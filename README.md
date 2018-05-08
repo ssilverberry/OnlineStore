@@ -1,2 +1,2 @@
 # OnlineStore
-Studying project. Online store which was made with ♥ and Java (JSP).
+Studying project. Online store made with ♥ and Java (JSP).
