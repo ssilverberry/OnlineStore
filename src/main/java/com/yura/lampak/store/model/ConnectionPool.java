@@ -18,7 +18,7 @@ public class ConnectionPool {
 
     private PoolDataSource pds;
     private static ConnectionPool instance;
-    private static final String pathToDBProperties = "resources/db.properties";
+    private static final String pathToDBProperties = "resources/DB.properties";
     private static final Logger log = LogManager.getLogger(ConnectionPool.class);
 
     /**
@@ -36,7 +36,7 @@ public class ConnectionPool {
             pds.setPassword(props.getProperty("Password"));
             pds.setInitialPoolSize(5);
             pds.setMaxPoolSize(20);
-            log.info("Success connection to DB! " + " Pool was configured!");
+            log.info("Success connection to DB! Pool was configured!");
         } catch (SQLException | IOException e) {
             log.error("Exception on connection to DB, ", e);
         }
@@ -44,7 +44,6 @@ public class ConnectionPool {
 
     /**
      * Return instance of ConnectionPool
-     * @return
      */
     public static ConnectionPool getInstance() {
         if (instance == null)
