@@ -1,7 +1,7 @@
 package com.yura.lampak.store.model.dao;
 
 
-import com.yura.lampak.store.model.beans.User;
+import com.yura.lampak.store.model.entities.User;
 
 import java.util.Collection;
 

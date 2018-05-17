@@ -1,9 +1,9 @@
 package com.yura.lampak.store.model.dao;
 
 
-import com.yura.lampak.store.model.beans.Product;
-import com.yura.lampak.store.model.beans.ProductAttribute;
-import com.yura.lampak.store.model.beans.ProductParameter;
+import com.yura.lampak.store.model.entities.Product;
+import com.yura.lampak.store.model.entities.ProductAttribute;
+import com.yura.lampak.store.model.entities.ProductParameter;
 
 import java.util.Collection;
 import java.util.Map;

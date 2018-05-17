@@ -1,4 +1,4 @@
-package com.yura.lampak.store.model.beans;
+package com.yura.lampak.store.model.entities;
 
 
 import java.sql.Timestamp;

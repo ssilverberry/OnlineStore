@@ -1,14 +1,14 @@
 package com.yura.lampak.store.model.impls;
 
-import com.yura.lampak.store.model.ConnectionPool;
-import com.yura.lampak.store.model.beans.Product;
-import com.yura.lampak.store.model.beans.ProductAttribute;
-import com.yura.lampak.store.model.beans.ProductParameter;
+import com.yura.lampak.store.model.entities.Product;
+import com.yura.lampak.store.model.entities.ProductAttribute;
+import com.yura.lampak.store.model.entities.ProductParameter;
 import com.yura.lampak.store.model.dao.ProductDAO;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,6 +40,12 @@ public class ProductDAOImpl implements ProductDAO {
     private static final String UPDATE_PRODUCT = "UPDATE products SET parent_id=?, product_name=?, iscategory=? WHERE product_id=?";
     private static final String DELETE_PRODUCT = "DELETE FROM PRODUCTS WHERE PRODUCT_ID = ?";
 
+    private DataSource dataSource;
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     public ProductDAOImpl() {
     }
 
@@ -49,7 +55,7 @@ public class ProductDAOImpl implements ProductDAO {
     @Override
     public Collection<Product> getCategories() {
         Collection<Product> categories = new ArrayList<>();
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(GET_CATEGORIES)) {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()){
@@ -66,7 +72,7 @@ public class ProductDAOImpl implements ProductDAO {
     @Override
     public Collection<Product> getProductsForCategory(int category_id) {
         Collection<Product> products = new ArrayList<>();
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(GET_PRODUCTS_FOR_CATEGORY)) {
             ps.setInt(1, category_id);
             ResultSet resultSet = ps.executeQuery();
@@ -84,7 +90,7 @@ public class ProductDAOImpl implements ProductDAO {
     @Override
     public Product getProductById(int product_id) {
         Product product = null;
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(GET_PRODUCT_BY_ID)) {
             ps.setInt(1, product_id);
             ResultSet resultSet = ps.executeQuery();
@@ -103,7 +109,7 @@ public class ProductDAOImpl implements ProductDAO {
     @Override
     public Map<ProductAttribute, ProductParameter> getParamsForProduct(int product_id) {
         Map<ProductAttribute, ProductParameter> prodParams = new HashMap<>();
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(GET_PARAMS_FOR_PRODUCT)) {
             ps.setInt(1, product_id);
             ResultSet resultSet = ps.executeQuery();
@@ -151,7 +157,7 @@ public class ProductDAOImpl implements ProductDAO {
     @Override
     public void saveProduct(Product product) {
         int product_id = product.getId();
-        try (Connection conn = ConnectionPool.getInstance().getConnection();
+        try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement(product_id != 0 ? UPDATE_PRODUCT : INSERT_PRODUCT)){
             ps.setInt(1, product.getParent_id());
             ps.setString(2, product.getName());
@@ -173,7 +179,7 @@ public class ProductDAOImpl implements ProductDAO {
      */
     @Override
     public void removeProduct(int product_id) {
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(DELETE_PRODUCT)) {
             ps.setInt(1, product_id);
             if (ps.executeUpdate() > 0){

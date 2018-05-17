@@ -1,6 +1,6 @@
 package com.yura.lampak.store.model.dao;
 
-import com.yura.lampak.store.model.beans.Delivery;
+import com.yura.lampak.store.model.entities.Delivery;
 
 import java.util.Collection;
 

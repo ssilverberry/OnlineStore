@@ -1,7 +1,7 @@
 package com.yura.lampak.store.model.dao;
 
 
-import com.yura.lampak.store.model.beans.Payment;
+import com.yura.lampak.store.model.entities.Payment;
 
 public interface PaymentDAO {
 

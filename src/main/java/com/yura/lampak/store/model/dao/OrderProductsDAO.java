@@ -1,8 +1,8 @@
 package com.yura.lampak.store.model.dao;
 
-import com.yura.lampak.store.model.beans.Order;
-import com.yura.lampak.store.model.beans.OrderProduct;
-import com.yura.lampak.store.model.beans.Product;
+import com.yura.lampak.store.model.entities.Order;
+import com.yura.lampak.store.model.entities.OrderProduct;
+import com.yura.lampak.store.model.entities.Product;
 
 import java.util.Collection;
 

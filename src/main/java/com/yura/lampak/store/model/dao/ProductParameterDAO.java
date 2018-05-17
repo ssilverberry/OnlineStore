@@ -1,7 +1,7 @@
 package com.yura.lampak.store.model.dao;
 
 
-import com.yura.lampak.store.model.beans.ProductParameter;
+import com.yura.lampak.store.model.entities.ProductParameter;
 
 public interface ProductParameterDAO {
 

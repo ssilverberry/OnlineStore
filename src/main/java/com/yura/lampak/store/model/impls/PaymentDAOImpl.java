@@ -1,12 +1,12 @@
 package com.yura.lampak.store.model.impls;
 
-import com.yura.lampak.store.model.ConnectionPool;
-import com.yura.lampak.store.model.beans.Payment;
+import com.yura.lampak.store.model.entities.Payment;
 import com.yura.lampak.store.model.dao.PaymentDAO;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,6 +26,11 @@ public class PaymentDAOImpl implements PaymentDAO {
     private static final String UPDATE_PAYMENT = "UPDATE payments SET payment_type=?, payment_amount=?, ispaid=? WHERE payment_id=?";
     private static final String DELETE_PAYMENT = "DELETE FROM PAYMENTS WHERE PAYMENT_ID = ?";
 
+    private DataSource dataSource;
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     public PaymentDAOImpl() {
     }
@@ -36,7 +41,7 @@ public class PaymentDAOImpl implements PaymentDAO {
     @Override
     public Payment getPaymentById(int payment_id) {
         Payment payment = null;
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(GET_PAYMENT_BY_ID)) {
             ps.setInt(1, payment_id);
             ResultSet resultSet = ps.executeQuery();
@@ -55,7 +60,7 @@ public class PaymentDAOImpl implements PaymentDAO {
     @Override
     public void savePayment(Payment payment) {
         int payment_id = payment.getId();
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(payment_id != 0 ? UPDATE_PAYMENT : INSERT_PAYMENT)){
             ps.setString(1, payment.getType());
             ps.setInt(2, payment.getAmount());
@@ -92,7 +97,7 @@ public class PaymentDAOImpl implements PaymentDAO {
      */
     @Override
     public void removePayment(int payment_id) {
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(DELETE_PAYMENT)) {
             ps.setInt(1, payment_id);
             if (ps.executeUpdate() > 0){

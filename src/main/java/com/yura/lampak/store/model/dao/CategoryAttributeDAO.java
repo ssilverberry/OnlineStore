@@ -1,7 +1,7 @@
 package com.yura.lampak.store.model.dao;
 
 
-import com.yura.lampak.store.model.beans.ProductAttribute;
+import com.yura.lampak.store.model.entities.ProductAttribute;
 
 import java.util.Collection;
 

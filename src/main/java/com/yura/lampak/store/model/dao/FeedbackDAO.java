@@ -1,7 +1,7 @@
 package com.yura.lampak.store.model.dao;
 
 
-import com.yura.lampak.store.model.beans.Feedback;
+import com.yura.lampak.store.model.entities.Feedback;
 
 import java.util.Collection;
 

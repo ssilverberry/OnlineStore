@@ -1,13 +1,12 @@
 package com.yura.lampak.store.model.impls;
 
-
-import com.yura.lampak.store.model.ConnectionPool;
-import com.yura.lampak.store.model.beans.Order;
+import com.yura.lampak.store.model.entities.Order;
 import com.yura.lampak.store.model.dao.OrderDAO;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.sql.DataSource;
 import java.sql.*;
 import java.time.LocalDateTime;
 
@@ -29,6 +28,12 @@ public class OrderDAOImpl implements OrderDAO {
     private static final String UPDATE_ORDER = "UPDATE orders SET order_date=?, user_id=?, payment_id=?, delivery_id=? WHERE order_id=?";
     private static final String DELETE_ORDER = "DELETE FROM ORDERS WHERE ORDER_ID = ?";
 
+    private DataSource dataSource;
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     public OrderDAOImpl() {
     }
 
@@ -38,7 +43,7 @@ public class OrderDAOImpl implements OrderDAO {
     @Override
     public Order getOrderById(int order_id) {
         Order order = null;
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(GET_ORDER_BY_ID)){
             ps.setInt(1, order_id);
             ResultSet resultSet = ps.executeQuery();
@@ -74,7 +79,7 @@ public class OrderDAOImpl implements OrderDAO {
     @Override
     public Collection<Order> getAllOrdersForUser(int user_id) {
         Collection<Order> orders = new ArrayList<>();
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(GET_ALL_ORDERS_FOR_USER)){
             ps.setInt(1, user_id);
             ResultSet resultSet = ps.executeQuery();
@@ -94,7 +99,7 @@ public class OrderDAOImpl implements OrderDAO {
     @Override
     public Collection<Order> getAllOrders() {
         Collection<Order> orders = new ArrayList<>();
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(GET_ALL_ORDERS)) {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
@@ -112,7 +117,7 @@ public class OrderDAOImpl implements OrderDAO {
     @Override
     public void saveOrder(Order order) {
         int order_id = order.getId();
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(order_id != 0 ? UPDATE_ORDER : INSERT_ORDER)){
             ps.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
             ps.setInt(2, order.getUser_id());
@@ -135,7 +140,7 @@ public class OrderDAOImpl implements OrderDAO {
      */
     @Override
     public void removeOrderById(int order_id) {
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(DELETE_ORDER)) {
             ps.setInt(1, order_id);
             if (ps.executeUpdate() > 0){
