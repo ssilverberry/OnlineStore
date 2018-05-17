@@ -1,0 +1,108 @@
+.content {
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    width: 100%;
+}
+.content__sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px 16px;
+}
+.content__sidebar__text {
+    padding-bottom: 5px;
+    border-bottom: 2px solid #000;
+}
+.content__sidebar__list__container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 270px;
+}
+.content__sidebar__text_fontsize_21 {
+    font-size: 21px;
+}
+.content__sidebar__list__container__categorieslist {
+    list-style-image: url(../../icons/listicon.svg);
+}
+.content__sidebar__list__container__categorieslist li {
+    margin-top: 20px;
+    font-size: 18px;
+}
+.content__sidebar__list__container__price {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 270px;
+}
+.content__sidebar__list__container__pricelist li {
+    margin-top: 20px;
+    font-size: 18px;
+}
+.content__sidebar__text__price {
+    margin-top: 50px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #000;
+}
+.input__text_width_35 {
+    width: 60px;
+    height: 25px;
+    border-radius: 5px;
+    border: 2px solid #007BFF;
+    font-size: 14px;
+}
+.margin_right_10 {
+    margin-right: 10px;
+}
+.content__mainpart__toprates {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 74px;
+    height: 265px;
+    border-left: solid 2px #707070;
+}
+.content__mainpart__toprates__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-left: 21px;
+    height: 90%;
+}
+.content__mainpart__toprates__text {
+    font-size: 21px;
+    margin-left: 21px;
+    padding-bottom: 10px;
+    align-self: flex-start;
+    z-index: 1;
+}
+.content__mainpart__toprates__item {
+    margin: 25px 15px 0px 0;
+    padding: 0 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.55s;
+}
+.content__mainpart__toprates__item:hover {
+    padding: 2.5% 8px;
+    box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+    z-index: 3;
+}
+.toprates__item {
+    width: 260px;
+    height: 150px;
+    object-fit: contain;
+}
+.content__mainpart__toprates__item__text {
+    margin-top: 10px;
+}
+.content__mainpart__topsales {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 74px;
+    height: 265px;
+    border-left: solid 2px #707070;
+}
