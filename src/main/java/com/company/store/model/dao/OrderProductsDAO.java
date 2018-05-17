@@ -1,8 +1,8 @@
 package com.company.store.model.dao;
 
-import com.company.store.model.beans.Order;
-import com.company.store.model.beans.OrderProduct;
-import com.company.store.model.beans.Product;
+import com.company.store.model.entities.Order;
+import com.company.store.model.entities.OrderProduct;
+import com.company.store.model.entities.Product;
 
 import java.util.Collection;
 

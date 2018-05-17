@@ -1,7 +1,7 @@
 package com.company.store.model.dao;
 
 
-import com.company.store.model.beans.Delivery;
+import com.company.store.model.entities.Delivery;
 
 import java.util.Collection;
 

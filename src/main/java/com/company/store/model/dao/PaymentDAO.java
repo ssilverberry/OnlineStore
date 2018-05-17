@@ -1,7 +1,7 @@
 package com.company.store.model.dao;
 
 
-import com.company.store.model.beans.Payment;
+import com.company.store.model.entities.Payment;
 
 public interface PaymentDAO {
 

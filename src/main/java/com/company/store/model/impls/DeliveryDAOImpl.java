@@ -1,11 +1,12 @@
 package com.company.store.model.impls;
 
-import com.company.store.model.ConnectionPool;
-import com.company.store.model.beans.Delivery;
 import com.company.store.model.dao.DeliveryDAO;
+import com.company.store.model.entities.Delivery;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,6 +33,12 @@ public class DeliveryDAOImpl implements DeliveryDAO {
 
     private static final String DELETE_DELIVERY = "DELETE FROM DELIVERIES WHERE DELIVERY_ID = ?";
 
+    private DataSource dataSource;
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     public DeliveryDAOImpl() {
     }
 
@@ -41,7 +48,7 @@ public class DeliveryDAOImpl implements DeliveryDAO {
     @Override
     public Collection<Delivery> getAllDeliveries() {
         Collection<Delivery> deliveries = new ArrayList<>();
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(GET_ALL_DELIVERIES)){
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
@@ -60,7 +67,7 @@ public class DeliveryDAOImpl implements DeliveryDAO {
     @Override
     public Delivery getDeliveryById(int delivery_id) {
         Delivery delivery = null;
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(GET_DELIVERY_BY_ID)) {
             ps.setInt(1, delivery_id);
             ResultSet resultSet = ps.executeQuery();
@@ -81,7 +88,7 @@ public class DeliveryDAOImpl implements DeliveryDAO {
     @Override
     public void saveDelivery(Delivery delivery) {
         int deliv_id = delivery.getId();
-        try (Connection conn = ConnectionPool.getInstance().getConnection();
+        try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement(deliv_id != 0 ? UPDATE_DELIV_CREDENTIALS : INSERT_DELIVERY)){
             ps.setString(1, delivery.getReceiverName());
             ps.setString(2, delivery.getReceiverSurname());
@@ -105,7 +112,7 @@ public class DeliveryDAOImpl implements DeliveryDAO {
      */
     @Override
     public void updateStatus(int delivery_id, String status) {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(UPDATE_STATUS)){
             ps.setString(1, status);
             ps.setInt(2, delivery_id);
@@ -139,7 +146,7 @@ public class DeliveryDAOImpl implements DeliveryDAO {
      */
     @Override
     public void removeDelivery(int delivery_id) {
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(DELETE_DELIVERY)) {
             ps.setInt(1, delivery_id);
             if (ps.executeUpdate() > 0){

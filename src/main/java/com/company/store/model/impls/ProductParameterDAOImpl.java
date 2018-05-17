@@ -1,11 +1,11 @@
 package com.company.store.model.impls;
 
-import com.company.store.model.ConnectionPool;
-import com.company.store.model.beans.ProductParameter;
 import com.company.store.model.dao.ProductParameterDAO;
+import com.company.store.model.entities.ProductParameter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +24,11 @@ public class ProductParameterDAOImpl implements ProductParameterDAO {
     private static final String UPDATE_PARAMETER = "UPDATE products_parameters SET attr_id=?, value=? WHERE product_id=?";
     private static final String DELETE_PARAMETER_BY_PRODUCT_ID = "DELETE FROM PRODUCTS_PARAMETERS WHERE ATTRIBUTE_ID = ?";
 
+    private DataSource dataSource;
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     public ProductParameterDAOImpl() {
     }
@@ -34,7 +39,7 @@ public class ProductParameterDAOImpl implements ProductParameterDAO {
     @Override
     public ProductParameter getParamByProductAndAttrIds(int product_id, int attr_id) {
         ProductParameter prodParam = null;
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(GET_PARAMETER_BY_PRODUCT_AND_ATTR_ID)) {
             ps.setInt(1, product_id);
             ps.setInt(2, attr_id);
@@ -67,7 +72,7 @@ public class ProductParameterDAOImpl implements ProductParameterDAO {
      */
     @Override
     public void saveParameter(ProductParameter productParam, boolean isUpdate) {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(isUpdate ? UPDATE_PARAMETER : INSERT_PARAMETER)){
             if (isUpdate) {
                 ps.setInt(1, productParam.getAttr_id());
@@ -92,7 +97,7 @@ public class ProductParameterDAOImpl implements ProductParameterDAO {
      */
     @Override
     public void removeParameterByProductId(int product_id) {
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(DELETE_PARAMETER_BY_PRODUCT_ID)) {
             ps.setInt(1, product_id);
             if (ps.executeUpdate() > 0){

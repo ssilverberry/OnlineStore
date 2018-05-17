@@ -1,18 +1,19 @@
 package com.company.store.model.impls;
 
-import com.company.store.model.ConnectionPool;
-import com.company.store.model.beans.ProductAttribute;
 import com.company.store.model.dao.CategoryAttributeDAO;
+import com.company.store.model.entities.ProductAttribute;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.Collection;
-
 
 public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
 
@@ -28,6 +29,12 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
     private static final String UPDATE_FEEDBACK = "UPDATE feedback SET product_id=?, attribute_name=?, WHERE attr_id=?";
     private static final String DELETE_ATTRIBUTE = "DELETE FROM PRODUCTS_ATTRIBUTES WHERE ATTRIBUTE_ID = ?";
 
+    private DataSource dataSource;
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     public CategoryAttributeDAOImpl() {
     }
 
@@ -37,7 +44,7 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
     @Override
     public Collection<ProductAttribute> getAttributesForCategory(int category_id) {
         Collection<ProductAttribute> productAttributes = new ArrayList<>();
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(GET_ATTRIBUTES_FOR_CATEGORY)){
             ps.setInt(1, category_id);
             ResultSet resultSet = ps.executeQuery();
@@ -55,7 +62,7 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
     @Override
     public ProductAttribute getAttributeById(int attr_id) {
         ProductAttribute productAttribute = null;
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(GET_ATTRIBUTE_BY_ID)){
             ps.setInt(1,attr_id);
             ResultSet resultSet = ps.executeQuery();
@@ -89,7 +96,7 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
     @Override
     public void saveAttribute(ProductAttribute attribute) {
         int attr_id = attribute.getAttr_id();
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(attr_id != 0 ? UPDATE_FEEDBACK : INSERT_ATTRIBUTE)){
             ps.setInt(1, attribute.getProduct_id());
             ps.setString(2, attribute.getName());
@@ -110,7 +117,7 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
      */
     @Override
     public void removeAttribute(int attr_id) {
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(DELETE_ATTRIBUTE)) {
             ps.setInt(1, attr_id);
             if (ps.executeUpdate() > 0){

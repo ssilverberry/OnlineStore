@@ -1,7 +1,7 @@
 package com.company.store.model.dao;
 
 
-import com.company.store.model.beans.User;
+import com.company.store.model.entities.User;
 
 import java.util.Collection;
 

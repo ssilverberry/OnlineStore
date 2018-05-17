@@ -1,6 +1,6 @@
 package com.company.store.model.dao;
 
-import com.company.store.model.beans.ProductParameter;
+import com.company.store.model.entities.ProductParameter;
 
 public interface ProductParameterDAO {
 

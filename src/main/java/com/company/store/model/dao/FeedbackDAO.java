@@ -2,7 +2,7 @@ package com.company.store.model.dao;
 
 
 
-import com.company.store.model.beans.Feedback;
+import com.company.store.model.entities.Feedback;
 
 import java.util.Collection;
 

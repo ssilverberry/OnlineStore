@@ -1,15 +1,18 @@
 package com.company.store.model.impls;
 
-import com.company.store.model.ConnectionPool;
-import com.company.store.model.beans.User;
+
+import com.company.store.model.entities.User;
 import com.company.store.model.dao.UserDAO;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -30,6 +33,12 @@ public class UserDAOImpl implements UserDAO {
             "user_phone=?, user_password=?, user_address=?, isadmin=? WHERE user_id=?";
 
     private static final String DELETE_USER = "DELETE FROM USERS WHERE USER_ID = ?";
+
+    private DataSource dataSource;
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     public UserDAOImpl() {
     }
@@ -58,7 +67,7 @@ public class UserDAOImpl implements UserDAO {
      */
     @Override
     public void saveUser(User user) {
-        try (Connection conn = ConnectionPool.getInstance().getConnection();
+        try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement(user.getId() != 0 ? UPDATE_USER_CREDENTIALS : INSERT_USER)){
             ps.setString(1, user.getName());
             ps.setString(2, user.getSurname());
@@ -85,7 +94,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public Collection<User> getAllUsers() {
         Collection<User> users = new ArrayList<>();
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(GET_ALL_USERS)) {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
@@ -103,7 +112,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User getById(int user_id) {
         User user = null;
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(GET_USER_BY_ID)) {
             ps.setInt(1, user_id);
             ResultSet resultSet = ps.executeQuery();
@@ -122,7 +131,7 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User getByCredentials(String email, String password) {
         User user = null;
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(GET_USER_BY_CREDENTIALS)) {
             ps.setString(1, email);
             ps.setString(2, password);
@@ -141,7 +150,7 @@ public class UserDAOImpl implements UserDAO {
      */
     @Override
     public void removeUser(int user_id) {
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(DELETE_USER)) {
             ps.setInt(1, user_id);
             if (ps.executeUpdate() > 0){

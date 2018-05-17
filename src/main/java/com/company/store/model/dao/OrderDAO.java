@@ -1,7 +1,7 @@
 package com.company.store.model.dao;
 
 
-import com.company.store.model.beans.Order;
+import com.company.store.model.entities.Order;
 
 import java.util.Collection;
 

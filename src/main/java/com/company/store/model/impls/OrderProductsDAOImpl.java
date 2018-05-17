@@ -1,17 +1,19 @@
 package com.company.store.model.impls;
 
-import com.company.store.model.ConnectionPool;
-import com.company.store.model.beans.Order;
-import com.company.store.model.beans.OrderProduct;
-import com.company.store.model.beans.Product;
 import com.company.store.model.dao.OrderProductsDAO;
+import com.company.store.model.entities.Order;
+import com.company.store.model.entities.OrderProduct;
+import com.company.store.model.entities.Product;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -46,6 +48,11 @@ public class OrderProductsDAOImpl implements OrderProductsDAO {
     private static final String DELETE_ORDER_PRODUCT = "DELETE FROM ORDER_PRODUCTS WHERE product_id=? AND order_id = ?";
     private static final String DELETE_All_PRODS_FOR_ORDER = "DELETE FROM ORDER_PRODUCTS WHERE order_id = ?";
 
+    private DataSource dataSource;
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     public OrderProductsDAOImpl() {
     }
@@ -56,7 +63,7 @@ public class OrderProductsDAOImpl implements OrderProductsDAO {
     @Override
     public Collection<OrderProduct> getOrderProductsById(int order_id) {
         Collection<OrderProduct> orderProducts = new ArrayList<>();
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(GET_ORDER_PROD)){
             ps.setInt(1, order_id);
             ResultSet resultSet = ps.executeQuery();
@@ -90,7 +97,7 @@ public class OrderProductsDAOImpl implements OrderProductsDAO {
     @Override
     public void saveProductToOrder(Product product, Order order, int amount, float price, boolean isUpdate) {
         int order_id = order.getId();
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(isUpdate ? UPDATE_ORDER_PROD : INSERT_ORDER_PROD)){
             ps.setInt(1, product.getId());
             ps.setInt(2, amount);
@@ -116,7 +123,7 @@ public class OrderProductsDAOImpl implements OrderProductsDAO {
      */
     @Override
     public void removeProductFromOrder(int product_id, int order_id) {
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(DELETE_ORDER_PRODUCT)) {
             ps.setInt(1, product_id);
             ps.setInt(2, order_id);
@@ -133,7 +140,7 @@ public class OrderProductsDAOImpl implements OrderProductsDAO {
      */
     @Override
     public void removeAllProductsFromOrder(int order_id) {
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
+        try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(DELETE_All_PRODS_FOR_ORDER)) {
             ps.setInt(1, order_id);
             if (ps.executeUpdate() > 0){

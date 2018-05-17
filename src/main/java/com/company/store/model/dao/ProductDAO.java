@@ -1,8 +1,8 @@
 package com.company.store.model.dao;
 
-import com.company.store.model.beans.Product;
-import com.company.store.model.beans.ProductAttribute;
-import com.company.store.model.beans.ProductParameter;
+import com.company.store.model.entities.Product;
+import com.company.store.model.entities.ProductAttribute;
+import com.company.store.model.entities.ProductParameter;
 
 import java.util.Collection;
 import java.util.Map;

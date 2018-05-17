@@ -2,7 +2,7 @@ package com.company.store.model.dao;
 
 
 
-import com.company.store.model.beans.ProductAttribute;
+import com.company.store.model.entities.ProductAttribute;
 
 import java.util.Collection;
 

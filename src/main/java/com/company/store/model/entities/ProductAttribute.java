@@ -1,4 +1,4 @@
-package com.company.store.model.beans;
+package com.company.store.model.entities;
 
 
 public class ProductAttribute {
