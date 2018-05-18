@@ -28,13 +28,13 @@ public class OrderDAOImpl implements OrderDAO {
     private static final String UPDATE_ORDER = "UPDATE orders SET order_date=?, user_id=?, payment_id=?, delivery_id=? WHERE order_id=?";
     private static final String DELETE_ORDER = "DELETE FROM ORDERS WHERE ORDER_ID = ?";
 
+    /**
+     * Instance of global datasource to get connection from pool.
+     */
     private DataSource dataSource;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
-    }
-
-    public OrderDAOImpl() {
     }
 
     /**
@@ -65,9 +65,9 @@ public class OrderDAOImpl implements OrderDAO {
         try {
             order.setId(resultSet.getInt(1));
             order.setDate(resultSet.getTimestamp(2));
-            order.setUser_id(resultSet.getInt(3));
-            order.setPayment_id(resultSet.getInt(4));
-            order.setDelivery_id(resultSet.getInt(5));
+            order.setUserId(resultSet.getInt(3));
+            order.setPaymentId(resultSet.getInt(4));
+            order.setDeliveryId(resultSet.getInt(5));
         } catch (SQLException e) {
             log.error("Parsing of order was failed! ", e);
         } return order;
@@ -120,9 +120,9 @@ public class OrderDAOImpl implements OrderDAO {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(order_id != 0 ? UPDATE_ORDER : INSERT_ORDER)){
             ps.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
-            ps.setInt(2, order.getUser_id());
-            ps.setInt(3, order.getPayment_id());
-            ps.setInt(4, order.getDelivery_id());
+            ps.setInt(2, order.getUserId());
+            ps.setInt(3, order.getPaymentId());
+            ps.setInt(4, order.getDeliveryId());
             if (order_id != 0){
                 ps.setInt(5, order_id);
             }

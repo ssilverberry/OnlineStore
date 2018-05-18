@@ -26,13 +26,13 @@ public class PaymentDAOImpl implements PaymentDAO {
     private static final String UPDATE_PAYMENT = "UPDATE payments SET payment_type=?, payment_amount=?, ispaid=? WHERE payment_id=?";
     private static final String DELETE_PAYMENT = "DELETE FROM PAYMENTS WHERE PAYMENT_ID = ?";
 
+    /**
+     * Instance of global datasource to get connection from pool.
+     */
     private DataSource dataSource;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
-    }
-
-    public PaymentDAOImpl() {
     }
 
     /**

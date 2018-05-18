@@ -33,13 +33,13 @@ public class UserDAOImpl implements UserDAO {
 
     private static final String DELETE_USER = "DELETE FROM USERS WHERE USER_ID = ?";
 
+    /**
+     * Instance of global datasource to get connection from pool.
+     */
     private DataSource dataSource;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
-    }
-
-    public UserDAOImpl() {
     }
 
     /**

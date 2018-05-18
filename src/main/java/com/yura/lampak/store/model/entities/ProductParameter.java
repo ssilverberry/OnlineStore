@@ -16,19 +16,19 @@ public class ProductParameter {
         this.value = value;
     }
 
-    public int getAttr_id() {
+    public int getAttrId() {
         return attr_id;
     }
 
-    public void setAttr_id(int attr_id) {
+    public void setAttrId(int attr_id) {
         this.attr_id = attr_id;
     }
 
-    public int getProduct_id() {
+    public int getProductId() {
         return product_id;
     }
 
-    public void setProduct_id(int product_id) {
+    public void setProductId(int product_id) {
         this.product_id = product_id;
     }
 

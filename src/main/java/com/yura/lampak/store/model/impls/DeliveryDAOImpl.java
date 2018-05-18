@@ -34,13 +34,13 @@ public class DeliveryDAOImpl implements DeliveryDAO {
 
     private static final String DELETE_DELIVERY = "DELETE FROM DELIVERIES WHERE DELIVERY_ID = ?";
 
+    /**
+     * Instance of global datasource to get connection from pool.
+     */
     private DataSource dataSource;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
-    }
-
-    public DeliveryDAOImpl() {
     }
 
     /**

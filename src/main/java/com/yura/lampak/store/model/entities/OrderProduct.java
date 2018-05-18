@@ -17,19 +17,19 @@ public class OrderProduct {
         this.price = price;
     }
 
-    public int getOrder_id() {
+    public int getOrderId() {
         return order_id;
     }
 
-    public void setOrder_id(int order_id) {
+    public void setOrderId(int order_id) {
         this.order_id = order_id;
     }
 
-    public int getProduct_id() {
+    public int getProductId() {
         return product_id;
     }
 
-    public void setProduct_id(int product_id) {
+    public void setProductId(int product_id) {
         this.product_id = product_id;
     }
 

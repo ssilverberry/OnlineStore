@@ -36,11 +36,11 @@ public class Product {
         this.product_id = product_id;
     }
 
-    public int getParent_id() {
+    public int getParentId() {
         return parent_id;
     }
 
-    public void setParent_id(int parent_id) {
+    public void setParentId(int parent_id) {
         this.parent_id = parent_id;
     }
 

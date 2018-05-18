@@ -33,27 +33,27 @@ public class Order {
         this.order_id = order_id;
     }
 
-    public int getUser_id() {
+    public int getUserId() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUserId(int user_id) {
         this.user_id = user_id;
     }
 
-    public int getPayment_id() {
+    public int getPaymentId() {
         return payment_id;
     }
 
-    public void setPayment_id(int payment_id) {
+    public void setPaymentId(int payment_id) {
         this.payment_id = payment_id;
     }
 
-    public int getDelivery_id() {
+    public int getDeliveryId() {
         return delivery_id;
     }
 
-    public void setDelivery_id(int delivery_id) {
+    public void setDeliveryId(int delivery_id) {
         this.delivery_id = delivery_id;
     }
 

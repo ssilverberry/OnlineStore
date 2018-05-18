@@ -48,13 +48,13 @@ public class OrderProductsDAOImpl implements OrderProductsDAO {
     private static final String DELETE_ORDER_PRODUCT = "DELETE FROM ORDER_PRODUCTS WHERE product_id=? AND order_id = ?";
     private static final String DELETE_All_PRODS_FOR_ORDER = "DELETE FROM ORDER_PRODUCTS WHERE order_id = ?";
 
+    /**
+     * Instance of global datasource to get connection from pool.
+     */
     private DataSource dataSource;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
-    }
-
-    public OrderProductsDAOImpl() {
     }
 
     /**
@@ -82,8 +82,8 @@ public class OrderProductsDAOImpl implements OrderProductsDAO {
     private OrderProduct parseOrderProd(ResultSet resultSet) {
         OrderProduct orderProd = new OrderProduct();
         try {
-            orderProd.setOrder_id(resultSet.getInt(1));
-            orderProd.setProduct_id(resultSet.getInt(2));
+            orderProd.setOrderId(resultSet.getInt(1));
+            orderProd.setProductId(resultSet.getInt(2));
             orderProd.setAmount(resultSet.getInt(3));
             orderProd.setPrice(resultSet.getFloat(4));
         } catch (SQLException e) {
@@ -105,7 +105,7 @@ public class OrderProductsDAOImpl implements OrderProductsDAO {
             if (isUpdate) {
                 ps.setInt(4, order_id);
             } else {
-                ps.setInt(4, order.getUser_id());
+                ps.setInt(4, order.getUserId());
             }
             int result = ps.executeUpdate();
             if (result > 0) {
