@@ -16,7 +16,6 @@ public class PaymentDAOImpl implements PaymentDAO {
 
     private static final Logger log = LogManager.getLogger(PaymentDAOImpl.class);
 
-    private static final String GET_ALL_PAYMENTS = "SELECT * FROM PAYMENTS";
     private static final String GET_PAYMENT_BY_ID = "SELECT * FROM PAYMENTS WHERE PAYMENT_ID = ?";
 
     /**
