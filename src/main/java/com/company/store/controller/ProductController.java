@@ -1,4 +1,4 @@
-package com.company.store.controller.controller;
+package com.company.store.controller;
 
 
 import com.company.store.model.entities.Product;
