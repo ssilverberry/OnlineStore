@@ -10,13 +10,13 @@ INSERT INTO PRODUCTS VALUES(DEFAULT, null, 'TV, electronics', 1);
 
 INSERT INTO PRODUCTS VALUES(DEFAULT, 
                             (SELECT product_id FROM PRODUCTS WHERE product_name = 'Laptops, PC'), 
-                            'Apple Mackboor Air Retina 13"', 0);
+                            'Apple MacBook Air Retina 13"', 0);
 INSERT INTO PRODUCTS VALUES(DEFAULT, 
                             (SELECT product_id FROM PRODUCTS WHERE product_name = 'Laptops, PC'), 
                             'Apple iMac 21.5" Retina 4K', 0);
 INSERT INTO PRODUCTS VALUES(DEFAULT, 
                             (SELECT product_id FROM PRODUCTS WHERE product_name = 'Laptops, PC'), 
-                            'Apple Mackboor Pro Retina 15"', 0);
+                            'Apple MacBook Pro Retina 15"', 0);
                             
 INSERT INTO PRODUCTS VALUES(DEFAULT, 
                             (SELECT product_id FROM PRODUCTS WHERE product_name = 'Smartphones'), 
@@ -89,52 +89,52 @@ INSERT INTO PRODUCTS_ATTRIBUTES VALUES(DEFAULT,
                             (SELECT product_id FROM PRODUCTS WHERE product_name = 'TV, electronics'), 
                             'Weight');
                             
-INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple Mackboor Air Retina 13"'),
+INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple MacBook Air Retina 13"'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Processor' 
                                          AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Laptops, PC')),
                                         'Dual-core Intel Core i5 (1.8 - 2.9 GHz)');
-INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple Mackboor Air Retina 13"'),
+INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple MacBook Air Retina 13"'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Display' 
                                          AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Laptops, PC')),
                                         '13.3" (1440x900) WXGA+');                                        
-INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple Mackboor Air Retina 13"'),
+INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple MacBook Air Retina 13"'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Memory' 
                                          AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Laptops, PC')),
                                         '8GB DDR4'); 
-INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple Mackboor Air Retina 13"'),
+INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple MacBook Air Retina 13"'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Storage' 
                                          AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Laptops, PC')),
                                         '256 GB SSD');
-INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple Mackboor Air Retina 13"'),
+INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple MacBook Air Retina 13"'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Weight' 
                                          AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Laptops, PC')),
                                         '325 mm');
-INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple Mackboor Air Retina 13"'),
+INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple MacBook Air Retina 13"'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Height' 
                                          AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Laptops, PC')),
                                         '3~17 mm');                                        
 
-INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple Mackboor Pro Retina 15"'),
+INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple MacBook Pro Retina 15"'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Processor' 
                                          AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Laptops, PC')),
                                         'Quad-Core Intel Core i7 (2.9-3.9 GHz)');
-INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple Mackboor Pro Retina 15"'),
+INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple MacBook Pro Retina 15"'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Display' 
                                          AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Laptops, PC')),
                                         '15.4" (2880x1800)');                                        
-INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple Mackboor Pro Retina 15"'),
+INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple MacBook Pro Retina 15"'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Memory' 
                                          AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Laptops, PC')),
                                         '16GB DDR4'); 
-INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple Mackboor Pro Retina 15"'),
+INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple MacBook Pro Retina 15"'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Storage' 
                                          AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Laptops, PC')),
                                         '512 GB SSD');
-INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple Mackboor Pro Retina 15"'),
+INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple MacBook Pro Retina 15"'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Weight' 
                                          AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Laptops, PC')),
                                         '349.3 mm');
-INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple Mackboor Pro Retina 15"'),
+INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple MacBook Pro Retina 15"'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Height' 
                                          AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Laptops, PC')),
                                         '15.5 mm');
