@@ -43,6 +43,6 @@ public class ProductController {
         Map<ProductAttribute, ProductParameter> paramsForProduct = productDAO.getParamsForProduct(1);
         return new ModelAndView("paramsProduct", "paramsForProduct",paramsForProduct);
     }
-    /*test cofdfgdfddfgmmi from my account privet from alex from controller branch fdgfdfgd*/
+    /*spent about 2 hours only for setting up github configuration*/
 }
 
