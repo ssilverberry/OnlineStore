@@ -31,27 +31,27 @@ public class Feedback {
         this.rating = raiting;
     }
 
-    public int getFeedback_id() {
+    public int getId() {
         return feedback_id;
     }
 
-    public void setFeedback_id(int feedback_id) {
+    public void setId(int feedback_id) {
         this.feedback_id = feedback_id;
     }
 
-    public int getUser_id() {
+    public int getUserId() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUserId(int user_id) {
         this.user_id = user_id;
     }
 
-    public int getProduct_id() {
+    public int getProductId() {
         return product_id;
     }
 
-    public void setProduct_id(int product_id) {
+    public void setProductId(int product_id) {
         this.product_id = product_id;
     }
 

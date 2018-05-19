@@ -29,13 +29,13 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
     private static final String UPDATE_FEEDBACK = "UPDATE feedback SET product_id=?, attribute_name=?, WHERE attr_id=?";
     private static final String DELETE_ATTRIBUTE = "DELETE FROM PRODUCTS_ATTRIBUTES WHERE ATTRIBUTE_ID = ?";
 
+    /**
+     * Instance of global datasource to get connection from pool.
+     */
     private DataSource dataSource;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
-    }
-
-    public CategoryAttributeDAOImpl() {
     }
 
     /**
@@ -82,8 +82,8 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
     private ProductAttribute parseProdAttr(ResultSet resultSet) {
         ProductAttribute prodAttr = new ProductAttribute();
         try {
-            prodAttr.setAttr_id(resultSet.getInt(1));
-            prodAttr.setProduct_id(resultSet.getInt(2));
+            prodAttr.setAttrId(resultSet.getInt(1));
+            prodAttr.setProductId(resultSet.getInt(2));
             prodAttr.setName(resultSet.getString(3));
         } catch (SQLException e) {
             log.error("Parsing of attribute was failed! ", e);
@@ -95,10 +95,10 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
      */
     @Override
     public void saveAttribute(ProductAttribute attribute) {
-        int attr_id = attribute.getAttr_id();
+        int attr_id = attribute.getAttrId();
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(attr_id != 0 ? UPDATE_FEEDBACK : INSERT_ATTRIBUTE)){
-            ps.setInt(1, attribute.getProduct_id());
+            ps.setInt(1, attribute.getProductId());
             ps.setString(2, attribute.getName());
             if (attr_id != 0){
                 ps.setInt(3, attr_id);

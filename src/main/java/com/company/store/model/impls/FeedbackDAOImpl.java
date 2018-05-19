@@ -32,13 +32,13 @@ public class FeedbackDAOImpl implements FeedbackDAO {
     private static final String UPDATE_FEEDBACK = "UPDATE feedback SET user_id=?, product_id=?, feedback_rating=?, feedback_message=? WHERE feedback_id=?";
     private static final String DELETE_FEEDBACK = "DELETE FROM FEEDBACK WHERE FEEDBACK_ID = ?";
 
+    /**
+     * Instance of global datasource to get connection from pool.
+     */
     private DataSource dataSource;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
-    }
-
-    public FeedbackDAOImpl() {
     }
 
     /**
@@ -46,11 +46,11 @@ public class FeedbackDAOImpl implements FeedbackDAO {
      */
     @Override
     public void saveFeedback(Feedback feedback) {
-        int feedb_id = feedback.getFeedback_id();
+        int feedb_id = feedback.getId();
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(feedb_id != 0 ? UPDATE_FEEDBACK : INSERT_FEEDBACK)){
-            ps.setInt(1, feedback.getUser_id());
-            ps.setInt(2, feedback.getProduct_id());
+            ps.setInt(1, feedback.getUserId());
+            ps.setInt(2, feedback.getProductId());
             ps.setInt(3, feedback.getRating());
             ps.setString(4, feedback.getContent());
             if (feedb_id != 0){
@@ -127,9 +127,9 @@ public class FeedbackDAOImpl implements FeedbackDAO {
     private Feedback parseFeedback(ResultSet resultSet) {
         Feedback feedback = new Feedback();
         try {
-            feedback.setFeedback_id(resultSet.getInt(1));
-            feedback.setUser_id(resultSet.getInt(2));
-            feedback.setProduct_id(resultSet.getInt(3));
+            feedback.setId(resultSet.getInt(1));
+            feedback.setUserId(resultSet.getInt(2));
+            feedback.setProductId(resultSet.getInt(3));
             feedback.setRating(resultSet.getInt(4));
             feedback.setContent(resultSet.getString(5));
         } catch (SQLException e) {

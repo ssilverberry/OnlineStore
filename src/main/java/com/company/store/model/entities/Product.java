@@ -16,6 +16,7 @@ public class Product {
 
     public Product(int product_id, int parent_id, String name, Map<ProductAttribute, ProductParameter> parameters,
                    boolean isCategory) {
+        this.product_id = product_id;
         this.parent_id = parent_id;
         this.name = name;
         this.parameters = parameters;
@@ -23,6 +24,7 @@ public class Product {
     }
 
     public Product(int product_id, int parent_id, String name, boolean isCategory) {
+        this.product_id = product_id;
         this.parent_id = parent_id;
         this.name = name;
         this.isCategory = isCategory;
@@ -36,11 +38,11 @@ public class Product {
         this.product_id = product_id;
     }
 
-    public int getParent_id() {
+    public int getParentId() {
         return parent_id;
     }
 
-    public void setParent_id(int parent_id) {
+    public void setParentId(int parent_id) {
         this.parent_id = parent_id;
     }
 

@@ -40,13 +40,13 @@ public class ProductDAOImpl implements ProductDAO {
     private static final String UPDATE_PRODUCT = "UPDATE products SET parent_id=?, product_name=?, iscategory=? WHERE product_id=?";
     private static final String DELETE_PRODUCT = "DELETE FROM PRODUCTS WHERE PRODUCT_ID = ?";
 
+    /**
+     * Instance of global datasource to get connection from pool.
+     */
     private DataSource dataSource;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
-    }
-
-    public ProductDAOImpl() {
     }
 
     /**
@@ -137,13 +137,13 @@ public class ProductDAOImpl implements ProductDAO {
                 product.setCategory(true);
                 product.setId(product_id);
                 product.setName(productName);
-                product.setParent_id(0);
+                product.setParentId(0);
                 product.setParameters(null);
             } else {
                 product.setCategory(false);
                 product.setId(product_id);
                 product.setName(productName);
-                product.setParent_id(parent_id);
+                product.setParentId(parent_id);
                 product.setParameters(getParamsForProduct(product_id));
             }
         } catch (SQLException e) {
@@ -159,7 +159,7 @@ public class ProductDAOImpl implements ProductDAO {
         int product_id = product.getId();
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement(product_id != 0 ? UPDATE_PRODUCT : INSERT_PRODUCT)){
-            ps.setInt(1, product.getParent_id());
+            ps.setInt(1, product.getParentId());
             ps.setString(2, product.getName());
             ps.setInt(3, Integer.parseInt(String.valueOf(product.isCategory())));
             if (product_id != 0){
