@@ -24,13 +24,13 @@ public class ProductParameterDAOImpl implements ProductParameterDAO {
     private static final String UPDATE_PARAMETER = "UPDATE products_parameters SET attr_id=?, value=? WHERE product_id=?";
     private static final String DELETE_PARAMETER_BY_PRODUCT_ID = "DELETE FROM PRODUCTS_PARAMETERS WHERE ATTRIBUTE_ID = ?";
 
+    /**
+     * Instance of global datasource to get connection from pool.
+     */
     private DataSource dataSource;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
-    }
-
-    public ProductParameterDAOImpl() {
     }
 
     /**
@@ -59,8 +59,8 @@ public class ProductParameterDAOImpl implements ProductParameterDAO {
     private ProductParameter parseProdParam(ResultSet resultSet) {
         ProductParameter prodParameter = new ProductParameter();
         try {
-            prodParameter.setProduct_id(resultSet.getInt(1));
-            prodParameter.setAttr_id(resultSet.getInt(2));
+            prodParameter.setProductId(resultSet.getInt(1));
+            prodParameter.setAttrId(resultSet.getInt(2));
             prodParameter.setValue(resultSet.getString(3));
         } catch (SQLException e) {
             log.error("Parsing of parameter was failed! ", e);
@@ -75,12 +75,12 @@ public class ProductParameterDAOImpl implements ProductParameterDAO {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(isUpdate ? UPDATE_PARAMETER : INSERT_PARAMETER)){
             if (isUpdate) {
-                ps.setInt(1, productParam.getAttr_id());
+                ps.setInt(1, productParam.getAttrId());
                 ps.setString(2, productParam.getValue());
-                ps.setInt(3, productParam.getProduct_id());
+                ps.setInt(3, productParam.getProductId());
             } else {
-                ps.setInt(1, productParam.getProduct_id());
-                ps.setInt(2, productParam.getAttr_id());
+                ps.setInt(1, productParam.getProductId());
+                ps.setInt(2, productParam.getAttrId());
                 ps.setString(3, productParam.getValue());
             }
             int result = ps.executeUpdate();

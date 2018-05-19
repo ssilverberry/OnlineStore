@@ -34,13 +34,13 @@ public class UserDAOImpl implements UserDAO {
 
     private static final String DELETE_USER = "DELETE FROM USERS WHERE USER_ID = ?";
 
+    /**
+     * Instance of global datasource to get connection from pool.
+     */
     private DataSource dataSource;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
-    }
-
-    public UserDAOImpl() {
     }
 
     /**
@@ -58,7 +58,7 @@ public class UserDAOImpl implements UserDAO {
             user.setAddress(resultSet.getString(7));
             user.setIsAdmin(Boolean.parseBoolean(String.valueOf(resultSet.getInt(8))));
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("Parsing of user was failed!", e);
         } return user;
     }
 
