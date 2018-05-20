@@ -24,11 +24,11 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/footer.css" />">
 
   <title>NC Loft</title>
-</head>
+</head> <!--
 <body>
 <nav class="nav">
   <div class="nav__logo">
-    <a href="#" class="viewResults">
+    <a href="viewResults" class="nav__logo__link">
       NC Loft
     </a>
   </div>
@@ -157,13 +157,166 @@
     <img src="<c:url value="/resources/icons/insta.svg"/>" alt="insta" class="footer__social__icon">
     <img src="<c:url value="/resources/icons/facebk.svg"/>" alt="facebk" class="footer__social__icon">
     <img src="<c:url value="/resources/icons/twitter.svg"/>" alt="twitter" class="footer__social__icon">
-    <img src="<c:url value="/resources/icons/telegram-app.svg"/>" alt="telega" class="footer__social__icon">
   </div>
   <div class="footer__license">
     <p class="footer__license__text">&copy; 2018, NC Loft.com</p>
   </div>
   <div class="footer__mail">
     <img src="<c:url value="/resources/icons/mail.svg"/>" alt="mail icon" class="footer__mail__icon">
+  </div>
+</div>
+</body>-->
+<body>
+<nav class="nav">
+  <div class="nav__logo">
+    <a href="#" class="nav__logo__link">
+      NC Loft
+    </a>
+  </div>
+  <div class="nav__links">
+    <a href="#" class="nav__links__item">
+      Payment & Delivery
+    </a>
+    <a href="#" class="nav__links__item">
+      Contacts
+    </a>
+    <a href="#" class="nav__links__item">
+      About us
+    </a>
+  </div>
+  <div class="nav__signin">
+    <P class="nav__signin__text">Sign in</P>
+    <img src="<c:url value="/resources/icons/signin.svg" />" alt="signin icon"
+         class="nav__signin__icon_width_20"/>
+  </div>
+</nav>
+<div class="content">
+  <div class="basket">
+    <a href="#">
+      <img src="<c:url value="/resources/icons/basket.jpg"/>" alt="basket" class="basket_icon">
+    </a>
+  </div>
+  <div class="content__sidebar">
+    <p class="content__sidebar__text content__sidebar__text_fontsize_21">
+      Categories
+    </p>
+    <div class="content__sidebar__list__container">
+      <ul class="content__sidebar__list__container__categorieslist">
+        <li><a href="#"> Laptops & PC </a></li>
+        <li><a href="#"> TV, Electronics</a> </li>
+        <li><a href="">Appliances</a> </li>
+        <li><a href="">Sports</a></li>
+        <li><a href="">Garden tools</a></li>
+        <li><a href="">Clothes & Shoes</a></li>
+        <li><a href="">Cars & Bikes</a></li>
+      </ul>
+    </div>
+    <p class="content__sidebar__text__price content__sidebar__text_fontsize_21">
+      Price
+    </p>
+    <div class="content__sidebar__list__container__price">
+      <ul class="content__sidebar__list__container__pricelist">
+        <li><input type="checkbox" class="margin_right_10"> Under $250</li>
+        <li><input type="checkbox" class="margin_right_10"> $250 - $450</li>
+        <li><input type="checkbox" class="margin_right_10"> Over $450</li>
+        <li>
+          $ <input type="number" class="input__text_width_35"> - to $
+          <input type="number" class="input__text_width_35">
+        </li>
+      </ul>
+    </div>
+    <div class="content__sidebar__search__button">
+      <a href="search" class="content__sidebar__search__button__btn" onclick="search">seek</a>
+    </div>
+  </div>
+  <div class="content__mainpart">
+    <div class="content__mainpart__toprates">
+      <p class="content__mainpart__toprates__text">Top rates</p>
+      <div class="content__mainpart__toprates__row">
+        <div class="content__mainpart__toprates__item">
+          <img src="<c:url value="/resources/images/macbook13.jpg"/>" alt="macbook"
+               class="toprates__item">
+          <p class="content__mainpart__toprates__item__text">
+            Macbook Pro Retina 13'
+          </p>
+        </div>
+        <div class="content__mainpart__toprates__item">
+          <img src="<c:url value="/resources/images/iphoneSE.jpg"/>" alt="macbook"
+               class="toprates__item">
+          <p class="content__mainpart__toprates__item__text">
+            iphone SE 32 gb
+          </p>
+        </div>
+        <div class="content__mainpart__toprates__item">
+          <img src="<c:url value="/resources/images/ssd.jpg"/>" alt="macbook"
+               class="toprates__item">
+          <p class="content__mainpart__toprates__item__text">
+            Samsung SSD 256 Gb
+          </p>
+        </div>
+        <div class="content__mainpart__toprates__item">
+          <img src="<c:url value="/resources/images/marshall.jpg"/>" alt="macbook"
+               class="toprates__item">
+          <p class="content__mainpart__toprates__item__text">
+            Sound Amplifier
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="content__mainpart__topsales">
+      <p class="content__mainpart__toprates__text">Top rates</p>
+      <div class="content__mainpart__toprates__row">
+        <div class="content__mainpart__toprates__item">
+          <img src="<c:url value="/resources/images/macbook13.jpg"/>" alt="macbook"
+               class="toprates__item">
+          <p class="content__mainpart__toprates__item__text">
+            Macbook Pro Retina 13'
+          </p>
+        </div>
+        <div class="content__mainpart__toprates__item">
+          <img src="<c:url value="/resources/images/iphoneSE.jpg"/>" alt="macbook"
+               class="toprates__item">
+          <p class="content__mainpart__toprates__item__text">
+            iphone SE 32 gb
+          </p>
+        </div>
+        <div class="content__mainpart__toprates__item">
+          <img src="<c:url value="/resources/images/ssd.jpg"/>" alt="macbook"
+               class="toprates__item">
+          <p class="content__mainpart__toprates__item__text">
+            Samsung SSD 256 Gb
+          </p>
+        </div>
+        <div class="content__mainpart__toprates__item">
+          <img src="<c:url value="/resources/images/marshall.jpg"/>" alt="macbook"
+               class="toprates__item">
+          <p class="content__mainpart__toprates__item__text">
+            Sound Amplifier
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <div class="footer__social">
+    <a href="https://www.instagram.com/">
+      <img src="<c:url value="/resources/icons/insta.svg"/>" alt="insta" class="footer__social__icon">
+    </a>
+    <a href="https://www.facebook.com/">
+      <img src="<c:url value="/resources/icons/facebk.svg"/>" alt="facebk" class="footer__social__icon">
+    </a>
+    <a href="https://twitter.com/">
+      <img src="<c:url value="/resources/icons/twitter.svg"/>" alt="twitter" class="footer__social__icon">
+    </a>
+  </div>
+  <div class="footer__license">
+    <p class="footer__license__text">&copy; 2018, NC Loft.com</p>
+  </div>
+  <div class="footer__mail">
+    <a href="mailto:ncloft@gmail.com?subject=Partnership">
+      <img src="<c:url value="/resources/icons/mail.svg"/>" alt="mail icon" class="footer__mail__icon">
+    </a>
   </div>
 </div>
 </body>
