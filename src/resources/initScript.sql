@@ -122,7 +122,7 @@ BEGIN
     END;
 
     BEGIN 
-       EXECUTE IMMEDIATE 'DROP SEQUENCE PRODUCT_ATTRIBUTES_SEQ';
+       EXECUTE IMMEDIATE 'DROP SEQUENCE PRODUCTS_ATTRIBUTES_SEQ';
     EXCEPTION
        WHEN OTHERS THEN
           IF SQLCODE !=-2289 THEN
@@ -227,7 +227,7 @@ END;
     noorder   
     /
     
-    create sequence "PRODUCT_ATTRIBUTES_SEQ"
+    create sequence "PRODUCTS_ATTRIBUTES_SEQ"
     start with 1000000
     increment by 1
     cache 100
@@ -374,7 +374,7 @@ END;
       for each row 
     begin  
       if :NEW."ATTRIBUTE_ID" is null then
-        select "PRODUCTS_ATTRIBUTES".nextval into :NEW."ATTRIBUTE_ID" from dual;
+        select "PRODUCTS_ATTRIBUTES_SEQ".nextval into :NEW."ATTRIBUTE_ID" from dual;
       end if;
     end;
     /   
