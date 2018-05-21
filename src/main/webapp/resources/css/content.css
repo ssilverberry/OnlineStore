@@ -1,3 +1,6 @@
+body {
+    background-color: #ffffff;
+}
 a {
     text-decoration: none;
     color: inherit;
@@ -136,4 +139,19 @@ a {
 }
 .content__sidebar__search__button:hover {
     box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+}
+.opacity_0 {
+    opacity: 0;
+}
+.opacity_1 {
+    opacity: 1;
+}
+
+.body_bck_color_black {
+    opacity: 0.3;
+    z-index: 0;
+}
+.display_none {
+    display: none;
+    transition: all 0.2s;
 }

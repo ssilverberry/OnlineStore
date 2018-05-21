@@ -1,16 +1,18 @@
 body {
-    background-color: rgba(0,0,0,0.76);
+    /*background-color: rgba(0,0,0,0.76);*/
     z-index: 0;
+    position: relative;
 }
 .authorization {
     display: flex;
     flex-direction: column;
     background-color: #fff;
-    max-width: 307px;
+    width: 307px;
     height: 313px;
-    margin: 200px auto;
-    z-index: 1;
+    margin: 10% auto 0 auto;
     border-radius: 10px;
+    box-shadow: 0px 0px 5px 1px #000;
+    z-index: 999;
 }
 .authorization__row {
     display: flex;
@@ -27,6 +29,9 @@ body {
 }
 .welcome_text {
     position: absolute;
+    font-size: 22px;
+    top: 15px;
+    font-weight: bold;
 }
 .authorization__input {
     display: flex;
@@ -136,6 +141,7 @@ body {
 }
 .forgott_password_text {
     font-style: italic;
+    font-size: 15px;
     text-decoration: none;
     color: #000;
 }

@@ -15,19 +15,50 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="<c:url value="/resources/css/reset.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/header.css" />">
+    <link rel="stylesheet" href="<c:url value="/resources/css/authorize.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/content.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/footer.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/product.css" />">
 
     <title>Document</title>
-    <style media="screen">
-
-    </style>
 </head>
 <body>
+<div class="authorization display_none">
+    <div class="authorization__row">
+        <h2 class="welcome_text">Welcome</h2>
+        <a href="#" style="text-decoration: none; color: initial;" class="authorization__close">
+            <img src="<c:url value="/resources/icons/close.svg" />" alt="close" >
+        </a>
+    </div>
+    <div class="authorization__input">
+        <div class="email_container">
+            <input type="email" class="email_input" required>
+            <label class="floating_email">Email</label>
+        </div>
+        <div class="pswrd_container">
+            <input type="password" class="pswrd_input" required>
+            <label class="floating_pswrd">Password</label>
+        </div>
+    </div>
+    <div class="btns_row">
+        <div class="btn_signup">
+            <a href="#" class="btn_link btn_link_up">Sign up</a>
+        </div>
+        <div class="btn_signin">
+            <a href="#" class="btn_link btn_link_in">Log in</a>
+        </div>
+    </div>
+    <div class="forgott_password">
+        <a href="restorePswrd"class="forgott_password_text">
+            Forgot password ?
+        </a>
+        <span class="link_decoration"></span>
+    </div>
+</div>
+<div class="main">
 <nav class="nav">
     <div class="nav__logo">
-        <a href="#" class="nav__logo__link">
+        <a href="/" class="nav__logo__link">
             NC Loft
         </a>
     </div>
@@ -92,7 +123,7 @@
         <div class="content__mainpart__product__photos">
             <div class="content__mainpart__product__header">
                 <p class="content__mainpart__product__header__text">
-                    Macbook Pro Retina 13`
+                    ${productById.name}
                 </p>
             </div>
             <div class="content__mainpart__product__photos__img">
@@ -109,7 +140,10 @@
             </div>
             <div class="description_container">
                 <div class="desc_text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </div>
+                    <c:forEach var="item" items="${productById.parameters}">
+                        ${item.key.name}: ${item.value.value} <br>
+                    </c:forEach>
+                </div>
                 <div class="desc_text">
                     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </div>
@@ -162,6 +196,38 @@
         </a>
     </div>
 </div>
+</div>
+<script>
+    var signinElem = document.querySelector('.nav__signin');
+    var basketElem = document.querySelector('.basket');
+    var navElem = document.querySelector('nav_logo');
+    var mainElem = document.querySelector('.main');
+    var authorization = document.querySelector('.authorization');
+    var closeAuthElem = document.querySelector('.authorization__close');
+    var flag = true;
+
+    navElem.addEventListener('click', function () {
+        window.location.replace("onlinestore");
+    });
+
+    signinElem.addEventListener('click', function() {
+        if (flag) {
+            authorization.classList.remove('display_none');
+            basketElem.classList.add('display_none');
+            mainElem.classList.add('display_none');
+            flag = false;
+        }
+
+    });
+    closeAuthElem.addEventListener('click', function () {
+        if (!flag) {
+            authorization.classList.add('display_none');
+            basketElem.classList.remove('display_none');
+            mainElem.classList.remove('display_none');
+            flag = true;
+        }
+    });
+</script>
 </body>
 </html>
 

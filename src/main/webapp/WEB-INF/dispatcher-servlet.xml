@@ -20,7 +20,7 @@
     <bean id="userDAOImpl" class="com.company.store.model.impls.UserDAOImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="productDAOImpl" class="com.company.store.model.impls.ProductDAOImpl">
+    <bean id="productDAO" class="com.company.store.model.impls.ProductDAOImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
     <bean id="prodParamDAOImpl" class="com.company.store.model.impls.ProductDAOImpl">
