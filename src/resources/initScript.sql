@@ -364,7 +364,7 @@ END;
       for each row 
     begin  
       if :NEW."PRODUCT_ID" is null then
-        select "PRODUCT_SEQ".nextval into :NEW."PRODUCT_ID" from dual;
+        select "PRODUCTS_SEQ".nextval into :NEW."PRODUCT_ID" from dual;
       end if;
     end;
     /   
@@ -374,7 +374,7 @@ END;
       for each row 
     begin  
       if :NEW."ATTRIBUTE_ID" is null then
-        select "PRODUCT_ATTRIBUTES".nextval into :NEW."ATTRIBUTE_ID" from dual;
+        select "PRODUCTS_ATTRIBUTES".nextval into :NEW."ATTRIBUTE_ID" from dual;
       end if;
     end;
     /   
