@@ -13,16 +13,16 @@ public class PaymentController {
 
 
     @RequestMapping("/paymentbyid")
-    public ModelAndView paymentById(){
-        Payment payment = paymentDAO.getPaymentById(1);
+    public ModelAndView paymentById(int payment_id){
+        Payment payment = paymentDAO.getPaymentById(payment_id);
         return new ModelAndView("paymentbyid", "payment", payment);
     }
 
-   /* @RequestMapping("/savepayment")
-    public ModelAndView savepayment(){
-        Payment payment = paymentDAO.savePayment();
-        return new ModelAndView("savepayment", "save", payment);
-    }*/
+    @RequestMapping("/savepayment")
+    public ModelAndView savepayment(Payment payment){
+        paymentDAO.savePayment(payment);
+        return new ModelAndView("savepayment");
+    }
 
     @RequestMapping("/paymentremove")
     public ModelAndView paymentremove(int payment_id){
