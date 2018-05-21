@@ -12,18 +12,19 @@ public class ProductParameterController {
     private ProductParameterDAOImpl productParameterDAO;
 
     @RequestMapping("/parambyproductandattrids")
-    public ModelAndView getParamByProductAndAttrIds(int product_id, int attr_id){
-        productParameterDAO.getParamByProductAndAttrIds(product_id,attr_id);
+    public ModelAndView getParamByProductAndAttrIds(int product_id, int attr_id) {
+        productParameterDAO.getParamByProductAndAttrIds(product_id, attr_id);
         return new ModelAndView("/productparamandattribs");
     }
 
     @RequestMapping("/saveparameter")
-    public ModelAndView saveParameter(ProductParameter productParam, boolean isUpdate){
-        productParameterDAO.saveParameter(productParam,isUpdate);
+    public ModelAndView saveParameter(ProductParameter productParam, boolean isUpdate) {
+        productParameterDAO.saveParameter(productParam, isUpdate);
         return new ModelAndView("saveupdate");
     }
+
     @RequestMapping("/removeparameterbyproductid")
-    public ModelAndView removeParameterByProductId(int product_id){
+    public ModelAndView removeParameterByProductId(int product_id) {
         productParameterDAO.removeParameterByProductId(product_id);
         return new ModelAndView("removeparameterbyproductid");
     }
