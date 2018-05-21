@@ -50,6 +50,9 @@ INSERT INTO PRODUCTS_ATTRIBUTES VALUES(DEFAULT,
 INSERT INTO PRODUCTS_ATTRIBUTES VALUES(DEFAULT, 
                             (SELECT product_id FROM PRODUCTS WHERE product_name = 'Laptops, PC'), 
                             'Weight');
+INSERT INTO PRODUCTS_ATTRIBUTES VALUES(DEFAULT, 
+                            (SELECT product_id FROM PRODUCTS WHERE product_name = 'Laptops, PC'), 
+                            'Price');
                             
 INSERT INTO PRODUCTS_ATTRIBUTES VALUES(DEFAULT, 
                             (SELECT product_id FROM PRODUCTS WHERE product_name = 'Smartphones'), 
@@ -69,6 +72,9 @@ INSERT INTO PRODUCTS_ATTRIBUTES VALUES(DEFAULT,
 INSERT INTO PRODUCTS_ATTRIBUTES VALUES(DEFAULT, 
                             (SELECT product_id FROM PRODUCTS WHERE product_name = 'Smartphones'), 
                             'Weight');
+INSERT INTO PRODUCTS_ATTRIBUTES VALUES(DEFAULT, 
+                            (SELECT product_id FROM PRODUCTS WHERE product_name = 'Smartphones'), 
+                            'Price');
                             
 INSERT INTO PRODUCTS_ATTRIBUTES VALUES(DEFAULT, 
                             (SELECT product_id FROM PRODUCTS WHERE product_name = 'TV, electronics'), 
@@ -88,6 +94,9 @@ INSERT INTO PRODUCTS_ATTRIBUTES VALUES(DEFAULT,
 INSERT INTO PRODUCTS_ATTRIBUTES VALUES(DEFAULT, 
                             (SELECT product_id FROM PRODUCTS WHERE product_name = 'TV, electronics'), 
                             'Weight');
+INSERT INTO PRODUCTS_ATTRIBUTES VALUES(DEFAULT, 
+                            (SELECT product_id FROM PRODUCTS WHERE product_name = 'TV, electronics'), 
+                            'Price');
                             
 INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple MacBook Air Retina 13"'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Processor' 
@@ -112,7 +121,11 @@ INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE p
 INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple MacBook Air Retina 13"'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Height' 
                                          AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Laptops, PC')),
-                                        '3~17 mm');                                        
+                                        '3~17 mm');
+INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple MacBook Air Retina 13"'),
+                                        (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Price' 
+                                         AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Laptops, PC')),
+                                        '1000');                                        
 
 INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple MacBook Pro Retina 15"'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Processor' 
@@ -138,6 +151,10 @@ INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE p
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Height' 
                                          AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Laptops, PC')),
                                         '15.5 mm');
+INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple MacBook Pro Retina 15"'),
+                                        (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Price' 
+                                         AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Laptops, PC')),
+                                        '1500');                                         
                                         
 INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple iMac 21.5" Retina 4K'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Processor' 
@@ -162,7 +179,11 @@ INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE p
 INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple iMac 21.5" Retina 4K'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Height' 
                                          AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Laptops, PC')),
-                                        '450 mm');                                                     
+                                        '450 mm');  
+INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple iMac 21.5" Retina 4K'),
+                                        (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Price' 
+                                         AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Laptops, PC')),
+                                        '2000');                                        
                               
 INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple iPhone 8 256Gb RED'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Processor' 
@@ -188,6 +209,10 @@ INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE p
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Height' 
                                          AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Smartphones')),
                                         '7.3 mm');  
+INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple iPhone 8 256Gb RED'),
+                                        (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Price' 
+                                         AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Smartphones')),
+                                        '700');  
 
 INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple iPhone 10 256Gb Space Gray'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Processor' 
@@ -213,6 +238,10 @@ INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE p
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Height' 
                                          AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Smartphones')),
                                         '7.7 mm'); 
+INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple iPhone 10 256Gb Space Gray'),
+                                        (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Price' 
+                                         AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Smartphones')),
+                                        '600');                                         
 
 INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple iPhone 7 128Gb Space Gray'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Processor' 
@@ -237,7 +266,11 @@ INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE p
 INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple iPhone 7 128Gb Space Gray'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Height' 
                                          AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Smartphones')),
-                                        '7.1 mm');                                         
+                                        '7.1 mm'); 
+INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'Apple iPhone 7 128Gb Space Gray'),
+                                        (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Price' 
+                                         AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='Smartphones')),
+                                        '600');                                         
 
 INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'TV LG 43UJ630V'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Resolution' 
@@ -262,5 +295,9 @@ INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE p
 INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'TV LG 43UJ630V'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Height' 
                                          AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='TV, electronics')),
-                                        '187 mm');                         
+                                        '187 mm');
+INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'TV LG 43UJ630V'),
+                                        (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Price' 
+                                         AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='TV, electronics')),
+                                        '1900');                                         
 END;
