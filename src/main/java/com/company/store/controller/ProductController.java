@@ -28,19 +28,19 @@ public class ProductController {
     }
 
     @RequestMapping("/productCategoriesId")
-    public ModelAndView showProductForCategory() {
-        Collection<Product> productIdList = productDAO.getProductsForCategory(2);
+    public ModelAndView showProductForCategory(int category_id) {
+        Collection<Product> productIdList = productDAO.getProductsForCategory(category_id);
         return new ModelAndView("product", "productCategoriesId", productIdList);
     }
 
     @RequestMapping("/productById")
-    public ModelAndView productById() {
-        Product productById = productDAO.getProductById(3);
+    public ModelAndView productById(int product_id ) {
+        Product productById = productDAO.getProductById(product_id );
         return new ModelAndView("productId", "productById", productById);
     }
     @RequestMapping("/paramsForProduct")
-    public ModelAndView paramsForProduct(){
-        Map<ProductAttribute, ProductParameter> paramsForProduct = productDAO.getParamsForProduct(1);
+    public ModelAndView paramsForProduct(int product_id){
+        Map<ProductAttribute, ProductParameter> paramsForProduct = productDAO.getParamsForProduct( product_id);
         return new ModelAndView("paramsProduct", "paramsForProduct",paramsForProduct);
     }
 }
