@@ -34,14 +34,26 @@ public class ProductController {
     }
 
     @RequestMapping("/productById")
-    public ModelAndView productById(int product_id ) {
-        Product productById = productDAO.getProductById(product_id );
+    public ModelAndView productById(int product_id) {
+        Product productById = productDAO.getProductById(product_id);
         return new ModelAndView("productId", "productById", productById);
     }
+
     @RequestMapping("/paramsForProduct")
-    public ModelAndView paramsForProduct(int product_id){
-        Map<ProductAttribute, ProductParameter> paramsForProduct = productDAO.getParamsForProduct( product_id);
-        return new ModelAndView("paramsProduct", "paramsForProduct",paramsForProduct);
+    public ModelAndView paramsForProduct(int product_id) {
+        Map<ProductAttribute, ProductParameter> paramsForProduct = productDAO.getParamsForProduct(product_id);
+        return new ModelAndView("paramsProduct", "paramsForProduct", paramsForProduct);
+    }
+    @RequestMapping("/saveproduct")
+    public ModelAndView saveProduct(Product product){
+        productDAO.saveProduct(product);
+        return new ModelAndView("saveproduct");
+    }
+
+    @RequestMapping("/removeproduct")
+    public ModelAndView removeProduct(int product_id){
+        productDAO.removeProduct(product_id);
+        return new ModelAndView("removeproduct");
     }
 }
 
