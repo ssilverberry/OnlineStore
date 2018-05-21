@@ -43,7 +43,7 @@ a {
     font-size: 21px;
 }
 .content__sidebar__list__container__categorieslist {
-    list-style-image: url(../../icons/listicon.svg);
+    list-style-image: url(../icons/listicon.svg);
 }
 .content__sidebar__list__container__categorieslist li {
     margin-top: 20px;
