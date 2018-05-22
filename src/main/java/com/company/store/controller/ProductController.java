@@ -6,7 +6,9 @@ import com.company.store.model.entities.ProductAttribute;
 import com.company.store.model.entities.ProductParameter;
 import com.company.store.model.impls.ProductDAOImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -27,32 +29,32 @@ public class ProductController {
         return new ModelAndView("categories", "categoryList", categoryList);
     }
 
-    @RequestMapping("/productCategoriesId")
-    public ModelAndView showProductForCategory(int category_id) {
+    @RequestMapping(value = "/productCategoriesId/{id}")
+    public ModelAndView showProductForCategory(@PathVariable int category_id) {
         Collection<Product> productIdList = productDAO.getProductsForCategory(category_id);
         return new ModelAndView("product", "productCategoriesId", productIdList);
     }
 
-    @RequestMapping("/productById")
-    public ModelAndView productById(int product_id) {
+    @RequestMapping(value = "/productById/{id}")
+    public ModelAndView productById(@PathVariable int product_id) {
         Product productById = productDAO.getProductById(product_id);
         return new ModelAndView("productId", "productById", productById);
     }
 
-    @RequestMapping("/paramsForProduct")
-    public ModelAndView paramsForProduct(int product_id) {
+    @RequestMapping(value = "/paramsForProduct/{id}")
+    public ModelAndView paramsForProduct(@PathVariable int product_id) {
         Map<ProductAttribute, ProductParameter> paramsForProduct = productDAO.getParamsForProduct(product_id);
         return new ModelAndView("paramsProduct", "paramsForProduct", paramsForProduct);
     }
 
-    @RequestMapping("/saveproduct")
+    @RequestMapping(value = "/saveproduct/{product}")
     public ModelAndView saveProduct(Product product) {
         productDAO.saveProduct(product);
         return new ModelAndView("saveproduct");
     }
 
-    @RequestMapping("/removeproduct")
-    public ModelAndView removeProduct(int product_id) {
+    @RequestMapping(value = "/removeproduct/{id}")
+    public ModelAndView removeProduct(@PathVariable int product_id) {
         productDAO.removeProduct(product_id);
         return new ModelAndView("removeproduct");
     }

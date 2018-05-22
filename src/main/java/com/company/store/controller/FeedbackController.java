@@ -3,6 +3,7 @@ package com.company.store.controller;
 import com.company.store.model.entities.Feedback;
 import com.company.store.model.impls.FeedbackDAOImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,47 +14,45 @@ public class FeedbackController {
 
     private FeedbackDAOImpl feedbackDAO;
 
-    @RequestMapping("/savefeedback")
+    @RequestMapping(value = "/savefeedback/{feedback}")
     public ModelAndView saveFeedback(Feedback feedback) {
         feedbackDAO.saveFeedback(feedback);
         return new ModelAndView("save_feedback");
     }
 
-    @RequestMapping("/allfeedback()")
+    @RequestMapping(value = "/allfeedback()")
     public ModelAndView getAllFeedback() {
         Collection<Feedback> feedback = feedbackDAO.getAllFeedback();
         return new ModelAndView("dysplayallfeedback", "feedback", feedback);
     }
 
-    @RequestMapping("/getAllFeedbackForUser")
-    public ModelAndView getAllFeedbackForUser(int user_id) {
+    @RequestMapping(value = "/getAllFeedbackForUser/{user_id}")
+    public ModelAndView getAllFeedbackForUser(@PathVariable int user_id) {
         feedbackDAO.getAllFeedbackForUser(user_id);
         return new ModelAndView("AllFeedbackForUser");
     }
 
-    @RequestMapping("/AllFeedbackForProduct")
-
-    public ModelAndView getAllFeedbackForProduct(int product_id) {
+    @RequestMapping(value = "/AllFeedbackForProduct/{product_id}")
+    public ModelAndView getAllFeedbackForProduct(@PathVariable int product_id) {
         feedbackDAO.getAllFeedbackForProduct(product_id);
         return new ModelAndView("AllFeedbackForProduc");
     }
 
-    @RequestMapping("/UserFeedbackOnProduc")
-
-    public ModelAndView getUserFeedbackOnProduc(int user_id, int product_id) {
+    @RequestMapping(value = "/UserFeedbackOnProduc/{user_id}/product/{product_id}")
+    public ModelAndView getUserFeedbackOnProduc(@PathVariable int user_id, int product_id) {
         feedbackDAO.getUserFeedbackOnProduct(user_id, product_id);
         return new ModelAndView("userFeedbackOnProduct");
     }
 
-    @RequestMapping("/FeedbackById")
-    public ModelAndView getFeedbackById(int feedb_id) {
+    @RequestMapping(value = "/FeedbackById/{feedb_id}")
+    public ModelAndView getFeedbackById(@PathVariable int feedb_id) {
         feedbackDAO.getFeedbackById(feedb_id);
         return new ModelAndView("return_feedb_id");
 
     }
 
-    @RequestMapping("/removeFeedback")
-    public ModelAndView removeFeedback(int feedb_id) {
+    @RequestMapping(value = "/removeFeedback/{feedb_id}")
+    public ModelAndView removeFeedback(@PathVariable int feedb_id) {
         feedbackDAO.removeFeedback(feedb_id);
         return new ModelAndView("remove_feedb_id");
 
