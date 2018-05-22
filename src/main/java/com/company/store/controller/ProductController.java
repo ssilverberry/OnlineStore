@@ -44,14 +44,15 @@ public class ProductController {
         Map<ProductAttribute, ProductParameter> paramsForProduct = productDAO.getParamsForProduct(product_id);
         return new ModelAndView("paramsProduct", "paramsForProduct", paramsForProduct);
     }
+
     @RequestMapping("/saveproduct")
-    public ModelAndView saveProduct(Product product){
+    public ModelAndView saveProduct(Product product) {
         productDAO.saveProduct(product);
         return new ModelAndView("saveproduct");
     }
 
     @RequestMapping("/removeproduct")
-    public ModelAndView removeProduct(int product_id){
+    public ModelAndView removeProduct(int product_id) {
         productDAO.removeProduct(product_id);
         return new ModelAndView("removeproduct");
     }
