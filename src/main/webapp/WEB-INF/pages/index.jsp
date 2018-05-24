@@ -91,14 +91,11 @@
     <div class="content__sidebar__list__container">
       <ul class="content__sidebar__list__container__categorieslist">
         <c:forEach var="category" items="${categoryList}">
-          <li><a href="#">${category.name}</a></li>
-          <li><a href="productCategoriesId/${category.id}">${category.name}</a></li>
-        </c:forEach>
 
-       <%-- <li><a href="">Sports</a></li>
-        <li><a href="">Garden tools</a></li>
-        <li><a href="">Clothes & Shoes</a></li>
-        <li><a href="">Cars & Bikes</a></li>--%>
+          <li><a href="<c:url value="/productCategoriesId">
+            <c:param name="category_id" value="${category.id}"/>
+          </c:url>"> ${category.name} </a></li>
+        </c:forEach>
       </ul>
     </div>
     <p class="content__sidebar__text__price content__sidebar__text_fontsize_21">

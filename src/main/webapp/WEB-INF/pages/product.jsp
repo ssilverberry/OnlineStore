@@ -140,6 +140,11 @@
             </div>
             <div class="description_container">
                 <div class="desc_text">
+                    <c:forEach var="prods" items="${productList}">
+                        <li><a href="<c:url value="/product">
+                                        <c:param name="prod_id" value="${prods.id}"/>
+                                     </c:url>">${prods.name}</a></li>
+                    </c:forEach>
                     <c:forEach var="item" items="${productById.parameters}">
                         ${item.key.name}: ${item.value.value} <br>
                     </c:forEach>
