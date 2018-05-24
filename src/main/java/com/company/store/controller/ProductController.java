@@ -38,21 +38,21 @@ public class ProductController {
     }
 
     @RequestMapping(value = "productCategoriesId")
-    public ModelAndView showProductForCategory(@RequestParam("category_id") String category_id) {
-        Collection<Product> productIdList = productDAO.getProductsForCategory(Integer.parseInt(category_id));
+    public ModelAndView showProductForCategory(@RequestParam("category_id") int category_id) {
+        Collection<Product> productIdList = productDAO.getProductsForCategory(category_id);
         return new ModelAndView("product", "productList", productIdList);
     }
 
     @RequestMapping("product")
-    public ModelAndView productById(@RequestParam("prod_id") String product_id) {
-        Product productById = productDAO.getProductById(Integer.parseInt(product_id));
+    public ModelAndView productById(@RequestParam("prod_id") int  product_id) {
+        Product productById = productDAO.getProductById(product_id);
         return new ModelAndView("product", "productById", productById);
     }
 
     @RequestMapping(value = "paramsForProduct")
-    public ModelAndView paramsForProduct(@RequestParam ("prod_id") String product_id) {
+    public ModelAndView paramsForProduct(@RequestParam ("prod_id") int product_id) {
         Map<ProductAttribute, ProductParameter> paramsForProduct =
-                productDAO.getParamsForProduct(Integer.parseInt(product_id));
+                productDAO.getParamsForProduct(product_id);
         return new ModelAndView("paramsProduct", "paramsForProduct", paramsForProduct);
     }
 
@@ -63,8 +63,8 @@ public class ProductController {
     }
 
     @RequestMapping(value = "removeproduct")
-    public ModelAndView removeProduct(@RequestParam ("prod_id") String product_id) {
-        productDAO.removeProduct(Integer.parseInt(product_id));
+    public ModelAndView removeProduct(@RequestParam ("prod_id") int product_id) {
+        productDAO.removeProduct(product_id);
         return new ModelAndView("removeproduct");
     }
 }
