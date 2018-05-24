@@ -1,5 +1,6 @@
 package com.company.store.model.impls;
 
+
 import com.company.store.model.dao.OrderDAO;
 import com.company.store.model.entities.Order;
 
@@ -49,7 +50,7 @@ public class OrderDAOImpl implements OrderDAO {
             ResultSet resultSet = ps.executeQuery();
             if (resultSet.next()){
                 order = parseOrder(resultSet);
-                log.info("Order was received  by id: " + order_id);
+                log.debug("Order was received  by id: " + order_id);
             }
         } catch (SQLException e) {
             log.error("Failed to receive order by id: " + order_id, e);
@@ -85,7 +86,7 @@ public class OrderDAOImpl implements OrderDAO {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()){
                 orders.add(parseOrder(resultSet));
-                log.info("Orders was received from database for user by id: " + user_id);
+                log.debug("Orders was received from database for user by id: " + user_id);
             }
         } catch (SQLException e) {
             log.error("Failed to receive orders for user by id: " + user_id, e);
@@ -104,7 +105,7 @@ public class OrderDAOImpl implements OrderDAO {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
                 orders.add(parseOrder(resultSet));
-            } log.info("All orders was received from database! ");
+            } log.debug("All orders was received from database! ");
         } catch (SQLException e) {
             log.error("Failed to receive all orders from database! ", e);
         }
@@ -115,7 +116,7 @@ public class OrderDAOImpl implements OrderDAO {
      * Save order to database.
      */
     @Override
-    public void saveOrder(Order order) {
+    public boolean saveOrder(Order order) {
         int order_id = order.getId();
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(order_id != 0 ? UPDATE_ORDER : INSERT_ORDER)){
@@ -126,28 +127,29 @@ public class OrderDAOImpl implements OrderDAO {
             if (order_id != 0){
                 ps.setInt(5, order_id);
             }
-            int result = ps.executeUpdate();
-            if (result > 0) {
-                log.info("Order was saved to database! Info: " + order.toString());
-            }
+            ps.executeUpdate();
+            log.debug("Order was saved to database! Info: " + order.toString());
         } catch (SQLException e) {
             log.error("Failed to save order into database! Info: " + order.toString(), e);
+            return false;
         }
+        return true;
     }
 
     /**
      * Remove order by specific id.
      */
     @Override
-    public void removeOrderById(int order_id) {
+    public boolean removeOrderById(int order_id) {
         try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(DELETE_ORDER)) {
             ps.setInt(1, order_id);
-            if (ps.executeUpdate() > 0){
-                log.info("Order was deleted by id: " + order_id);
-            }
+            ps.executeUpdate();
+            log.info("Order was deleted by id: " + order_id);
         } catch (SQLException e) {
             log.error("Failed to delete order by id: " + order_id, e);
+            return false;
         }
+        return true;
     }
 }

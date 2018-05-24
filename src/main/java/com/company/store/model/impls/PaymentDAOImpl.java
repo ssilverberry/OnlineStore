@@ -1,5 +1,6 @@
 package com.company.store.model.impls;
 
+
 import com.company.store.model.dao.PaymentDAO;
 import com.company.store.model.entities.Payment;
 
@@ -16,14 +17,14 @@ public class PaymentDAOImpl implements PaymentDAO {
 
     private static final Logger log = LogManager.getLogger(PaymentDAOImpl.class);
 
-    private static final String GET_ALL_PAYMENTS = "SELECT * FROM PAYMENTS";
     private static final String GET_PAYMENT_BY_ID = "SELECT * FROM PAYMENTS WHERE PAYMENT_ID = ?";
 
     /**
      * Parameters in this order: PAYMENT_TYPE, PAYMENT_AMOUNT, ISPAID
      */
     private static final String INSERT_PAYMENT = "INSERT INTO PAYMENTS VALUES (DEFAULT, ?, ?, ?)";
-    private static final String UPDATE_PAYMENT = "UPDATE payments SET payment_type=?, payment_amount=?, ispaid=? WHERE payment_id=?";
+    private static final String UPDATE_PAYMENT = "UPDATE payments SET payment_type=?, payment_amount=?, ispaid=? " +
+                                                                 "WHERE payment_id=?";
     private static final String DELETE_PAYMENT = "DELETE FROM PAYMENTS WHERE PAYMENT_ID = ?";
 
     /**
@@ -47,10 +48,10 @@ public class PaymentDAOImpl implements PaymentDAO {
             ResultSet resultSet = ps.executeQuery();
             if (resultSet.next()){
                 payment = parsePayment(resultSet);
-                log.info("Successfully received payment by id: " + payment_id);
+                log.debug("Payment was received from database by id: " + payment_id);
             }
         } catch (SQLException e) {
-            log.error("Getting payment was failed! Payment_id: " + payment_id, e);
+            log.error("Failed to get payment by id: " + payment_id, e);
         } return payment;
     }
 
@@ -58,7 +59,7 @@ public class PaymentDAOImpl implements PaymentDAO {
      * save payment to database
      */
     @Override
-    public void savePayment(Payment payment) {
+    public boolean savePayment(Payment payment) {
         int payment_id = payment.getId();
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(payment_id != 0 ? UPDATE_PAYMENT : INSERT_PAYMENT)){
@@ -68,13 +69,13 @@ public class PaymentDAOImpl implements PaymentDAO {
             if (payment_id != 0){
                 ps.setInt(4, payment_id);
             }
-            int result = ps.executeUpdate();
-            if (result > 0) {
-                log.info("Payment was successfully saved to database! Info: " + payment.toString());
-            }
+            ps.executeUpdate();
+            log.debug("Payment was saved to database! Info: " + payment.toString());
         } catch (SQLException e) {
-            log.error("Saving payment into database was failed! Info: " + payment.toString(), e);
+            log.error("Failed to save payment into database! Info: " + payment.toString(), e);
+            return false;
         }
+        return true;
     }
 
     /**
@@ -96,15 +97,16 @@ public class PaymentDAOImpl implements PaymentDAO {
      * remove payment from database by id
      */
     @Override
-    public void removePayment(int payment_id) {
+    public boolean removePayment(int payment_id) {
         try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(DELETE_PAYMENT)) {
             ps.setInt(1, payment_id);
-            if (ps.executeUpdate() > 0){
-                log.info("Success deleted payment by id: " + payment_id);
-            }
+            ps.executeUpdate();
+            log.debug("Payment was deleted by id: " + payment_id);
         } catch (SQLException e) {
-            log.error("Deleting payment was failed, id: " + payment_id, e);
+            log.error("Failed to delete payment by id: " + payment_id, e);
+            return false;
         }
+        return true;
     }
 }

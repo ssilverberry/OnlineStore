@@ -1,7 +1,7 @@
 package com.company.store.model.impls;
 
-import com.company.store.model.dao.CategoryAttributeDAO;
 import com.company.store.model.entities.ProductAttribute;
+import com.company.store.model.dao.CategoryAttributeDAO;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -50,7 +50,7 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()){
                 productAttributes.add(parseProdAttr(resultSet));
-            } log.info("Attribute list was received from database for category_id: " + category_id);
+            } log.debug("Attribute list was received from database for category_id: " + category_id);
         } catch (SQLException e) {
             log.error("Failed to receive list of attributes for category_id: " + category_id, e);
         } return productAttributes;
@@ -68,7 +68,7 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
             ResultSet resultSet = ps.executeQuery();
             if (resultSet.next()){
                 productAttribute = parseProdAttr(resultSet);
-                log.info("Attribute was received from database by id: " + attr_id);
+                log.debug("Attribute was received from database by id: " + attr_id);
             }
         } catch (SQLException e) {
             log.info(" Failed to receive attribute from database by id: " + attr_id, e);
@@ -94,7 +94,7 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
      * Save attribute to database.
      */
     @Override
-    public void saveAttribute(ProductAttribute attribute) {
+    public boolean saveAttribute(ProductAttribute attribute) {
         int attr_id = attribute.getAttrId();
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(attr_id != 0 ? UPDATE_FEEDBACK : INSERT_ATTRIBUTE)){
@@ -103,28 +103,29 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
             if (attr_id != 0){
                 ps.setInt(3, attr_id);
             }
-            int result = ps.executeUpdate();
-            if (result > 0) {
-                log.info("attribute was saved to database! Info: " + attribute.toString());
-            }
+            ps.executeUpdate();
+            log.debug("attribute was saved to database! Info: " + attribute.toString());
         } catch (SQLException e) {
             log.error("Failed to save attribute to database! Info: " + attribute.toString(), e);
+            return false;
         }
+        return true;
     }
 
     /**
      * Remove attribute from database by specific id.
      */
     @Override
-    public void removeAttribute(int attr_id) {
+    public boolean removeAttribute(int attr_id) {
         try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(DELETE_ATTRIBUTE)) {
             ps.setInt(1, attr_id);
-            if (ps.executeUpdate() > 0){
-                log.info("Attribute was deleted by id: " + attr_id);
-            }
+            ps.executeUpdate();
+            log.debug("Attribute was deleted by id: " + attr_id);
         } catch (SQLException e) {
             log.error("Failed to delete attribute by id: " + attr_id, e);
+            return false;
         }
+        return true;
     }
 }

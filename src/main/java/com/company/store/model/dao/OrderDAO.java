@@ -11,6 +11,6 @@ public interface OrderDAO {
     Order getOrderById(int order_id);
     Collection<Order> getAllOrdersForUser(int user_id);
 
-    void saveOrder(Order order);
-    void removeOrderById(int order_id);
+    boolean saveOrder(Order order);
+    boolean removeOrderById(int order_id);
 }
