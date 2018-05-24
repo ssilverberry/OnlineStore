@@ -37,7 +37,8 @@ public class ProductDAOImpl implements ProductDAO {
      * Parameters in this order: PARENT_ID, PRODUCT_NAME, ISCATEGORY
      */
     private static final String INSERT_PRODUCT = "INSERT INTO PRODUCTS VALUES (DEFAULT, ?, ?, ?)";
-    private static final String UPDATE_PRODUCT = "UPDATE products SET parent_id=?, product_name=?, iscategory=? WHERE product_id=?";
+    private static final String UPDATE_PRODUCT = "UPDATE products SET parent_id=?, product_name=?, iscategory=? " +
+                                                                 "WHERE product_id=?";
     private static final String DELETE_PRODUCT = "DELETE FROM PRODUCTS WHERE PRODUCT_ID = ?";
 
     /**
@@ -60,7 +61,7 @@ public class ProductDAOImpl implements ProductDAO {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()){
                 categories.add(parseProduct(resultSet));
-            } log.info("Categories was received from database!");
+            } log.debug("Categories was received from database!");
         } catch (SQLException e) {
             log.error("Failed to receive categories from database! ", e);
         } return categories;
@@ -78,7 +79,7 @@ public class ProductDAOImpl implements ProductDAO {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()){
                 products.add(parseProduct(resultSet));
-            } log.info("Products of category was received from database by id: " + category_id);
+            } log.debug("Products of category was received from database by id: " + category_id);
         } catch (SQLException e) {
             log.error("Failed to receive products for category by id: " + category_id);
         } return products;
@@ -96,7 +97,7 @@ public class ProductDAOImpl implements ProductDAO {
             ResultSet resultSet = ps.executeQuery();
             if (resultSet.next()){
                 product = parseProduct(resultSet);
-                log.info("Product was received  by id: " + product_id);
+                log.debug("Product was received  by id: " + product_id);
             }
         } catch (SQLException e) {
             log.error("Failed to receive product by id: " + product_id, e);
@@ -118,7 +119,7 @@ public class ProductDAOImpl implements ProductDAO {
                 ProductAttribute prodAttr = new ProductAttribute(attr_id, product_id, resultSet.getString(2));
                 ProductParameter prodParam = new ProductParameter(attr_id, product_id, resultSet.getString(3));
                 prodParams.put(prodAttr, prodParam);
-            } log.info("Parameters was received for product_id: " + product_id);
+            } log.debug("Parameters was received for product_id: " + product_id);
         } catch (SQLException e){
             log.error("Failed to receive product by id: " + product_id, e);
         } return prodParams;
@@ -152,10 +153,10 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     /**
-     * save product into database
+     * Save product into database
      */
     @Override
-    public void saveProduct(Product product) {
+    public boolean saveProduct(Product product) {
         int product_id = product.getId();
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement(product_id != 0 ? UPDATE_PRODUCT : INSERT_PRODUCT)){
@@ -165,28 +166,29 @@ public class ProductDAOImpl implements ProductDAO {
             if (product_id != 0){
                 ps.setInt(4, product_id);
             }
-            int result = ps.executeUpdate();
-            if (result > 0) {
-                log.info(" Product was saved to database! Info: " + product.toString());
-            }
+           ps.executeUpdate();
+            log.debug(" Product was saved to database! Info: " + product.toString());
         } catch (SQLException e) {
             log.error("Failed to save product to database! Info: " + product.toString(), e);
+            return false;
         }
+        return true;
     }
 
     /**
      * remove product from database by specify id
      */
     @Override
-    public void removeProduct(int product_id) {
+    public boolean removeProduct(int product_id) {
         try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(DELETE_PRODUCT)) {
             ps.setInt(1, product_id);
-            if (ps.executeUpdate() > 0){
-                log.info("Product was deleted by id: " + product_id);
-            }
+            ps.executeUpdate();
+            log.debug("Product was deleted by id: " + product_id);
         } catch (SQLException e) {
             log.error("Failed to delete product by id: " + product_id, e);
+            return false;
         }
+        return true;
     }
 }

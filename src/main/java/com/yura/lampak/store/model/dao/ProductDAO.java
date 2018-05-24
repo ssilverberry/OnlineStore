@@ -16,6 +16,6 @@ public interface ProductDAO {
     Map<ProductAttribute, ProductParameter> getParamsForProduct(int product_id);
 
     // for admin
-    void saveProduct(Product product);
-    void removeProduct(int product_id);
+    boolean saveProduct(Product product);
+    boolean removeProduct(int product_id);
 }

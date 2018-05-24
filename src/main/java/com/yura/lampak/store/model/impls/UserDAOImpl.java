@@ -57,7 +57,7 @@ public class UserDAOImpl implements UserDAO {
             user.setAddress(resultSet.getString(7));
             user.setIsAdmin(Boolean.parseBoolean(String.valueOf(resultSet.getInt(8))));
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("Parsing of user was failed! ", e);
         } return user;
     }
 
@@ -65,7 +65,7 @@ public class UserDAOImpl implements UserDAO {
      * save user credentials to database
      */
     @Override
-    public void saveUser(User user) {
+    public boolean saveUser(User user) {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement(user.getId() != 0 ? UPDATE_USER_CREDENTIALS : INSERT_USER)){
             ps.setString(1, user.getName());
@@ -78,13 +78,13 @@ public class UserDAOImpl implements UserDAO {
             if (user.getId() != 0){
                 ps.setInt(8, user.getId());
             }
-            int result = ps.executeUpdate();
-            if (result > 0) {
-                log.info("User was successfully inserted into db!, Info: " + user.toString());
-            }
+            ps.executeUpdate();
+            log.debug("User was successfully inserted into db!, Info: " + user.toString());
         } catch (SQLException e) {
             log.error("Inserting user into db was failed! User: " + user.toString(), e);
+            return false;
         }
+        return true;
     }
 
     /**
@@ -98,7 +98,7 @@ public class UserDAOImpl implements UserDAO {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
                 users.add(parseUser(resultSet));
-            } log.info("Successfully received all users from database!");
+            } log.debug("Successfully received all users from database!");
         } catch (SQLException e) {
             log.error("Receiving users from database was failed: ", e);
         }
@@ -117,7 +117,7 @@ public class UserDAOImpl implements UserDAO {
             ResultSet resultSet = ps.executeQuery();
             if (resultSet.next()){
                 user = parseUser(resultSet);
-                log.info("User was successfully received from database by id: " + user_id);
+                log.debug("User was successfully received from database by id: " + user_id);
             }
         } catch (SQLException e) {
             log.error("Receiving user was failed, user_id: " + user_id, e);
@@ -137,7 +137,7 @@ public class UserDAOImpl implements UserDAO {
             ResultSet resultSet = ps.executeQuery();
             if (resultSet.next()){
                 user = parseUser(resultSet);
-                log.info("Received a user by credentials, user: " + user.toString());
+                log.debug("Received a user by credentials, user: " + user.toString());
             }
         } catch (SQLException e) {
             log.error("Receiving user by credentials was failed, email: " + email, e);
@@ -148,15 +148,16 @@ public class UserDAOImpl implements UserDAO {
      * remove user from database by id
      */
     @Override
-    public void removeUser(int user_id) {
+    public boolean removeUser(int user_id) {
         try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(DELETE_USER)) {
             ps.setInt(1, user_id);
-            if (ps.executeUpdate() > 0){
-                log.info("user was deleted by id: " + user_id);
-            }
+            ps.executeUpdate();
+            log.debug("user was deleted by id: " + user_id);
         } catch (SQLException e) {
             log.error("deleting user was failed, id: " + user_id, e);
+            return false;
         }
+        return true;
     }
 }

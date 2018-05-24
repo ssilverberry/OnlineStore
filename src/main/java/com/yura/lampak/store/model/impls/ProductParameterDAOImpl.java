@@ -16,7 +16,8 @@ public class ProductParameterDAOImpl implements ProductParameterDAO {
 
     private static final Logger log = LogManager.getLogger(ProductParameterDAOImpl.class);
 
-    private static final String GET_PARAMETER_BY_PRODUCT_AND_ATTR_ID = "SELECT * FROM PRODUCTS_PARAMETERS WHERE PRODUCT_ID = ? AND ATTR_ID = ?";
+    private static final String GET_PARAM_BY_PROD_AND_ATTR_ID = "SELECT * FROM PRODUCTS_PARAMETERS " +
+                                                                         "WHERE PRODUCT_ID = ? AND ATTR_ID = ?";
 
     /**
      * Parameters in this order: PRODUCT_ID, ATTR_ID, VALUE
@@ -41,13 +42,13 @@ public class ProductParameterDAOImpl implements ProductParameterDAO {
     public ProductParameter getParamByProductAndAttrIds(int product_id, int attr_id) {
         ProductParameter prodParam = null;
         try(Connection connection = dataSource.getConnection();
-            PreparedStatement ps = connection.prepareStatement(GET_PARAMETER_BY_PRODUCT_AND_ATTR_ID)) {
+            PreparedStatement ps = connection.prepareStatement(GET_PARAM_BY_PROD_AND_ATTR_ID)) {
             ps.setInt(1, product_id);
             ps.setInt(2, attr_id);
             ResultSet resultSet = ps.executeQuery();
             if (resultSet.next()){
                 prodParam = parseProdParam(resultSet);
-                log.info("success received parameter by product_id: " + product_id + ", attr_id: " + attr_id);
+                log.debug("success received parameter by product_id: " + product_id + ", attr_id: " + attr_id);
             }
         } catch (SQLException e){
             log.error("getting parameter by product_id and attr_id was failed! ", e);
@@ -72,7 +73,7 @@ public class ProductParameterDAOImpl implements ProductParameterDAO {
      * save parameter of product into database
      */
     @Override
-    public void saveParameter(ProductParameter productParam, boolean isUpdate) {
+    public boolean saveParameter(ProductParameter productParam, boolean isUpdate) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(isUpdate ? UPDATE_PARAMETER : INSERT_PARAMETER)){
             if (isUpdate) {
@@ -84,28 +85,29 @@ public class ProductParameterDAOImpl implements ProductParameterDAO {
                 ps.setInt(2, productParam.getAttrId());
                 ps.setString(3, productParam.getValue());
             }
-            int result = ps.executeUpdate();
-            if (result > 0) {
-                log.info("Parameter was successfully saved into database! param: ", productParam.toString());
-            }
+            ps.executeUpdate();
+            log.debug("Parameter was saved into database! param: ", productParam.toString());
         } catch (SQLException e) {
-            log.error("Saving parameter into database was failed! param: " + productParam.toString(), e);
+            log.error("Failed to save parameter into database! param: " + productParam.toString(), e);
+            return false;
         }
+        return true;
     }
 
     /**
      * remove parameter of product from database
      */
     @Override
-    public void removeParameterByProductId(int product_id) {
+    public boolean removeParameterByProductId(int product_id) {
         try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(DELETE_PARAMETER_BY_PRODUCT_ID)) {
             ps.setInt(1, product_id);
-            if (ps.executeUpdate() > 0){
-                log.info("parameter was deleted for product_id: " + product_id);
-            }
+            ps.executeUpdate();
+            log.debug("Parameter was deleted for product_id: " + product_id);
         } catch (SQLException e) {
-            log.error("Deleting parameter for product_id was failed: " + product_id + " failed! ", e);
+            log.error("Failed to delete parameter by product_id: " + product_id, e);
+            return false;
         }
+        return true;
     }
 }

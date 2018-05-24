@@ -54,9 +54,9 @@ public class DeliveryDAOImpl implements DeliveryDAO {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
                 deliveries.add(parseDelivery(resultSet));
-            } log.info("All deliveries was received from database!");
+            } log.debug("All deliveries was received from database!");
         } catch (SQLException e) {
-            log.error("Failed to receive all deliveries! ", e);
+            log.error("Failed to receive deliveries! ", e);
         }
         return deliveries;
     }
@@ -74,12 +74,10 @@ public class DeliveryDAOImpl implements DeliveryDAO {
             ResultSet resultSet = ps.executeQuery();
             if (resultSet.next()){
                 delivery = parseDelivery(resultSet);
-                log.info("Got delivery by id: " + delivery_id);
-            } else {
-                log.info("delivery doesn't exist by id: " + delivery_id);
+                log.debug("Delivery was received by id: " + delivery_id);
             }
         } catch (SQLException e) {
-            log.error("got delivery failed, delivery_id: " + delivery_id, e);
+            log.error("Failed to receive delivery by id: " + delivery_id, e);
         } return delivery;
     }
 
@@ -87,7 +85,7 @@ public class DeliveryDAOImpl implements DeliveryDAO {
      * Save delivery to database.
      */
     @Override
-    public void saveDelivery(Delivery delivery) {
+    public boolean saveDelivery(Delivery delivery) {
         int deliv_id = delivery.getId();
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement(deliv_id != 0 ? UPDATE_DELIV_CREDENTIALS : INSERT_DELIVERY)){
@@ -99,30 +97,31 @@ public class DeliveryDAOImpl implements DeliveryDAO {
             if (deliv_id != 0){
                 ps.setInt(6, deliv_id);
             }
-            int result = ps.executeUpdate();
-            if (result > 0) {
-                log.info("Delivery was saved to database! Info:" + delivery.toString());
-            }
+            ps.executeUpdate();
+            log.debug("Delivery was saved to database! Info:" + delivery.toString());
         } catch (SQLException e) {
             log.error("Failed to save delivery into database! Info:" + delivery.toString(), e);
+            return false;
         }
+        return true;
     }
 
     /**
      * Update status of delivery by specific id.
      */
     @Override
-    public void updateStatus(int delivery_id, String status) {
+    public boolean updateStatus(int delivery_id, String status) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(UPDATE_STATUS)){
             ps.setString(1, status);
             ps.setInt(2, delivery_id);
-            if (ps.executeUpdate() > 0) {
-                log.info("Delivery status was updated by id: " + delivery_id);
-            }
+            ps.executeUpdate();
+                log.debug("Delivery status was updated by id: " + delivery_id);
         } catch (SQLException e) {
             log.error("Failed to update delivery status by id: " + delivery_id, e);
+            return false;
         }
+        return true;
     }
 
     /**
@@ -146,16 +145,16 @@ public class DeliveryDAOImpl implements DeliveryDAO {
      * Remove delivery from database by specific id.
      */
     @Override
-    public void removeDelivery(int delivery_id) {
+    public boolean removeDelivery(int delivery_id) {
         try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(DELETE_DELIVERY)) {
             ps.setInt(1, delivery_id);
-            if (ps.executeUpdate() > 0){
-                log.info("delivery was deleted by id: " + delivery_id);
-            }
+            ps.executeUpdate();
+            log.debug("delivery was deleted by id: " + delivery_id);
         } catch (SQLException e) {
             log.error("Failed to delete delivery by id: " + delivery_id, e);
+            return false;
         }
+        return true;
     }
-
 }
