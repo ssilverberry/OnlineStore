@@ -2,6 +2,7 @@ package com.company.store.controller;
 
 import com.company.store.model.entities.Delivery;
 import com.company.store.model.impls.DeliveryDAOImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,33 +15,37 @@ public class DeliveryController {
 
     private DeliveryDAOImpl deliveryDAO;
 
-    @RequestMapping(value = "/alldeliveries")
+    public void setDeliveryDAO(DeliveryDAOImpl deliveryDAO) {
+        this.deliveryDAO = deliveryDAO;
+    }
+
+    @RequestMapping(value = "alldeliveries")
     public ModelAndView getAllDeliveries() {
         Collection<Delivery> allDeliveries = deliveryDAO.getAllDeliveries();
-        return new ModelAndView("alldeliveries", "alldeliver", allDeliveries);
+        return new ModelAndView("alldeliveries", "allDeliveries", allDeliveries);
     }
 
-    @RequestMapping(value = "/deliverybyid/{delivery_id}")
-    public ModelAndView getDeliveryById(@PathVariable int delivery_id) {
-        deliveryDAO.getDeliveryById(delivery_id);
-        return new ModelAndView("deliveryid");
+    @RequestMapping(value = "deliverybyid/{id}")
+    public ModelAndView getDeliveryById(@PathVariable("id") String id) {
+        Delivery delivery = deliveryDAO.getDeliveryById(Integer.parseInt(id));
+        return new ModelAndView("deliveryid", "delivery", delivery);
     }
 
-    @RequestMapping(value = "/savedelivery/{delivery}")
+    @RequestMapping(value = "savedelivery/")
     public ModelAndView saveDelivery(Delivery delivery) {
         deliveryDAO.saveDelivery(delivery);
         return new ModelAndView("savedelivery");
     }
 
-    @RequestMapping(value = "/removedelivery/{delivery_id}")
-    public ModelAndView removeDelivery(@PathVariable int delivery_id) {
-        deliveryDAO.removeDelivery(delivery_id);
+    @RequestMapping(value = "removedelivery/{id}")
+    public ModelAndView removeDelivery(@PathVariable("id") String id) {
+        deliveryDAO.removeDelivery(Integer.parseInt(id));
         return new ModelAndView("deliveryremove");
     }
 
-    @RequestMapping(value = "/updetedelivery/{delivery_id}/status/{status}")
-    public ModelAndView updateStatus(@PathVariable int delivery_id, String status) {
-        deliveryDAO.updateStatus(delivery_id, status);
-        return new ModelAndView("/updatestatus");
+    @RequestMapping(value = "updetedelivery/{id}")
+    public ModelAndView updateStatus(@PathVariable("id") String id, String status) {
+        deliveryDAO.updateStatus(Integer.parseInt(id), status);
+        return new ModelAndView("updatestatus");
     }
 }
