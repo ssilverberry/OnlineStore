@@ -90,13 +90,15 @@
     </p>
     <div class="content__sidebar__list__container">
       <ul class="content__sidebar__list__container__categorieslist">
-        <li><a href="#"> Laptops & PC </a></li>
-        <li><a href="#"> TV, Electronics</a> </li>
-        <li><a href="">Appliances</a> </li>
-        <li><a href="">Sports</a></li>
+        <c:forEach var="category" items="${categoryList}">
+          <li><a href="#">${category.name}</a></li>
+          <li><a href="productCategoriesId/${category.id}">${category.name}</a></li>
+        </c:forEach>
+
+       <%-- <li><a href="">Sports</a></li>
         <li><a href="">Garden tools</a></li>
         <li><a href="">Clothes & Shoes</a></li>
-        <li><a href="">Cars & Bikes</a></li>
+        <li><a href="">Cars & Bikes</a></li>--%>
       </ul>
     </div>
     <p class="content__sidebar__text__price content__sidebar__text_fontsize_21">

@@ -2,6 +2,7 @@ package com.company.store.controller;
 
 import com.company.store.model.entities.Feedback;
 import com.company.store.model.impls.FeedbackDAOImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,46 +15,50 @@ public class FeedbackController {
 
     private FeedbackDAOImpl feedbackDAO;
 
-    @RequestMapping(value = "/savefeedback/{feedback}")
+    public void setFeedbackDAO(FeedbackDAOImpl feedbackDAO) {
+        this.feedbackDAO = feedbackDAO;
+    }
+
+    @RequestMapping(value = "savefeedback")
     public ModelAndView saveFeedback(Feedback feedback) {
         feedbackDAO.saveFeedback(feedback);
         return new ModelAndView("save_feedback");
     }
 
-    @RequestMapping(value = "/allfeedback()")
+    @RequestMapping(value = "allfeedback")
     public ModelAndView getAllFeedback() {
         Collection<Feedback> feedback = feedbackDAO.getAllFeedback();
         return new ModelAndView("dysplayallfeedback", "feedback", feedback);
     }
 
-    @RequestMapping(value = "/getAllFeedbackForUser/{user_id}")
-    public ModelAndView getAllFeedbackForUser(@PathVariable int user_id) {
-        feedbackDAO.getAllFeedbackForUser(user_id);
-        return new ModelAndView("AllFeedbackForUser");
+    @RequestMapping(value = "getAllFeedbackForUser/{id}")
+    public ModelAndView getAllFeedbackForUser(@PathVariable("id") String id) {
+        Collection<Feedback> feedbacks = feedbackDAO.getAllFeedbackForUser(Integer.parseInt(id));
+        return new ModelAndView("AllFeedbackForUser", "feedbacks", feedbacks);
     }
 
-    @RequestMapping(value = "/AllFeedbackForProduct/{product_id}")
-    public ModelAndView getAllFeedbackForProduct(@PathVariable int product_id) {
-        feedbackDAO.getAllFeedbackForProduct(product_id);
-        return new ModelAndView("AllFeedbackForProduc");
+    @RequestMapping(value = "AllFeedbackForProduct/{id}")
+    public ModelAndView getAllFeedbackForProduct(@PathVariable("id") String id) {
+        Collection<Feedback> feedbackForProduct = feedbackDAO.getAllFeedbackForProduct(Integer.parseInt(id));
+        return new ModelAndView("AllFeedbackForProduc", "feedbackForProduct", feedbackForProduct);
     }
 
-    @RequestMapping(value = "/UserFeedbackOnProduc/{user_id}/product/{product_id}")
-    public ModelAndView getUserFeedbackOnProduc(@PathVariable int user_id, int product_id) {
-        feedbackDAO.getUserFeedbackOnProduct(user_id, product_id);
-        return new ModelAndView("userFeedbackOnProduct");
+    @RequestMapping(value = "UserFeedbackOnProduc/{id}/product/{id}")
+    public ModelAndView getUserFeedbackOnProduc(@PathVariable("id") String id) {
+        Feedback userFeedbackOnProduct = feedbackDAO.getUserFeedbackOnProduct(Integer.parseInt(id), Integer.parseInt(id));
+        return new ModelAndView("userFeedbackOnProduct", "userFeedbackOnProduct", userFeedbackOnProduct);
     }
 
-    @RequestMapping(value = "/FeedbackById/{feedb_id}")
-    public ModelAndView getFeedbackById(@PathVariable int feedb_id) {
-        feedbackDAO.getFeedbackById(feedb_id);
-        return new ModelAndView("return_feedb_id");
+    @RequestMapping(value = "FeedbackById/{id}")
+    public ModelAndView getFeedbackById(@PathVariable("id") String id) {
+        Feedback feedback = feedbackDAO.getFeedbackById(Integer.parseInt(id));
+        return new ModelAndView("return_feedb_id", "feedback", feedback);
 
     }
 
-    @RequestMapping(value = "/removeFeedback/{feedb_id}")
-    public ModelAndView removeFeedback(@PathVariable int feedb_id) {
-        feedbackDAO.removeFeedback(feedb_id);
+    @RequestMapping(value = "removeFeedback/{id}")
+    public ModelAndView removeFeedback(@PathVariable("id") String id) {
+        feedbackDAO.removeFeedback(Integer.parseInt(id));
         return new ModelAndView("remove_feedb_id");
 
     }
