@@ -5,15 +5,14 @@
                            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="DB.properties"/>
+        <property name="location" value="classpath:DB.properties"/>
     </bean>
 
-    <bean id="dataSource" class="oracle.ucp.jdbc.PoolDataSourceFactory" factory-method="getPoolDataSource">
+    <bean id="dataSource" class="oracle.ucp.jdbc.PoolDataSourceFactory" factory-method="getPoolDataSource" >
         <property name="connectionFactoryClassName" value="${driverType}" />
         <property name="URL" value="${url}" />
         <property name="user" value="${user}" />
         <property name="password" value="${password}" />
-        <property name="connectionPoolName" value="StorePool" />
         <property name="minPoolSize" value="${minPoolSize}" />
         <property name="maxPoolSize" value="${maxPoolSize}" />
         <property name="initialPoolSize" value="${initialPoolSize}" />
