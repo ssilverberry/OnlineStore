@@ -83,13 +83,18 @@
       <dependency>
           <groupId>com.oracle</groupId>
           <artifactId>ucp</artifactId>
-          <version>11.2.0.3</version>
+          <version>11.2.0.4</version>
       </dependency>
       <!-- https://mvnrepository.com/artifact/jstl/jstl -->
       <dependency>
           <groupId>jstl</groupId>
           <artifactId>jstl</artifactId>
           <version>1.2</version>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-jdbc</artifactId>
+          <version>4.3.1.RELEASE</version>
       </dependency>
 
   </dependencies>
@@ -106,6 +111,24 @@
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.0.2</version>
+            <executions>
+                <execution>
+                    <id>default-copy-resources</id>
+                    <phase>process-resources</phase>
+                    <goals>
+                        <goal>copy-resources</goal>
+                    </goals>
+                    <configuration>
+                        <overwrite>true</overwrite>
+                        <outputDirectory>${project.build.directory}/${project.artifactId}/WEB-INF/classes</outputDirectory>
+                        <resources>
+                            <resource>
+                                <directory>${project.basedir}/src/resources</directory>
+                            </resource>
+                        </resources>
+                    </configuration>
+                </execution>
+            </executions>
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
