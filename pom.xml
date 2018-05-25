@@ -83,7 +83,7 @@
       <dependency>
           <groupId>com.oracle</groupId>
           <artifactId>ucp</artifactId>
-          <version>11.2.0.4</version>
+          <version>11.2.0.3</version>
       </dependency>
       <!-- https://mvnrepository.com/artifact/jstl/jstl -->
       <dependency>
