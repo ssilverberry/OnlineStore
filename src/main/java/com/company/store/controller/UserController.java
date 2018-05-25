@@ -26,8 +26,7 @@ public class UserController {
                                  @RequestParam(value = "email") String email,
                                  @RequestParam(value = "phone") String phone,
                                  @RequestParam(value = "password") String password,
-                                 @RequestParam (value = "address") String address) {
-
+                                 @RequestParam(value = "address") String address) {
         User user = new User();
         user.setName(name);
         user.setSurname(surname);
@@ -35,8 +34,11 @@ public class UserController {
         user.setPhone(phone);
         user.setPassword(password);
         user.setAddress(address);
-        userDAO.saveUser(user);
+        Boolean add = userDAO.saveUser(user);
+        if(add==true){
         return new ModelAndView("saveUser");
+        }else
+            return new ModelAndView("noUserSave");
     }
 
     @RequestMapping(value = "allusers")
@@ -61,7 +63,13 @@ public class UserController {
 
     @RequestMapping(value = "removeUser")
     public ModelAndView removeUser(@RequestParam(value = "id") int id) {
-        userDAO.removeUser(id);
-        return new ModelAndView("removeUser");
+       Boolean up = userDAO.removeUser(id);
+       /*up ? return new ModelAndView("removeUser") :
+        return new ModelAndView("user")*/
+        if(up == true){
+            return new ModelAndView("removeUser");
+        }
+        else
+        return new ModelAndView("user");
     }
 }
