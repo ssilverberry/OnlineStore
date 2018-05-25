@@ -39,6 +39,6 @@ public class ProductParameterController {
         if(rem == true){
         return new ModelAndView("removeparameterbyproductid");
     }else
-        return new ModelAndView("notRemove");
+        return new ModelAndView("notRemoveProduct");
     }
 }
