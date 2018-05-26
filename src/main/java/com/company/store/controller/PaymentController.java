@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class PaymentController {
-
+    // test
     private PaymentDAOImpl paymentDAO;
 
     public void setPaymentDAO(PaymentDAOImpl paymentDAO) {
