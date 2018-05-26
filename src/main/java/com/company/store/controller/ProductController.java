@@ -30,7 +30,7 @@ public class ProductController {
         this.productDAO = productDAO;
     }
 
-    @RequestMapping("/")
+    @RequestMapping("werrr")
     public ModelAndView showAllProduct() {
         Collection<Product> categoryList = productDAO.getCategories();
         categoryList.forEach(product -> System.out.println(product.toString()));
