@@ -18,6 +18,19 @@ public class PaymentController {
         this.paymentDAO = paymentDAO;
     }
 
+    @RequestMapping(value = "payDelive")
+    public String payment(){
+     return "payDelive";
+    }
+    @RequestMapping(value = "contacts")
+    public String contacts(){
+        return "contacts";
+    }
+    @RequestMapping(value = "aboutus")
+        public String aboutus(){
+        return "aboutus";
+    }
+
     @RequestMapping(value = "paymentbyid")
     public ModelAndView paymentById(@RequestParam(value = "id") int id) {
         Payment payment = paymentDAO.getPaymentById(id);
