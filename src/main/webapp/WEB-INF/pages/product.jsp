@@ -58,7 +58,7 @@
 <div class="main">
 <nav class="nav">
     <div class="nav__logo">
-        <a href="/" class="nav__logo__link">
+        <a href="<c:url value="/"/>" class="nav__logo__link">
             NC Loft
         </a>
     </div>
