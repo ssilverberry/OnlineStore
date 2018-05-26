@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
@@ -31,34 +32,35 @@ public class FeedbackController {
         return new ModelAndView("dysplayallfeedback", "feedback", feedback);
     }
 
-    @RequestMapping(value = "getAllFeedbackForUser/{id}")
-    public ModelAndView getAllFeedbackForUser(@PathVariable("id") String id) {
-        Collection<Feedback> feedbacks = feedbackDAO.getAllFeedbackForUser(Integer.parseInt(id));
+    @RequestMapping(value = "getAllFeedbackForUser")
+    public ModelAndView getAllFeedbackForUser(@RequestParam(value = "id")int id) {
+        Collection<Feedback> feedbacks = feedbackDAO.getAllFeedbackForUser(id);
         return new ModelAndView("AllFeedbackForUser", "feedbacks", feedbacks);
     }
 
-    @RequestMapping(value = "AllFeedbackForProduct/{id}")
-    public ModelAndView getAllFeedbackForProduct(@PathVariable("id") String id) {
-        Collection<Feedback> feedbackForProduct = feedbackDAO.getAllFeedbackForProduct(Integer.parseInt(id));
+    @RequestMapping(value = "AllFeedbackForProduct")
+    public ModelAndView getAllFeedbackForProduct(@RequestParam(value = "id") int id) {
+        Collection<Feedback> feedbackForProduct = feedbackDAO.getAllFeedbackForProduct(id);
         return new ModelAndView("AllFeedbackForProduc", "feedbackForProduct", feedbackForProduct);
     }
 
-    @RequestMapping(value = "UserFeedbackOnProduc/{id}/product/{id}")
-    public ModelAndView getUserFeedbackOnProduc(@PathVariable("id") String id) {
-        Feedback userFeedbackOnProduct = feedbackDAO.getUserFeedbackOnProduct(Integer.parseInt(id), Integer.parseInt(id));
+    @RequestMapping(value = "UserFeedbackOnProduc/product/{id}")
+    public ModelAndView getUserFeedbackOnProduc(@RequestParam(value = "id")int id,
+                                                @RequestParam(value = "product_id") int product_id) {
+        Feedback userFeedbackOnProduct = feedbackDAO.getUserFeedbackOnProduct(id, product_id);
         return new ModelAndView("userFeedbackOnProduct", "userFeedbackOnProduct", userFeedbackOnProduct);
     }
 
-    @RequestMapping(value = "FeedbackById/{id}")
-    public ModelAndView getFeedbackById(@PathVariable("id") String id) {
-        Feedback feedback = feedbackDAO.getFeedbackById(Integer.parseInt(id));
+    @RequestMapping(value = "FeedbackById")
+    public ModelAndView getFeedbackById(@RequestParam(value = "id") int id) {
+        Feedback feedback = feedbackDAO.getFeedbackById(id);
         return new ModelAndView("return_feedb_id", "feedback", feedback);
 
     }
 
-    @RequestMapping(value = "removeFeedback/{id}")
-    public ModelAndView removeFeedback(@PathVariable("id") String id) {
-        feedbackDAO.removeFeedback(Integer.parseInt(id));
+    @RequestMapping(value = "removeFeedback")
+    public ModelAndView removeFeedback(@RequestParam(value = "id") int id) {
+        feedbackDAO.removeFeedback(id);
         return new ModelAndView("remove_feedb_id");
 
     }
