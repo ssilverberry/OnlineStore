@@ -30,6 +30,7 @@ public class ProductController {
         this.productDAO = productDAO;
     }
 
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showCategories() {
         Collection<Product> categoryList = productDAO.getCategories();
@@ -40,7 +41,7 @@ public class ProductController {
     @RequestMapping(value = "productCategoriesId")
     public ModelAndView showProductForCategory(@RequestParam("category_id") int category_id) {
         Collection<Product> productIdList = productDAO.getProductsForCategory(category_id);
-        return new ModelAndView("product", "productList", productIdList);
+        return new ModelAndView("list", "productList", productIdList);
     }
 
     @RequestMapping("product")
@@ -66,6 +67,12 @@ public class ProductController {
     public ModelAndView removeProduct(@RequestParam ("prod_id") int product_id) {
         productDAO.removeProduct(product_id);
         return new ModelAndView("removeproduct");
+    }
+
+    @RequestMapping(value = "xxx", method = RequestMethod.GET)
+    public ModelAndView ajax(@RequestParam(value = "category_id") int category_id) {
+        Collection<Product> productIdList = productDAO.getProductsForCategory(category_id);
+        return new ModelAndView("list", "products", productIdList);
     }
 }
 

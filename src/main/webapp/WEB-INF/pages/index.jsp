@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/footer.css" />">
 
   <title>NC Loft</title>
+    <script src="<c:url value="/resources/js/script.js"/>" async="true"></script>
 </head>
 <body>
 <div class="authorization display_none">
@@ -79,10 +80,11 @@
   </div>
 </nav>
 <div class="content">
-  <div class="basket">
+  <div class="basket" onclick="getCategoriesList()">
     <a href="#">
       <img src="<c:url value="/resources/icons/basket.jpg"/>" alt="basket" class="basket_icon">
     </a>
+      <div class="basket_text"></div>
   </div>
   <div class="content__sidebar">
     <p class="content__sidebar__text content__sidebar__text_fontsize_21">
@@ -91,9 +93,11 @@
     <div class="content__sidebar__list__container">
       <ul class="content__sidebar__list__container__categorieslist">
         <c:forEach var="category" items="${categoryList}">
-          <li><a href="<c:url value="/productCategoriesId">
-                          <c:param name="category_id" value="${category.id}"/>
-                       </c:url>"> ${category.name} </a></li>
+          <li style="cursor: pointer;">
+              <a onclick="getCategoriesList(${category.id})">
+                      ${category.name}
+              </a>
+          </li>
         </c:forEach>
       </ul>
     </div>
@@ -208,32 +212,6 @@
   </div>
 </div>
 </div>
-<script>
-    var signinElem = document.querySelector('.nav__signin');
-    var basketElem = document.querySelector('.basket');
-    var mainElem = document.querySelector('.main');
-    var authorization = document.querySelector('.authorization');
-    var closeAuthElem = document.querySelector('.authorization__close');
-    var flag = true;
-
-    signinElem.addEventListener('click', function() {
-        if (flag) {
-            authorization.classList.remove('display_none');
-            basketElem.classList.add('display_none');
-            mainElem.classList.add('display_none');
-            flag = false;
-        }
-
-    });
-    closeAuthElem.addEventListener('click', function () {
-        if (!flag) {
-            authorization.classList.add('display_none');
-            basketElem.classList.remove('display_none');
-            mainElem.classList.remove('display_none');
-            flag = true;
-        }
-    });
-</script>
 </body>
 </html>
 

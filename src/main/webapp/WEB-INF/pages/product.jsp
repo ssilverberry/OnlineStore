@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/content.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/footer.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/product.css" />">
-
+    <script src="<c:url value="/resources/js/script.js"/>" async="true"></script>
     <title>Document</title>
 </head>
 <body>
@@ -93,11 +93,7 @@
             <ul class="content__sidebar__list__container__categorieslist">
                 <li><a href="#"> Laptops & PC </a></li>
                 <li><a href="#"> TV, Electronics</a> </li>
-                <li><a href="">Appliances</a> </li>
-                <li><a href="">Sports</a></li>
-                <li><a href="">Garden tools</a></li>
-                <li><a href="">Clothes & Shoes</a></li>
-                <li><a href="">Cars & Bikes</a></li>
+                <li><a href="">Smartphones</a> </li>
             </ul>
         </div>
         <p class="content__sidebar__text__price content__sidebar__text_fontsize_21">
@@ -140,20 +136,9 @@
             </div>
             <div class="description_container">
                 <div class="desc_text">
-                    <c:forEach var="prods" items="${productList}">
-                        <li><a href="<c:url value="/product">
-                                        <c:param name="prod_id" value="${prods.id}"/>
-                                     </c:url>">${prods.name}</a></li>
-                    </c:forEach>
                     <c:forEach var="item" items="${productById.parameters}">
                         ${item.key.name}: ${item.value.value} <br>
                     </c:forEach>
-                </div>
-                <div class="desc_text">
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </div>
-                <div class="desc_text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 </div>
                 <div class="product_pane">
                     <div class="product_pane_price">
@@ -203,7 +188,7 @@
 </div>
 </div>
 <script>
-    var signinElem = document.querySelector('.nav__signin');
+    /*var signinElem = document.querySelector('.nav__signin');
     var basketElem = document.querySelector('.basket');
     var navElem = document.querySelector('nav_logo');
     var mainElem = document.querySelector('.main');
@@ -231,7 +216,7 @@
             mainElem.classList.remove('display_none');
             flag = true;
         }
-    });
+    });*/
 </script>
 </body>
 </html>
