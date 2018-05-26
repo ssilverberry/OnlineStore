@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.xml.stream.events.Attribute;
@@ -23,27 +24,27 @@ public class CategoryAttributeController {
         this.categoryAttributeDAO = categoryAttributeDAO;
     }
 
-    @RequestMapping(value = "attributesforcategory/{id}", method = RequestMethod.GET)
-    public ModelAndView getAttributesForCategory(@PathVariable("id") String id) {
-        Collection<ProductAttribute> attributes = categoryAttributeDAO.getAttributesForCategory(Integer.parseInt(id));
+    @RequestMapping(value = "attributesforcategory")
+    public ModelAndView getAttributesForCategory(@RequestParam(value = "id") int id) {
+        Collection<ProductAttribute> attributes = categoryAttributeDAO.getAttributesForCategory(id);
         return new ModelAndView("attributesforcategory", "attributes", attributes);
     }
 
-    @RequestMapping(value = "attributebyid/{id}", method = RequestMethod.GET)
-    public ModelAndView getAttributeById(@PathVariable("id") String id) {
-        categoryAttributeDAO.getAttributeById(Integer.parseInt(id));
+    @RequestMapping(value = "attributebyid")
+    public ModelAndView getAttributeById(@RequestParam(value = "id") int id) {
+        categoryAttributeDAO.getAttributeById(id);
         return new ModelAndView("attr_id");
     }
 
-    @RequestMapping(value = "saveattribute", method = RequestMethod.POST)
+    @RequestMapping(value = "saveattribute")
     public ModelAndView saveAttribute(ProductAttribute attribute) {
         categoryAttributeDAO.saveAttribute(attribute);
         return new ModelAndView("saveattribute");
     }
 
-    @RequestMapping(value = "/removeattribute/{id}", method = RequestMethod.POST)
-    public ModelAndView removeAttribute(@PathVariable("id") String id) {
-        categoryAttributeDAO.removeAttribute(Integer.parseInt(id));
+    @RequestMapping(value = "removeattribute")
+    public ModelAndView removeAttribute(@RequestParam(value = "id") int id) {
+        categoryAttributeDAO.removeAttribute(id);
         return new ModelAndView("removeattr_id");
     }
 }
