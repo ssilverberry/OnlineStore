@@ -5,6 +5,7 @@ import com.company.store.model.entities.Product;
 import com.company.store.model.entities.ProductAttribute;
 import com.company.store.model.entities.ProductParameter;
 import com.company.store.model.impls.ProductDAOImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,8 +18,8 @@ import java.util.Map;
 
 @Controller
 public class ProductController {
-    /* @Qualifier("productDAOImpl")
-     @Autowired*/
+
+    @Autowired
     private ProductDAOImpl productDAO;
 
     @RequestMapping("/categories")
@@ -33,15 +34,16 @@ public class ProductController {
         return new ModelAndView("product", "productCategoriesId", productIdList);
     }
 
-    @RequestMapping("/productById")
+    @RequestMapping("product")
     public ModelAndView productById() {
-        Product productById = productDAO.getProductById(3);
-        return new ModelAndView("productId", "productById", productById);
+        Product productById = productDAO.getProductById(1000005);
+        return new ModelAndView("product", "productById", productById);
     }
-    @RequestMapping("/paramsForProduct")
+    @RequestMapping("/")
     public ModelAndView paramsForProduct(){
-        Map<ProductAttribute, ProductParameter> paramsForProduct = productDAO.getParamsForProduct(1);
-        return new ModelAndView("paramsProduct", "paramsForProduct",paramsForProduct);
+        //Map<ProductAttribute, ProductParameter> paramsForProduct = productDAO.getParamsForProduct(1);
+        return new ModelAndView("/");
     }
+
 }
 
