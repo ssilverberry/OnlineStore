@@ -51,8 +51,12 @@ public class OrderProductsController {
         order.setUserId(user_id);
         order.setDeliveryId(delivery_id);
         order.setPaymentId(payment_id);
-        orderProductsDAO.saveProductToOrder(product, order, amount, price, isUpdate);
+        Boolean rec = orderProductsDAO.saveProductToOrder(product, order, amount, price, isUpdate);
+        if(rec == true){
         return new ModelAndView("saveProductToOrder");
+        } else
+            return new ModelAndView("noSave");
+
     }
 
     @RequestMapping(value = "removeProductFromOrderorder")
