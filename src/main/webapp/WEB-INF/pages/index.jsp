@@ -91,10 +91,9 @@
     <div class="content__sidebar__list__container">
       <ul class="content__sidebar__list__container__categorieslist">
         <c:forEach var="category" items="${categoryList}">
-
           <li><a href="<c:url value="/productCategoriesId">
-            <c:param name="category_id" value="${category.id}"/>
-          </c:url>"> ${category.name} </a></li>
+                          <c:param name="category_id" value="${category.id}"/>
+                       </c:url>"> ${category.name} </a></li>
         </c:forEach>
       </ul>
     </div>
@@ -124,7 +123,9 @@
           <img src="<c:url value="/resources/images/macbook13.jpg"/>" alt="macbook"
                class="toprates__item">
           <p class="content__mainpart__toprates__item__text">
-              <a href="product">Macbook Pro Retina 13'</a>
+              <a href="<c:url value="/product">
+                            <c:param name="prod_id" value=""/>
+                        </c:url>">Macbook Pro Retina 13'</a>
           </p>
         </div>
         <div class="content__mainpart__toprates__item">

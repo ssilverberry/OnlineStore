@@ -30,16 +30,8 @@ public class ProductController {
         this.productDAO = productDAO;
     }
 
-    @RequestMapping("/")
-    public ModelAndView showAllProductStartap() {
-        Collection<Product> categoryList = productDAO.getCategories();
-        categoryList.forEach(product -> System.out.println(product.toString()));
-        return new ModelAndView("index", "categoryList", categoryList);
-    }
-
-
-    @RequestMapping("showAllProduct")
-    public ModelAndView showAllProduct() {
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView showCategories() {
         Collection<Product> categoryList = productDAO.getCategories();
         categoryList.forEach(product -> System.out.println(product.toString()));
         return new ModelAndView("index", "categoryList", categoryList);
