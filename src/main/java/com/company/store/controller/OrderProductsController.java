@@ -35,24 +35,18 @@ public class OrderProductsController {
         return new ModelAndView("removeAllProducts");
     }
 
-    @RequestMapping(value = "saveProductToOrder/")
+    @RequestMapping(value = "saveProductToOrder")
     public ModelAndView saveProductToOrder(@RequestParam(value = "id") int product,
                                            @RequestParam(value = "order_id") int order_id,
-                                           @RequestParam(value = "date") Timestamp date,
                                            @RequestParam(value = "user_id") int user_id,
-                                           @RequestParam(value = "payment_id") int payment_id,
-                                           @RequestParam(value = "delivery_id") int delivery_id,
                                            @RequestParam(value = "amount") int amount,
                                            @RequestParam(value = "price") float price,
                                            @RequestParam(value = "isUpdate") boolean isUpdate) {
         Order order = new Order();
         order.setId(order_id);
-        order.setDate(date);
         order.setUserId(user_id);
-        order.setDeliveryId(delivery_id);
-        order.setPaymentId(payment_id);
         Boolean rec = orderProductsDAO.saveProductToOrder(product, order, amount, price, isUpdate);
-        if(rec == true){
+        if(rec){
         return new ModelAndView("saveProductToOrder");
         } else
             return new ModelAndView("noSave");
