@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/content.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/footer.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/product.css" />">
-    <script src="<c:url value="/resources/js/script.js"/>" async="true"></script>
     <title>Document</title>
 </head>
 <body>
@@ -91,9 +90,17 @@
         </p>
         <div class="content__sidebar__list__container">
             <ul class="content__sidebar__list__container__categorieslist">
-                <li><a href="#"> Laptops & PC </a></li>
-                <li><a href="#"> TV, Electronics</a> </li>
-                <li><a href="">Smartphones</a> </li>
+                <c:forEach var="categ" items="${products}">
+                    <c:if test="${'categories'.equals(categ.key)}">
+                        <c:forEach var="item" items="${categ.value}">
+                            <li onclick="getCategoriesList(${item.id})">
+                                <a href="">
+                                    ${item.name}
+                                </a>
+                            </li>
+                        </c:forEach>
+                    </c:if>
+                </c:forEach>
             </ul>
         </div>
         <p class="content__sidebar__text__price content__sidebar__text_fontsize_21">
@@ -119,7 +126,11 @@
         <div class="content__mainpart__product__photos">
             <div class="content__mainpart__product__header">
                 <p class="content__mainpart__product__header__text">
-                    ${productById.name}
+                    <c:forEach var="map" items="${products}">
+                        <c:if test="${'product'.equals(map.key)}">
+                            ${map.value.name}
+                        </c:if>
+                    </c:forEach>
                 </p>
             </div>
             <div class="content__mainpart__product__photos__img">
@@ -134,10 +145,14 @@
                 <p class="description_headers_text"><a href="#">Description</a></p>
                 <p class="description_headers_text"><a href="#">Feedback</a></p>
             </div>
-            <div class="description_container">
+            <div class="description_container" style="width: 100%;">
                 <div class="desc_text">
-                    <c:forEach var="item" items="${productById.parameters}">
-                        ${item.key.name}: ${item.value.value} <br>
+                    <c:forEach var="map" items="${products}">
+                        <c:if test="${'product'.equals(map.key)}">
+                            <c:forEach var="prod" items="${map.value.parameters}">
+                                ${prod.key.name}: ${prod.value.value} <br>
+                            </c:forEach>
+                        </c:if>
                     </c:forEach>
                 </div>
                 <div class="product_pane">
@@ -188,18 +203,26 @@
 </div>
 </div>
 <script>
-    /*var signinElem = document.querySelector('.nav__signin');
+    var signinElem = document.querySelector('.nav__signin');
     var basketElem = document.querySelector('.basket');
-    var navElem = document.querySelector('nav_logo');
+    var mainPartList = document.querySelector('.content__mainpart');
     var mainElem = document.querySelector('.main');
     var authorization = document.querySelector('.authorization');
     var closeAuthElem = document.querySelector('.authorization__close');
     var flag = true;
 
-    navElem.addEventListener('click', function () {
-        window.location.replace("onlinestore");
-    });
+    var request = new XMLHttpRequest();
+    var path = "productCategoriesId?";
 
+    request.onreadystatechange = function () {
+        if (request.readyState === 4) {
+            if (request.status === 200) {
+                mainPartList.innerHTML = request.responseText;
+            } else {
+                console.log('An error occurred during your request: ' +  request.status + ' ' + request.statusText);
+            }
+        }
+    };
     signinElem.addEventListener('click', function() {
         if (flag) {
             authorization.classList.remove('display_none');
@@ -207,7 +230,6 @@
             mainElem.classList.add('display_none');
             flag = false;
         }
-
     });
     closeAuthElem.addEventListener('click', function () {
         if (!flag) {
@@ -216,7 +238,12 @@
             mainElem.classList.remove('display_none');
             flag = true;
         }
-    });*/
+    });
+    var getCategoriesList = function (id) {
+        console.log("request started !");
+        request.open('get', path + "category_id=" + id);
+        request.send();
+    };
 </script>
 </body>
 </html>

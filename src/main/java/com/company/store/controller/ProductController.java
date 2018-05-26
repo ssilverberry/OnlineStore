@@ -8,6 +8,7 @@ import com.company.store.model.impls.ProductDAOImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,11 +45,11 @@ public class ProductController {
         return new ModelAndView("list", "productList", productIdList);
     }
 
-    @RequestMapping("product")
+    /*@RequestMapping("product")
     public ModelAndView productById(@RequestParam("prod_id") int  product_id) {
         Product productById = productDAO.getProductById(product_id);
         return new ModelAndView("product", "productById", productById);
-    }
+    }*/
 
     @RequestMapping(value = "paramsForProduct")
     public ModelAndView paramsForProduct(@RequestParam ("prod_id") int product_id) {
@@ -69,10 +70,13 @@ public class ProductController {
         return new ModelAndView("removeproduct");
     }
 
-    @RequestMapping(value = "xxx", method = RequestMethod.GET)
-    public ModelAndView ajax(@RequestParam(value = "category_id") int category_id) {
-        Collection<Product> productIdList = productDAO.getProductsForCategory(category_id);
-        return new ModelAndView("list", "products", productIdList);
+    @RequestMapping("product")
+    public ModelAndView productBy(@RequestParam("prod_id") int  product_id) {
+        Product productById = productDAO.getProductById(product_id);
+        ModelMap modelMap = new ModelMap();
+        modelMap.addAttribute("categories", productDAO.getCategories());
+        modelMap.addAttribute("product", productById);
+        return new ModelAndView("product", "products", modelMap);
     }
 }
 
