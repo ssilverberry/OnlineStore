@@ -1,9 +1,9 @@
 package com.company.store.model.impls;
 
+
 import com.company.store.model.dao.OrderProductsDAO;
 import com.company.store.model.entities.Order;
 import com.company.store.model.entities.OrderProduct;
-import com.company.store.model.entities.Product;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -70,7 +70,7 @@ public class OrderProductsDAOImpl implements OrderProductsDAO {
             while (resultSet.next()){
                 orderProducts.add(parseOrderProd(resultSet));
             }
-            log.info("Order products was received from database by order_id " + order_id);
+            log.debug("Order products was received from database by order_id " + order_id);
         } catch (SQLException e) {
             log.error("Failed to receive order products by order_id: " + order_id, e);
         } return orderProducts;
@@ -95,11 +95,11 @@ public class OrderProductsDAOImpl implements OrderProductsDAO {
      * Save product, it amount, price to database by specific order id
      */
     @Override
-    public void saveProductToOrder(Product product, Order order, int amount, float price, boolean isUpdate) {
+    public boolean saveProductToOrder(int product_id, Order order, int amount, float price, boolean isUpdate) {
         int order_id = order.getId();
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(isUpdate ? UPDATE_ORDER_PROD : INSERT_ORDER_PROD)){
-            ps.setInt(1, product.getId());
+            ps.setInt(1, product_id);
             ps.setInt(2, amount);
             ps.setFloat(3, price);
             if (isUpdate) {
@@ -107,47 +107,49 @@ public class OrderProductsDAOImpl implements OrderProductsDAO {
             } else {
                 ps.setInt(4, order.getUserId());
             }
-            int result = ps.executeUpdate();
-            if (result > 0) {
-                log.info("Order product was saved to DB by order_id " + order_id + " Info: " + product.toString() +
+            ps.executeUpdate();
+            log.debug("Order product was saved to DB by order_id " + order_id + " Product_id: " + product_id +
                         " Amount: " + amount + " Price: " + price);
-            }
         } catch (SQLException e) {
-            log.error("Failed to save order product! Product: " + product.toString() + " Order: " + order_id +
+            log.error("Failed to save order product! Product_id: " + product_id + " Order_id: " + order_id +
                     "Amount: " + amount + "Price: " + price, e);
+            return false;
         }
+        return true;
     }
 
     /**
      * Remove by one product from order by specific ids.
      */
     @Override
-    public void removeProductFromOrder(int product_id, int order_id) {
+    public boolean removeProductFromOrder(int product_id, int order_id) {
         try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(DELETE_ORDER_PRODUCT)) {
             ps.setInt(1, product_id);
             ps.setInt(2, order_id);
-            if (ps.executeUpdate() > 0){
-                log.info("Order product was deleted by product_id: " + product_id + " and order_id: " + order_id);
-            }
+            ps.executeUpdate();
+            log.debug("Order product was deleted by product_id: " + product_id + " and order_id: " + order_id);
         } catch (SQLException e) {
-            log.error("Failed to delete order product by prod_id: " + product_id + "and order_id:" + order_id, e);
+            log.error("Failed to delete order product by prod_id: " + product_id + ", order_id:" + order_id, e);
+            return false;
         }
+        return true;
     }
 
     /**
      * Remove all products for specific order id.
      */
     @Override
-    public void removeAllProductsFromOrder(int order_id) {
+    public boolean removeAllProductsFromOrder(int order_id) {
         try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(DELETE_All_PRODS_FOR_ORDER)) {
             ps.setInt(1, order_id);
-            if (ps.executeUpdate() > 0){
-                log.info("Order products was deleted by order_id: " + order_id);
-            }
+            ps.executeUpdate();
+            log.debug("Order products was deleted by order_id: " + order_id);
         } catch (SQLException e) {
             log.error("Failed to delete order products by order_id:" + order_id, e);
+            return false;
         }
+        return true;
     }
 }

@@ -17,31 +17,30 @@
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-    <bean id="userDAOImpl" class="com.company.store.model.impls.UserDAOImpl">
+    <bean id="userDAOImpl" class="com.company.store.model.impls.UserDAOImpl" lazy-init="true">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="productDAO" class="com.company.store.model.impls.ProductDAOImpl">
+    <bean id="productDAO" class="com.company.store.model.impls.ProductDAOImpl" lazy-init="true">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="prodParamDAOImpl" class="com.company.store.model.impls.ProductDAOImpl">
+    <bean id="prodParamDAOImpl" class="com.company.store.model.impls.ProductDAOImpl" lazy-init="true">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="paymentDAOImpl" class="com.company.store.model.impls.ProductDAOImpl">
+    <bean id="paymentDAOImpl" class="com.company.store.model.impls.ProductDAOImpl" lazy-init="true">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="orderProdDAOImpl" class="com.company.store.model.impls.ProductDAOImpl">
+    <bean id="orderProdDAOImpl" class="com.company.store.model.impls.ProductDAOImpl" lazy-init="true">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="feedbackDAOImpl" class="com.company.store.model.impls.ProductDAOImpl">
+    <bean id="feedbackDAOImpl" class="com.company.store.model.impls.ProductDAOImpl" lazy-init="true">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="deliveryDAOImpl" class="com.company.store.model.impls.ProductDAOImpl">
+    <bean id="deliveryDAOImpl" class="com.company.store.model.impls.ProductDAOImpl" lazy-init="true">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="categoryAttrDAOImpl" class="com.company.store.model.impls.ProductDAOImpl">
+    <bean id="categoryAttrDAOImpl" class="com.company.store.model.impls.ProductDAOImpl" lazy-init="true">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
-
 </beans>

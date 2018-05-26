@@ -1,5 +1,6 @@
 package com.company.store.model.dao;
 
+
 import com.company.store.model.entities.Product;
 import com.company.store.model.entities.ProductAttribute;
 import com.company.store.model.entities.ProductParameter;
@@ -15,6 +16,6 @@ public interface ProductDAO {
     Map<ProductAttribute, ProductParameter> getParamsForProduct(int product_id);
 
     // for admin
-    void saveProduct(Product product);
-    void removeProduct(int product_id);
+    boolean saveProduct(Product product);
+    boolean removeProduct(int product_id);
 }

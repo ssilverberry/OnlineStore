@@ -5,45 +5,67 @@ import com.company.store.model.entities.Product;
 import com.company.store.model.entities.ProductAttribute;
 import com.company.store.model.entities.ProductParameter;
 import com.company.store.model.impls.ProductDAOImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 
 @Controller
 public class ProductController {
 
-    @Autowired
-    private ProductDAOImpl productDAO;
+    private final ProductDAOImpl productDAO;
 
-    @RequestMapping("/categories")
-    public ModelAndView showAllProduct() {
-        Collection<Product> categoryList = productDAO.getCategories();
-        return new ModelAndView("categories", "categoryList", categoryList);
+    @Autowired
+    public ProductController(ProductDAOImpl productDAO) {
+        this.productDAO = productDAO;
     }
 
-    @RequestMapping("/productCategoriesId")
-    public ModelAndView showProductForCategory() {
-        Collection<Product> productIdList = productDAO.getProductsForCategory(2);
-        return new ModelAndView("product", "productCategoriesId", productIdList);
+    @RequestMapping("/")
+    public ModelAndView showAllProduct() {
+        Collection<Product> categoryList = productDAO.getCategories();
+        categoryList.forEach(product -> System.out.println(product.toString()));
+        return new ModelAndView("index", "categoryList", categoryList);
+    }
+
+    @RequestMapping(value = "productCategoriesId")
+    public ModelAndView showProductForCategory(@RequestParam("category_id") int category_id) {
+        Collection<Product> productIdList = productDAO.getProductsForCategory(category_id);
+        return new ModelAndView("product", "productList", productIdList);
     }
 
     @RequestMapping("product")
-    public ModelAndView productById() {
-        Product productById = productDAO.getProductById(1000005);
+    public ModelAndView productById(@RequestParam("prod_id") int  product_id) {
+        Product productById = productDAO.getProductById(product_id);
         return new ModelAndView("product", "productById", productById);
     }
-    @RequestMapping("/")
-    public ModelAndView paramsForProduct(){
-        //Map<ProductAttribute, ProductParameter> paramsForProduct = productDAO.getParamsForProduct(1);
-        return new ModelAndView("/");
+
+    @RequestMapping(value = "paramsForProduct")
+    public ModelAndView paramsForProduct(@RequestParam ("prod_id") int product_id) {
+        Map<ProductAttribute, ProductParameter> paramsForProduct =
+                productDAO.getParamsForProduct(product_id);
+        return new ModelAndView("paramsProduct", "paramsForProduct", paramsForProduct);
     }
 
+    @RequestMapping(value = "saveproduct")
+    public ModelAndView saveProduct(Product product) {
+        productDAO.saveProduct(product);
+        return new ModelAndView("saveproduct");
+    }
+
+    @RequestMapping(value = "removeproduct")
+    public ModelAndView removeProduct(@RequestParam ("prod_id") int product_id) {
+        productDAO.removeProduct(product_id);
+        return new ModelAndView("removeproduct");
+    }
 }
 
