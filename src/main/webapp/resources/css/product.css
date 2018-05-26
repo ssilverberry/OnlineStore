@@ -2,11 +2,15 @@
     display: flex;
     flex-direction: row;
     margin-top: 55px;
+    height: auto;
 }
-.left__border {
+/*.left__border {
     border-left: 2px solid #707070;
     height: 85%;
     margin-left: 25px;
+}*/
+.content__mainpart__product__photos {
+    border-left: 2px solid #707070;
 }
 .content__mainpart__product__photos,
 .content__mainpart__product__description  {

@@ -38,7 +38,14 @@ public class ProductController {
         categoryList.forEach(product -> System.out.println(product.toString()));
         return new ModelAndView("index", "categoryList", categoryList);
     }
-
+    @RequestMapping("product")
+    public ModelAndView productBy(@RequestParam("prod_id") int  product_id) {
+        Product productById = productDAO.getProductById(product_id);
+        ModelMap modelMap = new ModelMap();
+        modelMap.addAttribute("categories", productDAO.getCategories());
+        modelMap.addAttribute("product", productById);
+        return new ModelAndView("product", "products", modelMap);
+    }
     @RequestMapping(value = "productCategoriesId")
     public ModelAndView showProductForCategory(@RequestParam("category_id") int category_id) {
         Collection<Product> productIdList = productDAO.getProductsForCategory(category_id);
@@ -70,13 +77,6 @@ public class ProductController {
         return new ModelAndView("removeproduct");
     }
 
-    @RequestMapping("product")
-    public ModelAndView productBy(@RequestParam("prod_id") int  product_id) {
-        Product productById = productDAO.getProductById(product_id);
-        ModelMap modelMap = new ModelMap();
-        modelMap.addAttribute("categories", productDAO.getCategories());
-        modelMap.addAttribute("product", productById);
-        return new ModelAndView("product", "products", modelMap);
-    }
+
 }
 

@@ -16,9 +16,10 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/reset.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/header.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/authorize.css" />">
-    <link rel="stylesheet" href="<c:url value="/resources/css/content.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/footer.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/product.css" />">
+    <link rel="stylesheet" href="<c:url value="/resources/css/content.css" />">
+    <script src="<c:url value="/resources/js/script.js"/>" async></script>
     <title>Document</title>
 </head>
 <body>
@@ -94,7 +95,7 @@
                     <c:if test="${'categories'.equals(categ.key)}">
                         <c:forEach var="item" items="${categ.value}">
                             <li onclick="getCategoriesList(${item.id})">
-                                <a href="">
+                                <a style="cursor: pointer;">
                                     ${item.name}
                                 </a>
                             </li>
@@ -122,7 +123,7 @@
         </div>
     </div>
     <div class="content__mainpart">
-        <div class="left__border"></div>
+        <%--<div class="left__border">--%>
         <div class="content__mainpart__product__photos">
             <div class="content__mainpart__product__header">
                 <p class="content__mainpart__product__header__text">
@@ -179,7 +180,7 @@
         </div>
     </div>
 </div>
-
+<%--</div>--%>
 <div class="footer">
     <div class="footer__social">
         <a href="https://www.instagram.com/">
@@ -202,49 +203,6 @@
     </div>
 </div>
 </div>
-<script>
-    var signinElem = document.querySelector('.nav__signin');
-    var basketElem = document.querySelector('.basket');
-    var mainPartList = document.querySelector('.content__mainpart');
-    var mainElem = document.querySelector('.main');
-    var authorization = document.querySelector('.authorization');
-    var closeAuthElem = document.querySelector('.authorization__close');
-    var flag = true;
-
-    var request = new XMLHttpRequest();
-    var path = "productCategoriesId?";
-
-    request.onreadystatechange = function () {
-        if (request.readyState === 4) {
-            if (request.status === 200) {
-                mainPartList.innerHTML = request.responseText;
-            } else {
-                console.log('An error occurred during your request: ' +  request.status + ' ' + request.statusText);
-            }
-        }
-    };
-    signinElem.addEventListener('click', function() {
-        if (flag) {
-            authorization.classList.remove('display_none');
-            basketElem.classList.add('display_none');
-            mainElem.classList.add('display_none');
-            flag = false;
-        }
-    });
-    closeAuthElem.addEventListener('click', function () {
-        if (!flag) {
-            authorization.classList.add('display_none');
-            basketElem.classList.remove('display_none');
-            mainElem.classList.remove('display_none');
-            flag = true;
-        }
-    });
-    var getCategoriesList = function (id) {
-        console.log("request started !");
-        request.open('get', path + "category_id=" + id);
-        request.send();
-    };
-</script>
 </body>
 </html>
 

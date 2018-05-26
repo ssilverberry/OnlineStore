@@ -18,9 +18,8 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/authorize.css" />">
   <link rel="stylesheet" href="<c:url value="/resources/css/content.css" />">
   <link rel="stylesheet" href="<c:url value="/resources/css/footer.css" />">
-
+  <script src="<c:url value="/resources/js/script.js"/>" async></script>
   <title>NC Loft</title>
-    <script src="<c:url value="/resources/js/script.js"/>" async="true"></script>
 </head>
 <body>
 <div class="authorization display_none">
