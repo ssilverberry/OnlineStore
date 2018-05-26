@@ -44,8 +44,8 @@ public class OrderController {
     }
 
     @RequestMapping(value = "removeOrderById/{id}")
-    public ModelAndView removeOrderById(@PathVariable("id") String id) {
+    public String removeOrderById(@PathVariable("id") String id) {
         orderDAO.removeOrderById(Integer.parseInt(id));
-        return new ModelAndView("removeorder_id");
+        return "removeorder_id";
     }
 }

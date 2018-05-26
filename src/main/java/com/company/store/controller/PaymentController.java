@@ -11,11 +11,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class PaymentController {
-
+    // test
     private PaymentDAOImpl paymentDAO;
 
     public void setPaymentDAO(PaymentDAOImpl paymentDAO) {
         this.paymentDAO = paymentDAO;
+    }
+
+    @RequestMapping(value = "payDelive")
+    public String payment(){
+     return "payDelive";
+    }
+    @RequestMapping(value = "contacts")
+    public String contacts(){
+        return "contacts";
+    }
+    @RequestMapping(value = "aboutus")
+        public String aboutus(){
+        return "aboutus";
     }
 
     @RequestMapping(value = "paymentbyid")
