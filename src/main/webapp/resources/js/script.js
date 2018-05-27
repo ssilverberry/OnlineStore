@@ -19,6 +19,7 @@ request.onreadystatechange = function () {
     }
 };
 signinElem.addEventListener('click', function() {
+    authorizeOverlay();
     if (flag) {
         authorization.classList.remove('display_none');
         basketElem.classList.add('display_none');
@@ -40,3 +41,6 @@ var getCategoriesList = function (id) {
     request.open('get', path + "category_id=" + id);
     request.send();
 };
+var authorizeOverlay = function () {
+    authorization.classList.toggle('overlay');
+}
