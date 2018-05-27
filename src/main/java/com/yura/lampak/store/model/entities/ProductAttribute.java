@@ -1,7 +1,7 @@
 package com.yura.lampak.store.model.entities;
 
 
-public class ProductAttribute {
+public class ProductAttribute implements Comparable<ProductAttribute>{
 
     private int attr_id;
     private int product_id;
@@ -46,5 +46,10 @@ public class ProductAttribute {
                 "\n product_id: " + product_id +
                 "\n attr_id: " + attr_id +
                 "\n name: " + name;
+    }
+
+    @Override
+    public int compareTo(ProductAttribute o) {
+        return this.name.compareTo(o.getName());
     }
 }

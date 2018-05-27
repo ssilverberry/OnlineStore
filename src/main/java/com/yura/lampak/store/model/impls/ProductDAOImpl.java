@@ -1,9 +1,10 @@
 package com.yura.lampak.store.model.impls;
 
+
+import com.yura.lampak.store.model.dao.ProductDAO;
 import com.yura.lampak.store.model.entities.Product;
 import com.yura.lampak.store.model.entities.ProductAttribute;
 import com.yura.lampak.store.model.entities.ProductParameter;
-import com.yura.lampak.store.model.dao.ProductDAO;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,10 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ProductDAOImpl implements ProductDAO {
 
@@ -109,7 +107,7 @@ public class ProductDAOImpl implements ProductDAO {
      */
     @Override
     public Map<ProductAttribute, ProductParameter> getParamsForProduct(int product_id) {
-        Map<ProductAttribute, ProductParameter> prodParams = new HashMap<>();
+        Map<ProductAttribute, ProductParameter> prodParams = new TreeMap<>();
         try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(GET_PARAMS_FOR_PRODUCT)) {
             ps.setInt(1, product_id);
