@@ -15,10 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ProductDAOImpl implements ProductDAO {
 
@@ -110,7 +107,7 @@ public class ProductDAOImpl implements ProductDAO {
      */
     @Override
     public Map<ProductAttribute, ProductParameter> getParamsForProduct(int product_id) {
-        Map<ProductAttribute, ProductParameter> prodParams = new HashMap<>();
+        Map<ProductAttribute, ProductParameter> prodParams = new TreeMap<>();
         try(Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(GET_PARAMS_FOR_PRODUCT)) {
             ps.setInt(1, product_id);
