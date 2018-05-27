@@ -153,14 +153,26 @@
                     <c:forEach var="map" items="${products}">
                         <c:if test="${'product'.equals(map.key)}">
                             <c:forEach var="prod" items="${map.value.parameters}">
-                                ${prod.key.name}: ${prod.value.value} <br>
+                                <c:if test="${!'Price'.equals(prod.key.name)}">
+                                    ${prod.key.name}: ${prod.value.value} <br><br>
+                                </c:if>
                             </c:forEach>
                         </c:if>
                     </c:forEach>
                 </div>
                 <div class="product_pane">
                     <div class="product_pane_price">
-                        <p class="product_pane_price_text">Price: {value} $</p>
+                        <p class="product_pane_price_text">
+                            <c:forEach var="map" items="${products}">
+                                <c:if test="${'product'.equals(map.key)}">
+                                    <c:forEach var="prod" items="${map.value.parameters}">
+                                        <c:if test="${'Price'.equals(prod.key.name)}">
+                                            ${prod.key.name}: ${prod.value.value} $<br><br>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:if>
+                            </c:forEach>
+                        </p>
                     </div>
                     <div class="product_pane_buy_btn">
                         <a href="buyProduct" class="product_pane_buy_btn_link">
