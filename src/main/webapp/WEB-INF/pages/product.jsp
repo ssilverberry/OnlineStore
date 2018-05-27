@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/content.css" />">
     <title>Document</title>
 </head>
-<body>
+<div class="overlay_container">
 <div class="authorization display_none">
     <div class="authorization__row">
         <h2 class="welcome_text">Welcome</h2>
@@ -53,6 +53,7 @@
         </a>
         <span class="link_decoration"></span>
     </div>
+</div>
 </div>
 <div class="main">
 <nav class="nav">
@@ -137,10 +138,18 @@
                 </p>
             </div>
             <div class="content__mainpart__product__photos__img">
-                <img src="<c:url value="/resources/images/macbook13.jpg" />" alt="macbook">
+                <div class="img__placeholder">
+                    <p class="img__placeholder__text">
+                        Img coming soon.
+                    </p>
+                </div>
             </div>
             <div class="content__mainpart__product__photos__img">
-                <img src="<c:url value="/resources/images/leftsideMacbook.jpg" />" alt="macbook">
+                <div class="img__placeholder">
+                    <p class="img__placeholder__text">
+                        Img coming soon.
+                    </p>
+                </div>
             </div>
         </div>
         <div class="content__mainpart__product__description">
@@ -167,7 +176,7 @@
                                 <c:if test="${'product'.equals(map.key)}">
                                     <c:forEach var="prod" items="${map.value.parameters}">
                                         <c:if test="${'Price'.equals(prod.key.name)}">
-                                            ${prod.key.name}: ${prod.value.value} $<br><br>
+                                            ${prod.key.name}: ${prod.value.value} $<br>
                                         </c:if>
                                     </c:forEach>
                                 </c:if>
@@ -224,6 +233,7 @@
     var content_mainpart = document.querySelector('.content__mainpart');
     var mainElem = document.querySelector('.main');
     var authorization = document.querySelector('.authorization');
+    var authorization_overlay = document.querySelector('.overlay_container');
     var closeAuthElem = document.querySelector('.authorization__close');
     var flag = true;
 
@@ -241,10 +251,10 @@
         }
     };
     signinElem.addEventListener('click', function() {
+        authorizeOverlay();
         if (flag) {
             authorization.classList.remove('display_none');
             basketElem.classList.add('display_none');
-            mainElem.classList.add('display_none');
             flag = false;
         }
 
@@ -253,7 +263,7 @@
         if (!flag) {
             authorization.classList.add('display_none');
             basketElem.classList.remove('display_none');
-            mainElem.classList.remove('display_none');
+            authorizeOverlay();
             flag = true;
         }
     });
@@ -262,6 +272,10 @@
         request.open('get', path + "category_id=" + id);
         request.send();
     };
+    var authorizeOverlay = function () {
+        authorization_overlay.classList.toggle('overlay');
+    };
+
 </script>
 </body>
 </html>

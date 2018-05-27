@@ -21,7 +21,7 @@
   <script src="<c:url value="/resources/js/script.js"/>" async></script>
   <title>NC Loft</title>
 </head>
-<body>
+<div class="overlay_container">
 <div class="authorization display_none">
     <div class="authorization__row">
         <h2 class="welcome_text">Welcome</h2>
@@ -53,6 +53,7 @@
         </a>
         <span class="link_decoration"></span>
     </div>
+</div>
 </div>
 <div class="main">
 <nav class="nav">

@@ -3,6 +3,7 @@ var basketElem = document.querySelector('.basket');
 var mainPartList = document.querySelector('.content__mainpart');
 var mainElem = document.querySelector('.main');
 var authorization = document.querySelector('.authorization');
+var authorization_overlay = document.querySelector('.overlay_container');
 var closeAuthElem = document.querySelector('.authorization__close');
 var flag = true;
 
@@ -23,7 +24,7 @@ signinElem.addEventListener('click', function() {
     if (flag) {
         authorization.classList.remove('display_none');
         basketElem.classList.add('display_none');
-        mainElem.classList.add('display_none');
+        //mainElem.classList.add('display_none');
         flag = false;
     }
 
@@ -32,7 +33,7 @@ closeAuthElem.addEventListener('click', function () {
     if (!flag) {
         authorization.classList.add('display_none');
         basketElem.classList.remove('display_none');
-        mainElem.classList.remove('display_none');
+        authorizeOverlay();
         flag = true;
     }
 });
@@ -42,5 +43,6 @@ var getCategoriesList = function (id) {
     request.send();
 };
 var authorizeOverlay = function () {
-    authorization.classList.toggle('overlay');
-}
+    authorization_overlay.classList.toggle('overlay');
+};
+//authorization_overlay.addEventListener('click', authorizeOverlay);
