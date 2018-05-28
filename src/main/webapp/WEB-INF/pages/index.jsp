@@ -63,7 +63,7 @@
     </a>
   </div>
   <div class="nav__links">
-    <a href="payment" class="nav__links__item">
+    <a href="payDelive" class="nav__links__item">
       Payment & Delivery
     </a>
     <a href="contacts" class="nav__links__item">
@@ -190,28 +190,29 @@
     </div>
   </div>
 </div>
-<div class="footer">
-  <div class="footer__social">
-    <a href="https://www.instagram.com/">
-      <img src="<c:url value="/resources/icons/insta.svg"/>" alt="insta" class="footer__social__icon">
-    </a>
-    <a href="https://www.facebook.com/">
-      <img src="<c:url value="/resources/icons/facebk.svg"/>" alt="facebk" class="footer__social__icon">
-    </a>
-    <a href="https://twitter.com/">
-      <img src="<c:url value="/resources/icons/twitter.svg"/>" alt="twitter" class="footer__social__icon">
-    </a>
-  </div>
-  <div class="footer__license">
-    <p class="footer__license__text">&copy; 2018, NC Loft.com</p>
-  </div>
-  <div class="footer__mail">
-    <a href="mailto:ncloft@gmail.com?subject=Partnership">
-      <img src="<c:url value="/resources/icons/mail.svg"/>" alt="mail icon" class="footer__mail__icon">
-    </a>
-  </div>
+    <div class="footer" style="position: initial;">
+        <div class="footer__social">
+            <a href="https://www.instagram.com/">
+                <img src="<c:url value="/resources/icons/insta.svg"/>" alt="insta" class="footer__social__icon">
+            </a>
+            <a href="https://www.facebook.com/">
+                <img src="<c:url value="/resources/icons/facebk.svg"/>" alt="facebk" class="footer__social__icon">
+            </a>
+            <a href="https://twitter.com/">
+                <img src="<c:url value="/resources/icons/twitter.svg"/>" alt="twitter" class="footer__social__icon">
+            </a>
+        </div>
+        <div class="footer__license">
+            <p class="footer__license__text">&copy; 2018, NC Loft.com</p>
+        </div>
+        <div class="footer__mail">
+            <a href="mailto:ncloft@gmail.com?subject=Partnership">
+                <img src="<c:url value="/resources/icons/mail.svg"/>" alt="mail icon" class="footer__mail__icon">
+            </a>
+        </div>
+    </div>
 </div>
-</div>
+
 </body>
 </html>
 
