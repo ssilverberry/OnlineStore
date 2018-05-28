@@ -54,7 +54,7 @@
             </div>
             <div class="basket_goods_row">
                 <div class="basket_item_amount font_size_20" style="padding-left: 20px;">
-                    1
+                    1x
                 </div>
                 <div class="basket_item_name font_size_20">
                     <p class="basket_item_name_text">Meizu M6s</p>
