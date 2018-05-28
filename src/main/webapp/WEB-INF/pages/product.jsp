@@ -207,7 +207,7 @@
     </div>
 </div>
 <%--</div>--%>
-<div class="footer">
+<div class="footer" style="position: initial;">
     <div class="footer__social">
         <a href="https://www.instagram.com/">
             <img src="<c:url value="/resources/icons/insta.svg"/>" alt="insta" class="footer__social__icon">
