@@ -74,13 +74,13 @@
         </a>
     </div>
     <div class="nav__links">
-        <a href="#" class="nav__links__item">
+        <a href="payDelive" class="nav__links__item">
             Payment & Delivery
         </a>
-        <a href="#" class="nav__links__item">
+        <a href="contacts" class="nav__links__item">
             Contacts
         </a>
-        <a href="#" class="nav__links__item">
+        <a href="aboutus" class="nav__links__item">
             About us
         </a>
     </div>
