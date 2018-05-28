@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +21,16 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/product.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/content.css" />">
     <title>Document</title>
+
+    <c:forEach var="map" items="${products}">
+        <c:if test="${'product'.equals(map.key)}">
+            <c:set var="product" value="${map.value}"/>
+        </c:if>
+        <c:if test="${'categories'.equals(map.key)}">
+            <c:set var="categs" value="${map.value}"/>
+        </c:if>
+    </c:forEach>
+
 </head>
 <div class="overlay_container">
 <div class="authorization display_none">
@@ -91,16 +102,12 @@
         </p>
         <div class="content__sidebar__list__container">
             <ul class="content__sidebar__list__container__categorieslist">
-                <c:forEach var="categ" items="${products}">
-                    <c:if test="${'categories'.equals(categ.key)}">
-                        <c:forEach var="item" items="${categ.value}">
-                            <li onclick="getCategoriesList(${item.id})">
-                                <a style="cursor: pointer;">
-                                    ${item.name}
-                                </a>
-                            </li>
-                        </c:forEach>
-                    </c:if>
+                <c:forEach var="item" items="${categs}">
+                    <li onclick="getCategoriesList(${item.id})">
+                        <a style="cursor: pointer;">
+                                ${item.name}
+                        </a>
+                    </li>
                 </c:forEach>
             </ul>
         </div>
@@ -130,11 +137,13 @@
         <div class="content__mainpart__product__photos">
             <div class="content__mainpart__product__header">
                 <p class="content__mainpart__product__header__text">
-                    <c:forEach var="map" items="${products}">
+                    ${product.name}
+                    <%--<c:forEach var="map" items="${products}">
                         <c:if test="${'product'.equals(map.key)}">
                             ${map.value.name}
+                            <c:set var="prod_id" value="${map.value.id}"/>
                         </c:if>
-                    </c:forEach>
+                    </c:forEach>--%>
                 </p>
             </div>
             <div class="content__mainpart__product__photos__img">
@@ -155,32 +164,27 @@
         <div class="content__mainpart__product__description">
             <div class="description_headers">
                 <p class="description_headers_text"><a href="#">Description</a></p>
-                <p class="description_headers_text"><a href="#">Feedback</a></p>
+                <p class="description_headers_text">
+                    <a href="<c:url value="AllFeedbackForProduct">
+                                <c:param name="id" value="${product.id}"/>
+                             </c:url>">Feedback
+                    </a></p>
             </div>
             <div class="description_container" style="width: 100%;">
                 <div class="desc_text">
-                    <c:forEach var="map" items="${products}">
-                        <c:if test="${'product'.equals(map.key)}">
-                            <c:forEach var="prod" items="${map.value.parameters}">
-                                <c:if test="${!'Price'.equals(prod.key.name)}">
-                                    ${prod.key.name}: ${prod.value.value} <br><br>
-                                </c:if>
-                            </c:forEach>
+                    <c:forEach var="item" items="${product.parameters}">
+                        <c:if test="${!'Price'.equals(item.key.name)}">
+                            ${item.key.name} : ${item.value.value} <br><br>
+                        </c:if>
+                        <c:if test="${'Price'.equals(item.key.name)}">
+                            <c:set var="price" value="${item.value.value}"/>
                         </c:if>
                     </c:forEach>
                 </div>
                 <div class="product_pane">
                     <div class="product_pane_price">
                         <p class="product_pane_price_text">
-                            <c:forEach var="map" items="${products}">
-                                <c:if test="${'product'.equals(map.key)}">
-                                    <c:forEach var="prod" items="${map.value.parameters}">
-                                        <c:if test="${'Price'.equals(prod.key.name)}">
-                                            ${prod.key.name}: ${prod.value.value} $<br>
-                                        </c:if>
-                                    </c:forEach>
-                                </c:if>
-                            </c:forEach>
+                            Price: ${price} $
                         </p>
                     </div>
                     <div class="product_pane_buy_btn">
