@@ -22,7 +22,7 @@ public class PaymentController {
     }
     @RequestMapping(value = "contacts")
     public String contacts(){
-        return "aboutus";
+        return "contacts";
     }
     @RequestMapping(value = "aboutus")
     public String aboutus(){
