@@ -49,4 +49,9 @@ public class OrderController {
         orderDAO.removeOrderById(id);
         return "removeorder_id";
     }
+
+    @RequestMapping("order")
+    public String order() {
+        return "order";
+    }
 }

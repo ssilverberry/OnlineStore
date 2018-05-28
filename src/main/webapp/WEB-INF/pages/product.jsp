@@ -187,7 +187,7 @@
                         </p>
                     </div>
                     <div class="product_pane_buy_btn">
-                        <a href="buyProduct" class="product_pane_buy_btn_link">
+                        <a href="order" class="product_pane_buy_btn_link">
                             Buy
                         </a>
                     </div>
