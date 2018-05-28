@@ -1,7 +1,7 @@
 var signinElem = document.querySelector('.nav__signin');
 var basketElem = document.querySelector('.basket');
 var mainPartList = document.querySelector('.content__mainpart');
-var mainElem = document.querySelector('.main');
+var payment = document.querySelector('.main');
 var authorization = document.querySelector('.authorization');
 var authorization_overlay = document.querySelector('.overlay_container');
 var closeAuthElem = document.querySelector('.authorization__close');
@@ -45,4 +45,3 @@ var getCategoriesList = function (id) {
 var authorizeOverlay = function () {
     authorization_overlay.classList.toggle('overlay');
 };
-//authorization_overlay.addEventListener('click', authorizeOverlay);

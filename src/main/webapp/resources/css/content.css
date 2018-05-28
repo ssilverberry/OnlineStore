@@ -1,5 +1,10 @@
+html {
+    height: 100%;
+}
 body {
     background-color: #ffffff;
+    position: relative;
+    min-height: 100%;
 }
 a {
     text-decoration: none;
@@ -25,6 +30,7 @@ a {
     flex-direction: row;
     height: auto;
     width: 100%;
+    margin-bottom: 50px;
 }
 .content__sidebar {
     display: flex;
