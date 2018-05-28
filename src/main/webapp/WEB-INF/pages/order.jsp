@@ -39,7 +39,7 @@
                     </div>
                     <div class="btns_row">
                         <div class="btn_signup">
-                            <a href="#" class="btn_link btn_link_up font_size_20">Buy</a>
+                            <a href="#" class="btn_link btn_link_up font_size_20">Accept</a>
                         </div>
                         <div class="btn_signin">
                             <a href="#" class="btn_link btn_link_in font_size_20">Cancel</a>
