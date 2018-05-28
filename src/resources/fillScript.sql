@@ -299,5 +299,96 @@ INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE p
 INSERT INTO PRODUCTS_PARAMETERS VALUES ((SELECT product_id FROM PRODUCTS WHERE product_name = 'TV LG 43UJ630V'),
                                         (SELECT attribute_id FROM PRODUCTS_ATTRIBUTES WHERE attribute_name='Price' 
                                          AND product_id=(SELECT product_id FROM PRODUCTS prod WHERE product_name='TV, electronics')),
-                                        '1900');                                         
+                                        '1900');
+
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test1'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='Apple MacBook Air Retina 13"'),
+                            5.0, 'Test feedback message');
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test2'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='Apple MacBook Air Retina 13"'),
+                            4.5, 'Test feedback message');    
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test3'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='Apple MacBook Air Retina 13"'),
+                            4.2, 'Test feedback message');
+
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test1'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='Apple MacBook Pro Retina 15"'),
+                            4.8, 'Test feedback message');
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test2'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='Apple MacBook Pro Retina 15"'),
+                            3.9, 'Test feedback message');    
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test3'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='Apple MacBook Pro Retina 15"'),
+                            4.4, 'Test feedback message');
+
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test1'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='Apple iMac 21.5" Retina 4K'),
+                            2.9, 'Test feedback message');
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test2'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='Apple iMac 21.5" Retina 4K'),
+                            3.3, 'Test feedback message');    
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test3'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='Apple iMac 21.5" Retina 4K'),
+                            4.1, 'Test feedback message');  
+                            
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test1'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='Apple iPhone 8 256Gb RED'),
+                            2.9, 'Test feedback message');
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test2'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='Apple iPhone 8 256Gb RED'),
+                            3.7, 'Test feedback message');    
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test3'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='Apple iPhone 8 256Gb RED'),
+                            4.3, 'Test feedback message');
+                            
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test1'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='Apple iPhone 10 256Gb Space Gray'),
+                            4.9, 'Test feedback message');
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test2'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='Apple iPhone 10 256Gb Space Gray'),
+                            4.7, 'Test feedback message');    
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test3'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='Apple iPhone 10 256Gb Space Gray'),
+                            5.0, 'Test feedback message');
+                            
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test1'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='Apple iPhone 7 128Gb Space Gray'),
+                            4.4, 'Test feedback message');
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test2'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='Apple iPhone 7 128Gb Space Gray'),
+                            4.8, 'Test feedback message');    
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test3'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='Apple iPhone 7 128Gb Space Gray'),
+                            3.7, 'Test feedback message');   
+                            
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test1'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='TV LG 43UJ630V'),
+                            4.8, 'Test feedback message');
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test2'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='TV LG 43UJ630V'),
+                            4.5, 'Test feedback message');    
+INSERT INTO FEEDBACK VALUES(DEFAULT, 
+                            (SELECT USER_ID FROM USERS WHERE USER_NAME='test3'), 
+                            (SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_NAME='TV LG 43UJ630V'),
+                            5.0, 'Test feedback message');                                                                    
 END;
