@@ -138,12 +138,6 @@
             <div class="content__mainpart__product__header">
                 <p class="content__mainpart__product__header__text">
                     ${product.name}
-                    <%--<c:forEach var="map" items="${products}">
-                        <c:if test="${'product'.equals(map.key)}">
-                            ${map.value.name}
-                            <c:set var="prod_id" value="${map.value.id}"/>
-                        </c:if>
-                    </c:forEach>--%>
                 </p>
             </div>
             <div class="content__mainpart__product__photos__img">
