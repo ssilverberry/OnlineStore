@@ -20,6 +20,9 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/footer.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/product.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/content.css" />">
+    <script src="<c:url value="/resources/js/jquery-3.3.1.min.js"/>"></script>
+    <script src="<c:url value="/resources/js/testFeedback.js"/>"></script>
+    <script src="<c:url value="/resources/js/testDescription.js"/>"></script>
     <title>Document</title>
 
     <c:forEach var="map" items="${products}">
@@ -157,12 +160,12 @@
         </div>
         <div class="content__mainpart__product__description">
             <div class="description_headers">
-                <p class="description_headers_text"><a href="#">Description</a></p>
                 <p class="description_headers_text">
-                    <a href="<c:url value="AllFeedbackForProduct">
-                                <c:param name="id" value="${product.id}"/>
-                             </c:url>">Feedback
-                    </a></p>
+                    <a style="cursor: pointer" onclick="enableDescription()">Description</a>
+                </p>
+                <p class="description_headers_text">
+                    <a style="cursor: pointer" onclick="getFeedback(${product.id})">Feedback</a>
+                </p>
             </div>
             <div class="description_container" style="width: 100%;">
                 <div class="desc_text">
@@ -175,7 +178,7 @@
                         </c:if>
                     </c:forEach>
                 </div>
-                <div class="feedback_text display_none">
+                <div id="feedback_container" class="feedback_text display_none">
                     Here is feedback !
                 </div>
                 <div class="product_pane">
