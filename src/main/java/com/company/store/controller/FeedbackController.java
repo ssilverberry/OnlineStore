@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
@@ -16,6 +17,7 @@ public class FeedbackController {
 
     private FeedbackDAOImpl feedbackDAO;
 
+    @Autowired
     public void setFeedbackDAO(FeedbackDAOImpl feedbackDAO) {
         this.feedbackDAO = feedbackDAO;
     }
@@ -39,9 +41,9 @@ public class FeedbackController {
     }
 
     @RequestMapping(value = "AllFeedbackForProduct")
-    public ModelAndView getAllFeedbackForProduct(@RequestParam(value = "id") int id) {
-        Collection<Feedback> feedbackForProduct = feedbackDAO.getAllFeedbackForProduct(id);
-        return new ModelAndView("AllFeedbackForProduc", "feedbackForProduct", feedbackForProduct);
+    @ResponseBody
+    public Collection<Feedback> getAllFeedbackForProduct(@RequestParam(value = "id") int id) {
+        return feedbackDAO.getAllFeedbackForProduct(id);
     }
 
     @RequestMapping(value = "UserFeedbackOnProduc/product/{id}")
