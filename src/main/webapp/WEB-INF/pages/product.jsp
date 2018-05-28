@@ -169,6 +169,9 @@
                         </c:if>
                     </c:forEach>
                 </div>
+                <div class="feedback_text display_none">
+                    Here is feedback !
+                </div>
                 <div class="product_pane">
                     <div class="product_pane_price">
                         <p class="product_pane_price_text">
