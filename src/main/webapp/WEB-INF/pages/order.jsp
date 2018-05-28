@@ -52,15 +52,20 @@
             <div class="booking_text" style="border: 1px solid #C5C5C5; border-radius: 10px; height: 66px;">
                 <h2>Your basket</h2>
             </div>
-            <div class="basket_goods_row">
+            <div class="basket_goods_row" style="cursor: pointer;">
                 <div class="basket_item_amount font_size_20" style="padding-left: 20px;">
-                    1x
+                    <p>1x</p>
                 </div>
                 <div class="basket_item_name font_size_20">
                     <p class="basket_item_name_text">Meizu M6s</p>
                 </div>
                 <div class="basket_item_photo">
                     <p>img</p>
+                </div>
+            </div>
+            <div class="basket_goods_row width_less_70">
+                <div class="basket_item_amount">
+                    <p class="font_size_20">Total Price: 150$</p>
                 </div>
             </div>
 

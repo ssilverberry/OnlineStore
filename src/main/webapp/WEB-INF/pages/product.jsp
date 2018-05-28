@@ -95,6 +95,7 @@
 </nav>
 <div class="content">
     <div class="basket">
+        <p class="basket_counter"> </p>
         <a href="#">
             <img src="<c:url value="/resources/icons/basket.jpg" />" alt="basket" class="basket_icon">
         </a>
@@ -193,7 +194,7 @@
                         </a>
                     </div>
                     <div class="product_pane_add_btn">
-                        <a href="buyProduct" class="product_pane_add_btn_link">
+                        <a class="product_pane_add_btn_link" style="cursor: pointer; ">
                             <img src="<c:url value="/resources/icons/add.svg"/>" alt="add button">
                         </a>
                     </div>
@@ -235,14 +236,16 @@
     var basketElem = document.querySelector('.basket');
     var mainPartList = document.querySelector('.product_result_container');
     var content_mainpart = document.querySelector('.content__mainpart');
-    var mainElem = document.querySelector('.main');
+    var basketCounter = document.querySelector('.basket_counter');
+    var addButton = document.querySelector('.product_pane_add_btn_link');
     var authorization = document.querySelector('.authorization');
     var authorization_overlay = document.querySelector('.overlay_container');
     var closeAuthElem = document.querySelector('.authorization__close');
     var flag = true;
-
+    var counter = 0;
     var request = new XMLHttpRequest();
     var path = "productCategoriesId?";
+    var myStorage = window.localStorage;
 
     request.onreadystatechange = function () {
         if (request.readyState === 4) {
@@ -271,6 +274,17 @@
             flag = true;
         }
     });
+    addButton.addEventListener('click', function() {
+        ++counter;
+        sessionStorage.setItem('counter', counter.toString());
+        basketCounter.innerHTML = '+' + sessionStorage.counter;
+    });
+    window.onload = function () {
+        if (sessionStorage.counter)
+            basketCounter.innerHTML = '+' + sessionStorage.counter;
+        else
+            basketCounter.innerHTML = '+' + 0;
+    };
     var getCategoriesList = function (id) {
         console.log("request started !");
         request.open('get', path + "category_id=" + id);
@@ -280,6 +294,7 @@
         authorization_overlay.classList.toggle('overlay');
     };
 
+    //setTimeout(function() {sessionStorage.counter = 0}, 3000);
 </script>
 </body>
 </html>

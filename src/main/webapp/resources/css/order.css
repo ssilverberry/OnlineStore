@@ -42,20 +42,20 @@
     flex-direction: row;
     border: 1px solid #c5c5c5;
     border-radius: 10px;
-    margin: 25px 0 25px 0;
+    margin-top: 25px;
     align-items: center;
     background-color: #eaf6fb;
 }
 .basket_item_name {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 60%;
     height: 50px;
 }
 .basket_item_photo {
     display: flex;
     flex-direction: column;
-    width: 20%;
+    width: 30%;
     height: 50px;
     background-color: #ccccc0;
     border-radius: 10px;
@@ -66,4 +66,12 @@
 .basket_item_name_text {
     font-size: 20px;
     margin: 12px auto;
+}
+.width_less_70 {
+    width: 50%;
+    align-self: flex-end;
+    justify-content: center;
+    font-weight: bold;
+    height: 40px;
+    background-color: initial;
 }

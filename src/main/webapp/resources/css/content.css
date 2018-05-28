@@ -14,6 +14,10 @@ a {
     position: absolute;
     right: 35px;
     top: 85px;
+    display: flex;
+    flex-direction: row;
+    width: 100px;
+    align-items: center;
 }
 .basket_icon {
     width: 50px;
@@ -171,4 +175,10 @@ a {
     height: 100%;
     background-color: rgba(0,0,0,0.75);
     z-index: 1;
+}
+.basket_counter {
+    display: flex;
+    margin: 10px;
+    font-size: 20px;
+    flex-direction: column;
 }
