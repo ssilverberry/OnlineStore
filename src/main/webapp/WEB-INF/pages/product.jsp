@@ -245,11 +245,10 @@
     var authorization_overlay = document.querySelector('.overlay_container');
     var closeAuthElem = document.querySelector('.authorization__close');
     var flag = true;
-    var counter = 1;
+    var counter = 0;
     var request = new XMLHttpRequest();
     var path = "productCategoriesId?";
     var myStorage = window.localStorage;
-    var getCounter = myStorage.getItem('counter');
 
     request.onreadystatechange = function () {
         if (request.readyState === 4) {
@@ -279,12 +278,15 @@
         }
     });
     addButton.addEventListener('click', function() {
-        localStorage.counter = Number(localStorage.counter) + 1;
-        basketCounter.innerHTML = '+' + localStorage.counter;
-        clearLocalStorage();
+        ++counter;
+        sessionStorage.setItem('counter', counter.toString());
+        basketCounter.innerHTML = '+' + sessionStorage.counter;
     });
     window.onload = function () {
-        basketCounter.innerHTML = '+' + localStorage.counter;
+        if (sessionStorage.counter)
+            basketCounter.innerHTML = '+' + sessionStorage.counter;
+        else
+            basketCounter.innerHTML = '+' + 0;
     };
     var getCategoriesList = function (id) {
         console.log("request started !");
@@ -295,7 +297,7 @@
         authorization_overlay.classList.toggle('overlay');
     };
 
-    setTimeout(function() {localStorage.counter = 0}, 3000);
+    //setTimeout(function() {sessionStorage.counter = 0}, 3000);
 </script>
 </body>
 </html>
