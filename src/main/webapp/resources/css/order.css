@@ -44,6 +44,7 @@
     border-radius: 10px;
     margin: 25px 0 25px 0;
     align-items: center;
+    background-color: #eaf6fb;
 }
 .basket_item_name {
     display: flex;
@@ -59,6 +60,8 @@
     background-color: #ccccc0;
     border-radius: 10px;
     margin: 5px;
+    text-align: center;
+    align-items: center;
 }
 .basket_item_name_text {
     font-size: 20px;

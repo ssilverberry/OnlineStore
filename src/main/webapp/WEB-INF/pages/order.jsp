@@ -59,7 +59,9 @@
                 <div class="basket_item_name font_size_20">
                     <p class="basket_item_name_text">Meizu M6s</p>
                 </div>
-                <div class="basket_item_photo"></div>
+                <div class="basket_item_photo">
+                    <p>img</p>
+                </div>
             </div>
 
         </div>
