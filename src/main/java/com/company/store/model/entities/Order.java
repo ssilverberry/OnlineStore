@@ -11,9 +11,12 @@ public class Order {
     private int user_id;
     private int payment_id;
     private int delivery_id;
-    private Collection products;
+    private Delivery delivery;
+    private Collection<Product> products;
+
 
     public Order() {
+
     }
 
     public Order(int order_id, Timestamp date, int user_id, int payment_id, int delivery_id, Collection products) {
@@ -65,11 +68,11 @@ public class Order {
         this.date = date;
     }
 
-    public Collection getProducts() {
+    public Collection<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(Collection products) {
+    public void setProducts(Collection<Product> products) {
         this.products = products;
     }
 

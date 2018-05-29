@@ -245,7 +245,7 @@
     var counter = 0;
     var request = new XMLHttpRequest();
     var path = "productCategoriesId?";
-    var myStorage = window.localStorage;
+    var productId = 0;
 
     request.onreadystatechange = function () {
         if (request.readyState === 4) {
@@ -276,14 +276,15 @@
     });
     addButton.addEventListener('click', function() {
         ++counter;
-        sessionStorage.setItem('counter', counter.toString());
-        basketCounter.innerHTML = '+' + sessionStorage.counter;
+        productId = ${product.id};
+        localStorage.setItem('counter', counter.toString());
+        localStorage.setItem('productId', productId.toString());
+        basketCounter.innerHTML = '+' + localStorage.counter;
+        console.log(localStorage.productId);
     });
     window.onload = function () {
-        if (sessionStorage.counter)
-            basketCounter.innerHTML = '+' + sessionStorage.counter;
-        else
-            basketCounter.innerHTML = '+' + 0;
+        if (localStorage.counter)
+            basketCounter.innerHTML = '+' + localStorage.counter;
     };
     var getCategoriesList = function (id) {
         console.log("request started !");

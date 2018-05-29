@@ -22,12 +22,12 @@
             <div class="booking_form">
                 <div class="booking_form_text">
                     <div class="email_container">
-                        <input type="text" class="email_input" required>
-                        <label class="floating_email font_size_20">Name & Surname</label>
+                        <input type="text" class="email_input " required>
+                        <label class="floating_email font_size_20 value">Name & Surname</label>
                     </div>
                     <div class="pswrd_container">
                         <input type="text" class="pswrd_input" required>
-                        <label class="floating_pswrd font_size_20">City</label>
+                        <label class="floating_pswrd font_size_20 ">City</label>
                     </div>
                     <div class="email_container">
                         <input type="number" class="email_input" required>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="btns_row">
                         <div class="btn_signup">
-                            <a href="#" class="btn_link btn_link_up font_size_20">Accept</a>
+                            <a href="#" class="btn_link btn_link_up font_size_20" onclick="sendRequest()">Accept</a>
                         </div>
                         <div class="btn_signin">
                             <a href="#" class="btn_link btn_link_in font_size_20">Cancel</a>
@@ -72,6 +72,44 @@
         </div>
     </div>
 
+    <script>
+        console.log(localStorage.getItem('productId'));
+        var emailValues = document.querySelectorAll('.email_input');
+        var pswrdValues = document.querySelectorAll('.pswrd_input');
+        /*
+        * private String receiverName;
+    private String receiverSurname;
+    private String receiverPhone;
+    private String address;
+    private String status;
+        * */
+        var orderId = 0;
+        var userId = 0;
+        var request = new XMLHttpRequest();
+        var email0 = emailValues[0].value;
+        var email1 = emailValues[1].value;
+        var email2 = pswrdValues[0].value;
 
+        var jsonObject = {
+            delivery: {receiverName: email0,
+            receiverPhone: email1,
+            address: email2},
+            products: {product_id: localStorage.productId}
+        };
+
+        var sendRequest = function () {
+            /*request.open("POST", 'saveOrder?', true);
+            request.setRequestHeader("Content-Type", "application/json");
+*/          email0 = emailValues[0].value;
+              email1 = emailValues[1].value;
+              email2 = pswrdValues[0].value;
+              jsonObject.delivery.receiverName = email0;
+              jsonObject.delivery.receiverPhone = email1;
+              jsonObject.delivery.address = email2;
+            request.open('post', 'saveOrder?' + JSON.stringify(jsonObject));
+            console.log(jsonObject);
+            request.send();
+        }
+    </script>
 </body>
 </html>
