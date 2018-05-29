@@ -12,9 +12,9 @@ import java.util.Collection;
 
 @Controller
 public class ProductParameterController {
-    @Autowired
-    private ProductParameterDAOImpl productParameterDAO;
 
+    private ProductParameterDAOImpl productParameterDAO;
+    @Autowired
     public void setProductParameterDAO(ProductParameterDAOImpl productParameterDAO) {
         this.productParameterDAO = productParameterDAO;
     }
