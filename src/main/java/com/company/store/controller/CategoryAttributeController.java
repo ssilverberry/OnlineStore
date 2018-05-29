@@ -19,7 +19,7 @@ import java.util.Locale;
 public class CategoryAttributeController {
 
     private CategoryAttributeDAOImpl categoryAttributeDAO;
-
+    @Autowired
     public void setCategoryAttributeDAO(CategoryAttributeDAOImpl categoryAttributeDAO) {
         this.categoryAttributeDAO = categoryAttributeDAO;
     }

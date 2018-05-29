@@ -3,6 +3,7 @@ package com.company.store.controller;
 import com.company.store.model.entities.Order;
 import com.company.store.model.entities.OrderProduct;
 import com.company.store.model.impls.OrderProductsDAOImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +16,7 @@ import java.util.Collection;
 public class OrderProductsController {
 
     private OrderProductsDAOImpl orderProductsDAO;
-
+    @Autowired
     public void setOrderProductsDAO(OrderProductsDAOImpl orderProductsDAO) {
         this.orderProductsDAO = orderProductsDAO;
     }

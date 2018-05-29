@@ -13,6 +13,7 @@ import java.util.Collection;
 
 @Controller
 public class UserController {
+
     @Autowired
     private UserDAOImpl userDAO;
 
