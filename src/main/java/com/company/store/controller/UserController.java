@@ -13,9 +13,9 @@ import java.util.Collection;
 
 @Controller
 public class UserController {
-    @Autowired
-    private UserDAOImpl userDAO;
 
+    private UserDAOImpl userDAO;
+    @Autowired
     public void setUserDAO(UserDAOImpl userDAO) {
         this.userDAO = userDAO;
     }

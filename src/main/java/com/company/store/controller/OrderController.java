@@ -16,7 +16,7 @@ import java.util.Collection;
 public class OrderController {
 
     private OrderDAOImpl orderDAO;
-
+    @Autowired
     public void setOrderDAO(OrderDAOImpl orderDAO) {
         this.orderDAO = orderDAO;
     }

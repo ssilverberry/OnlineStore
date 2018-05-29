@@ -2,6 +2,7 @@ package com.company.store.controller;
 
 import com.company.store.model.entities.Delivery;
 import com.company.store.model.impls.DeliveryDAOImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,7 @@ import java.util.Collection;
 public class DeliveryController {
 
     private DeliveryDAOImpl deliveryDAO;
-
+    @Autowired
     public void setDeliveryDAO(DeliveryDAOImpl deliveryDAO) {
         this.deliveryDAO = deliveryDAO;
     }
