@@ -124,33 +124,43 @@
       <p class="content__mainpart__toprates__text">Top rates</p>
       <div class="content__mainpart__toprates__row">
         <div class="content__mainpart__toprates__item">
-          <img src="<c:url value="/resources/images/macbook13.jpg"/>" alt="macbook"
+          <img src="<c:url value="/resources/images/products/1000003.jpg"/>" alt="macbook"
                class="toprates__item">
           <p class="content__mainpart__toprates__item__text">
               <a href="<c:url value="/product">
-                            <c:param name="prod_id" value=""/>
-                        </c:url>">Macbook Pro Retina 13'</a>
+                            <c:param name="prod_id" value="1000003"/>
+                        </c:url>">Apple MacBook Pro Retina 13"
+              </a>
           </p>
         </div>
         <div class="content__mainpart__toprates__item">
-          <img src="<c:url value="/resources/images/iphoneSE.jpg"/>" alt="macbook"
+          <img src="<c:url value="/resources/images/products/1000007.jpg"/>" alt="iphone"
                class="toprates__item">
           <p class="content__mainpart__toprates__item__text">
-            iphone SE 32 gb
+              <a href="<c:url value="/product">
+                            <c:param name="prod_id" value="1000007"/>
+                        </c:url>">Apple Iphone 10 256GB Space Gray
+              </a>
           </p>
         </div>
         <div class="content__mainpart__toprates__item">
-          <img src="<c:url value="/resources/images/ssd.jpg"/>" alt="macbook"
+          <img src="<c:url value="/resources/images/products/1000005.jpg"/>" alt="macbook"
                class="toprates__item">
           <p class="content__mainpart__toprates__item__text">
-            Samsung SSD 256 Gb
+              <a href="<c:url value="/product">
+                            <c:param name="prod_id" value="1000005"/>
+                        </c:url>">Apple MacBook Pro Retina 15"
+              </a>
           </p>
         </div>
         <div class="content__mainpart__toprates__item">
-          <img src="<c:url value="/resources/images/marshall.jpg"/>" alt="macbook"
+          <img src="<c:url value="/resources/images/products/1000008.jpg"/>" alt="iphone"
                class="toprates__item">
           <p class="content__mainpart__toprates__item__text">
-            Sound Amplifier
+              <a href="<c:url value="/product">
+                            <c:param name="prod_id" value="1000008"/>
+                        </c:url>">Apple iPhone 7 128Gb Space Gray
+              </a>
           </p>
         </div>
       </div>
@@ -159,31 +169,43 @@
       <p class="content__mainpart__toprates__text">Top rates</p>
       <div class="content__mainpart__toprates__row">
         <div class="content__mainpart__toprates__item">
-          <img src="<c:url value="/resources/images/macbook13.jpg"/>" alt="macbook"
+          <img src="<c:url value="/resources/images/products/1000003.jpg"/>" alt="macbook"
                class="toprates__item">
           <p class="content__mainpart__toprates__item__text">
-            Macbook Pro Retina 13'
+              <a href="<c:url value="/product">
+                            <c:param name="prod_id" value="1000003"/>
+                        </c:url>">Apple MacBook Pro Retina 13"
+              </a>
           </p>
         </div>
         <div class="content__mainpart__toprates__item">
-          <img src="<c:url value="/resources/images/iphoneSE.jpg"/>" alt="macbook"
+          <img src="<c:url value="/resources/images/products/1000007.jpg"/>" alt="Iphone"
                class="toprates__item">
           <p class="content__mainpart__toprates__item__text">
-            iphone SE 32 gb
+              <a href="<c:url value="/product">
+                            <c:param name="prod_id" value="1000007"/>
+                        </c:url>">Apple Iphone 10 256GB Space Gray
+              </a>
           </p>
         </div>
         <div class="content__mainpart__toprates__item">
-          <img src="<c:url value="/resources/images/ssd.jpg"/>" alt="macbook"
+          <img src="<c:url value="/resources/images/products/1000005.jpg"/>" alt="MacBook"
                class="toprates__item">
           <p class="content__mainpart__toprates__item__text">
-            Samsung SSD 256 Gb
+              <a href="<c:url value="/product">
+                            <c:param name="prod_id" value="1000005"/>
+                        </c:url>">Apple MacBook Pro Retina 15"
+              </a>
           </p>
         </div>
         <div class="content__mainpart__toprates__item">
-          <img src="<c:url value="/resources/images/marshall.jpg"/>" alt="macbook"
+          <img src="<c:url value="/resources/images/products/1000008.jpg"/>" alt="IPhone"
                class="toprates__item">
           <p class="content__mainpart__toprates__item__text">
-            Sound Amplifier
+              <a href="<c:url value="/product">
+                            <c:param name="prod_id" value="1000008"/>
+                        </c:url>">Apple IPhone 7 128Gb Space Gray
+              </a>
           </p>
         </div>
       </div>

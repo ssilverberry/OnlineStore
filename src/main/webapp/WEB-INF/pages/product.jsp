@@ -144,17 +144,10 @@
                     ${product.name}
                 </p>
             </div>
-            <%--<div class="content__mainpart__product__photos__img">
-                <div class="img__placeholder">
-                    <p class="img__placeholder__text">
-                        Img coming soon.
-                    </p>
-                </div>
-            </div>--%>
             <div class="content__mainpart__product__photos__img">
                 <div class="img__placeholder">
                     <p class="img__placeholder__text">
-                        <img src="<c:url value="/resources/images/${product.name}.jpg"/>"/>
+                        <img src="<c:url value="/resources/images/products/${product.id}.jpg"/>"/>
                     </p>
                 </div>
             </div>
