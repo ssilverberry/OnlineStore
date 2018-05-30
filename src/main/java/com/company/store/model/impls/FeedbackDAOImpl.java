@@ -3,6 +3,7 @@ package com.company.store.model.impls;
 import com.company.store.model.dao.FeedbackDAO;
 import com.company.store.model.entities.Feedback;
 
+import com.company.store.model.entities.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,8 +22,12 @@ public class FeedbackDAOImpl implements FeedbackDAO {
 
     private static final String GET_ALL_FEEDBACK = "SELECT * FROM FEEDBACK";
     private static final String GET_FEEDBACK_BY_ID = "SELECT * FROM FEEDBACK WHERE FEEDBACK_ID = ?";
-    private static final String GET_ALL_FEEDBACK_FOR_USER = "SELECT * FROM FEEDBACK WHERE USER_ID = ?";
-    private static final String GET_ALL_FEEDBACK_FOR_PRODUCT = "SELECT * FROM FEEDBACK WHERE PRODUCT_ID = ?";
+    private static final String GET_ALL_FEEDBACK_FOR_USER = "SELECT FEEDBACK.*, USERS.USER_NAME FROM FEEDBACK " +
+            "JOIN USERS ON USERS.USER_ID = FEEDBACK.USER_ID WHERE FEEDBACK.USER_ID=?";
+
+    private static final String GET_ALL_FEEDBACK_FOR_PRODUCT = "SELECT FEEDBACK.*, USERS.USER_NAME FROM FEEDBACK " +
+            "JOIN USERS ON USERS.USER_ID = FEEDBACK.USER_ID AND PRODUCT_ID=?";
+
     private static final String GET_FEEDBACK_BY_USER_FOR_PRODUCT = "SELECT * FROM FEEDBACK WHERE USER_ID = ? " +
                                                                                             "AND PRODUCT_ID = ?";
 
@@ -30,8 +35,10 @@ public class FeedbackDAOImpl implements FeedbackDAO {
      * Parameters in this order: USER_ID, PRODUCT_ID, FEEDBACK_RATING, FEEDBACK_MESSAGE
      */
     private static final String INSERT_FEEDBACK = "INSERT INTO FEEDBACK VALUES (DEFAULT, ?, ?, ?, ?)";
+
     private static final String UPDATE_FEEDBACK = "UPDATE feedback SET user_id=?, product_id=?, feedback_rating=?, " +
                                                                       "feedback_message=? WHERE feedback_id=?";
+
     private static final String DELETE_FEEDBACK = "DELETE FROM FEEDBACK WHERE FEEDBACK_ID = ?";
 
     /**
@@ -51,7 +58,7 @@ public class FeedbackDAOImpl implements FeedbackDAO {
         int feedb_id = feedback.getId();
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(feedb_id != 0 ? UPDATE_FEEDBACK : INSERT_FEEDBACK)){
-            ps.setInt(1, feedback.getUserId());
+            ps.setInt(1, feedback.getUser().getId());
             ps.setInt(2, feedback.getProductId());
             ps.setInt(3, feedback.getRating());
             ps.setString(4, feedback.getContent());
@@ -128,12 +135,15 @@ public class FeedbackDAOImpl implements FeedbackDAO {
      */
     private Feedback parseFeedback(ResultSet resultSet) {
         Feedback feedback = new Feedback();
+        User user = new User();
         try {
             feedback.setId(resultSet.getInt(1));
-            feedback.setUserId(resultSet.getInt(2));
+            user.setId(resultSet.getInt(2));
             feedback.setProductId(resultSet.getInt(3));
             feedback.setRating(resultSet.getInt(4));
             feedback.setContent(resultSet.getString(5));
+            user.setName(resultSet.getString(6));
+            feedback.setUser(user);
         } catch (SQLException e) {
             log.error("Parsing of feedback was failed! ", e);
         } return feedback;

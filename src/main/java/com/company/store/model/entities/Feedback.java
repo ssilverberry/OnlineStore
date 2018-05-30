@@ -1,10 +1,12 @@
 package com.company.store.model.entities;
 
 
-public class Feedback {
+import java.io.Serializable;
+
+public class Feedback implements Serializable {
     
     private int feedback_id;
-    private int user_id;
+    private User user;
     private int product_id;
     private int rating;
     private String content;
@@ -12,23 +14,23 @@ public class Feedback {
     public Feedback() {
     }
 
-    public Feedback(int user_id, int product_id, int raiting, String content) {
-        this.user_id = user_id;
+    public Feedback(User user, int product_id, int rating, String content) {
+        this.user = user;
         this.product_id = product_id;
-        this.rating = raiting;
+        this.rating = rating;
         this.content = content;
     }
 
-    public Feedback(int user_id, int product_id, String content) {
-        this.user_id = user_id;
+    public Feedback(User user, int product_id, String content) {
+        this.user = user;
         this.product_id = product_id;
         this.content = content;
     }
 
-    public Feedback(int user_id, int product_id, int raiting) {
-        this.user_id = user_id;
+    public Feedback(User user, int product_id, int rating) {
+        this.user = user;
         this.product_id = product_id;
-        this.rating = raiting;
+        this.rating = rating;
     }
 
     public int getId() {
@@ -39,12 +41,12 @@ public class Feedback {
         this.feedback_id = feedback_id;
     }
 
-    public int getUserId() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getProductId() {
@@ -59,8 +61,8 @@ public class Feedback {
         return rating;
     }
 
-    public void setRating(int raiting_id) {
-        this.rating = raiting_id;
+    public void setRating(int rating_id) {
+        this.rating = rating_id;
     }
 
     public String getContent() {
@@ -75,7 +77,7 @@ public class Feedback {
     public String toString() {
         return "Feedback: " +
                 "\n feed_id: " + feedback_id +
-                "\n user_id: " + user_id +
+                "\n user: " + user.toString() +
                 "\n prod_id: " + product_id+
                 "\n rating: " + rating +
                 "\n content: " + content;
