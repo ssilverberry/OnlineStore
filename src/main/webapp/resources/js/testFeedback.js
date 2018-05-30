@@ -6,10 +6,10 @@ function getFeedback(prod_id) {
             var result = "<table><tbody>";
             $.each(data, function (k, v) {
                 result += "<tr>";
-                result += "<td><br><br>";
+                result += "<td style='font-style: oblique; text-align: left; font-weight: bold; font-size: 16px'><br><br>";
                 result += v.user.name;
                 result += "</td>";
-                result += "<td style='margin-left: 5px'>";
+                result += "<td style='font-style: oblique; text-align: right; font-size: 16px'><br><br>";
                 result += "Rating: " + v.rating;
                 result += "</td>";
                 result += "</tr>";
