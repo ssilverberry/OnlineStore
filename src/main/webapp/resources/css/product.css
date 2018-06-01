@@ -33,6 +33,7 @@
 .content__mainpart__product__description {
     width: 400px;
     padding: 10px;
+    transition: all 0.3s;
 }
 .description_headers {
     display: flex;
@@ -40,9 +41,6 @@
 }
 .description_headers_text {
     padding: 10px;
-}
-.description_headers_text:first-child {
-    background-color: #F1F1F1;
 }
 .description_container {
     width: 85%;
@@ -107,4 +105,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+.flag {
+    background-color: #F1F1F1;
 }

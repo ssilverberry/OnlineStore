@@ -95,6 +95,7 @@ a {
     margin-top: 74px;
     height: 265px;
     border-left: solid 2px #707070;
+    justify-content: space-between;
 }
 .content__mainpart__toprates__row {
     display: flex;
@@ -102,7 +103,7 @@ a {
     justify-content: space-between;
     align-items: flex-end;
     margin-left: 21px;
-    height: 90%;
+    height: 200px;
 }
 .content__mainpart__toprates__text {
     font-size: 21px;
@@ -138,6 +139,7 @@ a {
     margin-top: 74px;
     height: 265px;
     border-left: solid 2px #707070;
+    justify-content: space-between;
 }
 .content__sidebar__search__button {
     margin-top: 20px;

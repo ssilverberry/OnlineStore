@@ -40,9 +40,9 @@ public class OrderController {
     }
 
     @RequestMapping(value = "saveOrder")
-    public void saveOrder(@RequestBody Order order) {
+    public void saveOrder(@RequestParam(value = "prod_id") int productId) {
         //orderDAO.saveOrder(order);
-        System.out.println(order.toString());
+        System.out.println(productId);
         //return new ModelAndView("saveorder");
     }
 
