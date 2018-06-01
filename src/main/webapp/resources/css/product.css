@@ -41,9 +41,6 @@
 .description_headers_text {
     padding: 10px;
 }
-.description_headers_text:first-child {
-    background-color: #F1F1F1;
-}
 .description_container {
     width: 85%;
     background-color: #F1F1F1;
@@ -107,4 +104,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+.flag {
+    background-color: #F1F1F1;
+    transition: all 0.5s;
 }

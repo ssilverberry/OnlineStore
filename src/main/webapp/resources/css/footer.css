@@ -11,20 +11,20 @@
     right: 0;
     bottom: 0;
     left: 0;
-  }
-  .footer__social {
+}
+.footer__social {
     margin-left: 50px;
-  }
-  .footer__social__icon {
+}
+.footer__social__icon {
     width: 25px;
     margin-right: 5px;
-  }
-  .footer__license {
+}
+.footer__license {
     margin: 0 auto;
-  }
-  .footer__mail {
+}
+.footer__mail {
     height: 18px;
-  }
-  .footer__mail__icon {
+}
+.footer__mail__icon {
     width: 180px;
-  }
+}
