@@ -296,7 +296,6 @@
         if (bool) {
             bg_desc[0].classList.remove('flag');
             bg_desc[1].classList.add('flag');
-           // bool = false;
         }
         bool = false;
     };
