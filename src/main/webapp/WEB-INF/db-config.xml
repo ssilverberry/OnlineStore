@@ -8,7 +8,7 @@
         <property name="location" value="classpath:DB.properties"/>
     </bean>
 
-    <bean id="dataSource" class="oracle.ucp.jdbc.PoolDataSourceFactory" factory-method="getPoolDataSource" >
+    <!--<bean id="dataSource" class="oracle.ucp.jdbc.PoolDataSourceFactory" factory-method="getPoolDataSource" >
         <property name="connectionFactoryClassName" value="${driverType}" />
         <property name="URL" value="${url}" />
         <property name="user" value="${user}" />
@@ -19,6 +19,13 @@
         <property name="inactiveConnectionTimeout" value="${inactiveConnectionTimeout}" />
         <property name="validateConnectionOnBorrow" value="${validateConnectionOnBorrow}" />
         <property name="maxStatements" value="${maxStatements}"/>
+    </bean>-->
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="${postgres.URI}"/>
+        <property name="username" value="${postgres.User}" />
+        <property name="password" value="${postgres.Pass}" />
     </bean>
 
 </beans>
