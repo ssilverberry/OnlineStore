@@ -41,6 +41,7 @@ public class FeedbackController {
     }
 
     @RequestMapping(value = "AllFeedbackForProduct")
+    @ResponseBody
     public Collection<Feedback> getAllFeedbackForProduct(@RequestParam(value = "id") int id) {
         return feedbackDAO.getAllFeedbackForProduct(id);
     }

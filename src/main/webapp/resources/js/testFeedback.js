@@ -22,8 +22,8 @@ function getFeedback(prod_id) {
             result += "</tbody></table><br>";
             $('#feedback_container').html(result);
         },
-        error: function () {
-            alert('Error');
+        error: function (data) {
+            console.log(data);
         }
     });
     $(document.querySelector('.feedback_text').classList.remove('display_none'));
