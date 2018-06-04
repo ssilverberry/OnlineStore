@@ -1,0 +1,77 @@
+.row_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 400px;
+    margin: 125px 20px;
+    border: 1px solid #C5C5C5;
+    border-radius: 10px;
+    padding: 5px;
+}
+.booking_form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+.booking_form_text {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    width: 90%;
+    padding: 5px;
+}
+
+.booking_text {
+    text-align: center;
+}
+.backgrnd_ccccc0 {
+    background-color: #ccccc0;
+}
+.font_size_20 {
+    font-size: 20px;
+}
+.basket_goods_row {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #c5c5c5;
+    border-radius: 10px;
+    margin-top: 25px;
+    align-items: center;
+    background-color: #eaf6fb;
+}
+.basket_item_name {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 50px;
+}
+.basket_item_photo {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 50px;
+    background-color: #ccccc0;
+    border-radius: 10px;
+    margin: 5px;
+    text-align: center;
+    align-items: center;
+}
+.basket_item_name_text {
+    font-size: 20px;
+    margin: 12px auto;
+}
+.width_less_70 {
+    width: 50%;
+    align-self: flex-end;
+    justify-content: center;
+    font-weight: bold;
+    height: 40px;
+    background-color: initial;
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:dataSource/config/DB.properties"/>
+    </bean>
+
+    <bean id="dataSource" class="org.postgresql.jdbc2.optional.PoolingDataSource">
+        <property name="serverName" value="${postgres.Host}"/>
+        <property name="databaseName" value="${postgres.DBName}"/>
+        <property name="portNumber" value="${postgres.Port}"/>
+        <property name="user" value="${postgres.User}" />
+        <property name="password" value="${postgres.Pass}" />
+        <property name="initialConnections" value="${postgres.InitConn}"/>
+        <property name="maxConnections" value="${postgres.MaxConn}"/>
+    </bean>
+
+</beans>

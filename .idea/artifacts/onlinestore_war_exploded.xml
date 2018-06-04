@@ -18,11 +18,14 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-web:4.3.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.11.0" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.11.0" />
-          <element id="library" level="project" name="Maven: com.oracle:ojdbc8:12.2.0.1" />
-          <element id="library" level="project" name="Maven: com.oracle:ucp:11.2.0.3" />
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.3.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.3.1.RELEASE" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.4.3" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.6" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.4.3" />
+          <element id="library" level="project" name="Maven: postgresql:postgresql:9.1-901-1.jdbc4" />
+          <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.2.2" />
         </element>
       </element>
       <element id="directory" name="META-INF">
