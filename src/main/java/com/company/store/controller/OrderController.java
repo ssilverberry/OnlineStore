@@ -22,14 +22,14 @@ public class OrderController {
     }
 
     @RequestMapping(value = "OrderById/{id}")
-    public ModelAndView getOrderById(@PathVariable("id") String id) {
-        Order order = orderDAO.getOrderById(Integer.parseInt(id));
+    public ModelAndView getOrderById(@PathVariable("id") int id) {
+        Order order = orderDAO.getOrderById(id);
         return new ModelAndView("orderById", "order", order);
     }
 
     @RequestMapping(value = "AllOrdersForUser/{id}")
-    public ModelAndView getAllOrdersForUser(@PathVariable("id") String id) {
-        Collection<Order> orders = orderDAO.getAllOrdersForUser(Integer.parseInt(id));
+    public ModelAndView getAllOrdersForUser(@PathVariable("id") int id) {
+        Collection<Order> orders = orderDAO.getAllOrdersForUser(id);
         return new ModelAndView("AllOrdersForUser", "AllOrdersUser", orders);
     }
 
@@ -54,6 +54,10 @@ public class OrderController {
 
     @RequestMapping("order")
     public String order() {
+        return "order";
+    }
+    @RequestMapping("order1")
+    public String order1() {
         return "order";
     }
 }
