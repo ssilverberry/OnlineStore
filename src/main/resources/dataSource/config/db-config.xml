@@ -8,6 +8,8 @@
         <property name="location" value="classpath:dataSource/config/DB.properties"/>
     </bean>
 
+    <!-- COMMENT OUT THIS BEAN -->
+
     <bean id="dataSource" class="org.postgresql.jdbc2.optional.PoolingDataSource">
         <property name="serverName" value="${postgres.Host}"/>
         <property name="databaseName" value="${postgres.DBName}"/>
@@ -16,6 +18,14 @@
         <property name="password" value="${postgres.Pass}" />
         <property name="initialConnections" value="${postgres.InitConn}"/>
         <property name="maxConnections" value="${postgres.MaxConn}"/>
+    </bean>
+
+    <bean id="dataSource" class="oracle.ucp.jdbc.PoolDataSourceFactory" factory-method="getPoolDataSource">
+        <property name="user" value="${oracle.user}"/>
+        <property name="password" value="${oracle.pass}"/>
+        <property name="URL" value="${oracle.url}"/>
+        <property name="initialPoolSize" value="${oracle.initConn}"/>
+        <property name="maxPoolSize" value="${oracle.MaxConn}"/>
     </bean>
 
 </beans>
