@@ -146,7 +146,7 @@
             </div>
             <div class="content__mainpart__product__photos__img">
                 <div class="img__placeholder">
-                    <p class="img__placeholder__text">
+                    <p class="" style="object-fit:contain; width: 260px; margin: auto">
                         <img src="<c:url value="/resources/images/products/${product.id}.jpg"/>"/>
                     </p>
                 </div>
@@ -154,11 +154,11 @@
         </div>
         <div class="content__mainpart__product__description">
             <div class="description_headers">
-                <p class="description_headers_text">
-                    <a style="cursor: pointer" onclick="enableDescription()">Description</a>
+                <p class="description_headers_text flag">
+                    <a style="cursor: pointer" onclick="enableDescription();secondBgChangr()">Description</a>
                 </p>
                 <p class="description_headers_text">
-                    <a style="cursor: pointer" onclick="getFeedback(${product.id})">Feedback</a>
+                    <a style="cursor: pointer" onclick="getFeedback(${product.id});bgChanger()">Feedback</a>
                 </p>
             </div>
             <div class="description_container" style="width: 100%;">
@@ -234,11 +234,15 @@
     var authorization = document.querySelector('.authorization');
     var authorization_overlay = document.querySelector('.overlay_container');
     var closeAuthElem = document.querySelector('.authorization__close');
+    var bg_desc = document.querySelectorAll('.description_headers_text');
     var flag = true;
     var counter = 0;
     var request = new XMLHttpRequest();
     var path = "productCategoriesId?";
     var productId = 0;
+    var target;
+    var text;
+    var bool = true;
 
     request.onreadystatechange = function () {
         if (request.readyState === 4) {
@@ -288,7 +292,21 @@
         authorization_overlay.classList.toggle('overlay');
     };
 
-    //setTimeout(function() {sessionStorage.counter = 0}, 3000);
+    var bgChanger = function () {
+        if (bool) {
+            bg_desc[0].classList.remove('flag');
+            bg_desc[1].classList.add('flag');
+        }
+        bool = false;
+    };
+    var secondBgChangr = function () {
+        if (!bool){
+            bg_desc[0].classList.add('flag');
+            bg_desc[1].classList.remove('flag');
+        }
+        bool = true;
+    }
+
 </script>
 </body>
 </html>

@@ -11,24 +11,6 @@
 <head>
     <link rel="stylesheet" href="<c:url value="/resources/css/authorize.css"/>">
     <link rel="stylesheet" href="<c:url value="/resources/css/order.css" />">
-    <script src="<c:url value="/resources/js/jquery-3.3.1.min.js"/>"></script>
-    <%--<script>
-        function sendRequest(){
-
-            $.ajax({
-                url : 'saveOrder',
-                type : "POST",
-                dataType: "application\json",
-                data : {products: {product_id: localStorage.product_id}, delivery:{receiverName: "yura", receiverPhone:"555"}},
-                success : function (response) {
-                    alert('success ' + response);
-                },
-                error : function (response) {
-                    alert('error ' + response);
-                }
-            });
-        }
-    </script>--%>
     <title>Order</title>
 </head>
 <body>
@@ -108,24 +90,26 @@
         var email1 = emailValues[1].value;
         var email2 = pswrdValues[0].value;
 
-        var sendRequest = function () {
-            request.open("POST", "saveOrder?");
-            request.setRequestHeader("Content-Type", "application/json");
-            email0 = emailValues[0].value;
-            email1 = emailValues[1].value;
-            email2 = pswrdValues[0].value;
-            var product = {product_id: 1000003};
-            var delivery = {receiverName: "yura", receiverPhone: 555};
+        var jsonObject = {
+            delivery: {receiverName: email0,
+            receiverPhone: email1,
+            address: email2},
+            products: {product_id: localStorage.productId}
+        };
 
-            var jsonObject = "delivery=" + JSON.stringify(delivery);
-            /*jsonObject.delivery.receiverName = email0;
-            jsonObject.delivery.receiverPhone = email1;
-            jsonObject.delivery.address = email2;*/
-            //request.open('post', 'saveOrder?' + JSON.stringify(jsonObject));
+        var sendRequest = function () {
+            /*request.open("POST", 'saveOrder?', true);
+            request.setRequestHeader("Content-Type", "application/json");
+*/          email0 = emailValues[0].value;
+              email1 = emailValues[1].value;
+              email2 = pswrdValues[0].value;
+              jsonObject.delivery.receiverName = email0;
+              jsonObject.delivery.receiverPhone = email1;
+              jsonObject.delivery.address = email2;
+            request.open('post', 'saveOrder?' + JSON.stringify(jsonObject));
             console.log(jsonObject);
-            request.send(jsonObject);
+            request.send();
         }
     </script>
-
 </body>
 </html>

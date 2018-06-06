@@ -80,6 +80,7 @@ body {
     opacity: 0.8;
     transition: all 0.3s;
     pointer-events: none;
+    left: 0;
 }
 .floating_pswrd {
     position: absolute;
@@ -87,6 +88,7 @@ body {
     opacity: 0.8;
     transition: all 0.3s;
     pointer-events: none;
+    left: 0;
 }
 .email_input:focus ~ .floating_email,
 .email_input:valid ~ .floating_email {
