@@ -105,6 +105,19 @@
           <version>2.4.3</version>
       </dependency>
 
+      <!-- oracle pool datasource-->
+      <dependency>
+          <groupId>com.oracle</groupId>
+          <artifactId>ojdbc8</artifactId>
+          <version>12.2.0.1</version>
+      </dependency>
+
+      <dependency>
+          <groupId>com.oracle</groupId>
+          <artifactId>ucp</artifactId>
+          <version>11.2.0.3</version>
+      </dependency>
+
       <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
       <dependency>
           <groupId>postgresql</groupId>
