@@ -45,4 +45,3 @@ function getCategoriesList (id) {
 var authorizeOverlay = function () {
     authorization_overlay.classList.toggle('overlay');
 };
-<!--privet vsem-->
