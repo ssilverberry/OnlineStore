@@ -1,6 +1,6 @@
 var signinElem = document.querySelector('.nav__signin');
 var basketElem = document.querySelector('.basket');
-var mainPartList = document.querySelector('.content__mainpart');
+var mainPartList = document.querySelector('.card-columns');
 var payment = document.querySelector('.main');
 var authorization = document.querySelector('.authorization');
 var authorization_overlay = document.querySelector('.overlay_container');
@@ -37,7 +37,7 @@ closeAuthElem.addEventListener('click', function () {
         flag = true;
     }
 });
-var getCategoriesList = function (id) {
+function getCategoriesList (id) {
     console.log("request started !");
     request.open('get', path + "category_id=" + id);
     request.send();

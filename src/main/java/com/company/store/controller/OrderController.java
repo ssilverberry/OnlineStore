@@ -56,4 +56,23 @@ public class OrderController {
     public String order() {
         return "order";
     }
+
+    @RequestMapping("header")
+    public String header() {
+        return "header";
+    }
+
+    @RequestMapping("basket")
+    public String basket() {
+        return "basket";
+    }
+
+    @RequestMapping("footer")
+    public String footer() {
+        return "footer";
+    }
+    @RequestMapping("authorize")
+    public String authorize() {
+        return "authorize";
+    }
 }

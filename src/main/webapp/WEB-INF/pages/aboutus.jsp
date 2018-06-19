@@ -82,7 +82,7 @@
     </nav>
     <div class="content" style="min-height: 100%;">
         <div class="basket" onclick="getCategoriesList()">
-            <a href="#">
+            <a href="basket">
                 <img src="<c:url value="/resources/icons/basket.jpg"/>" alt="basket" class="basket_icon">
             </a>
             <div class="basket_text"></div>

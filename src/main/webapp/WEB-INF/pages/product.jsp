@@ -23,6 +23,7 @@
     <script src="<c:url value="/resources/js/jquery-3.3.1.min.js"/>"></script>
     <script src="<c:url value="/resources/js/testFeedback.js"/>"></script>
     <script src="<c:url value="/resources/js/testDescription.js"/>"></script>
+
     <title>Document</title>
 
     <c:forEach var="map" items="${products}">
@@ -35,109 +36,14 @@
     </c:forEach>
 
 </head>
-<div class="overlay_container">
-<div class="authorization display_none">
-    <div class="authorization__row">
-        <h2 class="welcome_text">Welcome</h2>
-        <a href="#" style="text-decoration: none; color: initial;" class="authorization__close">
-            <img src="<c:url value="/resources/icons/close.svg" />" alt="close" >
-        </a>
+<jsp:include page="header.jsp" flush="true" />
+<div class="container-fluid justify-content-center" style="min-height: 100vh; position: relative;">
+<div class="row">
+    <div class="col-2 pt-5">
+        <jsp:include page="sidebar.jsp" flush="true" />
     </div>
-    <div class="authorization__input">
-        <div class="email_container">
-            <input type="email" class="email_input" required>
-            <label class="floating_email">Email</label>
-        </div>
-        <div class="pswrd_container">
-            <input type="password" class="pswrd_input" required>
-            <label class="floating_pswrd">Password</label>
-        </div>
-    </div>
-    <div class="btns_row">
-        <div class="btn_signup">
-            <a href="#" class="btn_link btn_link_up">Sign up</a>
-        </div>
-        <div class="btn_signin">
-            <a href="#" class="btn_link btn_link_in">Log in</a>
-        </div>
-    </div>
-    <div class="forgott_password">
-        <a href="restorePswrd"class="forgott_password_text">
-            Forgot password ?
-        </a>
-        <span class="link_decoration"></span>
-    </div>
-</div>
-</div>
-<div class="main">
-<nav class="nav">
-    <div class="nav__logo">
-        <a href="<c:url value="/"/>" class="nav__logo__link">
-            NC Loft
-        </a>
-    </div>
-    <div class="nav__links">
-        <a href="payDelive" class="nav__links__item">
-            Payment & Delivery
-        </a>
-        <a href="contacts" class="nav__links__item">
-            Contacts
-        </a>
-        <a href="aboutus" class="nav__links__item">
-            About us
-        </a>
-    </div>
-    <div class="nav__signin">
-        <P class="nav__signin__text">Sign in</P>
-        <img src="<c:url value="/resources/icons/signin.svg" />" alt="signin icon"
-             class="nav__signin__icon_width_20"/>
-    </div>
-</nav>
-<div class="content">
-    <div class="basket">
-        <p class="basket_counter"> </p>
-        <a href="#">
-            <img src="<c:url value="/resources/icons/basket.jpg" />" alt="basket" class="basket_icon">
-        </a>
-    </div>
-    <div class="content__sidebar">
-        <p class="content__sidebar__text content__sidebar__text_fontsize_21">
-            Categories
-        </p>
-        <div class="content__sidebar__list__container">
-            <ul class="content__sidebar__list__container__categorieslist">
-                <c:forEach var="item" items="${categs}">
-                    <li onclick="getCategoriesList(${item.id})">
-                        <a style="cursor: pointer;">
-                                ${item.name}
-                        </a>
-                    </li>
-                </c:forEach>
-            </ul>
-        </div>
-        <p class="content__sidebar__text__price content__sidebar__text_fontsize_21">
-            Price
-        </p>
-        <div class="content__sidebar__list__container__price">
-            <ul class="content__sidebar__list__container__pricelist">
-                <li><input type="checkbox" class="margin_right_10"> Under $250</li>
-                <li><input type="checkbox" class="margin_right_10"> $250 - $450</li>
-                <li><input type="checkbox" class="margin_right_10"> Over $450</li>
-                <li>
-                    $ <input type="number" class="input__text_width_35"> - to $
-                    <input type="number" class="input__text_width_35">
-                </li>
-            </ul>
-        </div>
-        <div class="content__sidebar__search__button">
-            <a href="search" class="content__sidebar__search__button__btn" onclick="search">seek</a>
-        </div>
-    </div>
-    <div class="product_result_container">
-
-    </div>
-    <div class="content__mainpart">
-        <%--<div class="left__border">--%>
+    <div class="col-9 pt-5">
+        <div class="row">
         <div class="content__mainpart__product__photos">
             <div class="content__mainpart__product__header">
                 <p class="content__mainpart__product__header__text">
@@ -186,7 +92,7 @@
                             Buy
                         </a>
                     </div>
-                    <div class="product_pane_add_btn">
+                    <%--<div class="product_pane_add_btn">
                         <a class="product_pane_add_btn_link" style="cursor: pointer; ">
                             <img src="<c:url value="/resources/icons/add.svg"/>" alt="add button">
                         </a>
@@ -195,34 +101,17 @@
                         <a href="buyProduct" class="product_pane_add_feedbck_btn_link">
                             <img src="<c:url value="/resources/icons/like.svg"/>" alt="like">
                         </a>
-                    </div>
+                    </div>--%>
                 </div>
+            </div>
             </div>
         </div>
     </div>
+
 </div>
-<%--</div>--%>
-<div class="footer" style="position: initial;">
-    <div class="footer__social">
-        <a href="https://www.instagram.com/">
-            <img src="<c:url value="/resources/icons/insta.svg"/>" alt="insta" class="footer__social__icon">
-        </a>
-        <a href="https://www.facebook.com/">
-            <img src="<c:url value="/resources/icons/facebk.svg"/>" alt="facebk" class="footer__social__icon">
-        </a>
-        <a href="https://twitter.com/">
-            <img src="<c:url value="/resources/icons/twitter.svg"/>" alt="twitter" class="footer__social__icon">
-        </a>
+    <div class="row p-2 bg-light rounded justify-content-center text-primary" style="position: absolute;bottom: 0px; width: 100%;">
+        <jsp:include page="footer.jsp" flush="true" />
     </div>
-    <div class="footer__license">
-        <p class="footer__license__text">&copy; 2018, NC Loft.com</p>
-    </div>
-    <div class="footer__mail">
-        <a href="mailto:ncloft@gmail.com?subject=Partnership">
-            <img src="<c:url value="/resources/icons/mail.svg"/>" alt="mail icon" class="footer__mail__icon">
-        </a>
-    </div>
-</div>
 </div>
 <script async>
     var signinElem = document.querySelector('.nav__signin');
@@ -296,7 +185,6 @@
         if (bool) {
             bg_desc[0].classList.remove('flag');
             bg_desc[1].classList.add('flag');
-           // bool = false;
         }
         bool = false;
     };

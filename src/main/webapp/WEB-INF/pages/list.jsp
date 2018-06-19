@@ -7,20 +7,36 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<div <%--class="content__mainpart__toprates"--%> style="align-items: flex-start; margin-top: 50px; height: auto;
-border-left: 2px solid #707070;">
-    <div style="padding-left: 25px;">
-        <p style="font-size: 26px; color: #000; margin-bottom: 26px;">Products: </p>
-        <ul>
-        <c:forEach var="prods" items="${productList}">
-            <li style="padding-bottom: 20px;">
-                <a href="<c:url value="/product">
-                    <c:param name="prod_id" value="${prods.id}"/>
-                    </c:url>">
-                        ${prods.name}
-                </a>
-            </li>
-        </c:forEach>
-        </ul>
+
+<jsp:include page="header.jsp" flush="true" />
+<div class="container-fluid" style="padding-top: 25px; min-height: 100vh; position: relative;">
+    <div class="row container-row">
+        <div class="col-2">
+            <div class="row">
+                <jsp:include page="sidebar.jsp"/>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="row">
+                <div class="card-columns bg-gradient-secondary text-white">
+                <c:forEach var="prods" items="${productList}">
+                    <div class="card border-0 text-center shadow p-3 rounded cd">
+                        <img src="<c:url value="/resources/images/products/${prods.id}.jpg"/>" alt="macbook" style="width: 80%;">
+                        <div class="card-body">
+                            <a href="<c:url value="/product">
+                   <c:param name="prod_id" value="${prods.id}"/>
+                       </c:url>" class="btn rounded border-bottom m-auto">${prods.name}
+                            </a>
+                        </div>
+                    </div>
+
+                </c:forEach>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row align-content-center justify-content-center bg-light p-2 text-primary bg-secondary rounded"
+         style="position: absolute;bottom: 0px; width: 100%;">
+        <jsp:include page="footer.jsp"/>
     </div>
 </div>
