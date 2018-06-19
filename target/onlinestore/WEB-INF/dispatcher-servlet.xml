@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <import resource="classpath:dataSource/config/db-config.xml"/>
+
+    <context:component-scan base-package = "com.company.store"/>
+
+    <mvc:annotation-driven />
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean id="userDAO" class="com.company.store.model.impls.UserDAOImpl" lazy-init="true">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="productDAO" class="com.company.store.model.impls.ProductDAOImpl" lazy-init="true">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="prodParamDAO" class="com.company.store.model.impls.ProductParameterDAOImpl" lazy-init="true">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="paymentDAO" class="com.company.store.model.impls.PaymentDAOImpl" lazy-init="true">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="orderProdDAO" class="com.company.store.model.impls.OrderProductsDAOImpl" lazy-init="true">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="orderDAO" class="com.company.store.model.impls.OrderDAOImpl" lazy-init="true">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="feedbackDAO" class="com.company.store.model.impls.FeedbackDAOImpl" lazy-init="true">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="deliveryDAO" class="com.company.store.model.impls.DeliveryDAOImpl" lazy-init="true">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="categoryAttrDAO" class="com.company.store.model.impls.CategoryAttributeDAOImpl" lazy-init="true">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+</beans>

@@ -1,0 +1,111 @@
+.content__mainpart {
+    display: flex;
+    flex-direction: row;
+    margin-top: 55px;
+    height: auto;
+}
+/*.left__border {
+    border-left: 2px solid #707070;
+    height: 85%;
+    margin-left: 25px;
+}*/
+.content__mainpart__product__photos {
+    border-left: 2px solid #707070;
+}
+.content__mainpart__product__photos,
+.content__mainpart__product__description  {
+    display: flex;
+    flex-direction: column;
+}
+.content__mainpart__product__photos__img {
+    width: 450px;
+    margin-left: 50px;
+    margin-top: 50px;
+    margin-right: 30px;
+}
+.content__mainpart__product__header {
+    margin-left: 50px;
+}
+.content__mainpart__product__header__text {
+    font-size: 22px;
+    font-weight: bold;
+}
+.content__mainpart__product__description {
+    width: 400px;
+    padding: 10px;
+}
+.description_headers {
+    display: flex;
+    flex-direction: row;
+}
+.description_headers_text {
+    padding: 10px;
+}
+.description_container {
+    width: 85%;
+    background-color: #F1F1F1;
+    padding: 10px;
+}
+.desc_text {
+    padding: 10px;
+    margin-bottom: 25px;
+}
+.product_pane {
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    align-items: center;
+}
+.product_pane_price_text {
+    font-weight: bold;
+    margin-right: 10px;
+}
+.product_pane_buy_btn {
+    margin-left: 15%;
+}
+.product_pane_buy_btn_link {
+    padding: 1px 20px 3px 20px;
+    border-radius: 25px;
+    background-color: #007BFF;
+    color: #fff;
+    font-weight: bolder;
+    transition: all 0.3s;
+}
+.product_pane_buy_btn_link:hover {
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+}
+.product_pane_add_btn_link > img {
+    border-radius: 50px;
+    width: 30px;
+    margin-top: 7px;
+    margin-left: 10px;
+    transition: all 0.3s;
+}
+.product_pane_add_feedbck_btn_link > img {
+    width: 30px;
+    border-radius: 150px;
+    padding: 2px;
+    margin-top: 7px;
+    margin-left: 10px;
+    transition: all 0.3s;
+}
+.product_pane_add_btn_link > img:hover, .product_pane_add_feedbck_btn_link > img:hover{
+    box-shadow: 0px 2px 5px 1px;
+}
+.img__placeholder {
+    position: relative;
+    width: 400px;
+    height: 250px;
+    /*background-color: #C5C5C5;*/
+    color: #333333;
+}
+.img__placeholder__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.flag {
+    background-color: #F1F1F1;
+    transition: all 0.5s;
+}
