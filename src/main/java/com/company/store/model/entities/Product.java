@@ -3,7 +3,7 @@ package com.company.store.model.entities;
 
 import java.util.Map;
 
-public class Product {
+public class Product implements Comparable<Product>{
 
     private int product_id;
     private int parent_id;
@@ -78,5 +78,10 @@ public class Product {
                 "\n name: " + name +
                 "\n is category: " + isCategory +
                 (!isCategory ? "\n parameters: " + parameters.toString() : " ");
+    }
+
+    @Override
+    public int compareTo(Product o) {
+        return this.name.compareTo(o.getName());
     }
 }
