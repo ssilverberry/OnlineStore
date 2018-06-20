@@ -11,7 +11,6 @@
 <div class="sidebar col">
     <div class="list-group">
         <c:forEach var="category" items="${categoryList}">
-            <%--/*getCategoriesList(${category.id})*/--%>
             <a class="list-group-item list-group-item-action" href="productCategoriesId?category_id=${category.id}">
                     ${category.name}
             </a>

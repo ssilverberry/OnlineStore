@@ -113,7 +113,7 @@
         <jsp:include page="footer.jsp" flush="true" />
     </div>
 </div>
-<script async>
+<%--<script async>
     var signinElem = document.querySelector('.nav__signin');
     var basketElem = document.querySelector('.basket');
     var mainPartList = document.querySelector('.product_result_container');
@@ -196,7 +196,7 @@
         bool = true;
     }
 
-</script>
+</script>--%>
 </body>
 </html>
 <!--privet vsem-->
