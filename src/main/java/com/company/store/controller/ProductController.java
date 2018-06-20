@@ -53,11 +53,7 @@ public class ProductController {
 
     @RequestMapping("product")
     public ModelAndView productBy(@RequestParam("prod_id") int  product_id) {
-        Product productById = productDAO.getProductById(product_id);
-        ModelMap modelMap = new ModelMap();
-        modelMap.addAttribute("categories", productDAO.getCategories());
-        modelMap.addAttribute("product", productById);
-        return new ModelAndView("product", "products", modelMap);
+        return new ModelAndView("product", "product", productService.getProductById(product_id));
     }
 
     @RequestMapping(value = "categoryProducts")
