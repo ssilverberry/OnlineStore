@@ -21,7 +21,7 @@ public class ProductDAOImpl implements ProductDAO {
 
     private static final Logger log = LogManager.getLogger(ProductDAOImpl.class);
 
-    private static final String GET_CATEGORIES = "SELECT * FROM PRODUCTS WHERE ISCATEGORY = 1";
+    private static final String GET_CATEGORIES = "SELECT * FROM PRODUCTS WHERE ISCATEGORY = 1 AND PARENT_ID IS null";
 
     private static final String GET_PRODUCTS_FOR_CATEGORY = "SELECT * FROM PRODUCTS WHERE PARENT_ID = ?";
 
