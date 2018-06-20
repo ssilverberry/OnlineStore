@@ -21,7 +21,7 @@
 <jsp:include page="header.jsp" flush="true" />
 <div class="container-fluid" style="padding-top: 25px; min-height: 100vh; position: relative;">
     <div class="row container-row">
-        <div class="col-2">
+        <div class="col-2 pt-3">
             <div class="row">
                 <jsp:include page="sidebar.jsp"/> <br><br>
             </div>

@@ -12,7 +12,7 @@
 
 <div class="container-fluid" style="padding-top: 25px;">
     <div class="row container-row">
-        <div class="col-2">
+        <div class="col-2 pt-3">
             <div class="row">
                 <jsp:include page="sidebar.jsp"/>
             </div>
