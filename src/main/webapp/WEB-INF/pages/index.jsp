@@ -18,12 +18,16 @@
   <link rel="stylesheet" href="<c:url value="/resources/css/authorize.css" />">
   <link rel="stylesheet" href="<c:url value="/resources/css/content.css" />">
   <link rel="stylesheet" href="<c:url value="/resources/css/footer.css" />">
+  <link rel="stylesheet" href="<c:url value="/resources/css/sidebar.css"/>"/>
+
+  <script src="<c:url value="/resources/js/script.js"/>"></script>
+
   <title>NC Loft</title>
 </head>
 
-<jsp:include page="page.jsp" flush="true" />
+<body>
 
-<script src="<c:url value="/resources/js/script.js"/>"></script>
+  <jsp:include page="page.jsp" flush="true" />
+
 </body>
 </html>
-<!--privet vsem-->
