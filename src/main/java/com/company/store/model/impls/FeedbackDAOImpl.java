@@ -22,13 +22,15 @@ public class FeedbackDAOImpl implements FeedbackDAO {
 
     private static final String GET_ALL_FEEDBACK = "SELECT * FROM FEEDBACK";
     private static final String GET_FEEDBACK_BY_ID = "SELECT * FROM FEEDBACK WHERE FEEDBACK_ID = ?";
-    private static final String GET_ALL_FEEDBACK_FOR_USER = "SELECT FEEDBACK.*, USERS.USER_NAME FROM FEEDBACK " +
+    private static final String GET_ALL_USER_FEEDBACK = "SELECT FEEDBACK.*, USERS.USER_NAME FROM FEEDBACK " +
             "JOIN USERS ON USERS.USER_ID = FEEDBACK.USER_ID WHERE FEEDBACK.USER_ID=?";
 
-    private static final String GET_ALL_FEEDBACK_FOR_PRODUCT = "SELECT FEEDBACK.*, USERS.USER_NAME FROM FEEDBACK " +
-            "JOIN USERS ON USERS.USER_ID = FEEDBACK.USER_ID AND PRODUCT_ID=?";
+    private static final String GET_ALL_FEEDBACK_FOR_PRODUCT = "SELECT * FROM FEEDBACK WHERE product_id=?";
 
-    private static final String GET_FEEDBACK_BY_USER_FOR_PRODUCT = "SELECT * FROM FEEDBACK WHERE USER_ID = ? " +
+    private static final String GET_PRODUCT_RATING = "SELECT round(avg(feedback_raiting), 2) FROM feedback " +
+            "WHERE product_id=?";
+
+    private static final String GET_USER_FEEDBACK_ON_PRODUCT = "SELECT * FROM FEEDBACK WHERE USER_ID = ? " +
                                                                                             "AND PRODUCT_ID = ?";
 
     /**
@@ -74,6 +76,24 @@ public class FeedbackDAOImpl implements FeedbackDAO {
         return true;
     }
 
+    @Override
+    public float getProductRating(int product_id) {
+        float rating = 0;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement ps = connection.prepareStatement(GET_PRODUCT_RATING)){
+            ps.setInt(1, product_id);
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                rating = resultSet.getFloat(1);
+                System.out.println("RATING = " + rating);
+                log.debug("Product rating was received!");
+            }
+        } catch (SQLException e) {
+            log.error("Failed to receive product rating! ", e);
+        }
+        return rating;
+    }
+
     /**
      * Return all feedback, which store in database
      */
@@ -97,7 +117,7 @@ public class FeedbackDAOImpl implements FeedbackDAO {
      */
     @Override
     public Collection<Feedback> getAllFeedbackForUser(int user_id) {
-        Collection<Feedback> feedback = getFeedbackFor(user_id, GET_ALL_FEEDBACK_FOR_USER);
+        Collection<Feedback> feedback = getFeedbackFor(user_id, GET_ALL_USER_FEEDBACK);
         log.debug("Feedback list was received from database for user_id: " + user_id);
         return feedback;
     }
@@ -156,7 +176,7 @@ public class FeedbackDAOImpl implements FeedbackDAO {
     public Feedback getUserFeedbackOnProduct(int user_id, int product_id) {
         Feedback feedback = null;
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement ps = connection.prepareStatement(GET_FEEDBACK_BY_USER_FOR_PRODUCT)){
+             PreparedStatement ps = connection.prepareStatement(GET_USER_FEEDBACK_ON_PRODUCT)){
             ps.setInt(1, user_id);
             ps.setInt(2, product_id);
             ResultSet resultSet = ps.executeQuery();
