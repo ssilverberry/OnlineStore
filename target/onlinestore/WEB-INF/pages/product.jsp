@@ -20,22 +20,26 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/footer.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/product.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/css/content.css" />">
+
     <script src="<c:url value="/resources/js/jquery-3.3.1.min.js"/>"></script>
     <script src="<c:url value="/resources/js/testFeedback.js"/>"></script>
     <script src="<c:url value="/resources/js/testDescription.js"/>"></script>
 
     <title>Document</title>
 
-    <c:forEach var="map" items="${products}">
-        <c:if test="${'product'.equals(map.key)}">
-            <c:set var="product" value="${map.value}"/>
+</head>
+
+<c:if test="${product != null}">
+    <c:forEach var="item" items="${product}">
+        <c:if test="${'product'.equals(item.key)}">
+            <c:set var="prod" value="${item.value}"/>
         </c:if>
-        <c:if test="${'categories'.equals(map.key)}">
-            <c:set var="categs" value="${map.value}"/>
+        <c:if test="${'rating'.equals(item.key)}">
+            <c:set var="rating" value="${item.value}"/>
         </c:if>
     </c:forEach>
+</c:if>
 
-</head>
 <jsp:include page="header.jsp" flush="true" />
 <div class="container-fluid justify-content-center" style="min-height: 100vh; position: relative;">
 <div class="row">
@@ -47,13 +51,13 @@
         <div class="content__mainpart__product__photos">
             <div class="content__mainpart__product__header">
                 <p class="content__mainpart__product__header__text">
-                    ${product.name}
+                    ${prod.name}
                 </p>
             </div>
             <div class="content__mainpart__product__photos__img">
                 <div class="img__placeholder">
                     <p class="" style="object-fit:contain; width: 260px; margin: auto">
-                        <img src="<c:url value="/resources/images/products/${product.id}.jpg"/>"/>
+                        <img src="<c:url value="/resources/images/products/${prod.id}.jpg"/>"/>
                     </p>
                 </div>
             </div>
@@ -64,12 +68,13 @@
                     <a style="cursor: pointer" onclick="enableDescription();secondBgChangr()">Description</a>
                 </p>
                 <p class="description_headers_text">
-                    <a style="cursor: pointer" onclick="getFeedback(${product.id});bgChanger()">Feedback</a>
+                    <a style="cursor: pointer" onclick="getFeedback(${prod.id});bgChanger()">Feedback</a>
                 </p>
             </div>
             <div class="description_container" style="width: 100%;">
                 <div class="desc_text">
-                    <c:forEach var="item" items="${product.parameters}">
+                    <b>Rating: </b> <i style="margin-left: 20px">${rating}</i> <br><br>
+                    <c:forEach var="item" items="${prod.parameters}">
                         <c:if test="${!'Price'.equals(item.key.name)}">
                             ${item.key.name} : ${item.value.value} <br><br>
                         </c:if>

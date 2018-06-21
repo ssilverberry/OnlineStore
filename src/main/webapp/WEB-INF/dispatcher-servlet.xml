@@ -49,5 +49,7 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <bean id="productService" class="com.company.store.model.services.ProductService" lazy-init="true"/>
+
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 </beans>
