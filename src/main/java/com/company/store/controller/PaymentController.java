@@ -29,6 +29,10 @@ public class PaymentController {
     public String aboutus(){
         return "aboutus";
     }
+    @RequestMapping(value = "signup")
+    public String registration(){
+        return "registration";
+    }
 
     @RequestMapping(value = "paymentbyid")
     public ModelAndView paymentById(@RequestParam(value = "id") int id) {

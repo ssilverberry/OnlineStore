@@ -41,26 +41,4 @@
         <div class="nav-link user-name">Sign in</div>
     </div>
 </nav>
-<script>
-    var signIn = function () {
-        var signinElem = document.querySelector('.sign-link');
-        var authElem = document.querySelector('.auth-elem');
-        var closeElem = document.querySelector('.return');
-
-        function displayOn() {
-            authElem.style.visibility = 'visible';
-        }
-
-        function displayOff() {
-            authElem.style.visibility = 'hidden';
-        }
-        window.onload = function () {
-            authElem.style.visibility = 'hidden';
-        };
-        closeElem.addEventListener('click', displayOff);
-        signinElem.addEventListener('click', displayOn);
-    };
-    signIn();
-</script>
-<!--privet vsem-->
-
+<script src="<c:url value="/resources/js/header.js"/>" async></script>

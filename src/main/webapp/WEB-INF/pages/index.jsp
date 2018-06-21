@@ -22,7 +22,7 @@
 </head>
 
 <jsp:include page="page.jsp" flush="true" />
-
+<jsp:include page="cartbar.jsp"/>
 <script src="<c:url value="/resources/js/script.js"/>"></script>
 </body>
 </html>

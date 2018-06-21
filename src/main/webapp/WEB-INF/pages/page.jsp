@@ -26,6 +26,5 @@
     <div class="row align-content-center justify-content-center bg-light p-2 text-primary bg-secondary rounded">
         <jsp:include page="footer.jsp"/>
     </div>
-
 </div>
-<!--privet vsem-->
+
