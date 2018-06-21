@@ -5,12 +5,14 @@
   Time: 16:27
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="<c:url value="/resources/js/script.js"/>"></script>
+
+<c:set var="categs" value="${categoryList}" scope="application"/>
+
 <div class="sidebar col">
     <div class="list-group">
-        <c:forEach var="category" items="${categoryList}">
+        <c:forEach var="category" items="${categs}">
             <a class="list-group-item list-group-item-action" href="productCategoriesId?category_id=${category.id}">
                     ${category.name}
             </a>

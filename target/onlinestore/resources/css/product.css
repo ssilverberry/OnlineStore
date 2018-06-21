@@ -33,6 +33,7 @@
 .content__mainpart__product__description {
     width: 400px;
     padding: 10px;
+    transition: all 0.3s;
 }
 .description_headers {
     display: flex;
@@ -107,5 +108,4 @@
 }
 .flag {
     background-color: #F1F1F1;
-    transition: all 0.5s;
 }
