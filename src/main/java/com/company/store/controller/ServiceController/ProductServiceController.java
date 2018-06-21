@@ -1,4 +1,4 @@
-package com.company.store.controller;
+package com.company.store.controller.ServiceController;
 
 import com.company.store.model.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
