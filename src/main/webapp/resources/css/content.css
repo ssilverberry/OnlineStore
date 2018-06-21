@@ -94,7 +94,6 @@ a {
     align-items: center;
     margin-top: 74px;
     height: 265px;
-    border-left: solid 2px #707070;
     justify-content: space-between;
 }
 .content__mainpart__toprates__row {
@@ -138,7 +137,6 @@ a {
     align-items: center;
     margin-top: 74px;
     height: 265px;
-    border-left: solid 2px #707070;
     justify-content: space-between;
 }
 .content__sidebar__search__button {
