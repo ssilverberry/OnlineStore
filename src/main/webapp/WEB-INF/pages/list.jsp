@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="card-columns bg-gradient-secondary text-white">
                     <c:forEach var="product" items="${prodList}">
-                        <div class="card border-0 text-center shadow p-3 rounded cd">
+                        <div class="card border-0 text-center shadow p-3 rounded cd image-same-size">
                             <img src="<c:url value="/resources/images/products/${product.id}.jpg"/>" style="width: 80%;">
                             <div class="card-body">
                                 <a href="<c:url value="/product">

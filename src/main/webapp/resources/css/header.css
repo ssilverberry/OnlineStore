@@ -75,3 +75,10 @@ body {
     height: 100%;
     z-index: 3;
 }
+.image-same-size img{
+    max-height: 15vw;
+    min-height: 15vw;
+    max-width:15vw;
+    min-width: 15vw;
+    object-fit: scale-down;
+}

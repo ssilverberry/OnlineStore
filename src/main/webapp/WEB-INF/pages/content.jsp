@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="card-columns bg-gradient-secondary text-white">
-    <div class="card border-0 text-center shadow p-3 rounded cd">
+    <div class="card border-0 text-center shadow p-3 rounded cd image-same-size">
         <img src="<c:url value="/resources/images/products/1000003.jpg"/>" alt="macbook" style="width: 100%;">
         <div class="card-body">
             <a href="<c:url value="/product">
@@ -17,7 +17,7 @@
             </a>
         </div>
     </div>
-    <div class="card border-0 text-center shadow p-3 rounded cd">
+    <div class="card border-0 text-center shadow p-3 rounded cd image-same-size">
         <img src="<c:url value="/resources/images/products/1000007.jpg"/>" alt="macbook" class="cd-img">
         <div class="card-body">
             <a href="<c:url value="/product">
@@ -26,7 +26,7 @@
             </a>
         </div>
     </div>
-    <div class="card border-0 text-center shadow p-3 bg-white rounded cd">
+    <div class="card border-0 text-center shadow p-3 bg-white rounded cd image-same-size">
         <img src="<c:url value="/resources/images/products/1000008.jpg"/>" alt="macbook" class="cd-img">
         <div class="card-body">
             <a href="<c:url value="/product">
@@ -35,7 +35,7 @@
             </a>
         </div>
     </div>
-    <div class="card border-0 text-center shadow p-3 bg-white rounded cd">
+    <div class="card border-0 text-center shadow p-3 bg-white rounded cd image-same-size">
         <img src="<c:url value="/resources/images/products/1000008.jpg"/>" alt="macbook" class="cd-img">
         <div class="card-body">
             <a href="<c:url value="/product">
@@ -44,7 +44,7 @@
             </a>
         </div>
     </div>
-    <div class="card border-0 text-center shadow p-3 bg-white rounded cd">
+    <div class="card border-0 text-center shadow p-3 bg-white rounded cd image-same-size">
         <img src="<c:url value="/resources/images/products/1000008.jpg"/>" alt="macbook" class="cd-img">
         <div class="card-body">
             <a href="<c:url value="/product">
@@ -53,7 +53,7 @@
             </a>
         </div>
     </div>
-    <div class="card border-0 text-center shadow p-3 bg-white rounded cd">
+    <div class="card border-0 text-center shadow p-3 bg-white rounded cd image-same-size">
         <img src="<c:url value="/resources/images/products/1000003.jpg"/>" alt="macbook" style="width: 100%;">
         <div class="card-body">
             <a href="<c:url value="/product">
@@ -63,4 +63,3 @@
         </div>
     </div>
 </div>
-<!--privet vsem-->
