@@ -32,10 +32,10 @@
         <a class="nav-link" href="payDelive">Payment & Delievery</a>
     </div>
     <div class="nav-item">
-        <a class="nav-link" href="contacts">About us</a>
+        <a class="nav-link" href="aboutus">About us</a>
     </div>
     <div class="nav-item">
-        <a class="nav-link" href="aboutus">Contacts</a>
+        <a class="nav-link" href="contacts">Contacts</a>
     </div>
     <div class="nav-item sign-link" style="cursor: pointer;">
         <div class="nav-link user-name">Sign in</div>
