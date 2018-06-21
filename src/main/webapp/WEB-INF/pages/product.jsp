@@ -86,11 +86,17 @@
                         <div class="product_pane_price_text col-4">
                             Price: ${price} $
                         </div>
-                        <div class="col-4 text-center">
+                        <div class="col-3 text-center">
                             <a href="order" class="btn btn-primary rounded" style="width: 100px;">
                                 Buy
                             </a>
                         </div>
+                        <div class="col-3 text-center">
+                            <a href="#" class="rounded btn btn-block btn-success">
+                                <i class="fa fa-cart-plus" style="font-size: 22px;"></i>
+                            </a>
+                        </div>
+
                     </div>
                 </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">

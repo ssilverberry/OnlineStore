@@ -60,43 +60,55 @@
                 </div>
             </div>
         </div>
-        <div class="content__mainpart__product__description col-5 ml-auto">
-            <div class="description_headers">
-                <p class="description_headers_text flag">
-                    <a style="cursor: pointer" onclick="enableDescription();">Description</a>
-                </p>
-                <p class="description_headers_text">
-                    <a style="cursor: pointer" onclick="getFeedback(${prod.id});">Feedback</a>
-                </p>
-            </div>
-            <div class="description_container" style="width: 100%;">
-                <div class="desc_text">
+        <div class="content__mainpart__product__description col-5 ml-auto shadow rounded">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                       aria-controls="home" aria-selected="true">Description</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                       aria-controls="profile" aria-selected="false">Feedback</a>
+                </li>
+            </ul>
+            <div class="tab-content pt-3" id="myTabContent">
+                <div class="tab-pane fade show active " id="home" role="tabpanel" aria-labelledby="home-tab">
                     <b>Rating: </b> <i style="margin-left: 20px">${rating}</i> <br><br>
                     <c:forEach var="item" items="${prod.parameters}">
                         <c:if test="${!'Price'.equals(item.key.name)}">
-                            ${item.key.name} : ${item.value.value} <br><br>
+                            <span class="pb-2 pt-2">${item.key.name} : ${item.value.value}</span><br><br>
                         </c:if>
                         <c:if test="${'Price'.equals(item.key.name)}">
-                            <c:set var="price" value="${item.value.value}"/>
+                            <span class="pb-2 pt-2"><c:set var="price" value="${item.value.value}"/></span><br>
                         </c:if>
                     </c:forEach>
-                </div>
-                <div id="feedback_container" class="feedback_text display_none">
-                    Here is feedback !
-                </div>
-                <div class="product_pane">
-                    <div class="product_pane_price">
-                        <p class="product_pane_price_text">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="product_pane_price_text col-4">
                             Price: ${price} $
-                        </p>
+                        </div>
+                        <div class="col-3 text-center">
+                            <a href="order" class="btn btn-primary rounded" style="width: 100px;">
+                                Buy
+                            </a>
+                        </div>
+                        <div class="col-3 text-center">
+                            <a href="#" class="rounded btn btn-block btn-success">
+                                <i class="fa fa-cart-plus" style="font-size: 22px;"></i>
+                            </a>
+                        </div>
+
                     </div>
-                    <div class="product_pane_buy_btn">
-                        <a href="order" class="product_pane_buy_btn_link">
-                            Buy
-                        </a>
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Your feedback" aria-label="Feedback" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">Send it</button>
+                        </div>
                     </div>
                 </div>
             </div>
+
             </div>
         </div>
     </div>
@@ -108,4 +120,4 @@
 </div>
 </body>
 </html>
-
+<%--comment for issue close commit--%>

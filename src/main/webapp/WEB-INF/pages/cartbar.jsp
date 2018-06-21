@@ -50,6 +50,9 @@
             <span>Total (USD)</span>
             <strong>$20</strong>
         </li>
+        <li class="list-group-item d-flex justify-content-between">
+            <a href="order" class="btn btn-success">Pay</a>
+        </li>
     </ul>
 
     <%--<form class="card p-2">
@@ -107,6 +110,5 @@
             });
 
         });
-
     }
 </script>
