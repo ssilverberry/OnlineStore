@@ -12,7 +12,7 @@
         your cart <span class="badge badge-primary">3</span>
     </div>
 </div>
-<div class="col-3 order-md-2 mb-4 cartlist shadow-lg">
+<div class="col-3 order-md-2 mb-4 cartlist shadow-lg" style="background-color: #ffffff !important;">
     <h4 class="d-flex justify-content-between align-items-center mb-3">
         <span class="text-muted">Your cart</span>
         <span class="badge badge-secondary badge-pill">3</span>
@@ -51,18 +51,10 @@
             <strong>$20</strong>
         </li>
         <li class="list-group-item d-flex justify-content-between">
-            <a href="order" class="btn btn-success">Pay</a>
+            <a href="order" class="btn btn-success btn-block">Pay</a>
         </li>
     </ul>
 
-    <%--<form class="card p-2">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Promo code">
-            <div class="input-group-append">
-                <button type="submit" class="btn btn-secondary">Redeem</button>
-            </div>
-        </div>
-    </form>--%>
 </div>
 <style>
     body {
@@ -86,12 +78,13 @@
         right: -350px;
         top: 12rem;
         transition: all 1s;
-        z-index: 3;
+        z-index: 999;
     }
     .moveleft {
         visibility: visible;
         right: -15px;
         transition: all 1s;
+        z-index: 999;
     }
 
 </style>
