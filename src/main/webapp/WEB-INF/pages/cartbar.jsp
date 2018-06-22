@@ -7,8 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<div class="cartbar bg-dark rounded" onclick="showCartList()">
-    <div class="col cartText text-primary pb-1" onclick="showCartList()">
+<div class="cartbar bg-dark rounded">
+    <div class="col cartText text-primary pb-1">
         your cart <span class="badge badge-primary">3</span>
     </div>
 </div>
@@ -67,7 +67,7 @@
         transform: rotate(-90deg);
         transform-origin: 50% 50%;
         cursor: pointer;
-        z-index: 1;
+        z-index: 5;
     }
     .cartText {
         font-size: 18px;
@@ -78,27 +78,32 @@
         right: -350px;
         top: 12rem;
         transition: all 1s;
-        z-index: 999;
+        z-index: 5;
     }
     .moveleft {
         visibility: visible;
         right: -15px;
         transition: all 1s;
-        z-index: 999;
+        z-index: 5;
     }
 
 </style>
-<script async>
+<script>
+    var cartElem = document.querySelector('.cartbar');
+
+    cartElem.addEventListener('click', showCartList());
+
     function showCartList () {
         var cartListElem = document.querySelector('.cartlist');
         var cartbar = document.querySelector('.cartbar');
 
         cartbar.addEventListener('click', function() {
             cartListElem.classList.add('moveleft');
-
+            console.log('click');
             cartListElem.addEventListener('mouseleave', function() {
                 setTimeout(function() {
                     cartListElem.classList.remove('moveleft');
+                    console.log('move right');
                 }, 3000);
             });
 

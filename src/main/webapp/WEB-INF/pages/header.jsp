@@ -41,5 +41,5 @@
         <div class="nav-link user-name">Sign in</div>
     </div>
 </nav>
-<jsp:include page="cartbar.jsp"/>
 <script src="<c:url value="/resources/js/header.js"/>" async></script>
+<jsp:include page="cartbar.jsp"/>

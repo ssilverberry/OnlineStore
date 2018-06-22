@@ -14,8 +14,8 @@
     <title>Order</title>
 </head>
 <body class="bg-light">
-
-<div class="container">
+<jsp:include page="header.jsp"/>
+<div class="container" style="display: none;">
     <div class="py-5 text-center">
         <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
         <h2>Checkout form</h2>
@@ -230,7 +230,82 @@
         </ul>
     </footer>
 </div>
+<h1 class="col display-4 bg-dark text-white text-center pt-3">
+    Billing
+</h1>
+<div class="container" style="position: relative; min-height: 100vh;">
+    <div class="row justify-content-center">
+        <div class="col-4 my-4 mr-4 shadow">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Your cart</span>
+                <span class="badge badge-secondary badge-pill">3</span>
+            </h4>
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Product name</h6>
+                        <small class="text-muted">Brief description</small>
+                    </div>
+                    <span class="text-muted">$12</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Second product</h6>
+                        <small class="text-muted">Brief description</small>
+                    </div>
+                    <span class="text-muted">$8</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Third item</h6>
+                        <small class="text-muted">Brief description</small>
+                    </div>
+                    <span class="text-muted">$5</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                    <div class="text-success">
+                        <h6 class="my-0">Promo code</h6>
+                        <small>EXAMPLECODE</small>
+                    </div>
+                    <span class="text-success">-$5</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Total (USD)</span>
+                    <strong>$1820</strong>
+                </li>
+            </ul>
+        </div>
+        <div class="col-4 justify-content-center ml-4 my-4 shadow">
+            <form class="needs-validation">
+                <div>
+                    <label for="email2">Email address</label>
+                    <input type="email" class="form-control" id="email2" aria-describedby="emailHelp" placeholder="Enter email" required>
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div>
+                    <label for="fname">First Name</label>
+                    <input type="text" class="form-control" id="fname" placeholder="Enter firstname" required>
+                </div>
+                <div >
+                    <label for="lname">Last  Name</label>
+                    <input type="text" class="form-control" id="lname" placeholder="Enter lastname" required>
+                </div>
+                <div>
+                    <label for="phone">Phone</label>
+                    <input type="number" class="form-control" id="phone" placeholder="Enter phone" required>
+                </div>
+                <hr class="mb-4">
+                <div class="row justify-content-center">
+                    <button type="submit" class="btn btn-block btn-outline-primary col-3">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
+</div>
+<div class="row p-2 bg-light rounded justify-content-center text-primary" style="position: absolute;bottom: 0px; width: 100%;">
+    <jsp:include page="footer.jsp" flush="true" />
+</div>
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
@@ -261,6 +336,7 @@
         }, false);
     })();
 </script>
+
 </body>
 </html>
 <!--privet vsem-->
