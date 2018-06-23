@@ -19,15 +19,6 @@ public class ProductParameterController {
         this.productParameterDAO = productParameterDAO;
     }
 
-    @RequestMapping(value = "parambyproductandattrids")
-    public ModelAndView getParamByProductAndAttrIds(@RequestParam(value = "id") String id,
-                                                    @RequestParam (value = "attr_id") String attr_id) {
-        ProductParameter productParameter =
-                productParameterDAO.getParamByProductAndAttrIds(Integer.parseInt(id), Integer.parseInt(id));
-        return new ModelAndView("productparamandattribs",
-                "productParameter", productParameter);
-    }
-
     @RequestMapping(value = "saveparameter") // not have solution fo this boolean variable & object
     public ModelAndView saveParameter(ProductParameter productParam, boolean isUpdate) {
         productParameterDAO.saveParameter(productParam, isUpdate);
