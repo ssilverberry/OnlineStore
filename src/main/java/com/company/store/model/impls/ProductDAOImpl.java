@@ -22,10 +22,12 @@ public class ProductDAOImpl implements ProductDAO {
     private static final Logger log = LogManager.getLogger(ProductDAOImpl.class);
 
     private static final String GET_CATEGORIES = "SELECT * FROM PRODUCTS WHERE ISCATEGORY = 1 AND PARENT_ID IS null";
+    private static final String GET_SUBCATEGORIES = "SELECT * FROM PRODUCTS WHERE ISCATEGORY = 1 AND PARENT_ID IS not null";
 
     private static final String GET_PRODUCTS_FOR_CATEGORY = "SELECT * FROM PRODUCTS WHERE PARENT_ID = ?";
 
     private static final String GET_PRODUCT_BY_ID = "SELECT * FROM PRODUCTS WHERE PRODUCT_ID = ?";
+    private static final String GET_PRODUCT_BY_NAME = "SELECT * FROM PRODUCTS WHERE product_name = ?";
 
     private static final String GET_PARAMS_FOR_PRODUCT = "SELECT PRODUCTS_PARAMETERS.attr_id, " +
             "PRODUCTS_ATTRIBUTES.attribute_name, PRODUCTS_PARAMETERS.value FROM PRODUCTS_PARAMETERS " +
@@ -66,6 +68,23 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     /**
+     * returns subcategory from db
+     */
+    @Override
+    public Collection<Product> getSubcategories() {
+        Collection<Product> subcategories = new ArrayList<>();
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement ps = connection.prepareStatement(GET_SUBCATEGORIES)) {
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()){
+                subcategories.add(parseProduct(resultSet));
+            } log.debug("Subcategories was received from database!");
+        } catch (SQLException e) {
+            log.error("Failed to receive categories from database! ", e);
+        } return subcategories;
+    }
+
+    /**
      * return products for specify category
      */
     @Override
@@ -99,6 +118,25 @@ public class ProductDAOImpl implements ProductDAO {
             }
         } catch (SQLException e) {
             log.error("Failed to receive product by id: " + product_id, e);
+        } return product;
+    }
+
+    /**
+     * return product by specific name
+     */
+    @Override
+    public Product getProductByName(String productName) {
+        Product product = null;
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement ps = connection.prepareStatement(GET_PRODUCT_BY_NAME)) {
+            ps.setString(1, productName);
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()){
+                product = parseProduct(resultSet);
+                log.debug("Product was received  by name: " + productName);
+            }
+        } catch (SQLException e) {
+            log.error("Failed to receive product by name: " + productName, e);
         } return product;
     }
 
@@ -160,7 +198,9 @@ public class ProductDAOImpl implements ProductDAO {
              PreparedStatement ps = conn.prepareStatement(product_id != 0 ? UPDATE_PRODUCT : INSERT_PRODUCT)){
             ps.setInt(1, product.getParentId());
             ps.setString(2, product.getName());
-            ps.setInt(3, Integer.parseInt(String.valueOf(product.isCategory())));
+            if ("false".equalsIgnoreCase(String.valueOf(product.isCategory())))
+                ps.setInt(3, 0);
+            else ps.setInt(3, 1);
             if (product_id != 0){
                 ps.setInt(4, product_id);
             }

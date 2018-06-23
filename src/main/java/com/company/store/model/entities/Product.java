@@ -1,6 +1,8 @@
 package com.company.store.model.entities;
 
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 public class Product implements Comparable<Product>{
@@ -9,6 +11,7 @@ public class Product implements Comparable<Product>{
     private int parent_id;
     private String name;
     private Map<ProductAttribute, ProductParameter> parameters;
+    private List<ProductParameter> params;
     private boolean isCategory;
 
     public Product() {
@@ -27,7 +30,6 @@ public class Product implements Comparable<Product>{
         this.product_id = product_id;
         this.parent_id = parent_id;
         this.name = name;
-        this.isCategory = isCategory;
     }
 
     public int getId() {
@@ -70,14 +72,21 @@ public class Product implements Comparable<Product>{
         isCategory = category;
     }
 
+    public List<ProductParameter> getParams() {
+        return params;
+    }
+
+    public void setParams(List<ProductParameter> params) {
+        this.params = params;
+    }
+
     @Override
     public String toString() {
         return "Product: " +
                 "\n product_id: " + product_id +
                 "\n parent_id: " + parent_id +
                 "\n name: " + name +
-                "\n is category: " + isCategory +
-                (!isCategory ? "\n parameters: " + parameters.toString() : " ");
+                "\n is category: " + isCategory;
     }
 
     @Override
