@@ -127,7 +127,6 @@ public class ProductParameterDAOImpl implements ProductParameterDAO {
             connection.setAutoCommit(false);
             if (isUpdate) {
                 for (ProductParameter productParam : productParams) {
-                    ps.
                     ps.setInt(1, productParam.getAttrId());
                     ps.setString(2, productParam.getValue());
                     ps.setInt(3, productParam.getProductId());
