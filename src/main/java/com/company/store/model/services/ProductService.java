@@ -1,8 +1,12 @@
 package com.company.store.model.services;
 
+import com.company.store.model.dao.CategoryAttributeDAO;
 import com.company.store.model.dao.FeedbackDAO;
+import com.company.store.model.dao.ProductDAO;
+import com.company.store.model.dao.ProductParameterDAO;
 import com.company.store.model.entities.Product;
 import com.company.store.model.entities.ProductAttribute;
+import com.company.store.model.entities.ProductParameter;
 import com.company.store.model.impls.CategoryAttributeDAOImpl;
 import com.company.store.model.impls.FeedbackDAOImpl;
 import com.company.store.model.impls.ProductDAOImpl;
@@ -10,26 +14,25 @@ import com.company.store.model.impls.ProductDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.function.Consumer;
 
 @Component
 public class ProductService {
 
-    private final ProductDAOImpl productDAO;
-    private final CategoryAttributeDAOImpl categoryAttributeDAO;
-    private final FeedbackDAOImpl feedbackDAO;
+    private final ProductDAO productDAO;
+    private final CategoryAttributeDAO categoryAttributeDAO;
+    private final FeedbackDAO feedbackDAO;
+    private final ProductParameterDAO productParameterDAO;
 
     @Autowired
-    public ProductService(ProductDAOImpl productDAO, CategoryAttributeDAOImpl categoryAttributeDAO, FeedbackDAOImpl feedbackDAO) {
+    public ProductService(ProductDAOImpl productDAO, CategoryAttributeDAOImpl categoryAttributeDAO,
+                          FeedbackDAOImpl feedbackDAO, ProductParameterDAO productParameterDAO) {
         this.productDAO = productDAO;
         this.categoryAttributeDAO = categoryAttributeDAO;
         this.feedbackDAO = feedbackDAO;
+        this.productParameterDAO = productParameterDAO;
     }
 
     public Map<Product, Collection<Product>> getCategories() {
@@ -44,6 +47,18 @@ public class ProductService {
         return categories;
     }
 
+    public Map<Integer, String> getSubcategories(){
+        Collection<Product> subcategories = productDAO.getSubcategories();
+        Map<Integer, String> subcategMap = new TreeMap<>();
+        subcategories.forEach(new Consumer<Product>() {
+            @Override
+            public void accept(Product product) {
+                subcategMap.put(product.getId(), product.getName());
+            }
+        });
+        return subcategMap;
+    }
+
     public Collection<Product> getCategoryProducts(int category_id){
         return productDAO.getProductsForCategory(category_id);
     }
@@ -52,7 +67,7 @@ public class ProductService {
         return categoryAttributeDAO.getAttributesForCategory(category_id);
     }
 
-    public float getProductRating(int product_id){
+    private float getProductRating(int product_id){
         return feedbackDAO.getProductRating(product_id);
     }
 
@@ -62,4 +77,32 @@ public class ProductService {
         modelMap.addAttribute("rating", getProductRating(product_id));
         return modelMap;
     }
+
+    public Product getProduct (int product_id){
+        return productDAO.getProductById(product_id);
+    }
+
+    public boolean updateProduct(Product product){
+        return productDAO.saveProduct(product);
+    }
+
+    public boolean addProduct(Product product){
+        product.setId(0);
+        product.getParams().forEach(new Consumer<ProductParameter>() {
+            @Override
+            public void accept(ProductParameter productParameter) {
+                productParameterDAO.saveParameter(productParameter, false);
+            }
+        });
+        return productDAO.saveProduct(product);
+    }
+
+    public List<ProductParameter> getProductParams(int product_id){
+        return productParameterDAO.getProductParams(product_id);
+    }
+
+    public boolean saveProductParams(List<ProductParameter> productParams){
+        return productParameterDAO.saveParameters(productParams, true);
+    }
+
 }
