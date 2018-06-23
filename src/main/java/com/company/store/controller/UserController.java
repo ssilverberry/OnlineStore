@@ -58,7 +58,7 @@ public class UserController {
     public ModelAndView getByCredential(@RequestParam(value = "email") String email,
                                         @RequestParam(value = "password") String password) {
         User user = userDAO.getByCredentials(email, password);
-        return new ModelAndView("getByCredential", "user", user);
+        return new ModelAndView("index", "user", user);
     }
 
     @RequestMapping(value = "removeUser")
