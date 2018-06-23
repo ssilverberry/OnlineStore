@@ -61,10 +61,10 @@ public class UserController {
         return new ModelAndView("getById", "user", user);
     }
 
-    @RequestMapping(value = "getByCredential")
-    public ModelAndView getByCredential(@RequestParam(value = "email") String email,
+    /*@RequestMapping(value = "getByCredential")
+    /*public ModelAndView getByCredential(@RequestParam(value = "email") String email,
                                         @RequestParam(value = "password") String password) {
-        ModelAndView modelAndView = new ModelAndView("somePage");
+        ModelAndView modelAndView = new ModelAndView("");
         User user = new User(email, password);
 
         if (userService.isValid(user)){
@@ -73,7 +73,7 @@ public class UserController {
                     modelAndView.addObject("admin", user);
                     break;
                 case "user":
-                    modelAndView.addObject("user", user);
+                    modelAndView.addObject("index", user);
                     break;
             }
             return modelAndView;
@@ -81,7 +81,7 @@ public class UserController {
             modelAndView.setViewName("errorPage");
             return modelAndView;
         }
-    }
+    }*/
 
     @RequestMapping(value = "removeUser")
     public ModelAndView removeUser(@RequestParam(value = "id") int id) {

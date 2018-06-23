@@ -9,18 +9,17 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
+    <%--<script src="<c:url value="/resources/bootstrapjs/bootstrap.bundle.min.js"/>"></script>--%>
+    <script src="<c:url value="/resources/bootstrapjs/bootstrap.min.js"/>"></script>
     <link rel="stylesheet" href="<c:url value="/resources/bootstrapcss/bootstrap-reboot.min.css"/>">
     <link rel="stylesheet" href="<c:url value="/resources/bootstrapcss/bootstrap-grid.min.css"/>">
     <link rel="stylesheet" href="<c:url value="/resources/bootstrapcss/bootstrap.min.css"/>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="<c:url value="/resources/css/header.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/authorize.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/sidebar.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/page.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/footer.css"/>"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="<c:url value="/resources/bootstrapjs/bootstrap.bundle.min.js"/>"></script>
-    <script src="<c:url value="/resources/bootstrapjs/bootstrap.min.js"/>"></script>
-
 </head>
 <body>
 <jsp:include page="authorize.jsp"/>

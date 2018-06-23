@@ -11,7 +11,7 @@
 <jsp:include page="header.jsp" flush="true" />
 
 <div class="container-fluid" style="padding-top: 25px;">
-    <div class="row container-row">
+    <div class="row">
         <div class="col-2 pt-3">
             <div class="row">
                 <jsp:include page="sidebar.jsp"/>

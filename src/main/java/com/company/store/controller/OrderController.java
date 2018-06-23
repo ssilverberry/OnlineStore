@@ -75,4 +75,8 @@ public class OrderController {
     public String authorize() {
         return "authorize";
     }
+    @RequestMapping("admin")
+    public String asAdmin() {
+        return "admin";
+    }
 }
