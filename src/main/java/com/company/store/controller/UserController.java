@@ -2,9 +2,9 @@ package com.company.store.controller;
 
 import com.company.store.model.entities.User;
 import com.company.store.model.impls.UserDAOImpl;
+import com.company.store.model.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +15,13 @@ import java.util.Collection;
 public class UserController {
 
     private UserDAOImpl userDAO;
+    private final UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @Autowired
     public void setUserDAO(UserDAOImpl userDAO) {
         this.userDAO = userDAO;
@@ -57,8 +64,23 @@ public class UserController {
     @RequestMapping(value = "getByCredential")
     public ModelAndView getByCredential(@RequestParam(value = "email") String email,
                                         @RequestParam(value = "password") String password) {
-        User user = userDAO.getByCredentials(email, password);
-        return new ModelAndView("getByCredential", "user", user);
+        ModelAndView modelAndView = new ModelAndView("somePage");
+        User user = new User(email, password);
+
+        if (userService.isValid(user)){
+            switch (userService.validateUser(user)){
+                case "admin":
+                    modelAndView.addObject("admin", user);
+                    break;
+                case "user":
+                    modelAndView.addObject("user", user);
+                    break;
+            }
+            return modelAndView;
+        } else{
+            modelAndView.setViewName("errorPage");
+            return modelAndView;
+        }
     }
 
     @RequestMapping(value = "removeUser")
