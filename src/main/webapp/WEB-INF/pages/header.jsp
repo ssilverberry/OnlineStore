@@ -42,4 +42,3 @@
     </div>
 </nav>
 <script src="<c:url value="/resources/js/header.js"/>" async></script>
-<jsp:include page="cartbar.jsp"/>

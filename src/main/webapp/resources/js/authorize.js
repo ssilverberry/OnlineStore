@@ -19,7 +19,7 @@ function authorize () {
 
     if (mailElem.value === emailSS &
         pswrdElem.value === pswrdSS)
-        usernameElem.innerHTML = localStorage.getItem('fname') + ' ' + localStorage.getItem('sname');
+        usernameElem.innerHTML = fname + ' ' + sname;
     else
         usernameElem.innerHTML = 'unnamed user';
 

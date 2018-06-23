@@ -41,12 +41,15 @@
 </c:if>
 
 <jsp:include page="header.jsp" flush="true" />
-<div class="container-fluid justify-content-center" style="min-height: 100vh; position: relative;">
+<jsp:include page="cartbar.jsp"/>
+<div class="container-fluid justify-content-center" style="min-height: 100vh; position: relative; padding-top: 25px;">
 <div class="row">
-    <div class="col-2 pt-5">
-        <jsp:include page="sidebar.jsp" flush="true" />
+    <div class="col-2 pt-3">
+        <div class="row">
+            <jsp:include page="sidebar.jsp"/>
+        </div>
     </div>
-    <div class="col-9 pt-5">
+    <div class="col-9 pt-3">
         <div class="row">
         <div class="content__mainpart__product__photos col-5 ml-auto text-center align-items-center">
             <div class="content__mainpart__product__header text-center align-self-center">
