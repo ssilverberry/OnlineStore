@@ -6,6 +6,7 @@ function registration () {
     var secNameElem = document.querySelector('.secondname');
     var phoneElem = document.querySelector('.phone');
     var address = document.querySelector('.address');
+    var modal = document.querySelector('#modal');
 
     var request = new XMLHttpRequest();
 
@@ -25,10 +26,12 @@ function registration () {
 
     request.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            location.replace(window.location.hostname + "/");
+            myTextElem.innerHTML = request.statusText + request.responseText;
         } else {
-            myTextElem.innerHTML = request.statusText;
+            myTextElem.innerHTML = request.statusText + request.responseText;
         }
+        modal.modal('toggle');
+        //window.location.assign("/");
     };
-    console.log('Function executed.');
+
 }

@@ -21,13 +21,14 @@
                 </label>
             </div>
             <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
-            <a href="<c:url value="/signup"/>" class="btn btn-lg btn-dark btn-block">Sign up</a>
+            <a href="<c:url value="signup" />" class="btn btn-lg btn-dark btn-block">Sign up</a>
             <div class="justify-content-center return" style="padding-top: 1rem;">
                 <a style="cursor: pointer;">
                     Return to shop
                 </a>
             </div>
-            <div class="col bg-success text-white text-center info" style="visibility: hidden;">
+            <div class="col bg-success text-white text-center info" style="visibility: hidden; transition: all 0.3s;">
+
             </div>
         </form>
     </div>
