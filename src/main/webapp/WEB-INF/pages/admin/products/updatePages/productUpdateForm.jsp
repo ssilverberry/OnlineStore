@@ -48,15 +48,14 @@
 
             <spring:bind path="parentId">
                 <div class="form-group">
-                    <%--<label>Category</label>--%>
-                    <a href="<c:url value="/admin/changeProduct"/>">Category</a>
+                    <label>Category</label>
                     <form:select path="parentId" class="custom-select my-1 mr-sm-2" id="parent-id">
                         <form:options items="${categs}"/>
                     </form:select>
                 </div>
             </spring:bind>
 
-            <div class="form-row" style="">
+            <div class="form-row">
                 <div class="form-group" >
                     <div class="col">
                         <label>Attributes</label>

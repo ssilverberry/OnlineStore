@@ -30,7 +30,7 @@
     <div class="row pt-3">
         <div class="col=sm-1">
             <a class="btn btn-primary"  role="button"
-               href="#">
+               href="<c:url value="/admin/showCreateForm"/>">
                 CREATE A NEW PRODUCT <br>
             </a>
         </div>
@@ -49,7 +49,7 @@
     <script>
         $("select#category-id").change(function () {
             $.ajax({
-                url: "changeProduct",
+                url: "updateProduct/productList",
                 data: {categ_id: $(this).val()},
                 method: 'post',
                 success: function (data) {

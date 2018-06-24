@@ -12,9 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 public class ProductParameterDAOImpl implements ProductParameterDAO {
@@ -30,7 +29,8 @@ public class ProductParameterDAOImpl implements ProductParameterDAO {
      * Parameters in this order: PRODUCT_ID, ATTR_ID, VALUE
      */
     private static final String INSERT_PARAMETER = "INSERT INTO PRODUCTS_PARAMETERS VALUES (?, ?, ?)";
-    private static final String UPDATE_PARAMETER = "UPDATE PRODUCTS_PARAMETERS SET attr_id=?, value=? WHERE product_id=?";
+    private static final String UPDATE_PARAMETER = "UPDATE PRODUCTS_PARAMETERS SET value=? WHERE product_id=? " +
+            "AND attr_id=?";
     private static final String DELETE_PARAMETER_BY_PRODUCT_ID = "DELETE FROM PRODUCTS_PARAMETERS WHERE ATTRIBUTE_ID = ?";
 
     /**
@@ -54,32 +54,11 @@ public class ProductParameterDAOImpl implements ProductParameterDAO {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()){
                 prodParams.add(parseProdParam(resultSet));
-            } log.debug("Product params was received by product_id: " + product_id + "params: " + prodParams.toString());
+            } log.debug("Product params was received by product_id: " + product_id + "\nparams: " + prodParams.toString());
         } catch (SQLException e){
             log.error("getting parameter by product_id and attr_id was failed! ", e);
         } return prodParams;
     }
-
-    /**
-     * return parameter by id's of product and attribute.
-     */
-    /*@Override
-    public ProductParameter getParamByProductAndAttrIds(int product_id, int attr_id) {
-        ProductParameter prodParam = null;
-        try(Connection connection = dataSource.getConnection();
-            PreparedStatement ps = connection.prepareStatement(GET_PARAM_BY_PROD_AND_ATTR_ID)) {
-            ps.setInt(1, product_id);
-            ps.setInt(2, attr_id);
-            ResultSet resultSet = ps.executeQuery();
-            if (resultSet.next()){
-                prodParam = parseProdParam(resultSet);
-                log.debug("success received parameter by product_id: " + product_id + ", attr_id: " + attr_id);
-            }
-        } catch (SQLException e){
-            log.error("getting parameter by product_id and attr_id was failed! ", e);
-        } return prodParam;
-    }*/
-
 
     /**
      * parse parameter cortege to object ProductParameter.
@@ -103,9 +82,9 @@ public class ProductParameterDAOImpl implements ProductParameterDAO {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(isUpdate ? UPDATE_PARAMETER : INSERT_PARAMETER)){
             if (isUpdate) {
-                ps.setInt(1, productParam.getAttrId());
-                ps.setString(2, productParam.getValue());
-                ps.setInt(3, productParam.getProductId());
+                ps.setString(1, productParam.getValue());
+                ps.setInt(2, productParam.getProductId());
+                ps.setInt(3, productParam.getAttrId());
             } else {
                 ps.setInt(1, productParam.getProductId());
                 ps.setInt(2, productParam.getAttrId());
@@ -121,35 +100,43 @@ public class ProductParameterDAOImpl implements ProductParameterDAO {
     }
 
     @Override
-    public boolean saveParameters(List<ProductParameter> productParams, boolean isUpdate) {
+    public boolean updateParameters(List<ProductParameter> productParams) {
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement ps = connection.prepareStatement(isUpdate ? UPDATE_PARAMETER : INSERT_PARAMETER)){
+             PreparedStatement ps = connection.prepareStatement(UPDATE_PARAMETER)) {
             connection.setAutoCommit(false);
-            if (isUpdate) {
-                for (ProductParameter productParam : productParams) {
-                    ps.setInt(1, productParam.getAttrId());
-                    ps.setString(2, productParam.getValue());
-                    ps.setInt(3, productParam.getProductId());
-                    ps.addBatch();
-                    ps.clearParameters();
-                }
-            } else {
-                for (ProductParameter productParam : productParams) {
-                    ps.setInt(1, productParam.getProductId());
-                    ps.setInt(2, productParam.getAttrId());
-                    ps.setString(3, productParam.getValue());
-                    ps.addBatch();
-                }
+            for (ProductParameter productParam : productParams) {
+                ps.setString(1, productParam.getValue());
+                ps.setInt(2, productParam.getProductId());
+                ps.setInt(3, productParam.getAttrId());
+                ps.addBatch();
             }
             ps.executeBatch();
-            System.out.println("INSERTED ROWS: " + ps.executeBatch().length);
             connection.commit();
             log.debug("Parameters was saved into database! param: " + productParams.toString());
         } catch (SQLException e) {
             log.error("Failed to save parameters into database! param: " + productParams.toString(), e);
             return false;
-        }
-        return true;
+        } return true;
+    }
+
+    @Override
+    public boolean addParameters(List<ProductParameter> productParams) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement ps = connection.prepareStatement(INSERT_PARAMETER)){
+            connection.setAutoCommit(false);
+            for (ProductParameter productParam : productParams) {
+                ps.setInt(1, productParam.getProductId());
+                ps.setInt(2, productParam.getAttrId());
+                ps.setString(3, productParam.getValue());
+                ps.addBatch();
+            }
+            ps.executeBatch();
+            connection.commit();
+            log.debug("Parameters was saved into database! param: " + productParams.toString());
+        } catch (SQLException e) {
+            log.error("Failed to save parameters into database! param: " + productParams.toString(), e);
+            return false;
+        } return true;
     }
 
     /**

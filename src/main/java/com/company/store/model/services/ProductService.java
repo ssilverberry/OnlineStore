@@ -102,7 +102,15 @@ public class ProductService {
     }
 
     public boolean saveProductParams(List<ProductParameter> productParams){
-        return productParameterDAO.saveParameters(productParams, true);
+        return productParameterDAO.updateParameters(productParams);
+    }
+
+    public boolean saveProductParams(ProductParameter productParameter, boolean isUpdate){
+        return productParameterDAO.saveParameter(productParameter, isUpdate);
+    }
+
+    public boolean deleteProduct(int prod_id){
+        return productDAO.removeProduct(prod_id);
     }
 
 }
