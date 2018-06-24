@@ -72,9 +72,11 @@ public class UserController {
             switch (userService.validateUser(user)){
                 case "admin":
                     modelAndView.addObject("admin", user);
+                    modelAndView.setViewName("redirect:/admin/mainPage");
                     break;
                 case "user":
                     modelAndView.addObject("index", user);
+                    modelAndView.setViewName("redirect:/");
                     break;
             }
             return modelAndView;
