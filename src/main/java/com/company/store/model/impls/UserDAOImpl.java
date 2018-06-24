@@ -76,8 +76,8 @@ public class UserDAOImpl implements UserDAO {
             ps.setString(5, user.getPassword());
             ps.setString(6, user.getAddress());
             if ("false".equalsIgnoreCase(String.valueOf(user.getIsAdmin())))
-                ps.setInt(3, 0);
-            else ps.setInt(3, 1);
+                ps.setInt(7, 0);
+            else ps.setInt(7, 1);
             if (user.getId() != 0){
                 ps.setInt(8, user.getId());
             }
