@@ -18,10 +18,6 @@
                    href="<c:url value="/admin/productsOperations"/>">
                     PRODUCTS
                 </a>
-                <a class="btn btn-light"  role="button"
-                   href="#">
-                    CATEGORIES
-                </a>
             </div>
         </div>
     </div>
