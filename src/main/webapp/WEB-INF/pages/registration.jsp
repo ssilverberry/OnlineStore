@@ -26,7 +26,7 @@
 <body>
 <div class="text-center">
     <div class="overlay-auth-elem auth-elem " style="background-color: #f5f5f5;">
-        <form class="form-signin margin-auto margin-top-5 bg-light" onclick="registration()" style="width: 18rem; box-shadow: 0px 0px 5px #c5c5c5; padding: 1rem;">
+        <form class="form-signin margin-auto margin-top-5 bg-light" onsubmit="registration()" style="width: 18rem; box-shadow: 0px 0px 5px #c5c5c5; padding: 1rem;">
             <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
 
             <label for="inputEmail" class="sr-only ">Email address</label>
@@ -47,7 +47,7 @@
             <label for="inputAddress" class="sr-only">Phone</label>
             <input type="text" id="inputAddress" class="form-control mb-2 address" placeholder="Address" required>
 
-            <a class="btn btn-lg btn-success btn-block mb-2" href="#" onsubmit="registration()">Submit</a>
+            <a class="btn btn-lg btn-success btn-block mb-2" href="<c:url value="/"/>" onsubmit="registration()">Submit</a>
             <div class="justify-content-center return" style="padding-top: 1rem;">
                 <a style="cursor: pointer;" href="<c:url value="/"/>">
                     Return to shop

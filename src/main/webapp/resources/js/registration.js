@@ -25,11 +25,9 @@ function registration () {
 
     request.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            //console.log (usr + ' ' + pswrd + ' ' + mail);
-            //myTextElem.innerHTML = request.responseText + ' ' + request.statusText;
-            window.location.replace();
+            location.replace(window.location.hostname + "/");
         } else {
-            myTextElem.innerHTML = request.responseText + ' ' + request.statusText;
+            myTextElem.innerHTML = request.statusText;
         }
     };
     console.log('Function executed.');
