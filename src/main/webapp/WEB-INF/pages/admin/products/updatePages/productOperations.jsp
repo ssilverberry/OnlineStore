@@ -34,6 +34,7 @@
     <div class="form-group pt-1">
         <label for="category-id">Category</label>
         <select class="custom-select my-1 mr-sm-2" name="categories" id="category-id" >
+                <option selected> Choose a category </option>
             <c:forEach var="item" items="${categories}">
                 <option value="${item.key}">${item.value}</option>
             </c:forEach>
