@@ -12,21 +12,16 @@
 
 <div class="container-fluid" style="min-height: 100vh; position: relative; padding-top: 25px;">
     <div class="row">
-        <div class="col-3 pt-3">
-            <div class="dropdown dropright">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <i class="fa fa-cogs"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                    <button class="dropdown-item" type="button">Action</button>
-                    <button class="dropdown-item" type="button">Another action</button>
-                    <button class="dropdown-item" type="button">Something else here</button>
-                </div>
-            </div>
-        </div>
         <div class="col-9">
-            <div class="row">
-
+            <div class="row" style="margin-left: 200px">
+                <a class="btn btn-light"  role="button"
+                   href="<c:url value="/admin/changeProduct"/>">
+                    PRODUCTS
+                </a>
+                <a class="btn btn-light"  role="button"
+                   href="<c:url value="/admin/changeProduct"/>">
+                    CATEGORIES
+                </a>
             </div>
         </div>
     </div>
