@@ -41,9 +41,10 @@ public class UserController {
         user.setPhone(phone);
         user.setPassword(password);
         user.setAddress(address);
+        System.out.println(user.toString());
         Boolean add = userDAO.saveUser(user);
-        if(add==true){
-        return new ModelAndView("saveUser");
+        if(add){
+            return new ModelAndView("index", "user", user);
         }else
             return new ModelAndView("noUserSave");
     }
@@ -61,10 +62,10 @@ public class UserController {
         return new ModelAndView("getById", "user", user);
     }
 
-    /*@RequestMapping(value = "getByCredential")
-    /*public ModelAndView getByCredential(@RequestParam(value = "email") String email,
+    @RequestMapping(value = "getByCredential")
+    public ModelAndView getByCredential(@RequestParam(value = "email") String email,
                                         @RequestParam(value = "password") String password) {
-        ModelAndView modelAndView = new ModelAndView("");
+        ModelAndView modelAndView = new ModelAndView("somePage");
         User user = new User(email, password);
 
         if (userService.isValid(user)){
@@ -81,7 +82,7 @@ public class UserController {
             modelAndView.setViewName("errorPage");
             return modelAndView;
         }
-    }*/
+    }
 
     @RequestMapping(value = "removeUser")
     public ModelAndView removeUser(@RequestParam(value = "id") int id) {

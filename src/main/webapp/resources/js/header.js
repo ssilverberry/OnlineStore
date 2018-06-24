@@ -28,8 +28,9 @@ var signIn = function () {
 };
 signIn();
 
+/*
 window.onload = function () {
     var usernameElem = document.querySelector('.user-name');
     if (localStorage.getItem('fname'))
         usernameElem.innerHTML = localStorage.getItem('fname') + ' ' + localStorage.getItem('sname');
-};
+};*/

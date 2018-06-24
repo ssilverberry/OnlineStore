@@ -23,6 +23,9 @@
 </head>
 <body>
 <jsp:include page="authorize.jsp"/>
+<c:if test = "${user != null}">
+    <c:set var = "user" value = "${user}"/>
+</c:if>
 <nav class="nav justify-content-center custom-nav-shadow bg-dark font-color-white">
     <div class="nav-item align-self-center">
         <a class="nav-link navbar-brand active" href="<c:url value="/"/>">Shop</a>
@@ -37,7 +40,10 @@
         <a class="nav-link" href="contacts">Contacts</a>
     </div>
     <div class="nav-item sign-link" style="cursor: pointer;">
-        <div class="nav-link user-name">Sign in</div>
+        <div class="nav-link user-name">Sign in
+            <c:out value = "${user}"/>
+         </div>
+
     </div>
 </nav>
 <script src="<c:url value="/resources/js/header.js"/>" async></script>

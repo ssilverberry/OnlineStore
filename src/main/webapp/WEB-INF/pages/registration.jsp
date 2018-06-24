@@ -47,7 +47,7 @@
             <label for="inputAddress" class="sr-only">Phone</label>
             <input type="text" id="inputAddress" class="form-control mb-2 address" placeholder="Address" required>
 
-            <a class="btn btn-lg btn-success btn-block mb-2" href="<c:url value="/"/>">Submit</a>
+            <a class="btn btn-lg btn-success btn-block mb-2" href="#" onsubmit="registration()">Submit</a>
             <div class="justify-content-center return" style="padding-top: 1rem;">
                 <a style="cursor: pointer;" href="<c:url value="/"/>">
                     Return to shop

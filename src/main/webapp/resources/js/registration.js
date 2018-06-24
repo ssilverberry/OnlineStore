@@ -9,21 +9,16 @@ function registration () {
 
     var request = new XMLHttpRequest();
 
-    var usrReqStr = 'usr=' + username.value;
+    var usrReqStr = 'name=' + username.value;
     var pswrdReqStr = '&password=' + password.value;
     var mailReqStr = '&email=' + email.value;
     var secNameReqStr = '&surname=' + secNameElem.value;
     var phoneReqStr = '&phone=' + phoneElem.value;
     var adrReqStr = '&address=' + address.value;
-    var requestString = 'registration?' + usrReqStr + pswrdReqStr + mailReqStr +
+    var requestString = 'saveUser?' + usrReqStr + pswrdReqStr + mailReqStr +
         secNameReqStr + phoneReqStr + adrReqStr;
 
     myTextElem.innerHTML = username.value + ' ' + password.value + ' ' + email.value;
-
-    localStorage.setItem('fname', String(username.value));
-    localStorage.setItem('sname', String(secNameElem.value));
-    localStorage.setItem('email', String(email.value));
-    localStorage.setItem('pswrd', String(password.value));
 
     request.open('get', requestString, true);
     request.send();
@@ -31,7 +26,10 @@ function registration () {
     request.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
             //console.log (usr + ' ' + pswrd + ' ' + mail);
-            myTextElem.innerHTML = request.responseText;
+            //myTextElem.innerHTML = request.responseText + ' ' + request.statusText;
+            window.location.replace();
+        } else {
+            myTextElem.innerHTML = request.responseText + ' ' + request.statusText;
         }
     };
     console.log('Function executed.');
