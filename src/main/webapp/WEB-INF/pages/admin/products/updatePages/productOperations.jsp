@@ -29,10 +29,6 @@
 <body style="margin-left: 300px; margin-right: 300px; margin-top: 50px ">
     <div class="row pt-3">
         <div class="col=sm-1">
-            <a class="btn btn-primary"  role="button"
-               href="<c:url value="/admin/showCreateForm"/>">
-                CREATE A NEW PRODUCT <br>
-            </a>
         </div>
     </div>
     <div class="form-group pt-1">
