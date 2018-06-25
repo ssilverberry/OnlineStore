@@ -31,13 +31,13 @@
         <a class="nav-link navbar-brand active" href="<c:url value="/"/>">Shop</a>
     </div>
     <div class="nav-item">
-        <a class="nav-link" href="payDelive">Payment & Delievery</a>
+        <a class="nav-link" href="<c:url value="/payDelive"/> ">Payment & Delievery</a>
     </div>
     <div class="nav-item">
-        <a class="nav-link" href="aboutus">About us</a>
+        <a class="nav-link" href="<c:url value="/aboutus"/>">About us</a>
     </div>
     <div class="nav-item">
-        <a class="nav-link" href="contacts">Contacts</a>
+        <a class="nav-link" href="<c:url value="/contacts"/>">Contacts</a>
     </div>
     <div class="nav-item sign-link" style="cursor: pointer;">
         <div class="nav-link user-name">Sign in
