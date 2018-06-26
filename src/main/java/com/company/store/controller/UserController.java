@@ -57,6 +57,7 @@ public class UserController {
             modelAndView.setViewName("errorPage");
             return modelAndView;
         }
+        /*comment for git*/
     }
 
     @RequestMapping(value = "/signup")
