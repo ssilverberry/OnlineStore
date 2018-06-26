@@ -65,7 +65,7 @@ public class UserController {
     @RequestMapping(value = "getByCredential")
     public ModelAndView getByCredential(@RequestParam(value = "email") String email,
                                         @RequestParam(value = "password") String password) {
-        ModelAndView modelAndView = new ModelAndView("somePage");
+        ModelAndView modelAndView = new ModelAndView("index");
         User user = new User(email, password);
 
         if (userService.isValid(user)){
@@ -89,7 +89,7 @@ public class UserController {
     @RequestMapping(value = "removeUser")
     public ModelAndView removeUser(@RequestParam(value = "id") int id) {
        Boolean up = userDAO.removeUser(id);
-        if(up == true){
+        if(up){
             return new ModelAndView("removeUser");
         }
         else

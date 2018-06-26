@@ -1,4 +1,5 @@
 function authorize () {
+    //event.preventDefault();
     var mailElem = document.querySelector('.email');
     var pswrdElem = document.querySelector('.pswrd');
     var infoElem = document.querySelector('.info');
@@ -16,10 +17,11 @@ function authorize () {
 
     request.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            infoElem.innerHTML = request.statusText + ' ' + mailReqStr + ' ' + pswrdReqStr;
+            infoElem.innerHTML = request.statusText + ' ' + requestStr;
         } else {
-            infoElem.innerHTML = request.statusText + ' ' + mailReqStr + ' ' + pswrdReqStr;
+            infoElem.innerHTML = request.statusText + ' ' + requestStr;
         }
+        document.body.innerHTML = request.responseText;
     };
 
 }

@@ -1,4 +1,5 @@
 function registration () {
+    //event.preventDefault();
     var username = document.querySelector('.username');
     var password = document.querySelector('.pswrd');
     var email = document.querySelector('.mail');
@@ -16,8 +17,8 @@ function registration () {
     var secNameReqStr = '&surname=' + secNameElem.value;
     var phoneReqStr = '&phone=' + phoneElem.value;
     var adrReqStr = '&address=' + address.value;
-    var requestString = 'saveUser?' + usrReqStr + pswrdReqStr + mailReqStr +
-        secNameReqStr + phoneReqStr + adrReqStr;
+    var requestString = 'saveUser?' + usrReqStr + secNameReqStr +  mailReqStr +
+         phoneReqStr + pswrdReqStr + adrReqStr;
 
     myTextElem.innerHTML = username.value + ' ' + password.value + ' ' + email.value;
 
@@ -26,12 +27,12 @@ function registration () {
 
     request.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            myTextElem.innerHTML = request.statusText + request.responseText;
+            myTextElem.innerHTML = requestString + ' ' + request.statusText + ' ';
         } else {
-            myTextElem.innerHTML = request.statusText + request.responseText;
+            myTextElem.innerHTML = requestString + ' ' + request.statusText + ' ';
         }
-        modal.modal('toggle');
-        //window.location.assign("/");
-    };
 
+        // window.location.assign("./");
+        document.body.innerHTML = request.responseText;
+    };
 }

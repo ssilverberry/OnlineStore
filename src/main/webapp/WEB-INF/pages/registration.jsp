@@ -27,7 +27,7 @@
 <jsp:include page="modal.jsp" flush="true" />
 <div class="text-center">
     <div class="overlay-auth-elem auth-elem " style="background-color: #f5f5f5;">
-        <form class="form-signin margin-auto margin-top-5 bg-light"  style="width: 18rem; box-shadow: 0px 0px 5px #c5c5c5; padding: 1rem;">
+        <form class="form-signin margin-auto margin-top-5 bg-light" style="width: 18rem; box-shadow: 0px 0px 5px #c5c5c5; padding: 1rem;">
             <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
 
             <label for="inputEmail" class="sr-only ">Email address</label>
@@ -48,8 +48,7 @@
             <label for="inputAddress" class="sr-only">Phone</label>
             <input type="text" id="inputAddress" class="form-control mb-2 address" placeholder="Address" required>
 
-            <a class="btn btn-lg btn-success btn-block mb-2" role="button" href="<c:url value="/"/>"
-               data-toggle="modal" data-target="#exampleModal" onclick="registration()">Submit</a>
+            <a class="btn btn-lg btn-success btn-block mb-2" href="#" onclick="registration()">Submit</a>
 
             <div class="justify-content-center return" style="padding-top: 1rem;">
                 <a style="cursor: pointer;" href="<c:url value="/"/>">
@@ -58,30 +57,6 @@
             </div>
             <div class="mytext col"><i>debug text</i></div>
         </form>
-        <div class="col-3">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Launch demo modal
-            </button>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 <script src="<c:url value="/resources/js/registration.js"/>" async></script>
