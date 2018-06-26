@@ -15,12 +15,8 @@
         <div class="col-9">
             <div class="row" style="margin-left: 200px">
                 <a class="btn btn-light"  role="button"
-                   href="<c:url value="/admin/changeProduct"/>">
+                   href="<c:url value="/admin/productsOperations"/>">
                     PRODUCTS
-                </a>
-                <a class="btn btn-light"  role="button"
-                   href="<c:url value="/admin/changeProduct"/>">
-                    CATEGORIES
                 </a>
             </div>
         </div>

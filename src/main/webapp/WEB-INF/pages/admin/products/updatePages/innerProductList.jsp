@@ -25,7 +25,7 @@
             </div>
             <div class="col-sm-1">
                 <a class="btn btn-danger"  role="button"
-                   href="<c:url value="/admin/showUpdateForm"><c:param name="prod_id" value="${item.id}"/></c:url>">
+                   href="<c:url value="/admin/deleteProduct"><c:param name="prod_id" value="${item.id}"/></c:url>">
                     DELETE
                 </a>
             </div>

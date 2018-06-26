@@ -1,6 +1,8 @@
 package com.company.store.controller;
 
 import com.company.store.model.entities.Product;
+import com.company.store.model.entities.ProductAttribute;
+import com.company.store.model.entities.ProductParameter;
 import com.company.store.model.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -21,6 +25,7 @@ public class AdminController {
         this.productService = productService;
     }
 
+    //WORKS
     @RequestMapping(value = "/mainPage")
     public String getMainPage() {
         return "admin";
@@ -30,14 +35,32 @@ public class AdminController {
     public String showCreateForm(Model model) {
         model.addAttribute("categories", productService.getSubcategories());
         model.addAttribute("product", new Product());
-        return "admin/createProduct";
+        return "admin/products/createPages/createProduct";
+    }
+
+
+    @RequestMapping(value = "/createProduct/categoryAttrs", method = RequestMethod.POST)
+    public @ResponseBody ModelAndView getAttrsList(@RequestParam("categ_id") int id, Model model) {
+        Collection<ProductAttribute> attributes = productService.getCategoryFilters(id);
+        List<ProductParameter> parameters = new ArrayList<>();
+        for (ProductAttribute attribute : attributes){
+            ProductParameter productParameter = new ProductParameter();
+            productParameter.setAttrId(attribute.getAttrId());
+            parameters.add(productParameter);
+        }
+        Product product = new Product();
+        product.setParams(parameters);
+        model.addAttribute("attrsList", attributes);
+        model.addAttribute("paramList", parameters);
+        model.addAttribute("product", product);
+        return new ModelAndView("admin/products/createPages/innerAttrsList");
     }
 
     @RequestMapping(value = "showAttrs", method = RequestMethod.GET)
     public String setProductCategory(@ModelAttribute("product") Product product, Model model){
         model.addAttribute("attributes", productService.getCategoryFilters(product.getParentId()));
         model.addAttribute("params", new ArrayList<>());
-        return "admin/product";
+        return "admin/products/productInfo";
     }
 
     // WORKS
@@ -48,7 +71,7 @@ public class AdminController {
         model.addAttribute("product", product);
         model.addAttribute("attrs", productService.getCategoryFilters(product.getParentId()));
         model.addAttribute("categs", productService.getSubcategories());
-        return "admin/products/productUpdateForm";
+        return "admin/products/updatePages/productUpdateForm";
     }
 
     // WORKS
@@ -57,42 +80,39 @@ public class AdminController {
         product.setCategory(false);
         if (productService.updateProduct(product)) {
             productService.saveProductParams(product.getParams());
-            return "redirect:/product?prod_id=" + product.getId();
+            return "redirect:/admin/products/?prod_id=" + product.getId();
         } else return null;
     }
 
-    @RequestMapping(value = "/products/{id}", method = RequestMethod.GET)
-    public String showUser(@PathVariable("id") int id, Model model) {
-        Product product = productService.getProduct(id);
-        model.addAttribute("prod", product);
-        return "admin/product";
-    }
-
-    //test
+    //WORKS
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     public String getUser(@RequestParam("prod_id") int id, Model model) {
         Product product = productService.getProduct(id);
         model.addAttribute("prod", product);
-        return "admin/product";
+        return "admin/products/productInfo";
     }
 
-    @RequestMapping(value = "/changeProduct", method = RequestMethod.GET)
-    public String showUser(Model model) {
+    //WORKS
+    @RequestMapping(value = "/productsOperations", method = RequestMethod.GET)
+    public String showProdOperations(Model model) {
         model.addAttribute("categories", productService.getSubcategories());
         model.addAttribute("category", new Product());
-        return "admin/products/productOperations";
+        return "admin/products/updatePages/productOperations";
     }
 
-    @RequestMapping(value = "/changeProduct", method = RequestMethod.POST)
+    //WORKS
+    @RequestMapping(value = "/updateProduct/productList", method = RequestMethod.POST)
     public @ResponseBody ModelAndView getListByCategory(@RequestParam("categ_id") int id, Model model) {
         model.addAttribute("productList", productService.getCategoryProducts(id));
-        return new ModelAndView("admin/products/innerProductList");
+        return new ModelAndView("admin/products/updatePages/innerProductList");
     }
 
-    /*@RequestMapping(value = "getProductPage")
-    public String getProductPage(@RequestParam("id") int id, Model model) {
-        model.addAttribute("prod", productService.getProduct(id));
-        return "admin/product";
-    }*/
+    //works
+    @RequestMapping(value = "/deleteProduct", method = RequestMethod.POST)
+    public String deleteProduct(@RequestParam("prod_id") int id) {
+        if (productService.deleteProduct(id)){
+            return "redirect:/admin/productsOperations";
+        } else return "";
+    }
 
 }

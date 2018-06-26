@@ -23,21 +23,22 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="<c:url value="/resources/bootstrapjs/bootstrap.bundle.min.js"/>"></script>
         <script src="<c:url value="/resources/bootstrapjs/bootstrap.min.js"/>"></script>
+        <script src="<c:url value="/resources/js/jquery-3.3.1.min.js"/> "></script>
+
 </head>
-<body>
+<body style="margin-left: 300px; margin-top: 50px; margin-right: 300px;">
 <div>
-    <spring:url value="/admin/showAttrs" var="actionUrl"/>
+    <spring:url value="/admin/createProduct" var="actionUrl"/>
 
-    <form:form style="margin-left: 250px; margin-top: 50px; margin-right: 250px;"
-               action="${actionUrl}" method="get" modelAttribute="product">
+    <form:form action="${actionUrl}" method="get" modelAttribute="product">
 
-        <h4>Step 1 of 2: General info</h4> <br>
+        <h4>New data</h4> <br>
 
-        <label class="my-1 mr-2" for="parent-id">Category </label> <br>
+        <label class="my-1 mr-2" for="category-id">Category </label> <br>
 
         <spring:bind path="parentId">
             <div class="form-group">
-                <form:select path="parentId" class="custom-select my-1 mr-sm-2" id="parent-id">
+                <form:select path="parentId" class="custom-select my-1 mr-sm-2" id="category-id">
                     <form:options items="${categories}"/>
                 </form:select>
             </div>
@@ -50,43 +51,27 @@
             </div>
         </spring:bind> <br>
 
-        <%--<div class="form-group">
-                <label>Product parameters</label>
 
-                <c:forEach var="item" items="${attributes}">
-                    <div class="form-row">
-                        <div class="col pt-1">
-                            <input type="text" class="form-control" placeholder="${item.name}" readonly>
-                        </div>
-                        <spring:bind path="params">
-                            <div class="col pt-1">
-                                <form:input path="params" type="text" class="form-control" placeholder="enter value..."/>
-                            </div>
-                        </spring:bind>
-                    </div>
-                </c:forEach>
-         </div>--%>
-
-            <%--<div class="form-group">
-                <label>Product parameters</label>
-
-                <c:forEach var="item" items="${attributes}">
-                    <div class="form-row">
-                        <div class="col pt-1">
-                            <input type="text" class="form-control" placeholder="${item.name}" readonly>
-                        </div>
-                        <spring:bind path="params">
-                            <div class="col pt-1">
-                                <form:input path="params" type="text" class="form-control" placeholder="enter value..."/>
-                            </div>
-                        </spring:bind>
-                    </div>
-                </c:forEach>
-            </div>--%>
+            <div id="attrsParams"> </div>
 
         <button type="submit" class="btn btn-primary my-1" style="float: right">Next</button>
 
     </form:form>
 </div>
+
+
 </body>
 </html>
+
+<script>
+    $("select#category-id").change(function () {
+        $.ajax({
+            url: "createProduct/categoryAttrs",
+            data: {categ_id: $(this).val()},
+            method: 'post',
+            success: function (data) {
+                $('#attrsParams').html(data);
+            }
+        })
+    })
+</script>
