@@ -56,7 +56,9 @@ public class UserDAOImpl implements UserDAO {
             user.setPhone(resultSet.getString(5));
             user.setPassword(resultSet.getString(6));
             user.setAddress(resultSet.getString(7));
-            user.setIsAdmin(Boolean.parseBoolean(String.valueOf(resultSet.getInt(8))));
+            if ("1".equalsIgnoreCase(String.valueOf(resultSet.getInt(8))))
+                user.setIsAdmin(true);
+            else user.setIsAdmin(false);
         } catch (SQLException e) {
             log.error("Parsing of user was failed! ", e);
         } return user;

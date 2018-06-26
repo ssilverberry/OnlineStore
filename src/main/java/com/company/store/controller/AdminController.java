@@ -38,7 +38,6 @@ public class AdminController {
         return "admin/products/createPages/createProduct";
     }
 
-
     @RequestMapping(value = "/createProduct/categoryAttrs", method = RequestMethod.POST)
     public @ResponseBody ModelAndView getAttrsList(@RequestParam("categ_id") int id, Model model) {
         Collection<ProductAttribute> attributes = productService.getCategoryFilters(id);
@@ -115,4 +114,33 @@ public class AdminController {
         } else return "";
     }
 
+    //WORKS
+    @RequestMapping(value = "/categoriesOperations", method = RequestMethod.GET)
+    public String showCategsOperations(Model model) {
+        model.addAttribute("categories", productService.getCategories());
+        return "admin/categories/categoriesOperations";
+    }
+
+    //WORKS
+    @RequestMapping(value = "/createCategoryForm", method = RequestMethod.GET)
+    public String showCreateCategForm(Model model) {
+        model.addAttribute("category", new Product());
+        return "admin/categories/createCategoryForm";
+    }
+
+    @RequestMapping(value = "/createCategory", method = RequestMethod.POST)
+    public String createCategory(@ModelAttribute("category") Product product) {
+        if (productService.addCategory(product)) {
+            return "redirect:/admin/categoriesOperations";
+        }
+        else return null;
+    }
+
+    @RequestMapping(value = "/deleteCategory")
+    public String deleteCategory(@RequestParam("category_id") int category_id) {
+        if (productService.deleteProduct(category_id)) {
+            return "redirect:/admin/categoriesOperations";
+        }
+        else return null;
+    }
 }

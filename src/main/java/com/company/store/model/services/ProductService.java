@@ -113,4 +113,8 @@ public class ProductService {
         return productDAO.removeProduct(prod_id);
     }
 
+    public boolean addCategory(Product product){
+        product.setCategory(true);
+        return productDAO.saveProduct(product);
+    }
 }
