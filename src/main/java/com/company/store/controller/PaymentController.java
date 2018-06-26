@@ -29,10 +29,6 @@ public class PaymentController {
     public String aboutus(){
         return "aboutus";
     }
-    @RequestMapping(value = "signup")
-    public String registration(){
-        return "registration";
-    }
 
     @RequestMapping(value = "paymentbyid")
     public ModelAndView paymentById(@RequestParam(value = "id") int id) {
@@ -51,8 +47,8 @@ public class PaymentController {
         payment.setType(type);
         payment.setPaid(isPaid);
         Boolean save = paymentDAO.savePayment(payment);
-        if(save == true){
-        return new ModelAndView("savepayment");
+        if(save){
+            return new ModelAndView("savepayment");
         }else
             return new ModelAndView("nosave");
     }
@@ -60,7 +56,7 @@ public class PaymentController {
     @RequestMapping(value = "paymentremove")
     public ModelAndView paymentremove(@RequestParam(value = "id") int id) {
         boolean rem = paymentDAO.removePayment(id);
-        if (rem == true) {
+        if (rem) {
             return new ModelAndView("paymentremove");
         } else
             return new ModelAndView("notRemove");

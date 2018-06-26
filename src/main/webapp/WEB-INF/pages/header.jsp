@@ -22,12 +22,11 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/footer.css"/>"/>
 </head>
 <body>
-<jsp:include page="authorize.jsp"/>
 <c:if test = "${user != null}">
     <c:set var = "user" value = "${user}"/>
 </c:if>
-<nav class="nav justify-content-center custom-nav-shadow bg-dark font-color-white">
-    <div class="nav-item align-self-center">
+<nav class="nav justify-content-center custom-nav-shadow bg-dark font-color-white align-items-center">
+    <div class="nav-item">
         <a class="nav-link navbar-brand active" href="<c:url value="/"/>">Shop</a>
     </div>
     <div class="nav-item">
@@ -40,10 +39,8 @@
         <a class="nav-link" href="<c:url value="/contacts"/>">Contacts</a>
     </div>
     <div class="nav-item sign-link" style="cursor: pointer;">
-        <div class="nav-link user-name">Sign in
-            <c:out value = "${user}"/>
-         </div>
-
+        <a class="nav-link user-name" href="<c:url value="/login"/>">Log in</a>
+        <c:out value = "${user}"/>
     </div>
 </nav>
 <script src="<c:url value="/resources/js/header.js"/>" async></script>
