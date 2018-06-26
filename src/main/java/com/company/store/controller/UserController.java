@@ -40,11 +40,11 @@ public class UserController {
     @RequestMapping("/userin")
     public ModelAndView loginAction(@RequestParam("email") String email,
                                     @RequestParam("password") String password) {
-        ModelAndView modelAndView = new ModelAndView("somePage");
-        User user = new User(email, password);
+        ModelAndView modelAndView = new ModelAndView();
+        User user = userService.getUser(email, password);
 
-        if (userService.isValid(user)){
-            switch (userService.validateUser(user)){
+        if (user != null){
+            switch (userService.validateUserType(user)){
                 case "admin":
                     modelAndView = new ModelAndView("redirect:/admin/mainPage", "admin", user);
                     break;

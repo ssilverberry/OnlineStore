@@ -15,12 +15,11 @@ public class UserService {
         this.userDAO = userDAO;
     }
 
-    public boolean isValid(User user){
-        User tempUser = userDAO.getByCredentials(user.getEmail(), user.getPassword());
-        return tempUser != null;
+    public User getUser(String email, String password){
+        return userDAO.getByCredentials(email, password);
     }
 
-    public String validateUser(User user){
+    public String validateUserType(User user){
         if (user.getIsAdmin()){
             return "admin";
         } else {
