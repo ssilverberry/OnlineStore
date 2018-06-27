@@ -115,6 +115,17 @@ public class ProductService {
 
     public boolean addCategory(Product product){
         product.setCategory(true);
-        return productDAO.saveProduct(product);
+        if(productDAO.saveProduct(product)){
+            Product categ = productDAO.getProductByName(product.getName());
+            List<ProductParameter> subCategs = product.getParams();
+            subCategs.forEach(productParameter -> {
+                Product subCateg = new Product();
+                subCateg.setCategory(true);
+                subCateg.setParentId(categ.getId());
+                subCateg.setName(productParameter.getValue());
+                productDAO.saveProduct(subCateg);
+            });
+            return true;
+        } else return false;
     }
 }
