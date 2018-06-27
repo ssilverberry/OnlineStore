@@ -73,7 +73,6 @@
 
             var temp = $(this).attr('class').split(' ');
             var removed = array.splice(temp[3], 1);
-            alert("1. Original: " + array + "\nRemoved: " + removed);
 
             for (var i = temp[3]; i < array.length; i++){
                 array[i] = ["params[" + i +"].value"];
@@ -87,7 +86,6 @@
                 $(this).attr("name", array[itm]);
                 itm++;
             });
-            alert("2. Original: " + array);
 
         }));
     })
