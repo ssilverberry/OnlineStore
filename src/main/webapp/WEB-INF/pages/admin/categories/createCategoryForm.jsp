@@ -25,12 +25,12 @@
     <script src="<c:url value="/resources/bootstrapjs/bootstrap.min.js"/>"></script>
     <script src="<c:url value="/resources/js/jquery-3.3.1.min.js"/>"></script>
 </head>
-<body>
+
+<body style="margin-left: 400px; margin-right: 400px; margin-top: 50px;">
 
     <spring:url value="/admin/createCategory" var="action"/>
 
-        <form:form style="margin-left: 400px; margin-right: 400px; margin-top: 50;"
-                   action="${action}" method="post" modelAttribute="category">
+        <form:form action="${action}" method="post" modelAttribute="category">
 
             <h4>New data</h4> <br>
 
@@ -41,8 +41,56 @@
                 </div>
             </spring:bind>
 
+            <p>Subcategories:</p>
+            <div class="form-group" id="subcategories-list" >
+                <p class="form-inline">
+                    <input name="params[0].value" class="form-control mb-2 mr-sm-2 mb-sm-0 item" type="text" id="first-item"
+                           placeholder="Write name.."/>
+                    <a class="btn btn-light" role="button" id="add-input">ADD ONE</a>
+                </p>
+            </div>
+
             <button type="submit" class="btn btn-primary my-1" style="float: right">Next</button>
         </form:form>
 
 </body>
+
+<script>
+    $(document).ready(function () {
+        var itemIndex = 0;
+        var array = ["params[" + itemIndex +"].value"];
+        $('#add-input').click(function() {
+            itemIndex++;
+            array[itemIndex] = ["params[" + itemIndex +"].value"];
+            $('<p class="form-inline">\n' +
+                '<input name="' + array[itemIndex] + '" class="form-control mb-2 mr-sm-2 mb-sm-0 subItem" ' +
+                '       placeholder="Write name.." />\n' +
+                '<a class="btn btn-danger icon-delete ' + itemIndex + '" role="button">DELETE</a>\n' +
+                '</p>').appendTo('#subcategories-list');
+        });
+
+        $('#subcategories-list').on('click', '.icon-delete', (function () {
+
+            var temp = $(this).attr('class').split(' ');
+            var removed = array.splice(temp[3], 1);
+            alert("1. Original: " + array + "\nRemoved: " + removed);
+
+            for (var i = temp[3]; i < array.length; i++){
+                array[i] = ["params[" + i +"].value"];
+            }
+
+            $(this).parent().remove();
+            itemIndex--;
+
+            var itm = 1;
+            $(".subItem").each(function () {
+                $(this).attr("name", array[itm]);
+                itm++;
+            });
+            alert("2. Original: " + array);
+
+        }));
+    })
+</script>
+
 </html>

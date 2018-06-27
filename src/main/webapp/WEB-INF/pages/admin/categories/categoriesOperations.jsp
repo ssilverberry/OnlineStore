@@ -26,6 +26,7 @@
     <script src="<c:url value="/resources/bootstrapjs/bootstrap.min.js"/>"></script>
     <script src="<c:url value="/resources/js/jquery-3.3.1.min.js"/> "></script>
 </head>
+
 <body style="margin-left: 300px; margin-right: 300px; margin-top: 50px ">
     <div class="row pt-3">
         <div class="col=sm-1">
@@ -57,9 +58,12 @@
                         </c:forEach>
                     </div>
                 </div>
-
             </c:forEach>
+
         </div>
     </div>
 </body>
+
 </html>
+
+
