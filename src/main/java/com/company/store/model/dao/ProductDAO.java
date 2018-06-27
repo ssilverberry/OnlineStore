@@ -14,6 +14,7 @@ public interface ProductDAO {
     Collection<Product> getSubcategories();
     Collection<Product> getProductsForCategory(int category_id);
     Product getProductById(int product_id);
+    Product getProductByName(String name);
     Map<ProductAttribute, ProductParameter> getParamsForProduct(int product_id);
 
     // for admin

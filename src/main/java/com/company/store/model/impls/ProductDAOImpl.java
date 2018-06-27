@@ -122,6 +122,22 @@ public class ProductDAOImpl implements ProductDAO {
         } return product;
     }
 
+    @Override
+    public Product getProductByName(String name) {
+        Product product = null;
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement ps = connection.prepareStatement(GET_PRODUCT_BY_NAME)) {
+            ps.setString(1, name);
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()){
+                product = parseProduct(resultSet);
+                log.debug("Product was received  by name: " + name);
+            }
+        } catch (SQLException e) {
+            log.error("Failed to receive product by name: " + name, e);
+        } return product;
+    }
+
     /**
      * return parameters for product by specify product_id
      */
