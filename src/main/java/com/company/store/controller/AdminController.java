@@ -4,11 +4,17 @@ import com.company.store.model.entities.Product;
 import com.company.store.model.entities.ProductAttribute;
 import com.company.store.model.entities.ProductParameter;
 import com.company.store.model.services.ProductService;
+import com.company.store.model.validators.CreateCategoryFormValidator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,10 +25,17 @@ import java.util.List;
 public class AdminController {
 
     private final ProductService productService;
+    private final CreateCategoryFormValidator createCategoryFormValidator;
 
     @Autowired
-    public AdminController(ProductService productService) {
+    public AdminController(ProductService productService, CreateCategoryFormValidator createCategoryFormValidator) {
         this.productService = productService;
+        this.createCategoryFormValidator = createCategoryFormValidator;
+    }
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.setValidator(createCategoryFormValidator);
     }
 
     //WORKS
@@ -129,8 +142,14 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/createCategory", method = RequestMethod.POST)
-    public String createCategory(@ModelAttribute("category") Product product) {
-        if (productService.addCategory(product)) {
+    public String createCategory(@Valid @ModelAttribute("category") Product category,
+                                 BindingResult result) {
+
+        if (result.hasErrors()) {
+            System.out.println(result.getFieldErrors().toString());
+            return "admin/categories/createCategoryForm";
+        }
+        if (productService.addCategory(category)) {
             return "redirect:/admin/categoriesOperations";
         }
         else return null;

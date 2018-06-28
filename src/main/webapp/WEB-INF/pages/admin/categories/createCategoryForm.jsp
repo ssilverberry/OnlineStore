@@ -9,8 +9,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<html>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
+<html lang="en">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="<c:url value="/resources/bootstrapcss/bootstrap-reboot.min.css"/>">
     <link rel="stylesheet" href="<c:url value="/resources/bootstrapcss/bootstrap-grid.min.css"/>">
@@ -25,30 +29,36 @@
     <script src="<c:url value="/resources/bootstrapjs/bootstrap.min.js"/>"></script>
     <script src="<c:url value="/resources/js/jquery-3.3.1.min.js"/>"></script>
 </head>
-
+<style type="text/css">
+    .error {
+        color: red;
+    }
+</style>
 <body style="margin-left: 400px; margin-right: 400px; margin-top: 50px;">
 
     <spring:url value="/admin/createCategory" var="action"/>
 
-        <form:form action="${action}" method="post" modelAttribute="category">
+        <form:form action="${action}" method="post" commandName="category">
 
             <h4>New data</h4> <br>
 
             <spring:bind path="name">
-                <div class="form-group">
-                    <label>Category name</label>
+                <div class="form-group ">
+                    <label class="control-label">Category name</label>
                     <form:input path="name" id="name" class="form-control" type="text"/>
+                    <form:errors path="name" cssClass="error"/>
                 </div>
             </spring:bind>
 
-            <p>Subcategories:</p>
-            <div class="form-group" id="subcategories-list" >
-                <p class="form-inline">
-                    <input name="params[0].value" class="form-control mb-2 mr-sm-2 mb-sm-0 item" type="text" id="first-item"
-                           placeholder="Write name.."/>
-                    <a class="btn btn-light" role="button" id="add-input">ADD ONE</a>
-                </p>
-            </div>
+                <p>Subcategories:</p>
+                <div class="form-group" id="subcategories-list" >
+                    <p class="form-inline">
+                        <input name="params[0].value" class="form-control mb-2 mr-sm-2 mb-sm-0 item" type="text" id="first-item"
+                               placeholder="Write name.."/>
+                        <a class="btn btn-light" role="button" id="add-input">ADD ONE</a>
+                        <form:errors path="name" cssClass="error"/>
+                    </p>
+                </div>
 
             <button type="submit" class="btn btn-primary my-1" style="float: right">Next</button>
         </form:form>
@@ -66,7 +76,7 @@
                 '<input name="' + array[itemIndex] + '" class="form-control mb-2 mr-sm-2 mb-sm-0 subItem" ' +
                 '       placeholder="Write name.." />\n' +
                 '<a class="btn btn-danger icon-delete ' + itemIndex + '" role="button">DELETE</a>\n' +
-                '</p>').appendTo('#subcategories-list');
+                '<form:errors path="name" cssClass="error"/></p>').appendTo('#subcategories-list');
         });
 
         $('#subcategories-list').on('click', '.icon-delete', (function () {

@@ -52,6 +52,12 @@
     <bean id="productService" class="com.company.store.model.services.ProductService" lazy-init="true"/>
     <bean id="userService" class="com.company.store.model.services.UserService" lazy-init="true"/>
 
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="useCodeAsDefaultMessage" value="true"/>
+        <property name="basename" value="messages" />
+
+    </bean>
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 </beans>
