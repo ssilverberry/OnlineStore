@@ -4,13 +4,12 @@ import com.company.store.model.entities.Order;
 import com.company.store.model.impls.OrderDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
+import java.util.Map;
 
 @Controller
 public class OrderController {
@@ -39,11 +38,17 @@ public class OrderController {
         return new ModelAndView("allorders", "Allorders", orders);
     }
 
+    @RequestMapping("order")
+    public String order(Map<String, Object> model) {
+        model.put("saveOrderForm", new Order());
+        return "order";
+    }
+
     @RequestMapping(value = "saveOrder")
-    public void saveOrder(@RequestParam(value = "prod_id") int productId) {
-        //orderDAO.saveOrder(order);
-        System.out.println(productId);
-        //return new ModelAndView("saveorder");
+    public String saveOrder(@ModelAttribute ("saveOrderForm") Order order,
+                            BindingResult result,
+                            Map<String, Object> model) {
+        return "success";
     }
 
     @RequestMapping(value = "removeOrderById")
@@ -52,31 +57,8 @@ public class OrderController {
         return "removeorder_id";
     }
 
-    @RequestMapping("order")
-    public String order() {
-        return "order";
-    }
-
-    @RequestMapping("header")
-    public String header() {
-        return "header";
-    }
-
-    @RequestMapping("basket")
-    public String basket() {
-        return "basket";
-    }
-
-    @RequestMapping("footer")
-    public String footer() {
-        return "footer";
-    }
-    @RequestMapping("authorize")
-    public String authorize() {
-        return "authorize";
-    }
-    @RequestMapping("admin")
-    public String asAdmin() {
-        return "admin";
+    @RequestMapping ("success")
+    public String success () {
+        return "success";
     }
 }
