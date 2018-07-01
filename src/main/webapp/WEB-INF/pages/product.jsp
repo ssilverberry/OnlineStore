@@ -94,7 +94,7 @@
                                 Buy
                             </a>
                         </div>
-                        <div class="col-3 text-center">
+                        <div class="col-3 text-center d-none">
                             <a href="#" class="rounded btn btn-block btn-success">
                                 <i class="fa fa-cart-plus" style="font-size: 22px;"></i>
                             </a>
