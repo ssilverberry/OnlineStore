@@ -22,9 +22,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/footer.css"/>"/>
 </head>
 <body>
-<c:if test = "${user != null}">
-    <c:set var = "user" value = "${user}"/>
-</c:if>
+
 <nav class="nav justify-content-center custom-nav-shadow bg-dark font-color-white align-items-center">
     <div class="nav-item">
         <a class="nav-link navbar-brand active" href="<c:url value="/"/>">Shop</a>
@@ -39,8 +37,8 @@
         <a class="nav-link" href="<c:url value="/contacts"/>">Contacts</a>
     </div>
     <div class="nav-item sign-link" style="cursor: pointer;">
-        <a class="nav-link user-name" href="<c:url value="/login"/>">Log in</a>
-        <c:out value = "${user}"/>
+        <a class="nav-link user-name" href="<c:url value="/login"/>">Log in ${username.email}</a>
+        <c:out value = "${username.name}"/>
     </div>
 </nav>
 <script src="<c:url value="/resources/js/header.js"/>" async></script>

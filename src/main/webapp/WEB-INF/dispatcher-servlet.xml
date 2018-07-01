@@ -21,6 +21,8 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+
     <bean id="userDAO" class="com.company.store.model.impls.UserDAOImpl" lazy-init="true">
         <property name="dataSource" ref="dataSource"/>
     </bean>
@@ -51,13 +53,13 @@
 
     <bean id="productService" class="com.company.store.model.services.ProductService" lazy-init="true"/>
     <bean id="userService" class="com.company.store.model.services.UserService" lazy-init="true"/>
+    <bean id="signUpValidator2" class="com.company.store.controller.SignUpValidator" lazy-init="true"/>
+    <bean id="signInValidator" class="com.company.store.controller.SignInValidator" lazy-init="true"/>
 
     <bean id="messageSource"
           class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="useCodeAsDefaultMessage" value="true"/>
         <property name="basename" value="messages" />
-
     </bean>
 
-    <mvc:resources mapping="/resources/**" location="/resources/"/>
 </beans>

@@ -7,19 +7,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.Collection;
+import java.util.Map;
 
 @Controller
 public class UserController {
 
     private UserDAOImpl userDAO;
     private final UserService userService;
+
+    @Autowired
+    private SignUpValidator signUpValidator;
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.setValidator(signUpValidator);
+    }
 
     @Autowired
     public UserController(UserService userService) {
@@ -31,62 +39,41 @@ public class UserController {
         this.userDAO = userDAO;
     }
 
-    @RequestMapping("/login")
-    public String showLoginForm (Model model) {
-        model.addAttribute("authForm", new User());
-        return "authorize";
-    }
-
-    @RequestMapping("/userin")
-    public ModelAndView loginAction(@RequestParam("email") String email,
-                                    @RequestParam("password") String password) {
-        ModelAndView modelAndView = new ModelAndView();
-        User user = userService.getUser(email, password);
-
-        if (user != null){
-            switch (userService.validateUserType(user)){
-                case "admin":
-                    modelAndView = new ModelAndView("redirect:/admin/mainPage", "admin", user);
-                    break;
-                case "user":
-                    modelAndView = new ModelAndView("redirect:/", "index", user);
-                    break;
-            }
-            return modelAndView;
-        } else{
-            modelAndView.setViewName("errorPage");
-            return modelAndView;
-        }
-        /*comment for git*/
-    }
 
     @RequestMapping(value = "/signup")
-    public String showRegistrationForm(Model model) {
-        model.addAttribute("registrationForm", new User());
+    public String showRegistrationForm(Map<String, Object> model) {
+        model.put("registrationForm", new User());
         return "registration";
     }
 
-    @RequestMapping(value = "addUser")
-    public ModelAndView saveUser(Model model,
-                                 @RequestParam("email") String email,
-                                 @RequestParam("name") String name,
-                                 @RequestParam("surname") String surname,
-                                 @RequestParam("phone") String phone,
-                                 @RequestParam("password") String password,
-                                 @RequestParam("address") String address) {
-        User user = new User();
-        model.addAttribute("registrationForm", user);
+    @RequestMapping(value="addUser", method = RequestMethod.POST)
+    public String saveUser(@Valid @ModelAttribute("registrationForm")  User user,
+                           BindingResult result,
+                           Map<String, Object> model,
+                           @RequestParam("email") String email,
+                           @RequestParam("name") String name,
+                           @RequestParam("surname") String surname,
+                           @RequestParam("phone") String phone,
+                           @RequestParam("password") String password,
+                           @RequestParam("address") String address) {
         user.setName(name);
         user.setSurname(surname);
         user.setEmail(email);
         user.setPhone(phone);
         user.setPassword(password);
         user.setAddress(address);
-        Boolean add = userDAO.saveUser(user);
-        if(add){
-            return new ModelAndView("index", "user", user);
-        }else {
-            return new ModelAndView("index", "user", user);
+        if (result.hasErrors()) {
+            System.out.println(result.getFieldErrors().toString());
+            return "registration";
+        } else {
+            Boolean add = userDAO.saveUser(user);
+            if (add) {
+                //return new ModelAndView("index", "user", user);
+                return "redirect:/";
+            } else {
+                //return new ModelAndView("index", "user", user);
+                return "registration";
+            }
         }
     }
 

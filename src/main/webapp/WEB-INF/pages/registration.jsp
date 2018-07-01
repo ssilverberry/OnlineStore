@@ -28,61 +28,82 @@
 <body>
 <spring:url value="addUser" var="actionUrl"/>
 
-<div class="text-center">
-    <div class="overlay-auth-elem auth-elem " style="background-color: #f5f5f5;">
-        <form:form method="get" action="${actionUrl}" modelAttribute="registrationForm"
-                   cssClass="form-signin margin-auto margin-top-5 bg-light" cssStyle="width: 18rem; box-shadow: 0px 0px 5px #c5c5c5; padding: 1rem;">
-            <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
-
+<div class="container ">
+    <div class="row justify-content-center">
+        <div class="col-6 mt-5">
+        <form:form method="post" action="${actionUrl}" modelAttribute="registrationForm"
+                   cssClass="form-signin margin-auto margin-top-2 bg-light"
+                   cssStyle="width: 18rem; box-shadow: 0px 0px 5px #c5c5c5; padding: 1rem;">
+            <h1 class="h3 mb-3 font-weight-normal text-center">Sign Up</h1>
             <spring:bind path="email">
-                <label for="inputEmail" class="sr-only ">Email address</label>
-                <form:input path="email" type="email" id="inputEmail" class="form-control mb-2 mail" placeholder="Email"
+                <div class="row p-1">
+                    <label for="inputEmail" class="sr-only ">Email address</label>
+                    <form:input path="email" type="email" id="inputEmail" class="form-control mail email col" placeholder="Email"
                             required=""
                             autofocus=""/>
+                    <form:errors path="email" cssClass="col text-danger"/>
+                </div>
             </spring:bind>
 
             <spring:bind path="name">
                 <label for="inputName" class="sr-only">Username</label>
-                <form:input path="name" type="text" id="inputName" class="form-control mb-2 username" placeholder="Name" required="" autofocus="" />
+                <div class="row p-1">
+                    <form:input path="name" type="text" id="inputName" class="form-control name col" placeholder="Name"
+                            required="" autofocus="" />
+                    <form:errors path="name" cssClass="col text-danger"/>
+                </div>
             </spring:bind>
 
             <spring:bind path="surname">
                 <label for="inputSecName" class="sr-only ">Second Name</label>
-                <form:input path="surname" type="text" id="inputSecName" class="form-control mb-2 secondname"
-                            placeholder="Second name"
+                <div class="row p-1">
+                    <form:input path="surname" type="text" id="inputSecName" class="form-control surname col"
+                            placeholder="Surname"
                             required=""
                             autofocus="" />
+                    <form:errors path="surname" cssClass="col text-danger"/>
+                </div>
             </spring:bind>
 
             <spring:bind path="phone">
                 <label for="inputPhone" class="sr-only">Phone</label>
-                <form:input path="phone" type="number" id="inputPhone" class="form-control mb-2 phone"
+                <div class="row p-1">
+                <form:input path="phone" type="text" id="inputPhone" class="form-control phone col"
                             placeholder="Phone"
                             required=""/>
+                <form:errors path="phone" cssClass="col text-danger"/>
+                </div>
             </spring:bind>
 
             <spring:bind path="password">
+                <div class="row p-1">
                 <label for="inputPassword" class="sr-only">Password</label>
-                <form:input path="password" type="password" id="inputPassword" class="form-control mb-2 pswrd"
+                <form:input path="password" type="password" id="inputPassword" class="form-control password col"
                             placeholder="Password"
                             required=""/>
+                <form:errors path="password" cssClass="col text-danger"/>
+                </div>
             </spring:bind>
 
             <spring:bind path="address">
+                <div class="row p-1">
                 <label for="inputAddress" class="sr-only">Address</label>
-                <form:input path="address" type="text" id="inputAddress" class="form-control mb-2 address"
+                <form:input path="address" type="text" id="inputAddress" class="form-control address col"
                             placeholder="Address"
                             required=""/>
+                <form:errors path="address" cssClass="col text-danger"/>
+                </div>
             </spring:bind>
-            <form:button class="btn btn-lg btn-success btn-block mb-2">Submit</form:button>
 
-            <div class="justify-content-center return" style="padding-top: 1rem;">
-                <a style="cursor: pointer;" href="<c:url value="/"/>">
+            <form:button class="btn btn-lg btn-success btn-block my-2">Submit</form:button>
+
+            <div class="justify-content-center return my-1">
+                <a class="btn btn-outline-secondary btn-block" style="cursor: pointer;" href="<c:url value="/"/>">
                     Return to shop
                 </a>
             </div>
-            <div class="mytext col"><i>debug text</i></div>
         </form:form>
+        </div>
     </div>
 </div>
 </body>

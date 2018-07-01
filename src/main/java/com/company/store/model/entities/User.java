@@ -1,13 +1,18 @@
 package com.company.store.model.entities;
 
 
+import org.hibernate.validator.constraints.Email;
+import javax.validation.constraints.Size;
+
 public class User {
 
     private int user_id;
     private String name;
     private String surname;
+    @Email
     private String email;
     private String phone;
+    @Size (min = 6, max = 15)
     private String password;
     private String address;
     private boolean isAdmin;

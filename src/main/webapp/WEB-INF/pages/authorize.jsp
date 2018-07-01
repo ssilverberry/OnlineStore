@@ -28,8 +28,10 @@
 <body>
 <spring:url value="/userin" var="actionUrl"/>
 <div class="text-center" style="width: 100%; height: 100%;">
-    <div class="overlay-auth-elem auth-elem " style="background-color: #f5f5f5;">
-        <form:form method="get" action="${actionUrl}" modelAttribute="authForm"
+    <div class="overlay-auth-elem auth-elem container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-6">
+        <form:form method="post" action="${actionUrl}" modelAttribute="authForm"
                 cssClass="form-signin margin-auto margin-top-5 bg-light"
                 cssStyle="width: 18rem; box-shadow: 0px 0px 5px #c5c5c5; padding: 1rem;">
 
@@ -39,12 +41,14 @@
                 <label for="inputEmail" class="sr-only">Email address</label>
                 <form:input path="email" type="email" id="inputEmail" class="form-control email mb-2"
                         placeholder="Email address" required="" autofocus=""/>
+                <form:errors path="email" cssClass="col text-danger"/>
             </spring:bind>
 
             <spring:bind path="password">
                 <label for="inputPassword" class="sr-only">Password</label>
                 <form:input path="password" type="password" id="inputPassword" class="form-control pswrd mb-2"
                             placeholder="Password" required="" />
+                <form:errors path="password" cssClass="col text-danger"/>
             </spring:bind>
 
             <form:button class="btn btn-lg btn-success btn-block">Sign in</form:button>
@@ -58,6 +62,8 @@
 
             </div>
         </form:form>
+            </div>
+        </div>
     </div>
 </div>
 </body>
