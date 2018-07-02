@@ -22,67 +22,77 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="<c:url value="/resources/bootstrapjs/bootstrap.bundle.min.js"/>"></script>
     <script src="<c:url value="/resources/bootstrapjs/bootstrap.min.js"/>"></script>
-
     <title>Registration</title>
+    <style>
+        .font-size-12 {
+            font-size: 12px;
+        }
+    </style>
 </head>
 <body>
 <spring:url value="addUser" var="actionUrl"/>
 
 <div class="container ">
-    <div class="row justify-content-center">
-        <div class="col-6 mt-5">
+    <div class="row justify-content-center" style="margin-top: 5rem;">
+    <div class="col-4">
         <form:form method="post" action="${actionUrl}" modelAttribute="registrationForm"
-                   cssClass="form-signin margin-auto margin-top-2 bg-light"
-                   cssStyle="width: 18rem; box-shadow: 0px 0px 5px #c5c5c5; padding: 1rem;">
+                   cssClass="form-signin bg-light"
+                   cssStyle="width: 18rem; box-shadow: 0px 0px 5px #c5c5c5; padding: 1.5rem; margin: 0 auto;">
             <h1 class="h3 mb-3 font-weight-normal text-center">Sign Up</h1>
+            <div class="row">
             <spring:bind path="email">
                 <label for="inputEmail" class="sr-only ">Email address</label>
                 <form:input path="email" type="email" id="inputEmail" class="form-control mail email m-1" placeholder="Email"
                         required=""
                         autofocus=""/>
-                <form:errors path="email" cssClass="text-danger"/>
+                <form:errors path="email" cssClass="text-danger font-size-12 pl-2"/>
             </spring:bind>
-
+            </div>
+            <div class="row">
             <spring:bind path="name">
                 <label for="inputName" class="sr-only">Username</label>
-                <form:input path="name" type="text" id="inputName" class="form-control name col m-1" placeholder="Name"
+                <form:input path="name" type="text" id="inputName" class="form-control name m-1" placeholder="Name"
                         required="" autofocus="" />
-                <form:errors path="name" cssClass="text-danger"/>
+                <form:errors path="name" cssClass="text-danger font-size-12 pl-2"/>
             </spring:bind>
-
+            </div>
+            <div class="row">
             <spring:bind path="surname">
                 <label for="inputSecName" class="sr-only ">Second Name</label>
-                <form:input path="surname" type="text" id="inputSecName" class="form-control surname col m-1"
+                <form:input path="surname" type="text" id="inputSecName" class="form-control surname m-1"
                         placeholder="Surname"
                         required=""
                         autofocus="" />
-                <form:errors path="surname" cssClass="text-danger"/>
+               <form:errors path="surname" cssClass="text-danger font-size-12 pl-2"/>
             </spring:bind>
-
+            </div>
+            <div class="row">
             <spring:bind path="phone">
                 <label for="inputPhone" class="sr-only">Phone</label>
-                <form:input path="phone" type="text" id="inputPhone" class="form-control phone col m-1"
+                <form:input path="phone" type="text" id="inputPhone" class="form-control phone m-1"
                             placeholder="Phone"
                             required=""/>
-                <form:errors path="phone" cssClass="text-danger"/>
+                <form:errors path="phone" cssClass="text-danger font-size-12 pl-2"/>
             </spring:bind>
-
+            </div>
+            <div class="row">
             <spring:bind path="password">
                 <label for="inputPassword" class="sr-only">Password</label>
-                <form:input path="password" type="password" id="inputPassword" class="form-control password col m-1"
+                <form:input path="password" type="password" id="inputPassword" class="form-control password m-1"
                             placeholder="Password"
                             required=""/>
-                <form:errors path="password" cssClass="text-danger"/>
+                <form:errors path="password" cssClass="text-danger font-size-12 pl-2"/>
             </spring:bind>
-
+            </div>
+            <div class="row">
             <spring:bind path="address">
                 <label for="inputAddress" class="sr-only">Address</label>
-                <form:input path="address" type="text" id="inputAddress" class="form-control address col m-1"
+                <form:input path="address" type="text" id="inputAddress" class="form-control address m-1"
                             placeholder="Address"
                             required=""/>
-                <form:errors path="address" cssClass="text-danger"/>
+                <form:errors path="address" cssClass="text-danger font-size-12 pl-2"/>
             </spring:bind>
-
+            </div>
             <form:button class="btn btn-lg btn-success btn-block my-2">Submit</form:button>
 
             <div class="justify-content-center return my-1">
@@ -91,7 +101,7 @@
                 </a>
             </div>
         </form:form>
-        </div>
+    </div>
     </div>
 </div>
 </body>
