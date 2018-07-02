@@ -37,7 +37,7 @@
             <h1 class="h3 mb-3 font-weight-normal text-center">Sign Up</h1>
             <spring:bind path="email">
                 <label for="inputEmail" class="sr-only ">Email address</label>
-                <form:input path="email" type="email" id="inputEmail" class="form-control mail email col" placeholder="Email"
+                <form:input path="email" type="email" id="inputEmail" class="form-control mail email m-1" placeholder="Email"
                         required=""
                         autofocus=""/>
                 <form:errors path="email" cssClass="text-danger"/>
@@ -45,14 +45,14 @@
 
             <spring:bind path="name">
                 <label for="inputName" class="sr-only">Username</label>
-                <form:input path="name" type="text" id="inputName" class="form-control name col" placeholder="Name"
+                <form:input path="name" type="text" id="inputName" class="form-control name col m-1" placeholder="Name"
                         required="" autofocus="" />
                 <form:errors path="name" cssClass="text-danger"/>
             </spring:bind>
 
             <spring:bind path="surname">
                 <label for="inputSecName" class="sr-only ">Second Name</label>
-                <form:input path="surname" type="text" id="inputSecName" class="form-control surname col"
+                <form:input path="surname" type="text" id="inputSecName" class="form-control surname col m-1"
                         placeholder="Surname"
                         required=""
                         autofocus="" />
@@ -61,28 +61,26 @@
 
             <spring:bind path="phone">
                 <label for="inputPhone" class="sr-only">Phone</label>
-                <div class="row p-1">
-                <form:input path="phone" type="text" id="inputPhone" class="form-control phone col"
+                <form:input path="phone" type="text" id="inputPhone" class="form-control phone col m-1"
                             placeholder="Phone"
                             required=""/>
-                <form:errors path="phone" cssClass="col text-danger"/>
-                </div>
+                <form:errors path="phone" cssClass="text-danger"/>
             </spring:bind>
 
             <spring:bind path="password">
                 <label for="inputPassword" class="sr-only">Password</label>
-                <form:input path="password" type="password" id="inputPassword" class="form-control password col"
+                <form:input path="password" type="password" id="inputPassword" class="form-control password col m-1"
                             placeholder="Password"
                             required=""/>
-                <form:errors path="password" cssClass="col text-danger"/>
+                <form:errors path="password" cssClass="text-danger"/>
             </spring:bind>
 
             <spring:bind path="address">
                 <label for="inputAddress" class="sr-only">Address</label>
-                <form:input path="address" type="text" id="inputAddress" class="form-control address col"
+                <form:input path="address" type="text" id="inputAddress" class="form-control address col m-1"
                             placeholder="Address"
                             required=""/>
-                <form:errors path="address" cssClass="col text-danger"/>
+                <form:errors path="address" cssClass="text-danger"/>
             </spring:bind>
 
             <form:button class="btn btn-lg btn-success btn-block my-2">Submit</form:button>
