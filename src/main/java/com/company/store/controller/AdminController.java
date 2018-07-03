@@ -157,7 +157,7 @@ public class AdminController {
 
     @RequestMapping(value = "/deleteCategory")
     public String deleteCategory(@RequestParam("category_id") int category_id) {
-        if (productService.deleteProduct(category_id)) {
+        if (productService.deleteCategory(category_id)) {
             return "redirect:/admin/categoriesOperations";
         }
         else return null;
