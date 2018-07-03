@@ -113,6 +113,19 @@ public class ProductService {
         return productDAO.removeProduct(prod_id);
     }
 
+    public boolean deleteCategory(int categ__id){
+        Collection<Product> subCategs = productDAO.getProductsForCategory(categ__id);
+        if (subCategs != null && subCategs.size() > 0){
+            subCategs.forEach(new Consumer<Product>() {
+                @Override
+                public void accept(Product product) {
+                    productDAO.removeProduct(product.getId());
+                }
+            });
+        }
+        return productDAO.removeProduct(categ__id);
+    }
+
     public boolean addCategory(Product product){
         product.setCategory(true);
         if(productDAO.saveProduct(product)){
