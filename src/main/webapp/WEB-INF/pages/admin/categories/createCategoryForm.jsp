@@ -11,30 +11,14 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
-<html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="<c:url value="/resources/bootstrapcss/bootstrap-reboot.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/bootstrapcss/bootstrap-grid.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/bootstrapcss/bootstrap.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/css/header.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/authorize.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/sidebar.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/page.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/footer.css"/>"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <script src="<c:url value="/resources/bootstrapjs/bootstrap.bundle.min.js"/>"></script>
-    <script src="<c:url value="/resources/bootstrapjs/bootstrap.min.js"/>"></script>
-    <script src="<c:url value="/resources/js/jquery-3.3.1.min.js"/>"></script>
-</head>
+<body lang="en">
 <style type="text/css">
     .error {
         color: red;
     }
 </style>
-<body style="margin-left: 400px; margin-right: 400px; margin-top: 50px;">
+<jsp:include page="../../header.jsp"/>
+<div style="margin-left: 400px; margin-right: 400px; margin-top: 50px; min-height: 100vh; position: relative;">
 
     <spring:url value="/admin/createCategory" var="action"/>
 
@@ -62,9 +46,14 @@
 
             <button type="submit" class="btn btn-primary my-1" style="float: right">Next</button>
         </form:form>
-
-</body>
-
+</div>
+<div class="container-fluid" style="position: absolute; bottom: 0; left: 0;">
+    <div class="col">
+        <div class="row align-content-center justify-content-center p-2 text-primary rounded">
+            <jsp:include page="../../footer.jsp"/>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function () {
         var itemIndex = 0;
@@ -100,5 +89,5 @@
         }));
     })
 </script>
-
+</body>
 </html>

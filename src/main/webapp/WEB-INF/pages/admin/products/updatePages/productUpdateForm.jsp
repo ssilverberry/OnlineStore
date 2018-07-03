@@ -11,23 +11,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 
-<head>
-    <title>Title</title>
-    <link rel="stylesheet" href="<c:url value="/resources/bootstrapcss/bootstrap-reboot.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/bootstrapcss/bootstrap-grid.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/bootstrapcss/bootstrap.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/css/header.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/authorize.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/sidebar.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/page.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/footer.css"/>"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="<c:url value="/resources/bootstrapjs/bootstrap.bundle.min.js"/>"></script>
-    <script src="<c:url value="/resources/bootstrapjs/bootstrap.min.js"/>"></script>
-    <script src="<c:url value="/resources/js/jquery-3.3.1.min.js"/> "></script>
-</head>
+<jsp:include page="../../../header.jsp"/>
 
-<body>
     <spring:url value="/admin/updateProduct" var="action"/>
     <div>
         <form:form style="margin-left: 400px; margin-right: 400px; margin-top: 50;"
@@ -84,6 +69,12 @@
         </form:form>
 
     </div>
-
+<div class="container-fluid" style="margin-top: 14rem;">
+    <div class="col">
+        <div class="row align-content-center justify-content-center p-2 text-primary rounded">
+            <jsp:include page="../../../footer.jsp"/>
+        </div>
+    </div>
+</div>
 </body>
 </html>
