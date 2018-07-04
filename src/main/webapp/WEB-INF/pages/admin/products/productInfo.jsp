@@ -10,24 +10,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="<c:url value="/resources/css/reset.css" />">
-    <link rel="stylesheet" href="<c:url value="/resources/css/header.css" />">
-    <link rel="stylesheet" href="<c:url value="/resources/css/authorize.css" />">
-    <link rel="stylesheet" href="<c:url value="/resources/css/footer.css" />">
-    <link rel="stylesheet" href="<c:url value="/resources/css/product.css" />">
-    <link rel="stylesheet" href="<c:url value="/resources/css/content.css" />">
 
-    <script src="<c:url value="/resources/js/jquery-3.3.1.min.js"/>"></script>
-    <script src="<c:url value="/resources/js/testFeedback.js"/>"></script>
-    <script src="<c:url value="/resources/js/testDescription.js"/>"></script>
-
-    <title>Document</title>
-
-</head>
 
 <c:if test="${product != null}">
     <c:forEach var="item" items="${product}">
@@ -111,10 +94,11 @@
         </div>
 
     </div>
-    <div class="row p-2 bg-light rounded justify-content-center text-primary" style="position: absolute;bottom: 0px; width: 100%;">
-        <jsp:include page="../../footer.jsp" flush="true" />
+    <div class="row p-2 rounded justify-content-center text-primary" style="position: absolute;bottom: 0px; width: 100%;">
+        <div class="col-9">
+            <div class="row"><jsp:include page="../../footer.jsp" flush="true" /></div>
+        </div>
     </div>
 </div>
 </body>
 </html>
-<%--comment for issue close commit--%>

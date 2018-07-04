@@ -7,27 +7,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<html>
-<head>
-    <title>Title</title>
-    <link rel="stylesheet" href="<c:url value="/resources/bootstrapcss/bootstrap-reboot.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/bootstrapcss/bootstrap-grid.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/bootstrapcss/bootstrap.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/css/header.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/authorize.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/sidebar.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/page.css"/>"/>
-    <link rel="stylesheet" href="<c:url value="/resources/css/footer.css"/>"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="<c:url value="/resources/bootstrapjs/bootstrap.bundle.min.js"/>"></script>
-    <script src="<c:url value="/resources/bootstrapjs/bootstrap.min.js"/>"></script>
-    <script src="<c:url value="/resources/js/jquery-3.3.1.min.js"/> "></script>
-</head>
 
-<body style="margin-left: 300px; margin-right: 300px; margin-top: 50px ">
+<jsp:include page="../../header.jsp"/>
+<div style="margin-left: 300px; margin-right: 300px; margin-top: 50px ">
     <div class="row pt-3">
         <div class="col=sm-1">
             <a class="btn btn-primary"  role="button"
@@ -62,8 +47,16 @@
 
         </div>
     </div>
+</div>
+<div class="container-fluid" style="margin-top: 14rem;">
+    <div class="col">
+        <div class="row align-content-center justify-content-center bg-light p-2 text-primary bg-secondary rounded">
+            <jsp:include page="../../footer.jsp"/>
+        </div>
+    </div>
+</div>
+<script src="<c:url value="/resources/js/jquery-3.3.1.min.js"/> "></script>
 </body>
-
 </html>
 
 
