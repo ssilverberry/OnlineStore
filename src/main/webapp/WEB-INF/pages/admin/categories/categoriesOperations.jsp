@@ -12,7 +12,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <jsp:include page="../../header.jsp"/>
-<div style="margin-left: 300px; margin-right: 300px; margin-top: 50px ">
+<div style="margin-left: 300px; margin-right: 300px; margin-top: 50px; position: relative; min-height: 100vh;">
     <div class="row pt-3">
         <div class="col=sm-1">
             <a class="btn btn-primary"  role="button"
@@ -48,7 +48,7 @@
         </div>
     </div>
 </div>
-<div class="container-fluid" style="margin-top: 14rem;">
+<div class="container-fluid" style="margin-top: 14rem; position: absolute;">
     <div class="col">
         <div class="row align-content-center justify-content-center bg-light p-2 text-primary bg-secondary rounded">
             <jsp:include page="../../footer.jsp"/>
