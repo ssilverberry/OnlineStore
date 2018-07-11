@@ -48,7 +48,7 @@
         </div>
     </div>
 </div>
-<div class="container-fluid" style="margin-top: 14rem; position: absolute;">
+<div class="container-fluid" style="position: absolute;">
     <div class="col">
         <div class="row align-content-center justify-content-center bg-light p-2 text-primary bg-secondary rounded">
             <jsp:include page="../../footer.jsp"/>
