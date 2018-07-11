@@ -17,13 +17,13 @@
 </head>
 <body class="bg-light">
 <jsp:include page="header.jsp"/>
-<h1 class="col display-4 bg-dark text-white text-center pt-3">
+<h1 class="col display-4 bg-dark text-white text-center p-3">
     Billing
 </h1>
 <spring:url value="success" var="actionUrl"/>
 <div class="container" style="position: relative; min-height: 100vh;">
     <div class="row justify-content-center">
-        <div class="col-4 my-4 mr-4 shadow">
+        <div class="col-4 my-4 mr-4 shadow d-none">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-muted">Your cart</span>
                 <span class="badge badge-secondary badge-pill">3</span>
@@ -91,7 +91,7 @@
     </div>
 
 </div>
-<div class="row p-2 bg-light rounded justify-content-center text-primary" style="position: absolute;bottom: 0px; width: 100%;">
+<div class="row p-2 bg-light rounded justify-content-center align-items-center text-primary" style="position: absolute;bottom: 0px; width: 100%;">
     <jsp:include page="footer.jsp" flush="true" />
 </div>
 <!-- Bootstrap core JavaScript

@@ -1,11 +1,9 @@
 package com.company.store.model.entities;
 
-
 import org.hibernate.validator.constraints.Email;
 import javax.validation.constraints.Size;
 
 public class User {
-
     private int user_id;
     private String name;
     private String surname;
@@ -16,9 +14,9 @@ public class User {
     private String password;
     private String address;
     private boolean isAdmin;
+    private UserRoles role;
 
-    public User() {
-    }
+    public User () {}
 
     public User(int user_id, String name, String surname, String email, String phone, String password, String address,
                 boolean isAdmin) {
@@ -35,6 +33,19 @@ public class User {
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+    public User(String email, String password, UserRoles role) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public UserRoles getRole() {
+        return role;
+    }
+
+    public void setRole(UserRoles role) {
+        this.role = role;
     }
 
     public int getId() {

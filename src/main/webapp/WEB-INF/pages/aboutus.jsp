@@ -31,7 +31,7 @@
             </div>
         </div>
     </div>
-    <div class="row align-content-center justify-content-center bg-light p-2 text-primary bg-secondary rounded"
+    <div class="row align-items-center justify-content-center bg-light p-2 text-primary bg-secondary rounded"
     style="position: absolute;bottom: 0px; width: 100%;">
         <jsp:include page="footer.jsp"/>
     </div>

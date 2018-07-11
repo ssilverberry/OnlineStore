@@ -4,6 +4,7 @@ package com.company.store.model.impls;
 import com.company.store.model.dao.UserDAO;
 import com.company.store.model.entities.User;
 
+import com.company.store.model.entities.UserRoles;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -47,7 +48,7 @@ public class UserDAOImpl implements UserDAO {
      * parse cortege with user credentials to object User.
      */
     private User parseUser(ResultSet resultSet) {
-        User user = new User();
+        User user = new User("superAdmin@gmail.com", "superAdmin", UserRoles.ADMIN);
         try {
             user.setId(resultSet.getInt(1));
             user.setName(resultSet.getString(2));

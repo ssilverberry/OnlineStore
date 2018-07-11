@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <html>
 <head>
     <script src="<c:url value="/resources/bootstrapjs/bootstrap.min.js"/>"></script>
@@ -37,7 +38,10 @@
         <a class="nav-link" href="<c:url value="/contacts"/>">Contacts</a>
     </div>
     <div class="nav-item sign-link" style="cursor: pointer;">
-        <a class="nav-link user-name" href="<c:url value="/login"/>">Log in ${username.email}</a>
-        <c:out value = "${username.name}"/>
+        <a class="nav-link user-name" href="<c:url value="/login"/>">Log in ${username}</a>
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+            ${pageContext.request.userPrincipal.name} |
+            <a class="nav-link user-name" href="<c:url value="/logout"/>">Log out</a>
+        </c:if>
     </div>
 </nav>

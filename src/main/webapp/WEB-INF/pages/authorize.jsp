@@ -54,12 +54,9 @@
             <form:button class="btn btn-lg btn-success btn-block">Sign in</form:button>
             <a href="<c:url value="/signup" />" class="btn btn-lg btn-dark btn-block">Sign up</a>
             <div class="justify-content-center return" style="padding-top: 1rem;">
-                <a style="cursor: pointer;" href="<c:url value="/" />">
+                <a class="badge badge-secondary" href="<c:url value="/" />">
                     Return to shop
                 </a>
-            </div>
-            <div class="col bg-success text-white text-center info" style="transition: all 0.3s;">
-
             </div>
         </form:form>
             </div>

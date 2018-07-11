@@ -4,6 +4,7 @@ import com.company.store.model.dao.FeedbackDAO;
 import com.company.store.model.entities.Feedback;
 
 import com.company.store.model.entities.User;
+import com.company.store.model.entities.UserRoles;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -155,7 +156,7 @@ public class FeedbackDAOImpl implements FeedbackDAO {
      */
     private Feedback parseFeedback(ResultSet resultSet) {
         Feedback feedback = new Feedback();
-        User user = new User();
+        User user = new User("superAdmin@gmail.com", "superAdmin", UserRoles.ADMIN);
         try {
             feedback.setId(resultSet.getInt(1));
             user.setId(resultSet.getInt(2));

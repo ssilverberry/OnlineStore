@@ -41,7 +41,7 @@
 </c:if>
 
 <jsp:include page="header.jsp" flush="true" />
-<jsp:include page="cartbar.jsp"/>
+<%--<jsp:include page="cartbar.jsp"/>--%>
 <div class="container-fluid justify-content-center" style="min-height: 100vh; position: relative; padding-top: 25px;">
 <div class="row">
     <div class="col-2 pt-3">
@@ -117,10 +117,9 @@
     </div>
 
 </div>
-    <div class="row p-2 bg-light rounded justify-content-center text-primary" style="position: absolute;bottom: 0px; width: 100%;">
+    <div class="row align-items-center p-2 bg-light rounded justify-content-center text-primary" style="position: absolute;bottom: 0px; width: 100%;">
         <jsp:include page="footer.jsp" flush="true" />
     </div>
 </div>
 </body>
 </html>
-<%--comment for issue close commit--%>

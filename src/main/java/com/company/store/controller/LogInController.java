@@ -2,10 +2,8 @@ package com.company.store.controller;
 
 import com.company.store.model.entities.User;
 import com.company.store.model.services.UserService;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -48,10 +46,10 @@ public class LogInController {
         } else if (userService.getUser(user.getEmail(), user.getPassword()) != null) {
             switch (userService.validateUserType(userService.getUser(user.getEmail(), user.getPassword()))) {
                 case "admin":
-                    model.put("username", user);
+                    model.put("username", user.getName());
                     return "redirect:/admin/mainPage";
                 case "user":
-                    model.put("username", user);
+                    model.put("username", user.getName());
                     return "redirect:/";
             }
         }

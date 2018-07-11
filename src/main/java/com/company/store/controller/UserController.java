@@ -1,11 +1,12 @@
 package com.company.store.controller;
 
 import com.company.store.model.entities.User;
+import com.company.store.model.entities.UserRoles;
 import com.company.store.model.impls.UserDAOImpl;
 import com.company.store.model.services.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +43,7 @@ public class UserController {
 
     @RequestMapping(value = "/signup")
     public String showRegistrationForm(Map<String, Object> model) {
-        model.put("registrationForm", new User());
+        model.put("registrationForm", new User("superAdmin@gmail.com", "superAdmin", UserRoles.ADMIN));
         return "registration";
     }
 

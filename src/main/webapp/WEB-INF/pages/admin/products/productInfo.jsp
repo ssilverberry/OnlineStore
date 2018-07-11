@@ -92,12 +92,11 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <div class="row p-2 rounded justify-content-center text-primary" style="position: absolute;bottom: 0px; width: 100%;">
-        <div class="col-9">
-            <div class="row"><jsp:include page="../../footer.jsp" flush="true" /></div>
-        </div>
+</div>
+<div class="row p-2 rounded justify-content-center text-primary">
+    <div class="col justify-content-center">
+        <div class="row"><jsp:include page="../../footer.jsp" flush="true" /></div>
     </div>
 </div>
 </body>
