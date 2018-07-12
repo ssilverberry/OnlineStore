@@ -4,9 +4,9 @@ import com.company.store.model.entities.Feedback;
 import com.company.store.model.impls.FeedbackDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
@@ -21,12 +21,19 @@ public class FeedbackController {
         this.feedbackDAO = feedbackDAO;
     }
 
-    @RequestMapping(value = "savefeedback")
-    public ModelAndView saveFeedback(Feedback feedback) {
-        feedbackDAO.saveFeedback(feedback);
-        return new ModelAndView("save_feedback");
-    }
+    /*@RequestMapping("showfeedback")
+    public ModelAndView saveFeedback(Model model) {
+        model.addAttribute("feedback", new Feedback());
+        return new ModelAndView("product", "feedback", model);
+    }*/
 
+    @RequestMapping(value = "addFeedback", method = RequestMethod.GET)
+    public ModelAndView addFeedBack (@ModelAttribute("feedback") Feedback feedback,
+                                     @RequestParam("content") String fb) {
+        //model.addAttribute("content", feedback.getContent());
+        System.out.println(feedback.getContent());
+        return new ModelAndView("product");
+    }
     @RequestMapping(value = "allfeedback")
     public ModelAndView getAllFeedback() {
         Collection<Feedback> feedback = feedbackDAO.getAllFeedback();

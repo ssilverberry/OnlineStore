@@ -1,6 +1,7 @@
 package com.company.store.controller;
 
 
+import com.company.store.model.entities.Feedback;
 import com.company.store.model.entities.Product;
 import com.company.store.model.entities.ProductAttribute;
 import com.company.store.model.entities.ProductParameter;
@@ -9,6 +10,7 @@ import com.company.store.model.services.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,8 +50,10 @@ public class ProductController {
 
 
     @RequestMapping("product")
-    public ModelAndView productBy(@RequestParam("prod_id") int  product_id) {
-        return new ModelAndView("product", "product", productService.getProductById(product_id));
+    public ModelAndView productBy(@RequestParam("prod_id") int  product_id, Model model) {
+        model.addAttribute("feedback", new Feedback());
+        model.addAttribute("product", productService.getProductById(product_id));
+        return new ModelAndView("product");
     }
 
     @RequestMapping(value = "categoryProducts")
