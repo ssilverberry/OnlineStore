@@ -8,6 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="s"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +41,7 @@
         </c:if>
     </c:forEach>
 </c:if>
-
+<spring:url value="/addFeedback" var="actionUrl"/>
 <jsp:include page="header.jsp" flush="true" />
 <%--<jsp:include page="cartbar.jsp"/>--%>
 <div class="container-fluid justify-content-center" style="min-height: 100vh; position: relative; padding-top: 25px;">
@@ -103,15 +105,27 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Your feedback" aria-label="Feedback" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">Send it</button>
-                        </div>
+                    <div class="list-group">
+                        <c:forEach var="fb" items="${feedbackList}">
+                            <a href="#" class="list-group-item list-group-item-action">
+                                    ${fb.content}
+                            </a>
+                        </c:forEach>
                     </div>
+                    <form:form method="get" action="${actionUrl}" modelAttribute="feedback">
+                        <spring:bind path="feedback">
+                            <div class="input-group mt-2">
+                                <form:input path="content" type="text" class="form-control"
+                                            placeholder="Your feedback" aria-label="Feedback"
+                                            aria-describedby="basic-addon2"/>
+
+                                <input name="productId" value="${prod.id}" hidden/>
+                                <button class="btn btn-outline-secondary" type="submit">Send it</button>
+                            </div>
+                        </spring:bind>
+                    </form:form>
                 </div>
             </div>
-
             </div>
         </div>
     </div>

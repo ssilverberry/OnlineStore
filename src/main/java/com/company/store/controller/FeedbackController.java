@@ -1,12 +1,15 @@
 package com.company.store.controller;
 
 import com.company.store.model.entities.Feedback;
+import com.company.store.model.entities.User;
 import com.company.store.model.impls.FeedbackDAOImpl;
+import com.company.store.model.impls.ProductDAOImpl;
+import com.company.store.model.impls.UserDAOImpl;
+import com.company.store.model.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
@@ -15,22 +18,32 @@ import java.util.Collection;
 public class FeedbackController {
 
     private FeedbackDAOImpl feedbackDAO;
+    private UserDAOImpl userDAO;
+    private ProductService productService;
 
     @Autowired
-    public void setFeedbackDAO(FeedbackDAOImpl feedbackDAO) {
+    public void setFeedbackDAO(FeedbackDAOImpl feedbackDAO, ProductService productService, UserDAOImpl userDAO) {
         this.feedbackDAO = feedbackDAO;
+        this.productService = productService;
+        this.userDAO = userDAO;
     }
 
-    @RequestMapping(value = "savefeedback")
-    public ModelAndView saveFeedback(Feedback feedback) {
-        feedbackDAO.saveFeedback(feedback);
-        return new ModelAndView("save_feedback");
+    @RequestMapping(value = "addFeedback", method = RequestMethod.GET)
+    public ModelAndView addFeedBack (@ModelAttribute("feedback") Feedback feedback,
+                               Model model,
+                               @RequestParam("content") String fb,
+                               @RequestParam("productId") int  product_id) {
+        model.addAttribute("content", feedback.getContent());
+        model.addAttribute("product", productService.getProductById(product_id));
+        model.addAttribute("feedbackList", feedbackDAO.getAllFeedbackForProduct(product_id));
+        feedbackDAO.saveFeedback(new Feedback(userDAO.getById(1000001), product_id,
+                4, feedback.getContent()));
+        return new ModelAndView("product");
     }
-
     @RequestMapping(value = "allfeedback")
     public ModelAndView getAllFeedback() {
         Collection<Feedback> feedback = feedbackDAO.getAllFeedback();
-        return new ModelAndView("dysplayallfeedback", "feedback", feedback);
+        return new ModelAndView("product", "feedback", feedback);
     }
 
     @RequestMapping(value = "getAllFeedbackForUser")

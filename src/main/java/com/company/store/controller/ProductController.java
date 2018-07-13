@@ -1,14 +1,16 @@
 package com.company.store.controller;
 
-
+import com.company.store.model.entities.Feedback;
 import com.company.store.model.entities.Product;
 import com.company.store.model.entities.ProductAttribute;
 import com.company.store.model.entities.ProductParameter;
+import com.company.store.model.impls.FeedbackDAOImpl;
 import com.company.store.model.impls.ProductDAOImpl;
 import com.company.store.model.services.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,18 +20,18 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Collection;
 import java.util.Map;
 
-
-
 @Controller
 public class ProductController {
 
     private final ProductDAOImpl productDAO;
     private final ProductService productService;
+    private FeedbackDAOImpl feedbackDAO;
 
     @Autowired
-    public ProductController(ProductDAOImpl productDAO, ProductService productService) {
+    public ProductController(ProductDAOImpl productDAO, ProductService productService, FeedbackDAOImpl feedback) {
         this.productDAO = productDAO;
         this.productService = productService;
+        this.feedbackDAO = feedback;
     }
 
     // it works
@@ -48,8 +50,11 @@ public class ProductController {
 
 
     @RequestMapping("product")
-    public ModelAndView productBy(@RequestParam("prod_id") int  product_id) {
-        return new ModelAndView("product", "product", productService.getProductById(product_id));
+    public ModelAndView productBy(@RequestParam("prod_id") int  product_id, Model model) {
+        model.addAttribute("feedback", new Feedback());
+        model.addAttribute("feedbackList", feedbackDAO.getAllFeedbackForProduct(product_id));
+        model.addAttribute("product", productService.getProductById(product_id));
+        return new ModelAndView("product");
     }
 
     @RequestMapping(value = "categoryProducts")
