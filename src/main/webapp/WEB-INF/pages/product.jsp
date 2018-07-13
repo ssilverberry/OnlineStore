@@ -118,7 +118,6 @@
                                 <form:input path="content" type="text" class="form-control"
                                             placeholder="Your feedback" aria-label="Feedback"
                                             aria-describedby="basic-addon2"/>
-
                                 <input name="productId" value="${prod.id}" hidden/>
                                 <button class="btn btn-outline-secondary" type="submit">Send it</button>
                             </div>

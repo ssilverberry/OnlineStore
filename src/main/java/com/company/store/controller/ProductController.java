@@ -66,12 +66,6 @@ public class ProductController {
         return new ModelAndView("list", "productMap", map);
     }
 
-    /*@RequestMapping("product")
-    public ModelAndView productById(@RequestParam("prod_id") int  product_id) {
-        Product productById = productDAO.getProductById(product_id);
-        return new ModelAndView("product", "productById", productById);
-    }*/
-
     @RequestMapping(value = "paramsForProduct")
     public ModelAndView paramsForProduct(@RequestParam ("prod_id") int product_id) {
         Map<ProductAttribute, ProductParameter> paramsForProduct =
