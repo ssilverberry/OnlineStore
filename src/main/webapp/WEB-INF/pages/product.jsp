@@ -92,7 +92,8 @@
                             Price: ${price} $
                         </div>
                         <div class="col-3 text-center">
-                            <a href="order" class="btn btn-primary rounded" style="width: 100px;">
+                            <a href="<c:url value="/order"><c:param name="productId" value="${prod.id}"/> </c:url>"
+                               class="btn btn-primary rounded" style="width: 100px;">
                                 Buy
                             </a>
                         </div>
@@ -115,12 +116,15 @@
                     <form:form method="get" action="${actionUrl}" modelAttribute="feedback">
                         <spring:bind path="feedback">
                             <div class="input-group mt-2">
-                                <form:input path="content" type="text" class="form-control"
+                                <form:input path="content" type="text" id="content" class="form-control"
                                             placeholder="Your feedback" aria-label="Feedback"
                                             aria-describedby="basic-addon2"/>
                                 <input name="productId" value="${prod.id}" hidden/>
                                 <button class="btn btn-outline-secondary" type="submit">Send it</button>
                             </div>
+                            <small id="content" class="form-text text-muted">
+                                <form:errors path="content" cssClass="text-danger"/>
+                            </small>
                         </spring:bind>
                     </form:form>
                 </div>

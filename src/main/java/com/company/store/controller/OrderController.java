@@ -2,6 +2,7 @@ package com.company.store.controller;
 
 import com.company.store.model.entities.Order;
 import com.company.store.model.impls.OrderDAOImpl;
+import com.company.store.model.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -15,9 +16,12 @@ import java.util.Map;
 public class OrderController {
 
     private OrderDAOImpl orderDAO;
+    private ProductService productService;
+
     @Autowired
-    public void setOrderDAO(OrderDAOImpl orderDAO) {
+    public void setOrderDAO(OrderDAOImpl orderDAO, ProductService productService) {
         this.orderDAO = orderDAO;
+        this.productService = productService;
     }
 
     @RequestMapping(value = "OrderById/{id}")
@@ -39,8 +43,10 @@ public class OrderController {
     }
 
     @RequestMapping("order")
-    public String order(Map<String, Object> model) {
+    public String order(Map<String, Object> model,
+                        @RequestParam ("productId") int productId) {
         model.put("saveOrderForm", new Order());
+        model.put("product", productService.getProduct(productId));
         return "order";
     }
 

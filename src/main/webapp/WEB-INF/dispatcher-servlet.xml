@@ -57,7 +57,8 @@
     <bean id="userService" class="com.company.store.model.services.UserService" lazy-init="true"/>
     <bean id="signUpValidator2" class="com.company.store.controller.SignUpValidator" lazy-init="true"/>
     <bean id="signInValidator" class="com.company.store.controller.SignInValidator" lazy-init="true"/>
-    
+    <bean id="feedBackValidator" class="com.company.store.controller.FeedBackValidator" lazy-init="true"/>
+
     <bean id="messageSource"
           class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="useCodeAsDefaultMessage" value="true"/>
