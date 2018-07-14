@@ -39,7 +39,7 @@
                 <img src="<c:url value="/resources/images/products/${product.id}.jpg"/>"/>
             </div>
         </div>
-        <div class="col-4 justify-content-center ml-4 my-4">
+        <div class="col-4 justify-content-center ml-4 my-2">
             <div class="shadow p-3">
                 <form:form class="needs-validation" method="get" action="${actionUrl}" modelAttribute="saveOrderForm">
                     <div>
