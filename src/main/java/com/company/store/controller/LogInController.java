@@ -46,11 +46,11 @@ public class LogInController {
         } else if (userService.getUser(user.getEmail(), user.getPassword()) != null) {
             switch (userService.validateUserType(userService.getUser(user.getEmail(), user.getPassword()))) {
                 case "admin":
-                    model.put("username", user.getName());
-                    return "redirect:/admin/mainPage";
+                    model.put("user", userService.getUser(user.getEmail(), user.getPassword()));
+                    return "admin";
                 case "user":
-                    model.put("username", user.getName());
-                    return "redirect:/";
+                    model.put("user", userService.getUser(user.getEmail(), user.getPassword()));
+                    return "index";
             }
         }
         return "authorize";

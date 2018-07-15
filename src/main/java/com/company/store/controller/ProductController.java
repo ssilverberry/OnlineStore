@@ -25,7 +25,7 @@ public class ProductController {
 
     private final ProductDAOImpl productDAO;
     private final ProductService productService;
-    private FeedbackDAOImpl feedbackDAO;
+    private final FeedbackDAOImpl feedbackDAO;
 
     @Autowired
     public ProductController(ProductDAOImpl productDAO, ProductService productService, FeedbackDAOImpl feedback) {
@@ -84,7 +84,4 @@ public class ProductController {
         productDAO.removeProduct(product_id);
         return new ModelAndView("removeproduct");
     }
-
-
 }
-

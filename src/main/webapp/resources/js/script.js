@@ -1,3 +1,4 @@
+/*
 var signinElem = document.querySelector('.nav__signin');
 var basketElem = document.querySelector('.basket');
 var mainPartList = document.querySelector('.card-columns');
@@ -45,3 +46,4 @@ function getCategoriesList (id) {
 var authorizeOverlay = function () {
     authorization_overlay.classList.toggle('overlay');
 };
+*/

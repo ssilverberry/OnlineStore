@@ -8,8 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <title>Admin</title>
-<jsp:include page="header.jsp" flush="true" />
 
+<c:if test="${!user.equals(null)}">
+    <c:set var="myRequestModel" value="${user}" scope="request" />
+</c:if>
+<jsp:include page="header.jsp" flush="true">
+    <jsp:param name="model" value="${user.name}"/>
+</jsp:include>
 <div class="container-fluid" style="min-height: 100vh; position: relative; padding-top: 25px;">
     <div class="row">
         <div class="col-9">

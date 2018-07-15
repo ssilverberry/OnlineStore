@@ -28,7 +28,6 @@
     <script src="<c:url value="/resources/js/testDescription.js"/>"></script>
 
     <title>Document</title>
-
 </head>
 
 <c:if test="${product != null}">
@@ -42,7 +41,8 @@
     </c:forEach>
 </c:if>
 <spring:url value="/addFeedback" var="actionUrl"/>
-<jsp:include page="header.jsp" flush="true" />
+<jsp:include page="header.jsp" flush="true"/>
+
 <%--<jsp:include page="cartbar.jsp"/>--%>
 <div class="container-fluid justify-content-center" style="min-height: 100vh; position: relative; padding-top: 25px;">
 <div class="row">
@@ -138,5 +138,9 @@
         <jsp:include page="footer.jsp" flush="true" />
     </div>
 </div>
+<script>
+    var navUserName = document.querySelector('.user-name');
+    navUserName.innerHTML = 'Log in ' + localStorage.getItem('username');
+</script>
 </body>
 </html>

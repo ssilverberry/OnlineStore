@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/footer.css"/>"/>
 </head>
 <body>
-
 <nav class="nav justify-content-center custom-nav-shadow bg-dark font-color-white align-items-center">
     <div class="nav-item">
         <a class="nav-link navbar-brand active" href="<c:url value="/"/>">Shop</a>
@@ -38,10 +37,6 @@
         <a class="nav-link" href="<c:url value="/contacts"/>">Contacts</a>
     </div>
     <div class="nav-item sign-link" style="cursor: pointer;">
-        <a class="nav-link user-name" href="<c:url value="/login"/>">Log in ${username}</a>
-        <c:if test="${pageContext.request.userPrincipal.name != null}">
-            ${pageContext.request.userPrincipal.name} |
-            <a class="nav-link user-name" href="<c:url value="/logout"/>">Log out</a>
-        </c:if>
+        <a class="nav-link user-name" href="<c:url value="/login"/>">Log in ${param.model}</a>
     </div>
 </nav>
