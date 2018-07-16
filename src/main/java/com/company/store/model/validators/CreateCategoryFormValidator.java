@@ -33,10 +33,12 @@ public class CreateCategoryFormValidator implements Validator {
 
         Product category = (Product) target;
 
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.category.name");
+
         Collection<Product> existCategories = productDAO.getCategories();
         existCategories.addAll(productDAO.getSubcategories());
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.category.name");
+        category.setName(category.getName().trim());
 
         for (Product prod: existCategories) {
             if (category.getName().equalsIgnoreCase(prod.getName())){
@@ -46,7 +48,10 @@ public class CreateCategoryFormValidator implements Validator {
 
         for (int i = 0; i < category.getParams().size(); i++) {
             ProductParameter subcateg = category.getParams().get(i);
-
+            if (subcateg != null){
+                subcateg.setValue(subcateg.getValue().trim());
+                category.getParams().set(i, subcateg);
+            }
             if (subcateg == null || subcateg.getValue().equals("")){
                 errors.rejectValue("params[" + i + "].value", "NotEmpty.category.params.value");
             } else {
