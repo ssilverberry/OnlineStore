@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/bootstrapcss/bootstrap-grid.min.css"/>">
     <link rel="stylesheet" href="<c:url value="/resources/bootstrapcss/bootstrap.min.css"/>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<c:url value="/resources/css/reset.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/header.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/authorize.css"/>"/>
     <link rel="stylesheet" href="<c:url value="/resources/css/sidebar.css"/>"/>
