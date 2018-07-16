@@ -8,15 +8,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:forEach var="item" items="${productMap}">
-    <c:if test="${'products'.equals(item.key)}">
-        <c:set var="prodList" value="${item.value}"/>
-    </c:if>
+<c:if test="${productMap != null}">
+    <c:forEach var="item" items="${productMap}">
+        <c:if test="${'products'.equals(item.key)}">
+            <c:set var="prodList" value="${item.value}"/>
+        </c:if>
 
-    <c:if test="${'subCategs'.equals(item.key)}">
-        <c:set var="subCategs" value="${item.value}"/>
-    </c:if>
-</c:forEach>
+        <c:if test="${'subCategs'.equals(item.key)}">
+            <c:set var="subCategs" value="${item.value}"/>
+        </c:if>
+    </c:forEach>
+</c:if>
 
 <jsp:include page="header.jsp" flush="true" />
 <div class="container-fluid" style="padding-top: 25px; min-height: 100vh; position: relative;">
