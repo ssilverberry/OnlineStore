@@ -29,7 +29,7 @@
             <spring:bind path="name">
                 <div class="form-group ">
                     <label class="control-label">Category name</label>
-                    <form:input path="name" id="name" class="form-control" type="text" placeholder="Write name.."/>
+                    <form:input path="name" id="name" class="form-control" type="text" placeholder="Write name.." />
                     <form:errors path="name" cssClass="error"/>
                 </div>
             </spring:bind>
