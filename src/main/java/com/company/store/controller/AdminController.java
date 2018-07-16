@@ -137,7 +137,11 @@ public class AdminController {
     //WORKS
     @RequestMapping(value = "/createCategoryForm", method = RequestMethod.GET)
     public String showCreateCategForm(Model model) {
-        model.addAttribute("category", new Product());
+        Product product = new Product();
+        List<ProductParameter> list = new ArrayList<>();
+        list.add(new ProductParameter());
+        product.setParams(list);
+        model.addAttribute("category", product);
         return "admin/categories/createCategoryForm";
     }
 
@@ -146,7 +150,6 @@ public class AdminController {
                                  BindingResult result) {
 
         if (result.hasErrors()) {
-            System.out.println(result.getFieldErrors().toString());
             return "admin/categories/createCategoryForm";
         }
         if (productService.addCategory(category)) {

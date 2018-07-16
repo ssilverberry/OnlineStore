@@ -29,22 +29,41 @@
             <spring:bind path="name">
                 <div class="form-group ">
                     <label class="control-label">Category name</label>
-                    <form:input path="name" id="name" class="form-control" type="text"/>
+                    <form:input path="name" id="name" class="form-control" type="text" placeholder="Write name.."/>
                     <form:errors path="name" cssClass="error"/>
                 </div>
             </spring:bind>
 
-                <p>Subcategories:</p>
+            <p>Subcategories:</p>
+                <a class="btn btn-light" style="float:right;" role="button" id="add-input">ADD ONE</a>
+
                 <div class="form-group" id="subcategories-list" >
-                    <p class="form-inline">
-                        <input name="params[0].value" class="form-control mb-2 mr-sm-2 mb-sm-0 item" type="text" id="first-item"
-                               placeholder="Write name.."/>
-                        <a class="btn btn-light" role="button" id="add-input">ADD ONE</a>
-                        <form:errors path="name" cssClass="error"/>
-                    </p>
+
+                    <c:if test="${category.params != null && category.params.size() != 0}">
+                        <c:forEach var="item" items="${category.params}" varStatus="status">
+                            <p class="form-inline">
+                                <c:set var="index" value="${status.index}"/>
+                                <input name="params[${status.index}].value" class="form-control mb-2 mr-sm-2 mb-sm-0 item"
+                                       placeholder="Write name.." type="text" id="first-item" value="${item.value}" />
+
+                                <c:if test="${index > 0}">
+                                    <a class="btn btn-danger icon-delete ${index}" role="button">DELETE</a>
+                                </c:if>
+
+                                <form:errors path="params[${index}].value" cssClass="error"/>
+                            </p>
+                        </c:forEach>
+                    </c:if>
                 </div>
 
-            <button type="submit" class="btn btn-primary my-1" style="float: right">Next</button>
+            <div class="row" style="margin-top: 20px">
+                <div class="col-11">
+                    <a href="<c:url value="/admin/categoriesOperations"/> " style="float: right;" class="btn btn-secondary"
+                       role="button">Cancel</a>
+                </div>
+                <button type="submit" class="btn btn-primary my-1" style="float: right">Next</button>
+            </div>
+
         </form:form>
 </div>
 <div class="container-fluid" style="position: absolute; bottom: 0; left: 0;">
