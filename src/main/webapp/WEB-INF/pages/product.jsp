@@ -106,7 +106,7 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"
-                     style="overflow-y: auto;">
+                     style="overflow: auto; height: 450px;">
                     <div class="list-group">
                         <c:forEach var="fb" items="${feedbackList}">
                             <a href="#" class="list-group-item list-group-item-action">
