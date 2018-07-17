@@ -83,6 +83,7 @@ public class ProductService {
     }
 
     public boolean updateProduct(Product product){
+        product.setCategory(false);
         return productDAO.saveProduct(product);
     }
 
