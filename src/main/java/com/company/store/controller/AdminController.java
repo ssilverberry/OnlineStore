@@ -6,6 +6,7 @@ import com.company.store.model.entities.ProductParameter;
 import com.company.store.model.services.ProductService;
 import com.company.store.model.validators.CreateCategoryFormValidator;
 
+import com.company.store.model.validators.UpdateProductFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,22 +27,26 @@ public class AdminController {
 
     private final ProductService productService;
     private final CreateCategoryFormValidator createCategoryFormValidator;
+    private final UpdateProductFormValidator updateProductFormValidator;
 
     @Autowired
-    public AdminController(ProductService productService, CreateCategoryFormValidator createCategoryFormValidator) {
+    public AdminController(ProductService productService, CreateCategoryFormValidator createCategoryFormValidator,
+                           UpdateProductFormValidator updateProductFormValidator) {
         this.productService = productService;
         this.createCategoryFormValidator = createCategoryFormValidator;
+        this.updateProductFormValidator = updateProductFormValidator;
     }
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.setValidator(createCategoryFormValidator);
+        binder.setValidator(updateProductFormValidator);
     }
 
     //WORKS
     @RequestMapping(value = "/mainPage")
     public String getMainPage() {
-        return "admin";
+        return "redirect:/admin/categoriesOperations";
     }
 
     @RequestMapping(value = "showCreateForm", method = RequestMethod.GET)
@@ -88,8 +93,13 @@ public class AdminController {
 
     // WORKS
     @RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
-    public String updateProduct(@ModelAttribute("product") Product product) {
-        product.setCategory(false);
+    public String updateProduct(@ModelAttribute("product") Product product, BindingResult result, Model model) {
+        updateProductFormValidator.validate(product, result);
+        if (result.hasErrors()){
+            model.addAttribute("attrs", productService.getCategoryFilters(product.getParentId()));
+            model.addAttribute("categs", productService.getSubcategories());
+            return "admin/products/updatePages/productUpdateForm";
+        }
         if (productService.updateProduct(product)) {
             productService.saveProductParams(product.getParams());
             return "redirect:/admin/products/?prod_id=" + product.getId();
@@ -148,11 +158,9 @@ public class AdminController {
     @RequestMapping(value = "/createCategory", method = RequestMethod.POST)
     public String createCategory(@Valid @ModelAttribute("category") Product category,
                                  BindingResult result) {
-
         if (result.hasErrors()) {
             return "admin/categories/createCategoryForm";
-        }
-        if (productService.addCategory(category)) {
+        } else if (productService.addCategory(category)) {
             return "redirect:/admin/categoriesOperations";
         }
         else return null;
