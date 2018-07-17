@@ -12,41 +12,49 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <jsp:include page="../../header.jsp"/>
-<div style="margin-left: 300px; margin-right: 300px; margin-top: 50px; position: relative; min-height: 100vh;">
-    <div class="row pt-3">
-        <div class="col=sm-1">
-            <a class="btn btn-primary"  role="button"
-               href="<c:url value="/admin/createCategoryForm"/> ">
-                CREATE NEW CATEGORY
-            </a>
-        </div>
-    </div>
-    <div class="form-group pt-3">
-        <div class="list-group">
-            <label class="form-group">Categories</label>
-            <c:forEach var="item" items="${categories}">
-                <div class="row">
-                    <div class="col-md">
-                        <div class="list-group-item">${item.key.name}</div>
-                    </div>
-                    <div class="col-sm-1">
-                        <a class="btn btn-danger"  role="button"
-                           href="<c:url value="/admin/deleteCategory"><c:param name="category_id" value="${item.key.id}"/></c:url>">
-                            DELETE
-                        </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="list-group" style="margin-left: 15px;">
-                        <c:forEach var="in_item" items="${item.value}">
-                            <div class="list-group-item" style="padding-left: 50px">${in_item.name}</div>
-                        </c:forEach>
-                    </div>
-                </div>
-            </c:forEach>
+<div style="margin-left: 100px; margin-right: 200px; margin-top: 50px; position: relative; min-height: 100vh;">
 
+    <div class="row">
+        <jsp:include page="../sidemenu.jsp"/>
+
+        <div class="col-md-9">
+            <div class="row pt-3">
+                <div class="col-sm-1">
+                    <a class="btn btn-primary"  role="button"
+                       href="<c:url value="/admin/createCategoryForm"/> ">
+                        CREATE NEW CATEGORY
+                    </a>
+                </div>
+            </div>
+            <div class="form-group pt-3">
+                <div class="list-group">
+                    <label class="form-group">Categories</label>
+                    <c:forEach var="item" items="${categories}">
+                        <div class="row">
+                            <div class="col-md">
+                                <div class="list-group-item">${item.key.name}</div>
+                            </div>
+                            <div class="col-sm-1">
+                                <a class="btn btn-danger mt-1"  role="button"
+                                   href="<c:url value="/admin/deleteCategory"><c:param name="category_id" value="${item.key.id}"/></c:url>">
+                                    DELETE
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="list-group" style="margin-left: 15px;">
+                                <c:forEach var="in_item" items="${item.value}">
+                                    <div class="list-group-item" style="padding-left: 50px">${in_item.name}</div>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </c:forEach>
+
+                </div>
+            </div>
         </div>
     </div>
+
 </div>
 <div class="container-fluid" style="position: absolute;">
     <div class="col">

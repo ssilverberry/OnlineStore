@@ -14,28 +14,37 @@
 <body lang="en">
 <style type="text/css">
     .error {
+        font-family: Verdana, serif;
+        font-size: 14px;
+        margin-left: 10px;
         color: red;
     }
 </style>
 <jsp:include page="../../header.jsp"/>
-<div style="margin-left: 400px; margin-right: 400px; margin-top: 50px; min-height: 100vh; position: relative;">
+
+<div style="margin-left: 100px; margin-right: 200px; margin-top: 50px; min-height: 100vh; position: relative;">
 
     <spring:url value="/admin/createCategory" var="action"/>
 
-        <form:form action="${action}" method="post" commandName="category">
+    <div class="row">
 
-            <h4>New data</h4> <br>
+        <jsp:include page="../sidemenu.jsp"/>
 
-            <spring:bind path="name">
-                <div class="form-group ">
-                    <label class="control-label">Category name</label>
-                    <form:input path="name" id="name" class="form-control" type="text" placeholder="Write name.." />
-                    <form:errors path="name" cssClass="error"/>
-                </div>
-            </spring:bind>
+        <div class="col-md-9" >
+            <form:form action="${action}" method="post" commandName="category">
 
-            <p>Subcategories:</p>
-                <a class="btn btn-light" style="float:right;" role="button" id="add-input">ADD ONE</a>
+                <h4>New data</h4> <br>
+
+                <spring:bind path="name">
+                    <div class="form-group ">
+                        <label class="control-label">Category name</label>
+                        <form:input path="name" id="name" class="form-control" type="text" placeholder="Write name.." />
+                        <form:errors path="name" cssClass="error"/>
+                    </div>
+                </spring:bind>
+
+                <p>Subcategories:</p>
+                <a class="btn btn-light" style="float: right" role="button" id="add-input">ADD ONE</a>
 
                 <div class="form-group" id="subcategories-list" >
 
@@ -56,15 +65,17 @@
                     </c:if>
                 </div>
 
-            <div class="row" style="margin-top: 20px">
-                <div class="col-11">
-                    <a href="<c:url value="/admin/categoriesOperations"/> " style="float: right;" class="btn btn-secondary"
-                       role="button">Cancel</a>
+                <div class="row" style="margin-top: 20px">
+                    <div class="col-11">
+                        <a href="<c:url value="/admin/categoriesOperations"/> " style="float: right; margin-top: 4px"
+                           class="btn btn-secondary" role="button">Cancel</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary my-1" style="float: right">Next</button>
                 </div>
-                <button type="submit" class="btn btn-primary my-1" style="float: right">Next</button>
-            </div>
 
-        </form:form>
+            </form:form>
+        </div>
+    </div>
 </div>
 <div class="container-fluid" style="position: absolute; bottom: 0; left: 0;">
     <div class="col">
