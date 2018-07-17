@@ -12,22 +12,35 @@
 
 <jsp:include page="../../../header.jsp"/>
 <div class="container-fluid" style="position: relative; min-height: 100vh;">
-<div style="margin-left: 300px; margin-right: 300px; margin-top: 50px ">
-    <div class="row pt-3">
-        <div class="col=sm-1">
+<div style="margin-left: 100px; margin-right: 200px; margin-top: 50px ">
+    <div class="row">
+
+        <jsp:include page="../../sidemenu.jsp"/>
+
+        <div class="col-md-9">
+            <div class="form-group pt-1">
+                <div class="row">
+                    <div class="col-sm-1">
+                        <a class="btn btn-primary mb-2"  role="button"
+                           href="#">
+                            CREATE NEW PRODUCT
+                        </a>
+                    </div>
+                </div>
+                <div class="row pt-3 ml-auto">
+                    <label for="category-id"> Selecting products by the category </label>
+                    <select class="custom-select my-1 mr-sm-2" name="categories" id="category-id" >
+                        <option selected> Choose a category </option>
+                        <c:forEach var="item" items="${categories}">
+                            <option value="${item.key}">${item.value}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </div>
+
+            <div id="prod-list"></div>
         </div>
     </div>
-    <div class="form-group pt-1">
-        <label for="category-id">Category</label>
-        <select class="custom-select my-1 mr-sm-2" name="categories" id="category-id" >
-                <option selected> Choose a category </option>
-            <c:forEach var="item" items="${categories}">
-                <option value="${item.key}">${item.value}</option>
-            </c:forEach>
-        </select>
-    </div>
-
-    <div id="prod-list"></div>
 
     <script>
         $("select#category-id").change(function () {

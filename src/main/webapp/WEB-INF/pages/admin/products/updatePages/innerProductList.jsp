@@ -17,14 +17,14 @@
                         ${item.name}
                 </a>
             </div>
-            <div class="col=sm-1">
+            <div class="col=sm-1 mt-1">
                 <a class="btn btn-primary"  role="button"
                    href="<c:url value="/admin/showUpdateForm"><c:param name="prod_id" value="${item.id}"/></c:url>">
                     UPDATE
                 </a>
             </div>
             <div class="col-sm-1">
-                <a class="btn btn-danger"  role="button"
+                <a class="btn btn-danger mt-1"  role="button"
                    href="<c:url value="/admin/deleteProduct"><c:param name="prod_id" value="${item.id}"/></c:url>">
                     DELETE
                 </a>
