@@ -120,7 +120,7 @@
                                             placeholder="Your feedback" aria-label="Feedback"
                                             aria-describedby="basic-addon2"/>
                                 <input name="productId" value="${prod.id}" hidden/>
-                                <button class="btn btn-outline-secondary" type="submit">Send it</button>
+                                <form:button class="btn btn-outline-secondary" type="submit">Send it</form:button>
                             </div>
                             <small id="content" class="form-text text-muted">
                                 <form:errors path="content" cssClass="text-danger"/>
