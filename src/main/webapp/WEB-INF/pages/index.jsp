@@ -24,7 +24,7 @@
     <jsp:param name="model" value="${user.name}"/>
 </jsp:include>
 
-<div class="container-fluid" style="padding-top: 25px;">
+<div class="container-fluid" style="padding-top: 25px; position: relative; min-height: 100vh;">
     <%--<div class="row justify-content-center myUsername">
         <div class="col-3">
             <div class="bg-info shadow rounded p-2 text-white text-center" style="cursor: pointer;">${username}</div>
@@ -36,15 +36,16 @@
                 <jsp:include page="sidebar.jsp"/>
             </div>
         </div>
-        <div class="col-9">
+        <div class="col-9 ml-4">
             <div class="row">
                 <jsp:include page="content.jsp"/>
             </div>
         </div>
     </div>
-    <div class="row align-items-center justify-content-center bg-light p-2 text-primary bg-secondary rounded">
-        <jsp:include page="footer.jsp"/>
-    </div>
+</div>
+<div class="row align-items-center justify-content-center bg-light p-2 text-primary bg-secondary rounded"
+     style="position: absolute; width: 100%;">
+    <jsp:include page="footer.jsp"/>
 </div>
 <script>
     var foo = '${user.name}';
