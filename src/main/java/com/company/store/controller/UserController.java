@@ -13,14 +13,16 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
 
 @Controller
 public class UserController {
 
     private UserDAOImpl userDAO;
-    private final UserService userService;
+    private UserService userService;
 
     @Autowired
     private SignUpValidator signUpValidator;
@@ -43,32 +45,31 @@ public class UserController {
 
     @RequestMapping(value = "/signup")
     public String showRegistrationForm(Map<String, Object> model) {
-        model.put("registrationForm", new User("superAdmin@gmail.com", "superAdmin", UserRoles.ADMIN));
+        model.put("registrationForm", new User());
         return "registration";
     }
 
     @RequestMapping(value="addUser", method = RequestMethod.POST)
     public String saveUser(@Valid @ModelAttribute("registrationForm")  User user,
                            BindingResult result,
-                           Map<String, Object> model,
                            @RequestParam("email") String email,
                            @RequestParam("name") String name,
                            @RequestParam("surname") String surname,
                            @RequestParam("phone") String phone,
                            @RequestParam("password") String password,
                            @RequestParam("address") String address) {
-        user.setName(name);
-        user.setSurname(surname);
-        user.setEmail(email);
-        user.setPhone(phone);
-        user.setPassword(password);
-        user.setAddress(address);
         if (result.hasErrors()) {
-            System.out.println(result.getFieldErrors().toString());
+            //System.out.println(result.getFieldErrors().toString());
             return "registration";
         } else {
-            Boolean add = userDAO.saveUser(user);
-            if (add) {
+            user.setName(name);
+            user.setSurname(surname);
+            user.setEmail(email);
+            user.setPhone(phone);
+            user.setPassword(password);
+            user.setAddress(address);
+
+            if (userDAO.saveUser(user)) {
                 //return new ModelAndView("index", "user", user);
                 return "redirect:/";
             } else {
