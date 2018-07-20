@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
+@SessionAttributes("user")
 public class LogInController {
 
     private final UserService userService;
