@@ -28,7 +28,7 @@
         <a class="nav-link navbar-brand active" href="<c:url value="/"/>">Shop</a>
     </div>
     <div class="nav-item">
-        <a class="nav-link" href="<c:url value="/payDelive"/> ">Payment & Delievery</a>
+        <a class="nav-link" href="<c:url value="/payDelive"/>">Payment & Delievery</a>
     </div>
     <div class="nav-item">
         <a class="nav-link" href="<c:url value="/aboutus"/>">About us</a>

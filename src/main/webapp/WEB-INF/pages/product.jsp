@@ -92,7 +92,9 @@
                             Price: ${price} $
                         </div>
                         <div class="col-3 text-center">
-                            <a href="<c:url value="/order"><c:param name="productId" value="${prod.id}"/> </c:url>"
+                            <a href="<c:url value="/order">
+                                <c:param name="productId" value="${prod.id}"/>
+                                </c:url>"
                                class="btn btn-primary rounded" style="width: 100px;">
                                 Buy
                             </a>
