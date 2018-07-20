@@ -37,6 +37,12 @@
         <a class="nav-link" href="<c:url value="/contacts"/>">Contacts</a>
     </div>
     <div class="nav-item sign-link" style="cursor: pointer;">
-        <a class="nav-link user-name" href="<c:url value="/login"/>">Log in ${param.model}</a>
+        <a class="nav-link user-name" href="<c:url value="/login"/>">Log in <c:if test="${param.model != null}">
+            ${param.model}
+        </c:if></a>
     </div>
 </nav>
+<script async>
+    var navUserName = document.querySelector('.user-name');
+    navUserName.innerHTML = 'Log in ' + localStorage.getItem('username');
+</script>

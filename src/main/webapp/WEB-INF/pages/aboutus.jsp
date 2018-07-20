@@ -7,8 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<jsp:include page="header.jsp" flush="true" />
-
+<jsp:include page="header.jsp" flush="true"/>
 <div class="container-fluid" style="padding-top: 25px; min-height: 100vh; position: relative;">
     <div class="row container-row justify-content-center">
         <div class="col-9">

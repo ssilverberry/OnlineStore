@@ -18,7 +18,7 @@
 </head>
 
 <c:if test="${!user.equals(null)}">
-    <c:set var="myRequestModel" value="${user}" scope="request" />
+    <c:set var="myRequestModel" value="${user}" scope="session" />
 </c:if>
 <jsp:include page="header.jsp" flush="true">
     <jsp:param name="model" value="${user.name}"/>
