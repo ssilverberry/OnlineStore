@@ -37,12 +37,15 @@
         <a class="nav-link" href="<c:url value="/contacts"/>">Contacts</a>
     </div>
     <div class="nav-item sign-link" style="cursor: pointer;">
-        <a class="nav-link user-name" href="<c:url value="/login"/>">Log in <c:if test="${param.model != null}">
+        <a class="nav-link user-name" href="<c:url value="/login"/>">Log in <span class="flag">
+            <c:if test="${param.model != null}">
             ${param.model}
-        </c:if></a>
+        </c:if></span></a>
     </div>
 </nav>
 <script async>
     var navUserName = document.querySelector('.user-name');
-    navUserName.innerHTML = 'Log in ' + localStorage.getItem('username');
+    var flag = document.querySelector(".flag");
+    if (flag.value != null)
+        navUserName.innerHTML = 'Log in ' + localStorage.getItem('username');
 </script>
