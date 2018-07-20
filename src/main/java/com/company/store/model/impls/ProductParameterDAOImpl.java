@@ -120,7 +120,7 @@ public class ProductParameterDAOImpl implements ProductParameterDAO {
     }
 
     @Override
-    public boolean addParameters(List<ProductParameter> productParams) {
+    public boolean saveParameters(List<ProductParameter> productParams) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(INSERT_PARAMETER)){
             connection.setAutoCommit(false);

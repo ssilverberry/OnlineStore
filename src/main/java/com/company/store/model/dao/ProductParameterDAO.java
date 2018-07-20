@@ -14,7 +14,7 @@ public interface ProductParameterDAO {
 //    for admin
     boolean saveParameter(ProductParameter productParam, boolean isUpdate);
 
-    boolean addParameters(List<ProductParameter> productParams);
+    boolean saveParameters(List<ProductParameter> productParams);
     boolean updateParameters(List<ProductParameter> productParams);
 
     boolean removeParameterByProductId(int product_id);
