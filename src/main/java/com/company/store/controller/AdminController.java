@@ -6,7 +6,7 @@ import com.company.store.model.entities.ProductParameter;
 import com.company.store.model.services.ProductService;
 import com.company.store.model.validators.CreateCategoryFormValidator;
 
-import com.company.store.model.validators.UpdateProductFormValidator;
+import com.company.store.model.validators.ProductFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,20 +27,20 @@ public class AdminController {
 
     private final ProductService productService;
     private final CreateCategoryFormValidator createCategoryFormValidator;
-    private final UpdateProductFormValidator updateProductFormValidator;
+    private final ProductFormValidator productFormValidator;
 
     @Autowired
     public AdminController(ProductService productService, CreateCategoryFormValidator createCategoryFormValidator,
-                           UpdateProductFormValidator updateProductFormValidator) {
+                           ProductFormValidator productFormValidator) {
         this.productService = productService;
         this.createCategoryFormValidator = createCategoryFormValidator;
-        this.updateProductFormValidator = updateProductFormValidator;
+        this.productFormValidator = productFormValidator;
     }
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.setValidator(createCategoryFormValidator);
-        binder.setValidator(updateProductFormValidator);
+        binder.setValidator(productFormValidator);
     }
 
     //WORKS
@@ -58,7 +58,7 @@ public class AdminController {
 
     @RequestMapping(value = "/createProduct/categoryAttrs", method = RequestMethod.POST)
     public @ResponseBody ModelAndView getAttrsList(@RequestParam("categ_id") int id, Model model) {
-        Collection<ProductAttribute> attributes = productService.getCategoryFilters(id);
+        Collection<ProductAttribute> attributes = productService.getCategoryAttrs(id);
         List<ProductParameter> parameters = new ArrayList<>();
         for (ProductAttribute attribute : attributes){
             ProductParameter productParameter = new ProductParameter();
@@ -73,9 +73,27 @@ public class AdminController {
         return new ModelAndView("admin/products/createPages/innerAttrsList");
     }
 
+    @RequestMapping(value = "createProduct", method = RequestMethod.POST)
+    public String createProduct(@ModelAttribute("product") Product product, BindingResult result, Model model){
+        productFormValidator.validate(product, result);
+        if (result.hasErrors()){
+            model.addAttribute("categories", productService.getSubcategories());
+            model.addAttribute("attrsList", productService.getCategoryAttrs(product.getParentId()));
+            return "admin/products/createPages/createProduct";
+        } else {
+            if (productService.addProduct(product)){
+                return "redirect:/admin/products/?prod_id=" + product.getId();
+            }
+        } return null;
+    }
+
+    /*private void populateModel(Model model, Product product){
+
+    }*/
+
     @RequestMapping(value = "showAttrs", method = RequestMethod.GET)
     public String setProductCategory(@ModelAttribute("product") Product product, Model model){
-        model.addAttribute("attributes", productService.getCategoryFilters(product.getParentId()));
+        model.addAttribute("attributes", productService.getCategoryAttrs(product.getParentId()));
         model.addAttribute("params", new ArrayList<>());
         return "admin/products/productInfo";
     }
@@ -86,7 +104,7 @@ public class AdminController {
         Product product = productService.getProduct(prod_id);
         product.setParams(productService.getProductParams(prod_id));
         model.addAttribute("product", product);
-        model.addAttribute("attrs", productService.getCategoryFilters(product.getParentId()));
+        model.addAttribute("attrs", productService.getCategoryAttrs(product.getParentId()));
         model.addAttribute("categs", productService.getSubcategories());
         return "admin/products/updatePages/productUpdateForm";
     }
@@ -94,14 +112,13 @@ public class AdminController {
     // WORKS
     @RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
     public String updateProduct(@ModelAttribute("product") Product product, BindingResult result, Model model) {
-        updateProductFormValidator.validate(product, result);
+        productFormValidator.validate(product, result);
         if (result.hasErrors()){
-            model.addAttribute("attrs", productService.getCategoryFilters(product.getParentId()));
+            model.addAttribute("attrs", productService.getCategoryAttrs(product.getParentId()));
             model.addAttribute("categs", productService.getSubcategories());
             return "admin/products/updatePages/productUpdateForm";
         }
         if (productService.updateProduct(product)) {
-            productService.saveProductParams(product.getParams());
             return "redirect:/admin/products/?prod_id=" + product.getId();
         } else return null;
     }

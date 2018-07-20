@@ -63,7 +63,7 @@ public class ProductService {
         return productDAO.getProductsForCategory(category_id);
     }
 
-    public Collection<ProductAttribute> getCategoryFilters(int category_id){
+    public Collection<ProductAttribute> getCategoryAttrs(int category_id){
         return categoryAttributeDAO.getAttributesForCategory(category_id);
     }
 
@@ -84,30 +84,28 @@ public class ProductService {
 
     public boolean updateProduct(Product product){
         product.setCategory(false);
-        return productDAO.saveProduct(product);
+        if (productDAO.saveProduct(product)){
+            return productParameterDAO.updateParameters(product.getParams());
+        } else return false;
     }
 
     public boolean addProduct(Product product){
         product.setId(0);
-        product.getParams().forEach(new Consumer<ProductParameter>() {
-            @Override
-            public void accept(ProductParameter productParameter) {
-                productParameterDAO.saveParameter(productParameter, false);
-            }
-        });
-        return productDAO.saveProduct(product);
+        if (productDAO.saveProduct(product)){
+            product.setId(productDAO.getProductByName(product.getName()).getId());
+            return saveProductParams(product.getParams(), product.getId());
+        } else return false;
     }
 
     public List<ProductParameter> getProductParams(int product_id){
         return productParameterDAO.getProductParams(product_id);
     }
 
-    public boolean saveProductParams(List<ProductParameter> productParams){
-        return productParameterDAO.updateParameters(productParams);
-    }
-
-    public boolean saveProductParams(ProductParameter productParameter, boolean isUpdate){
-        return productParameterDAO.saveParameter(productParameter, isUpdate);
+    private boolean saveProductParams(List<ProductParameter> productParams, int prod_id){
+        productParams.forEach(productParameter -> {
+            productParameter.setProductId(prod_id);
+        });
+        return productParameterDAO.saveParameters(productParams);
     }
 
     public boolean deleteProduct(int prod_id){

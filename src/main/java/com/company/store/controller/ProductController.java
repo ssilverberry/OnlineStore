@@ -62,7 +62,7 @@ public class ProductController {
         Collection<Product> productIdList = productDAO.getProductsForCategory(category_id);
         ModelMap map = new ModelMap();
         map.addAttribute("products", productService.getCategoryProducts(category_id));
-        map.addAttribute("subCategs", productService.getCategoryFilters(category_id));
+        map.addAttribute("subCategs", productService.getCategoryAttrs(category_id));
         return new ModelAndView("list", "productMap", map);
     }
 
