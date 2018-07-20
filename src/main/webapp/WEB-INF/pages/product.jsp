@@ -105,7 +105,8 @@
 
                     </div>
                 </div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"
+                     style="overflow: auto; height: 450px;">
                     <div class="list-group">
                         <c:forEach var="fb" items="${feedbackList}">
                             <a href="#" class="list-group-item list-group-item-action">
@@ -120,7 +121,7 @@
                                             placeholder="Your feedback" aria-label="Feedback"
                                             aria-describedby="basic-addon2"/>
                                 <input name="productId" value="${prod.id}" hidden/>
-                                <button class="btn btn-outline-secondary" type="submit">Send it</button>
+                                <form:button class="btn btn-outline-secondary" type="submit">Send it</form:button>
                             </div>
                             <small id="content" class="form-text text-muted">
                                 <form:errors path="content" cssClass="text-danger"/>

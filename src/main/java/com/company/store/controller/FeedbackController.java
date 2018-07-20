@@ -45,7 +45,7 @@ public class FeedbackController {
                                @RequestParam("content") String fb,
                                @RequestParam("productId") int  product_id) {
         if (result.hasErrors()) {
-            model.addAttribute("content", feedback.getContent());
+            //model.addAttribute("content", feedback.getContent());
             model.addAttribute("product", productService.getProductById(product_id));
             model.addAttribute("feedbackList", feedbackDAO.getAllFeedbackForProduct(product_id));
             return new ModelAndView("product");
@@ -56,7 +56,7 @@ public class FeedbackController {
             model.addAttribute("feedbackList", feedbackDAO.getAllFeedbackForProduct(product_id));
             feedbackDAO.saveFeedback(new Feedback(userDAO.getById(1000001), product_id,
                 4, feedback.getContent()));
-            return new ModelAndView("product");
+            return new ModelAndView("redirect:/product" + "?prod_id=" + product_id);
         }
     }
     @RequestMapping(value = "allfeedback")
