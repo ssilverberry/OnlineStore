@@ -68,21 +68,6 @@
                     <jsp:include page="innerAttrsList.jsp"/>
                 </div>
 
-                <%--<div class="col-sm-2 mt-4 pt-2">
-                    <c:forEach var="item" items="${product.params}" varStatus="status">
-                        <c:set var="index" value="${status.index}"/>
-                        <div class="row align-self-center pl-2 mt-2">
-                            <form:errors path="params[${index}].value" cssClass="error"/>
-                        </div>
-                    </c:forEach>
-                    &lt;%&ndash;<spring:hasBindErrors name="product">
-                        <c:forEach var="error" items="${errors.allErrors}">
-                            <b>${error}</b>
-                            <br />
-                        </c:forEach>
-                    </spring:hasBindErrors>&ndash;%&gt;
-                </div>--%>
-
                 </div>
                 <div class="row mt-5">
                     <div class="col-11">
@@ -108,27 +93,24 @@
 </html>
 
 <script>
-
-    $(document).ready(function () {
-        if (${attrsList == null}) {
-            $.ajax({
-                url: "createProduct/categoryAttrs",
-                data: {categ_id: $("select#category-id").val()},
-                method: 'post',
-                success: function (data) {
-                    $('#attrs').html(data);
-                }
-            });
-        }
-    });
-    $("select#category-id").change(function () {
+    function getAttributesByCategory(val) {
         $.ajax({
             url: "createProduct/categoryAttrs",
-            data: {categ_id: $(this).val()},
+            data: {categ_id: val},
             method: 'post',
             success: function (data) {
                 $('#attrs').html(data);
             }
         });
+    }
+    var selectList = $("select#category-id");
+    $(document).ready(function () {
+        if (${attrsList == null}) {
+            getAttributesByCategory(selectList.val());
+        }
+    });
+
+    selectList.change(function () {
+        getAttributesByCategory(selectList.val());
     });
 </script>
