@@ -173,7 +173,7 @@ public class ProductDAOImpl implements ProductDAO {
                 product.setCategory(true);
                 product.setId(product_id);
                 product.setName(productName);
-                product.setParentId(0);
+                product.setParentId(resultSet.getInt("parent_id"));
                 product.setParameters(null);
             } else {
                 product.setCategory(false);
