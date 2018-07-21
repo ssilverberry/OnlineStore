@@ -34,3 +34,7 @@
         <jsp:include page="footer.jsp"/>
     </div>
 </div>
+<script>
+    var navUserName = document.querySelector('.user-name');
+    navUserName.innerHTML = 'Log in ' + localStorage.getItem('username');
+</script>

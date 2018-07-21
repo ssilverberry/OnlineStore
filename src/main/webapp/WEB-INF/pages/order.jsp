@@ -95,6 +95,10 @@
 <div class="row p-2 bg-light rounded justify-content-center align-items-center text-primary" style="position: absolute; width: 100%;">
     <jsp:include page="footer.jsp" flush="true" />
 </div>
+<script>
+    var navUserName = document.querySelector('.user-name');
+    navUserName.innerHTML = 'Log in ' + localStorage.getItem('username');
+</script>
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->

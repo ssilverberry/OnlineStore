@@ -63,6 +63,10 @@
     </div>
 </div>
 <script src="<c:url value="/resources/js/jquery-3.3.1.min.js"/> "></script>
+<script>
+    var navUserName = document.querySelector('.user-name');
+    navUserName.innerHTML = 'Log in ' + localStorage.getItem('username');
+</script>
 </body>
 </html>
 

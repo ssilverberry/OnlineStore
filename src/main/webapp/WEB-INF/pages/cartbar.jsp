@@ -88,7 +88,7 @@
     }
 
 </style>
-<script>
+<%--<script>
     var cartElem = document.querySelector('.cartbar');
 
     cartElem.addEventListener('click', showCartList());
@@ -109,4 +109,4 @@
 
         });
     }
-</script>
+</script>--%>

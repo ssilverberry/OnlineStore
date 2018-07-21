@@ -43,7 +43,7 @@
         </c:if></span></a>
     </div>
 </nav>
-<script async>
+<script>
     var navUserName = document.querySelector('.user-name');
     var flag = document.querySelector(".flag");
     if (flag.value != null)
