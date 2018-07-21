@@ -31,7 +31,7 @@
                     <c:forEach var="item" items="${categories}">
                         <div class="row">
                             <div class="col-md">
-                                <div class="list-group-item">${item.key.name}</div>
+                                <div class="list-group-item"><strong>${item.key.name}</strong></div>
                             </div>
                             <div class="col-sm-1">
                                 <a class="btn btn-danger mt-1"  role="button"
@@ -40,13 +40,26 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="list-group" style="margin-left: 15px;">
-                                <c:forEach var="in_item" items="${item.value}">
-                                    <div class="list-group-item" style="padding-left: 50px">${in_item.name}</div>
-                                </c:forEach>
+
+                            <div class="row-fluid ml-3 mt-3 mb-3">
+                                    <c:forEach var="in_item" items="${item.value}">
+                                        <div class="row">
+
+                                            <div class="col-md-7 list-group-item ml-5 pt-3 pb-3">
+                                                ${in_item.name}
+                                            </div>
+                                            <div class="col-1 pt-2">
+                                                <a class="btn btn-info"  role="button"
+                                                   href="<c:url value="/admin/updateSubcategoryForm">
+                                                    <c:param name="subcategory_id" value="${in_item.id}"/>
+                                                 </c:url>">
+                                                    UPDATE
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
                             </div>
-                        </div>
+
                     </c:forEach>
 
                 </div>
