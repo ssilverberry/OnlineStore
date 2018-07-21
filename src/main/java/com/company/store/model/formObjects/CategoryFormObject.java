@@ -6,9 +6,37 @@ import java.util.List;
 
 public class CategoryFormObject {
 
+    private Integer categoryId;
+    private Integer subcategoryId;
     private String categoryName;
     private String subcategoryName;
     private List<ProductAttribute> attributes;
+    private boolean isUpdate;
+
+    public CategoryFormObject() {
+    }
+
+    public CategoryFormObject(Integer categoryId, String categoryName, String subcategoryName) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+        this.subcategoryName = subcategoryName;
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public Integer getSubcategoryId() {
+        return subcategoryId;
+    }
+
+    public void setSubcategoryId(Integer subcategoryId) {
+        this.subcategoryId = subcategoryId;
+    }
 
     public String getCategoryName() {
         return categoryName;
@@ -32,5 +60,13 @@ public class CategoryFormObject {
 
     public void setAttributes(List<ProductAttribute> attributes) {
         this.attributes = attributes;
+    }
+
+    public boolean isUpdate() {
+        return isUpdate;
+    }
+
+    public void setUpdate(boolean update) {
+        isUpdate = update;
     }
 }
