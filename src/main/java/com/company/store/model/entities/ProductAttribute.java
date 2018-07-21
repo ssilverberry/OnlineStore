@@ -52,6 +52,6 @@ public class ProductAttribute implements Comparable<ProductAttribute>{
 
     @Override
     public int compareTo(ProductAttribute o) {
-        return this.name.compareTo(o.getName());
+        return String.valueOf(this.attr_id).compareTo(String.valueOf(o.getAttrId()));
     }
 }
