@@ -28,7 +28,7 @@
         <a class="nav-link navbar-brand active" href="<c:url value="/"/>">Shop</a>
     </div>
     <div class="nav-item">
-        <a class="nav-link" href="<c:url value="/payDelive"/> ">Payment & Delievery</a>
+        <a class="nav-link" href="<c:url value="/payDelive"/>">Payment & Delievery</a>
     </div>
     <div class="nav-item">
         <a class="nav-link" href="<c:url value="/aboutus"/>">About us</a>
@@ -37,6 +37,15 @@
         <a class="nav-link" href="<c:url value="/contacts"/>">Contacts</a>
     </div>
     <div class="nav-item sign-link" style="cursor: pointer;">
-        <a class="nav-link user-name" href="<c:url value="/login"/>">Log in ${param.model}</a>
+        <a class="nav-link user-name" href="<c:url value="/login"/>">Log in <span class="flag">
+            <c:if test="${param.model != null}">
+            ${param.model}
+        </c:if></span></a>
     </div>
 </nav>
+<script async>
+    var navUserName = document.querySelector('.user-name');
+    var flag = document.querySelector(".flag");
+    if (flag.value != null)
+        navUserName.innerHTML = 'Log in ' + localStorage.getItem('username');
+</script>

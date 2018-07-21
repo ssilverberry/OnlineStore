@@ -92,7 +92,9 @@
                             Price: ${price} $
                         </div>
                         <div class="col-3 text-center">
-                            <a href="<c:url value="/order"><c:param name="productId" value="${prod.id}"/> </c:url>"
+                            <a href="<c:url value="/order">
+                                <c:param name="productId" value="${prod.id}"/>
+                                </c:url>"
                                class="btn btn-primary rounded" style="width: 100px;">
                                 Buy
                             </a>
@@ -139,9 +141,5 @@
         <jsp:include page="footer.jsp" flush="true" />
     </div>
 </div>
-<script>
-    var navUserName = document.querySelector('.user-name');
-    navUserName.innerHTML = 'Log in ' + localStorage.getItem('username');
-</script>
 </body>
 </html>
