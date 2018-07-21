@@ -41,6 +41,7 @@ public class ProductDAOImpl implements ProductDAO {
     private static final String UPDATE_PRODUCT = "UPDATE products SET parent_id=?, product_name=?, iscategory=? " +
                                                                  "WHERE product_id=?";
     private static final String DELETE_PRODUCT = "DELETE FROM PRODUCTS WHERE PRODUCT_ID = ?";
+    private static final String DELETE_CATEGORY_PRODUCTS = "DELETE FROM PRODUCTS WHERE parent_id=?";
 
     /**
      * Instance of global datasource to get connection from pool.
@@ -223,6 +224,20 @@ public class ProductDAOImpl implements ProductDAO {
             log.debug("Product was deleted by id: " + product_id);
         } catch (SQLException e) {
             log.error("Failed to delete product by id: " + product_id, e);
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean removeCategoryProducts(int category_id) {
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement ps = connection.prepareStatement(DELETE_CATEGORY_PRODUCTS)) {
+            ps.setInt(1, category_id);
+            ps.executeUpdate();
+            log.debug("Products was deleted by category_id: " + category_id);
+        } catch (SQLException e) {
+            log.error("Failed to delete products by category_id: " + category_id, e);
             return false;
         }
         return true;

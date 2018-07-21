@@ -19,5 +19,8 @@ public interface ProductDAO {
 
     // for admin
     boolean saveProduct(Product product);
+
     boolean removeProduct(int product_id);
+    boolean removeCategoryProducts(int category_id);
+
 }
