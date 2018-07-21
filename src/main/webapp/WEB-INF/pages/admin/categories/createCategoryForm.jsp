@@ -22,7 +22,7 @@
 </style>
 <jsp:include page="../../header.jsp"/>
 
-<div style="margin-left: 100px; margin-right: 200px; margin-top: 50px; min-height: 100vh; position: relative;">
+<div style="margin-left: 100px; margin-right: 300px; margin-top: 50px; min-height: 100vh; position: relative;">
 
     <spring:url value="/admin/createCategory" var="action"/>
 
@@ -33,33 +33,41 @@
         <div class="col-md-9" >
             <form:form action="${action}" method="post" commandName="category">
 
-                <h4>New data</h4> <br>
+                <h4>Creating category</h4> <br>
 
-                <spring:bind path="name">
+                <spring:bind path="categoryName">
                     <div class="form-group ">
-                        <label class="control-label">Category name</label>
-                        <form:input path="name" id="name" class="form-control" type="text" placeholder="Write name.." />
-                        <form:errors path="name" cssClass="error"/>
+                        <label class="control-label">Category</label>
+                        <form:input path="categoryName" id="name" class="form-control" type="text" placeholder="Write name.." />
+                        <form:errors path="categoryName" cssClass="error"/>
                     </div>
                 </spring:bind>
 
-                <p>Subcategories:</p>
+                <spring:bind path="subcategoryName">
+                    <div class="form-group ">
+                        <label class="control-label">Subcategory</label>
+                        <form:input path="subcategoryName" id="name" class="form-control" type="text" placeholder="Write name.." />
+                        <form:errors path="subcategoryName" cssClass="error"/>
+                    </div>
+                </spring:bind>
+
+                <p>Attributes:</p>
                 <a class="btn btn-light" style="float: right" role="button" id="add-input">ADD ONE</a>
 
                 <div class="form-group" id="subcategories-list" >
 
-                    <c:if test="${category.params != null && category.params.size() != 0}">
-                        <c:forEach var="item" items="${category.params}" varStatus="status">
+                    <c:if test="${category.attributes != null && category.attributes.size() != 0}">
+                        <c:forEach var="item" items="${category.attributes}" varStatus="status">
                             <p class="form-inline">
                                 <c:set var="index" value="${status.index}"/>
-                                <input name="params[${status.index}].value" class="form-control mb-2 mr-sm-2 mb-sm-0 item"
-                                       placeholder="Write name.." type="text" id="first-item" value="${item.value}" />
+                                <input name="attributes[${status.index}].name" class="form-control mb-2 mr-sm-2 mb-sm-0 item"
+                                       placeholder="Write name.." type="text" value="${item.name}" />
 
                                 <c:if test="${index > 0}">
                                     <a class="btn btn-danger icon-delete ${index}" role="button">DELETE</a>
                                 </c:if>
 
-                                <form:errors path="params[${index}].value" cssClass="error"/>
+                                <form:errors path="attributes[${index}].name" cssClass="error attr"/>
                             </p>
                         </c:forEach>
                     </c:if>
@@ -84,18 +92,31 @@
         </div>
     </div>
 </div>
+
 <script>
+    function updateList(array) {
+        var temp = 0;
+        $(".item").each(function () {
+            array[temp] = ["attributes[" + temp +"].name"];
+            temp++;
+        });
+    }
+
     $(document).ready(function () {
-        var itemIndex = 0;
-        var array = ["params[" + itemIndex +"].value"];
+        var array = [];
+
+        updateList(array);
+
+        var itemIndex = ${category.attributes.size()-1};
+
         $('#add-input').click(function() {
             itemIndex++;
-            array[itemIndex] = ["params[" + itemIndex +"].value"];
+            array[itemIndex] = ["attributes[" + itemIndex +"].name"];
             $('<p class="form-inline">\n' +
-                '<input name="' + array[itemIndex] + '" class="form-control mb-2 mr-sm-2 mb-sm-0 subItem" ' +
+                '<input name="' + array[itemIndex] + '" class="form-control mb-2 mr-sm-2 mb-sm-0 item" ' +
                 '       placeholder="Write name.." />\n' +
                 '<a class="btn btn-danger icon-delete ' + itemIndex + '" role="button">DELETE</a>\n' +
-                '<form:errors path="name" cssClass="error"/></p>').appendTo('#subcategories-list');
+                '</p>').appendTo('#subcategories-list');
         });
 
         $('#subcategories-list').on('click', '.icon-delete', (function () {
@@ -103,21 +124,33 @@
             var temp = $(this).attr('class').split(' ');
             var removed = array.splice(temp[3], 1);
 
-            for (var i = temp[3]; i < array.length; i++){
-                array[i] = ["params[" + i +"].value"];
+            for (var i = 0; i < array.length; i++){
+                array[i] = ["attributes[" + i +"].name"];
             }
 
             $(this).parent().remove();
             itemIndex--;
 
-            var itm = 1;
-            $(".subItem").each(function () {
+            var itm = 0;
+            $(".item").each(function () {
                 $(this).attr("name", array[itm]);
                 itm++;
             });
+            itm = 1;
+            $(".icon-delete").each(function () {
+                $(this).attr("class", "btn btn-danger icon-delete " + itm);
+                itm++;
+            });
+
+            itm = 0;
+            $(".attr").each(function () {
+                $(this).attr("id", "attributes" + itm + ".name.errors");
+                itm++;
+            })
 
         }));
-    })
+    });
 </script>
+
 </body>
 </html>
