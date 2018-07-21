@@ -7,6 +7,7 @@ import com.company.store.model.dao.ProductParameterDAO;
 import com.company.store.model.entities.Product;
 import com.company.store.model.entities.ProductAttribute;
 import com.company.store.model.entities.ProductParameter;
+import com.company.store.model.formObjects.CategoryFormObject;
 import com.company.store.model.impls.CategoryAttributeDAOImpl;
 import com.company.store.model.impls.FeedbackDAOImpl;
 import com.company.store.model.impls.ProductDAOImpl;
@@ -63,7 +64,7 @@ public class ProductService {
         return productDAO.getProductsForCategory(category_id);
     }
 
-    public Collection<ProductAttribute> getCategoryAttrs(int category_id){
+    public List<ProductAttribute> getCategoryAttrs(int category_id){
         return categoryAttributeDAO.getAttributesForCategory(category_id);
     }
 
@@ -97,6 +98,9 @@ public class ProductService {
         } else return false;
     }
 
+    public Map<ProductAttribute, ProductParameter> getParamsForProduct(int product_id){
+        return productDAO.getParamsForProduct(product_id);
+    }
     public List<ProductParameter> getProductParams(int product_id){
         return productParameterDAO.getProductParams(product_id);
     }
@@ -109,35 +113,83 @@ public class ProductService {
     }
 
     public boolean deleteProduct(int prod_id){
-        return productDAO.removeProduct(prod_id);
-    }
-
-    public boolean deleteCategory(int categ__id){
-        Collection<Product> subCategs = productDAO.getProductsForCategory(categ__id);
-        if (subCategs != null && subCategs.size() > 0){
-            subCategs.forEach(new Consumer<Product>() {
-                @Override
-                public void accept(Product product) {
-                    productDAO.removeProduct(product.getId());
-                }
-            });
+        if (productParameterDAO.removeParameterByProductId(prod_id)){
+            return productDAO.removeProduct(prod_id);
         }
-        return productDAO.removeProduct(categ__id);
+        return false;
     }
 
-    public boolean addCategory(Product product){
-        product.setCategory(true);
-        if(productDAO.saveProduct(product)){
-            Product categ = productDAO.getProductByName(product.getName());
-            List<ProductParameter> subCategs = product.getParams();
-            subCategs.forEach(productParameter -> {
-                Product subCateg = new Product();
-                subCateg.setCategory(true);
-                subCateg.setParentId(categ.getId());
-                subCateg.setName(productParameter.getValue());
-                productDAO.saveProduct(subCateg);
-            });
-            return true;
-        } else return false;
+    public boolean deleteCategory(int category_id){
+        Collection<Product> subcategories = productDAO.getProductsForCategory(category_id);
+        boolean result;
+        for (Product subcategory: subcategories) {
+            if (deleteCategoryProducts(subcategory.getId())){
+                result = categoryAttributeDAO.removeCategoryAttributes(subcategory.getId());
+                if (!result){
+                    return false;
+                }
+            }
+        }
+        if (productDAO.removeCategoryProducts(category_id)){
+            return productDAO.removeProduct(category_id);
+        }
+        return false;
+    }
+
+    private boolean deleteCategoryProducts(int subcategory_id){
+        boolean resultFlag = true;
+        Collection<Product> products = productDAO.getProductsForCategory(subcategory_id);
+        for (Product product: products) {
+            resultFlag = deleteProduct(product.getId());
+            if (!resultFlag) {
+                break;
+            }
+        }
+        return resultFlag;
+    }
+
+    public boolean addCategory(CategoryFormObject object){
+        Product category = new Product();
+        category.setName(object.getCategoryName());
+        category.setCategory(true);
+        if(productDAO.saveProduct(category)){
+            category.setId(productDAO.getProductByName(category.getName()).getId());
+            Product subcategory = new Product();
+            subcategory.setName(object.getSubcategoryName());
+            subcategory.setCategory(true);
+            subcategory.setParentId(category.getId());
+            if (productDAO.saveProduct(subcategory)){
+                subcategory.setId(productDAO.getProductByName(subcategory.getName()).getId());
+                return saveCategoryAttributes(subcategory, object.getAttributes());
+            }
+        }
+        return false;
+    }
+
+    public boolean updateSubcategory(CategoryFormObject object){
+        Product subcategory = new Product();
+        subcategory.setId(object.getSubcategoryId());
+        subcategory.setName(object.getSubcategoryName());
+        subcategory.setParentId(productDAO.getProductByName(object.getCategoryName()).getId());
+        subcategory.setCategory(true);
+        if (productDAO.saveProduct(subcategory)){
+            for (ProductAttribute attr: object.getAttributes()) {
+                System.out.println("IN updateSubcategory attr_id " + attr.getAttrId());
+                attr.setProductId(subcategory.getId());
+                categoryAttributeDAO.saveAttribute(attr);
+            }
+            //return categoryAttributeDAO.saveAttributes(object.getAttributes(), true);
+        }
+        return false;
+    }
+
+    private boolean saveCategoryAttributes(Product subcategory, List<ProductAttribute> attributes){
+        attributes.forEach(new Consumer<ProductAttribute>() {
+            @Override
+            public void accept(ProductAttribute attribute) {
+                attribute.setProductId(subcategory.getId());
+            }
+        });
+        return categoryAttributeDAO.saveAttributes(attributes, false);
     }
 }
