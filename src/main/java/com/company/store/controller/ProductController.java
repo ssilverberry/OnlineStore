@@ -59,7 +59,6 @@ public class ProductController {
 
     @RequestMapping(value = "categoryProducts")
     public ModelAndView showProductForCategory(@RequestParam("category_id") int category_id) {
-        Collection<Product> productIdList = productDAO.getProductsForCategory(category_id);
         ModelMap map = new ModelMap();
         map.addAttribute("products", productService.getCategoryProducts(category_id));
         map.addAttribute("subCategs", productService.getCategoryAttrs(category_id));
