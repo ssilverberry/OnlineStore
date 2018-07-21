@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Home
-  Date: 26.06.2018
-  Time: 19:52
+  Date: 21.07.2018
+  Time: 12:17
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -24,21 +24,30 @@
 
 <div style="margin-left: 100px; margin-right: 300px; margin-top: 50px; min-height: 100vh; position: relative;">
 
-    <spring:url value="/admin/createCategory" var="action"/>
+    <spring:url value="/admin/updateSubcategory" var="action"/>
 
     <div class="row">
 
         <jsp:include page="../sidemenu.jsp"/>
 
         <div class="col-md-9" >
-            <form:form action="${action}" method="post" commandName="category">
+            <form:form action="${action}" method="post" modelAttribute="category">
 
-                <h4>Creating category</h4> <br>
+                <h4>Updating subcategory</h4> <br>
+
+                <form:input path="subcategoryId" value="${category.subcategoryId}" hidden="true"/>
 
                 <spring:bind path="categoryName">
                     <div class="form-group ">
-                        <label class="control-label">Category</label>
-                        <form:input path="categoryName" id="name" class="form-control" type="text" placeholder="Write name.." />
+                        <label>Category</label>
+                        <select class="custom-select my-1 mr-sm-2" name="categoryName" id="category-id" >
+                            <option selected value="${category.categoryName}">${category.categoryName}</option>
+                            <c:forEach var="item" items="${categories}">
+                                <c:if test="${!category.categoryName.equals(item.name)}">
+                                    <option value="${item.name}">${item.name}</option>
+                                </c:if>
+                            </c:forEach>
+                        </select>
                         <form:errors path="categoryName" cssClass="error"/>
                     </div>
                 </spring:bind>
@@ -46,7 +55,7 @@
                 <spring:bind path="subcategoryName">
                     <div class="form-group ">
                         <label class="control-label">Subcategory</label>
-                        <form:input path="subcategoryName" id="name" class="form-control" type="text" placeholder="Write name.." />
+                        <form:input path="subcategoryName" class="form-control" type="text" value="${category.subcategoryName}" />
                         <form:errors path="subcategoryName" cssClass="error"/>
                     </div>
                 </spring:bind>
@@ -63,6 +72,8 @@
                                 <input name="attributes[${status.index}].name" class="form-control mb-2 mr-sm-2 mb-sm-0 item"
                                        placeholder="Write name.." type="text" value="${item.name}" />
 
+                                <input name="attributes[${status.index}].attrId" value="${item.attrId}" class="attrId" hidden/>
+
                                 <c:if test="${index > 0}">
                                     <a class="btn btn-danger icon-delete ${index}" role="button">DELETE</a>
                                 </c:if>
@@ -74,7 +85,7 @@
                 </div>
 
                 <spring:bind path="update">
-                    <form:input path="update" class="form-control" type="text" value="${false}" hidden="true"/>
+                    <form:input path="update" class="form-control" type="text" value="${true}" hidden="true"/>
                 </spring:bind>
 
                 <div class="row" style="margin-top: 20px">
@@ -149,6 +160,12 @@
             itm = 0;
             $(".attr").each(function () {
                 $(this).attr("id", "attributes" + itm + ".name.errors");
+                itm++;
+            })
+
+            itm = 0;
+            $(".attrId").each(function () {
+                $(this).attr("name", "attributes[" + itm + "].attrId");
                 itm++;
             })
 

@@ -3,8 +3,9 @@ package com.company.store.controller;
 import com.company.store.model.entities.Product;
 import com.company.store.model.entities.ProductAttribute;
 import com.company.store.model.entities.ProductParameter;
+import com.company.store.model.formObjects.CategoryFormObject;
 import com.company.store.model.services.ProductService;
-import com.company.store.model.validators.CreateCategoryFormValidator;
+import com.company.store.model.validators.CategoryFormValidator;
 
 import com.company.store.model.validators.ProductFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,29 +18,31 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
 
     private final ProductService productService;
-    private final CreateCategoryFormValidator createCategoryFormValidator;
+    private final CategoryFormValidator categoryFormValidator;
     private final ProductFormValidator productFormValidator;
 
     @Autowired
-    public AdminController(ProductService productService, CreateCategoryFormValidator createCategoryFormValidator,
+    public AdminController(ProductService productService, CategoryFormValidator categoryFormValidator,
                            ProductFormValidator productFormValidator) {
         this.productService = productService;
-        this.createCategoryFormValidator = createCategoryFormValidator;
+        this.categoryFormValidator = categoryFormValidator;
         this.productFormValidator = productFormValidator;
     }
 
-    @InitBinder
-    protected void initBinder(WebDataBinder binder) {
-        binder.setValidator(createCategoryFormValidator);
+    @InitBinder(value = "category")
+    protected void initCategoryBinder(WebDataBinder binder) {
+        binder.setValidator(categoryFormValidator);
+    }
+
+    @InitBinder(value = "product")
+    protected void initProductBinder(WebDataBinder binder) {
         binder.setValidator(productFormValidator);
     }
 
@@ -58,7 +61,8 @@ public class AdminController {
 
     @RequestMapping(value = "/createProduct/categoryAttrs", method = RequestMethod.POST)
     public @ResponseBody ModelAndView getAttrsList(@RequestParam("categ_id") int id, Model model) {
-        Collection<ProductAttribute> attributes = productService.getCategoryAttrs(id);
+        List<ProductAttribute> attributes = productService.getCategoryAttrs(id);
+        attributes.sort(Comparator.comparing(o -> String.valueOf(o.getAttrId())));
         List<ProductParameter> parameters = new ArrayList<>();
         for (ProductAttribute attribute : attributes){
             ProductParameter productParameter = new ProductParameter();
@@ -87,10 +91,6 @@ public class AdminController {
         } return null;
     }
 
-    /*private void populateModel(Model model, Product product){
-
-    }*/
-
     @RequestMapping(value = "showAttrs", method = RequestMethod.GET)
     public String setProductCategory(@ModelAttribute("product") Product product, Model model){
         model.addAttribute("attributes", productService.getCategoryAttrs(product.getParentId()));
@@ -102,9 +102,13 @@ public class AdminController {
     @RequestMapping(value = "showUpdateForm")
     public String getUpdateProduct(@RequestParam("prod_id") int prod_id, Model model) {
         Product product = productService.getProduct(prod_id);
-        product.setParams(productService.getProductParams(prod_id));
+        Map<ProductAttribute, ProductParameter> attrParamMap = productService.getParamsForProduct(prod_id);
+        List<ProductParameter> parameters = new ArrayList<>(attrParamMap.values());
+        product.setParams(parameters);
+        List<ProductAttribute> attributes = new ArrayList<>(attrParamMap.keySet());
+        //attributes.sort(Comparator.comparing(o -> String.valueOf(o.getAttrId())));
         model.addAttribute("product", product);
-        model.addAttribute("attrs", productService.getCategoryAttrs(product.getParentId()));
+        model.addAttribute("attrs", attributes);
         model.addAttribute("categs", productService.getSubcategories());
         return "admin/products/updatePages/productUpdateForm";
     }
@@ -135,7 +139,7 @@ public class AdminController {
     @RequestMapping(value = "/productsOperations", method = RequestMethod.GET)
     public String showProdOperations(Model model) {
         model.addAttribute("categories", productService.getSubcategories());
-        model.addAttribute("category", new Product());
+        /*model.addAttribute("categ", new Product());*/
         return "admin/products/updatePages/productOperations";
     }
 
@@ -147,11 +151,11 @@ public class AdminController {
     }
 
     //works
-    @RequestMapping(value = "/deleteProduct", method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteProduct", method = RequestMethod.GET)
     public String deleteProduct(@RequestParam("prod_id") int id) {
         if (productService.deleteProduct(id)){
             return "redirect:/admin/productsOperations";
-        } else return "";
+        } else return null;
     }
 
     //WORKS
@@ -164,23 +168,49 @@ public class AdminController {
     //WORKS
     @RequestMapping(value = "/createCategoryForm", method = RequestMethod.GET)
     public String showCreateCategForm(Model model) {
-        Product product = new Product();
-        List<ProductParameter> list = new ArrayList<>();
-        list.add(new ProductParameter());
-        product.setParams(list);
-        model.addAttribute("category", product);
+        CategoryFormObject object = new CategoryFormObject();
+        List<ProductAttribute> attributes = new ArrayList<>();
+        attributes.add(new ProductAttribute());
+        object.setAttributes(attributes);
+        model.addAttribute("category", object);
         return "admin/categories/createCategoryForm";
     }
 
+    //WORKS
+    @RequestMapping(value = "/updateSubcategoryForm", method = RequestMethod.GET)
+    public String showUpdateSubcategForm(@RequestParam("subcategory_id") int subcategory_id, Model model) {
+        Product subcategory = productService.getProduct(subcategory_id);
+        Product category = productService.getProduct(subcategory.getParentId());
+        CategoryFormObject object = new CategoryFormObject(category.getId(), category.getName(), subcategory.getName());
+        object.setSubcategoryId(subcategory_id);
+        object.setAttributes(productService.getCategoryAttrs(subcategory_id));
+        object.getAttributes().sort(Comparator.comparing(o -> String.valueOf(o.getAttrId())));
+        model.addAttribute("categories", productService.getCategories().keySet());
+        model.addAttribute("category", object);
+        return "admin/categories/updateSubcategoryForm";
+    }
+
+    @RequestMapping(value = "/updateSubcategory", method = RequestMethod.POST)
+    public String updateSubcategory(@Valid @ModelAttribute("category") CategoryFormObject category,
+                                 BindingResult result) {
+
+        if (result.hasErrors()) {
+            return "admin/categories/updateSubcategoryForm";
+        } else if (productService.updateSubcategory(category)) {
+            return "redirect:/admin/categoriesOperations";
+        }
+        else return "redirect:/admin/categoriesOperations";
+    }
+
     @RequestMapping(value = "/createCategory", method = RequestMethod.POST)
-    public String createCategory(@Valid @ModelAttribute("category") Product category,
+    public String createCategory(@ Valid @ModelAttribute("category") CategoryFormObject category,
                                  BindingResult result) {
         if (result.hasErrors()) {
             return "admin/categories/createCategoryForm";
         } else if (productService.addCategory(category)) {
             return "redirect:/admin/categoriesOperations";
         }
-        else return null;
+        else return "redirect:/admin/categoriesOperations";
     }
 
     @RequestMapping(value = "/deleteCategory")

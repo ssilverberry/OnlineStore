@@ -14,6 +14,7 @@ import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
 
@@ -26,8 +27,10 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
      * Parameters in this order: PRODUCT_ID, ATTRIBUTE_NAME
      */
     private static final String INSERT_ATTRIBUTE = "INSERT INTO PRODUCTS_ATTRIBUTES VALUES (DEFAULT, ?, ?)";
-    private static final String UPDATE_FEEDBACK = "UPDATE feedback SET product_id=?, attribute_name=?, WHERE attr_id=?";
+    private static final String UPDATE_ATTRIBUTE = "UPDATE PRODUCTS_ATTRIBUTES SET attribute_name=? WHERE attribute_id=?";
     private static final String DELETE_ATTRIBUTE = "DELETE FROM PRODUCTS_ATTRIBUTES WHERE ATTRIBUTE_ID = ?";
+
+    private static final String DELETE_CATEGORY_ATTRIBUTES = "DELETE FROM PRODUCTS_ATTRIBUTES WHERE product_id=?";
 
     /**
      * Instance of global datasource to get connection from pool.
@@ -42,8 +45,8 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
      * Return attributes for specific category by id.
      */
     @Override
-    public Collection<ProductAttribute> getAttributesForCategory(int category_id) {
-        Collection<ProductAttribute> productAttributes = new ArrayList<>();
+    public List<ProductAttribute> getAttributesForCategory(int category_id) {
+        List<ProductAttribute> productAttributes = new ArrayList<>();
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(GET_ATTRIBUTES_FOR_CATEGORY)){
             ps.setInt(1, category_id);
@@ -97,7 +100,7 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
     public boolean saveAttribute(ProductAttribute attribute) {
         int attr_id = attribute.getAttrId();
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement ps = connection.prepareStatement(attr_id != 0 ? UPDATE_FEEDBACK : INSERT_ATTRIBUTE)){
+             PreparedStatement ps = connection.prepareStatement(attr_id != 0 ? UPDATE_ATTRIBUTE : INSERT_ATTRIBUTE)){
             ps.setInt(1, attribute.getProductId());
             ps.setString(2, attribute.getName());
             if (attr_id != 0){
@@ -107,6 +110,31 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
             log.debug("attribute was saved to database! Info: " + attribute.toString());
         } catch (SQLException e) {
             log.error("Failed to save attribute to database! Info: " + attribute.toString(), e);
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean saveAttributes(List<ProductAttribute> attributes, boolean isUpdate) {
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement ps = connection.prepareStatement(isUpdate ? UPDATE_ATTRIBUTE : INSERT_ATTRIBUTE)){
+            connection.setAutoCommit(false);
+            for (ProductAttribute attribute : attributes) {
+                if (isUpdate){
+                    ps.setString(1, attribute.getName());
+                    ps.setInt(2, attribute.getAttrId());
+                } else {
+                    ps.setInt(1, attribute.getProductId());
+                    ps.setString(2, attribute.getName());
+                }
+                ps.addBatch();
+            }
+            ps.executeBatch();
+            connection.commit();
+            log.debug("attributes was saved to database! param: " + attributes.toString());
+        } catch (SQLException e) {
+            log.error("Failed to save attributes to database! Info: " + attributes.toString(), e);
             return false;
         }
         return true;
@@ -128,4 +156,20 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
         }
         return true;
     }
+
+    @Override
+    public boolean removeCategoryAttributes(int category_id) {
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement ps = connection.prepareStatement(DELETE_CATEGORY_ATTRIBUTES)) {
+            ps.setInt(1, category_id);
+            ps.executeUpdate();
+            log.debug("Attributes was deleted by category_id: " + category_id);
+        } catch (SQLException e) {
+            log.error("Failed to delete attributes by category_id: " + category_id, e);
+            return false;
+        }
+        return true;
+    }
+
+
 }

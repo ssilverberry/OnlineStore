@@ -31,7 +31,7 @@ public class ProductParameterDAOImpl implements ProductParameterDAO {
     private static final String INSERT_PARAMETER = "INSERT INTO PRODUCTS_PARAMETERS VALUES (?, ?, ?)";
     private static final String UPDATE_PARAMETER = "UPDATE PRODUCTS_PARAMETERS SET value=? WHERE product_id=? " +
             "AND attr_id=?";
-    private static final String DELETE_PARAMETER_BY_PRODUCT_ID = "DELETE FROM PRODUCTS_PARAMETERS WHERE ATTRIBUTE_ID = ?";
+    private static final String DELETE_PARAMETERS_BY_PRODUCT_ID = "DELETE FROM products_parameters WHERE product_id=?";
 
     /**
      * Instance of global datasource to get connection from pool.
@@ -145,7 +145,7 @@ public class ProductParameterDAOImpl implements ProductParameterDAO {
     @Override
     public boolean removeParameterByProductId(int product_id) {
         try(Connection connection = dataSource.getConnection();
-            PreparedStatement ps = connection.prepareStatement(DELETE_PARAMETER_BY_PRODUCT_ID)) {
+            PreparedStatement ps = connection.prepareStatement(DELETE_PARAMETERS_BY_PRODUCT_ID)) {
             ps.setInt(1, product_id);
             ps.executeUpdate();
             log.debug("Parameter was deleted for product_id: " + product_id);
