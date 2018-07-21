@@ -73,6 +73,10 @@
                     </c:if>
                 </div>
 
+                <spring:bind path="update">
+                    <form:input path="update" class="form-control" type="text" value="${false}" hidden="true"/>
+                </spring:bind>
+
                 <div class="row" style="margin-top: 20px">
                     <div class="col-11">
                         <a href="<c:url value="/admin/categoriesOperations"/> " style="float: right; margin-top: 4px"
