@@ -13,7 +13,6 @@ import java.util.Collection;
 
 @Controller
 public class CategoryAttributeController {
-
     private CategoryAttributeDAOImpl categoryAttributeDAO;
     @Autowired
     public void setCategoryAttributeDAO(CategoryAttributeDAOImpl categoryAttributeDAO) {

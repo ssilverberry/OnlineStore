@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<div class="list-group">
+<div class="list-group" lang="ru">
     <c:forEach var="item" items="${productList}">
         <div class="row">
             <div class="col-md">
