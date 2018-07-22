@@ -11,7 +11,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <jsp:include page="../../../header.jsp"/>
-<div class="container-fluid" style="position: relative; min-height: 100vh;">
+<div class="container-fluid" style="position: relative; min-height: 100vh;" lang="ru">
 <div style="margin-left: 100px; margin-right: 200px; margin-top: 50px ">
     <div class="row">
 

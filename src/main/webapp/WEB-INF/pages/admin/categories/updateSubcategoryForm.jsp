@@ -11,7 +11,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<body>
+<body lang="ru">
 <style type="text/css">
     .error {
         font-family: Verdana, serif;
