@@ -173,14 +173,28 @@ public class ProductService {
         subcategory.setParentId(productDAO.getProductByName(object.getCategoryName()).getId());
         subcategory.setCategory(true);
         if (productDAO.saveProduct(subcategory)){
-            for (ProductAttribute attr: object.getAttributes()) {
-                System.out.println("IN updateSubcategory attr_id " + attr.getAttrId());
-                attr.setProductId(subcategory.getId());
-                categoryAttributeDAO.saveAttribute(attr);
-            }
-            //return categoryAttributeDAO.saveAttributes(object.getAttributes(), true);
+            updateAttributes(subcategory.getId(), object.getAttributes());
         }
         return false;
+    }
+
+    private void updateAttributes(int category_id, List<ProductAttribute> attributes){
+        List<ProductAttribute> existingAttrs = categoryAttributeDAO.getAttributesForCategory(category_id);
+        boolean isExist;
+        for (ProductAttribute existAttr : existingAttrs) {
+            isExist = false;
+            for (ProductAttribute attribute : attributes){
+                attribute.setProductId(category_id);
+                if (attribute.getAttrId() == 0 || existAttr.getAttrId() == attribute.getAttrId()){
+                    System.out.println("IN updateAttributes: attr to save " + attribute.toString());
+                    categoryAttributeDAO.saveAttribute(attribute);
+                    isExist = true;
+                }
+            }
+            if (!isExist){
+                categoryAttributeDAO.removeAttribute(existAttr.getAttrId());
+            }
+        }
     }
 
     private boolean saveCategoryAttributes(Product subcategory, List<ProductAttribute> attributes){
