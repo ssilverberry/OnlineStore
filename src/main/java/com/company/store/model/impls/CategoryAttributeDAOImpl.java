@@ -101,10 +101,12 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
         int attr_id = attribute.getAttrId();
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(attr_id != 0 ? UPDATE_ATTRIBUTE : INSERT_ATTRIBUTE)){
-            ps.setInt(1, attribute.getProductId());
-            ps.setString(2, attribute.getName());
             if (attr_id != 0){
-                ps.setInt(3, attr_id);
+                ps.setString(1, attribute.getName());
+                ps.setInt(2, attr_id);
+            } else {
+                ps.setInt(1, attribute.getProductId());
+                ps.setString(2, attribute.getName());
             }
             ps.executeUpdate();
             log.debug("attribute was saved to database! Info: " + attribute.toString());
