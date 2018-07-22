@@ -11,7 +11,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <jsp:include page="../../header.jsp"/>
-<div style="margin-left: 100px; margin-right: 200px; margin-top: 50px; position: relative; min-height: 100vh;" lang="en-ru">
+<div style="margin-left: 100px; margin-right: 200px; margin-top: 50px; position: relative; min-height: 100vh;">
 
     <div class="row">
         <jsp:include page="../sidemenu.jsp"/>
