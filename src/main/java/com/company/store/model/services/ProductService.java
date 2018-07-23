@@ -181,18 +181,46 @@ public class ProductService {
     private void updateAttributes(int category_id, List<ProductAttribute> attributes){
         List<ProductAttribute> existingAttrs = categoryAttributeDAO.getAttributesForCategory(category_id);
         boolean isExist;
+        checkForNewAttrs(attributes, category_id);
         for (ProductAttribute existAttr : existingAttrs) {
             isExist = false;
             for (ProductAttribute attribute : attributes){
                 attribute.setProductId(category_id);
-                if (attribute.getAttrId() == 0 || existAttr.getAttrId() == attribute.getAttrId()){
+                if (existAttr.getAttrId() == attribute.getAttrId()){
                     System.out.println("IN updateAttributes: attr to save " + attribute.toString());
                     categoryAttributeDAO.saveAttribute(attribute);
                     isExist = true;
                 }
             }
             if (!isExist){
+                Collection<Product> categoryProducts = productDAO.getProductsForCategory(category_id);
+                if (categoryProducts.size() > 0){
+                    for (Product product : categoryProducts) {
+                       List<ProductParameter> params = productParameterDAO.getProductParams(product.getId());
+                        for (ProductParameter param : params) {
+                            if (existAttr.getAttrId() == param.getAttrId()){
+                                productParameterDAO.removeParameterByAttrId(existAttr.getAttrId());
+                            }
+                        }
+                    }
+                }
                 categoryAttributeDAO.removeAttribute(existAttr.getAttrId());
+            }
+        }
+    }
+
+    private void checkForNewAttrs(List<ProductAttribute> attributes, int category_id){
+        for (ProductAttribute attribute : attributes){
+            attribute.setProductId(category_id);
+            if (attribute.getAttrId() == 0){
+                categoryAttributeDAO.saveAttribute(attribute);
+                int attr_id = categoryAttributeDAO.getAttributeByName(attribute.getName()).getAttrId();
+                Collection<Product> products = productDAO.getProductsForCategory(category_id);
+                List<ProductParameter> paramsToAdd = new ArrayList<>();
+                for (Product product : products) {
+                    paramsToAdd.add(new ProductParameter(attr_id, product.getId(), " "));
+                }
+                productParameterDAO.saveParameters(paramsToAdd);
             }
         }
     }
