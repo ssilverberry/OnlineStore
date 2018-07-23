@@ -10,6 +10,7 @@ public interface CategoryAttributeDAO {
 
     List<ProductAttribute> getAttributesForCategory(int product_id);
     ProductAttribute getAttributeById(int attr_id);
+    ProductAttribute getAttributeByName(String attrName);
 
     boolean saveAttribute(ProductAttribute productAttribute);
     boolean saveAttributes(List<ProductAttribute> attributes, boolean isUpdate);

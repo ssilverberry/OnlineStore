@@ -21,6 +21,7 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
     private static final Logger log = LogManager.getLogger(CategoryAttributeDAOImpl.class);
 
     private static final String GET_ATTRIBUTE_BY_ID = "SELECT * FROM PRODUCTS_ATTRIBUTES WHERE ATTRIBUTE_ID = ?";
+    private static final String GET_ATTRIBUTE_BY_NAME = "SELECT * FROM PRODUCTS_ATTRIBUTES WHERE ATTRIBUTE_NAME = ?";
     private static final String GET_ATTRIBUTES_FOR_CATEGORY = "SELECT * FROM PRODUCTS_ATTRIBUTES WHERE PRODUCT_ID = ?";
 
     /**
@@ -75,6 +76,23 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
             }
         } catch (SQLException e) {
             log.info(" Failed to receive attribute from database by id: " + attr_id, e);
+        }
+        return productAttribute;
+    }
+
+    @Override
+    public ProductAttribute getAttributeByName(String attrName) {
+        ProductAttribute productAttribute = null;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement ps = connection.prepareStatement(GET_ATTRIBUTE_BY_NAME)){
+            ps.setString(1,attrName);
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()){
+                productAttribute = parseProdAttr(resultSet);
+                log.debug("Attribute was received from database by name: " + attrName);
+            }
+        } catch (SQLException e) {
+            log.info(" Failed to receive attribute from database by name: " + attrName, e);
         }
         return productAttribute;
     }

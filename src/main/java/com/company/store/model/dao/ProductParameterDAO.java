@@ -18,4 +18,5 @@ public interface ProductParameterDAO {
     boolean updateParameters(List<ProductParameter> productParams);
 
     boolean removeParameterByProductId(int product_id);
+    boolean removeParameterByAttrId(int attr_id);
 }
