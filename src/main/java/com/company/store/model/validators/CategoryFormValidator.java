@@ -88,6 +88,13 @@ public class CategoryFormValidator implements Validator {
                 }
             }
         }
+        if (object.getCategoryId() != null && object.getCategoryId() != 0){
+            for (Product categ: existCategories) {
+                if (object.getSubcategoryName().equalsIgnoreCase(categ.getName())){
+                    errors.rejectValue("subcategoryName", "Exist.category.subcategoryName");
+                }
+            }
+        }
     }
 
     private void trimNames(CategoryFormObject category){

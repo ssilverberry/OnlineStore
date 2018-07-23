@@ -24,7 +24,14 @@
 
 <div style="margin-left: 100px; margin-right: 300px; margin-top: 50px; min-height: 100vh; position: relative;">
 
-    <spring:url value="/admin/createCategory" var="action"/>
+    <c:choose>
+        <c:when test="${mainCategory != null}">
+            <spring:url value="/admin/createSubcategory" var="action"/>
+        </c:when>
+        <c:otherwise>
+            <spring:url value="/admin/createCategory" var="action"/>
+        </c:otherwise>
+    </c:choose>
 
     <div class="row">
 
@@ -33,13 +40,34 @@
         <div class="col-md-9" >
             <form:form action="${action}" method="post" commandName="category">
 
-                <h4>Creating category</h4> <br>
+                <c:choose>
+                    <c:when test="${!mainCategory.equals('')}">
+                        <h4>Adding subcategory</h4> <br>
+                    </c:when>
+                    <c:otherwise>
+                        <h4>Creating category</h4> <br>
+                    </c:otherwise>
+                </c:choose>
 
                 <spring:bind path="categoryName">
                     <div class="form-group ">
-                        <label class="control-label">Category</label>
-                        <form:input path="categoryName" id="name" class="form-control" type="text" placeholder="Write name.." />
-                        <form:errors path="categoryName" cssClass="error"/>
+                        <c:choose>
+                            <c:when test="${mainCategory != null}">
+                                <label class="control-label">Category</label>
+                                <form:input path="categoryName" id="name" class="form-control" type="text"
+                                            value="${mainCategory.name}" readonly="true"/>
+                                <form:errors path="categoryName" cssClass="error"/>
+                                <form:input path="categoryId" class="form-control" value="${mainCategory.id}" hidden="true"/>
+
+                            </c:when>
+                            <c:otherwise>
+                                <label class="control-label">Category</label>
+                                <form:input path="categoryName" id="name" class="form-control" type="text"
+                                            placeholder="Write name.." />
+                                <form:errors path="categoryName" cssClass="error"/>
+                            </c:otherwise>
+                        </c:choose>
+
                     </div>
                 </spring:bind>
 
@@ -74,7 +102,7 @@
                 </div>
 
                 <spring:bind path="update">
-                    <form:input path="update" class="form-control" type="text" value="${false}" hidden="true"/>
+                    <form:input path="update" class="form-control" type="text" value="${true}" hidden="true"/>
                 </spring:bind>
 
                 <div class="row" style="margin-top: 20px">

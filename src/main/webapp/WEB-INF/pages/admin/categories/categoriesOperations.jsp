@@ -26,15 +26,21 @@
                 </div>
             </div>
             <div class="form-group pt-3">
-                <div class="list-group">
-                    <label class="form-group">Categories</label>
+                <div class="row-fluid">
+                    <label>Categories:</label>
                     <c:forEach var="item" items="${categories}">
                         <div class="row">
-                            <div class="col-md">
-                                <div class="list-group-item"><strong>${item.key.name}</strong></div>
+                            <div class="col-9 list-group-item">
+                                <strong>${item.key.name}</strong>
                             </div>
-                            <div class="col-sm-1">
-                                <a class="btn btn-danger mt-1"  role="button"
+                            <div class="col-2">
+                                <a class="btn btn-info mt-1"  role="button"
+                                   href="<c:url value="/admin/createSubcategoryForm"><c:param name="categoryName" value="${item.key.name}"/></c:url>">
+                                    ADD SUBCATEGORY
+                                </a>
+                            </div>
+                            <div class="col-1">
+                                <a class="btn btn-danger mt-1 ml-3"  role="button"
                                    href="<c:url value="/admin/deleteCategory"><c:param name="category_id" value="${item.key.id}"/></c:url>">
                                     DELETE
                                 </a>
@@ -45,7 +51,7 @@
                                     <c:forEach var="in_item" items="${item.value}">
                                         <div class="row">
 
-                                            <div class="col-md-7 list-group-item ml-5 pt-3 pb-3">
+                                            <div class="col-md-6 list-group-item ml-5 pt-3 pb-3">
                                                 ${in_item.name}
                                             </div>
                                             <div class="col-1 pt-2">
@@ -54,6 +60,14 @@
                                                     <c:param name="subcategory_id" value="${in_item.id}"/>
                                                  </c:url>">
                                                     UPDATE
+                                                </a>
+                                            </div>
+                                            <div class="col-1 ml-2 pt-2">
+                                                <a class="btn btn-danger"  role="button"
+                                                   href="<c:url value="/admin/deleteSubcategory">
+                                                    <c:param name="subcategory_id" value="${in_item.id}"/>
+                                                 </c:url>">
+                                                    DELETE
                                                 </a>
                                             </div>
                                         </div>

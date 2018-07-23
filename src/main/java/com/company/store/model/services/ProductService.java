@@ -72,6 +72,10 @@ public class ProductService {
         return feedbackDAO.getProductRating(product_id);
     }
 
+    public Product getProductByName(String productName){
+        return productDAO.getProductByName(productName);
+    }
+
     public ModelMap getProductById(int product_id){
         ModelMap modelMap = new ModelMap();
         modelMap.addAttribute("product", productDAO.getProductById(product_id));
@@ -164,6 +168,29 @@ public class ProductService {
             }
         }
         return false;
+    }
+
+    public boolean addSubcategory(CategoryFormObject object){
+        Product subcategory = new Product();
+        subcategory.setName(object.getSubcategoryName());
+        subcategory.setCategory(true);
+        subcategory.setParentId(productDAO.getProductById(object.getCategoryId()).getId());
+        if (productDAO.saveProduct(subcategory)){
+            subcategory.setId(productDAO.getProductByName(subcategory.getName()).getId());
+            return saveCategoryAttributes(subcategory, object.getAttributes());
+        }
+        return false;
+    }
+
+    public boolean deleteSubcategory(int subcategory_id){
+        boolean result;
+        if (deleteCategoryProducts(subcategory_id)){
+            result = categoryAttributeDAO.removeCategoryAttributes(subcategory_id);
+            if (!result){
+                return false;
+            }
+        }
+        return productDAO.removeProduct(subcategory_id);
     }
 
     public boolean updateSubcategory(CategoryFormObject object){

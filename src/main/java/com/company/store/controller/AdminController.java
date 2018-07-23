@@ -177,6 +177,38 @@ public class AdminController {
     }
 
     //WORKS
+    @RequestMapping(value = "/createSubcategoryForm", method = RequestMethod.GET)
+    public String showCreateSubcategForm(@RequestParam String categoryName, Model model) {
+        CategoryFormObject object = new CategoryFormObject();
+        List<ProductAttribute> attributes = new ArrayList<>();
+        attributes.add(new ProductAttribute());
+        object.setAttributes(attributes);
+        model.addAttribute("category", object);
+        model.addAttribute("mainCategory", productService.getProductByName(categoryName));
+        return "admin/categories/createCategoryForm";
+    }
+
+    @RequestMapping(value = "/createSubcategory", method = RequestMethod.POST)
+    public String createCategory(@ Valid @ModelAttribute("category") CategoryFormObject object,
+                                 BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("mainCategory", productService.getProductByName(object.getCategoryName()));
+            return "admin/categories/createCategoryForm";
+        } else if (productService.addSubcategory(object)) {
+            return "redirect:/admin/categoriesOperations";
+        }
+        else return "redirect:/admin/categoriesOperations";
+    }
+
+    @RequestMapping(value = "/deleteSubcategory")
+    public String deleteSubcategory(@RequestParam("subcategory_id") int subcategory_id) {
+        if (productService.deleteSubcategory(subcategory_id)) {
+            return "redirect:/admin/categoriesOperations";
+        }
+        else return null;
+    }
+
+    //WORKS
     @RequestMapping(value = "/updateSubcategoryForm", method = RequestMethod.GET)
     public String showUpdateSubcategForm(@RequestParam("subcategory_id") int subcategory_id, Model model) {
         Product subcategory = productService.getProduct(subcategory_id);
