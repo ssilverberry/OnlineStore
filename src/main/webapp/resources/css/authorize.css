@@ -1,0 +1,160 @@
+body {
+    /*background-color: rgba(0,0,0,0.76);*/
+    z-index: 0;
+    position: relative;
+}
+.authorization {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    width: 307px;
+    height: 313px;
+    margin: 10% auto 0 auto;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 1px #000;
+    z-index: 999;
+}
+.authorization__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+    height: 50px;
+}
+.authorization__close {
+    position: absolute;
+    width: 16px;
+    margin: 5px;
+    right: 0px;
+}
+.welcome_text {
+    position: absolute;
+    font-size: 22px;
+    top: 15px;
+    font-weight: bold;
+}
+.authorization__input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    margin-top: 40px;
+}
+.email_container {
+    width: 70%;
+    position: relative;
+    margin: 0 auto;
+
+}
+.pswrd_container {
+    width: 70%;
+    position: relative;
+    margin: 0 auto;
+}
+.email_input {
+    border: none;
+    border-bottom: 1px solid #707070;
+    width: 100%;
+    height: 30px;
+    margin: 15px auto;
+    font-size: 14px;
+    transition: all 0.5s;
+    outline: none;
+    z-index: 1;
+}
+.pswrd_input {
+    border: none;
+    border-bottom: 1px solid #707070;
+    width: 100%;
+    height: 30px;
+    margin: 15px auto;
+    font-size: 14px;
+    outline: none;
+    z-index: 1;
+}
+.floating_email {
+    position: absolute;
+    bottom: 20px;
+    font-size: 16px;
+    opacity: 0.8;
+    transition: all 0.3s;
+    pointer-events: none;
+    left: 0;
+}
+.floating_pswrd {
+    position: absolute;
+    bottom: 20px;
+    opacity: 0.8;
+    transition: all 0.3s;
+    pointer-events: none;
+    left: 0;
+}
+.email_input:focus ~ .floating_email,
+.email_input:valid ~ .floating_email {
+    bottom: 50px;
+    font-size: 12px;
+    transition: all 0.3s;
+}
+.pswrd_input:focus ~ .floating_pswrd,
+.pswrd_input:valid ~ .floating_pswrd {
+    bottom: 50px;
+    font-size: 12px;
+    transition: all 0.3s;
+}
+.btns_row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 50px;
+    margin: 35px 0 0 0;
+    justify-content: center;
+    align-items: center;
+}
+.btn_signup, .btn_signin {
+    margin: 0 10px;
+}
+.btn_link {
+    padding: 5px 15px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bolder;
+    border-radius: 25px;
+    text-align: center;
+    vertical-align: middle;
+    transition: all 0.2s;
+}
+.btn_link:hover {
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+.btn_link_up {
+    background-color: #28a745;
+}
+.btn_link_in {
+    background-color: #007BFF;
+}
+.forgott_password {
+    display: flex;
+    flex-direction: column;
+    height: 35px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8px;
+}
+.forgott_password_text {
+    font-style: italic;
+    font-size: 15px;
+    text-decoration: none;
+    color: #000;
+}
+.link_decoration {
+    width: 125px;
+    border-bottom: 1px solid #000;
+    opacity: 0;
+    margin-top: 2px;
+    transition: all 0.3s;
+}
+.forgott_password_text:hover ~ .link_decoration {
+    opacity: 1;
+}
+

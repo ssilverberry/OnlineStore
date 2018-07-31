@@ -1,0 +1,13 @@
+.container-row {
+    flex-wrap: wrap;
+}
+.cd {
+    transition: all 0.3s;
+}
+.cd:hover {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.55) !important;
+}
+.cd-img {
+    object-fit: contain;
+    width: 38.6%;
+}
