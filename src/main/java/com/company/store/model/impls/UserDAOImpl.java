@@ -72,20 +72,20 @@ public class UserDAOImpl implements UserDAO {
     public boolean saveUser(User user) {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement(user.getId() != 0 ? UPDATE_USER_CREDENTIALS : INSERT_USER)){
-            ps.setString(1, user.getName());
-            ps.setString(2, user.getSurname());
-            ps.setString(3, user.getEmail());
-            ps.setString(4, user.getPhone());
-            ps.setString(5, user.getPassword());
-            ps.setString(6, user.getAddress());
-            if ("false".equalsIgnoreCase(String.valueOf(user.getIsAdmin())))
-                ps.setInt(7, 0);
-            else ps.setInt(7, 1);
-            if (user.getId() != 0){
-                ps.setInt(8, user.getId());
-            }
-            ps.executeUpdate();
-            log.debug("User was successfully inserted into db!, Info: " + user.toString());
+             ps.setString(1, user.getName());
+             ps.setString(2, user.getSurname());
+             ps.setString(3, user.getEmail());
+             ps.setString(4, user.getPhone());
+             ps.setString(5, user.getPassword());
+             ps.setString(6, user.getAddress());
+             if (!user.getIsAdmin())
+                 ps.setInt(7, 0);
+             else
+                 ps.setInt(7, 1);
+             if (user.getId() != 0)
+                 ps.setInt(8, user.getId());
+             ps.executeUpdate();
+             log.debug("User was successfully inserted into db!, Info: " + user.toString());
         } catch (SQLException e) {
             log.error("Inserting user into db was failed! User: " + user.toString(), e);
             return false;
