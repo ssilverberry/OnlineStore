@@ -195,16 +195,16 @@ public class ProductDAOImpl implements ProductDAO {
         int product_id = product.getId();
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement(product_id != 0 ? UPDATE_PRODUCT : INSERT_PRODUCT)){
-            ps.setInt(1, product.getParentId());
-            ps.setString(2, product.getName());
-            if ("false".equalsIgnoreCase(String.valueOf(product.isCategory())))
-                ps.setInt(3, 0);
-            else ps.setInt(3, 1);
-            if (product_id != 0){
-                ps.setInt(4, product_id);
-            }
-           ps.executeUpdate();
-            log.debug(" Product was saved to database! Info: " + product.toString());
+             ps.setInt(1, product.getParentId());
+             ps.setString(2, product.getName());
+             if (!product.isCategory())
+                 ps.setInt(3, 0);
+             else
+                 ps.setInt(3, 1);
+             if (product_id != 0)
+                 ps.setInt(4, product_id);
+             ps.executeUpdate();
+             log.debug(" Product was saved to database! Info: " + product.toString());
         } catch (SQLException e) {
             log.error("Failed to save product to database! Info: " + product.toString(), e);
             return false;
