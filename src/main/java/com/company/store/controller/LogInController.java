@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Map;
 
+
 @Controller
 @SessionAttributes("user")
 public class LogInController {
@@ -46,10 +47,10 @@ public class LogInController {
             return "authorize";
         } else if (userService.getUser(user.getEmail(), user.getPassword()) != null) {
             switch (userService.validateUserType(userService.getUser(user.getEmail(), user.getPassword()))) {
-                case "admin":
+                case ADMIN:
                     model.put("user", userService.getUser(user.getEmail(), user.getPassword()));
                     return "admin";
-                case "user":
+                case USER:
                     model.put("user", userService.getUser(user.getEmail(), user.getPassword()));
                     return "index";
             }

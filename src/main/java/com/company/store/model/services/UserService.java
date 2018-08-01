@@ -2,12 +2,11 @@ package com.company.store.model.services;
 
 import com.company.store.model.dao.UserDAO;
 import com.company.store.model.entities.User;
+import com.company.store.model.entities.UserRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
 
 @Component
 public class UserService {
@@ -32,11 +31,10 @@ public class UserService {
         return userDAO.getAllUsers();
     }
 
-    public String validateUserType(User user){
-        if (user.getIsAdmin()){
-            return "admin";
-        } else {
-            return "user";
-        }
+    public UserRoles validateUserType(User user){
+        if (user.isAdmin())
+            return UserRoles.ADMIN;
+        else
+            return UserRoles.USER;
     }
 }

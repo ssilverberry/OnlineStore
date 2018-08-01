@@ -4,7 +4,6 @@ package com.company.store.model.impls;
 import com.company.store.model.dao.UserDAO;
 import com.company.store.model.entities.User;
 
-import com.company.store.model.entities.UserRoles;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -48,7 +47,7 @@ public class UserDAOImpl implements UserDAO {
      * parse cortege with user credentials to object User.
      */
     private User parseUser(ResultSet resultSet) {
-        User user = new User("superAdmin@gmail.com", "superAdmin", UserRoles.ADMIN);
+        User user = new User();
         int adminFlag = 1;
         try {
             user.setId(resultSet.getInt(1));
@@ -59,8 +58,8 @@ public class UserDAOImpl implements UserDAO {
             user.setPassword(resultSet.getString(6));
             user.setAddress(resultSet.getString(7));
             if (adminFlag == resultSet.getInt(8))
-                user.setIsAdmin(true);
-            else user.setIsAdmin(false);
+                user.setAdmin(true);
+            else user.setAdmin(false);
         } catch (SQLException e) {
             log.error("Parsing of user was failed! ", e);
         } return user;
@@ -79,7 +78,7 @@ public class UserDAOImpl implements UserDAO {
              ps.setString(4, user.getPhone());
              ps.setString(5, user.getPassword());
              ps.setString(6, user.getAddress());
-             if (!user.getIsAdmin())
+             if (!user.isAdmin())
                  ps.setInt(7, 0);
              else
                  ps.setInt(7, 1);
