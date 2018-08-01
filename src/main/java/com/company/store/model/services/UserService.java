@@ -24,7 +24,9 @@ public class UserService {
 
     public boolean match(String email, String password) {
         User user = userDAO.getByCredentials(email, password);
-        return user.getEmail().equals(email) && user.getPassword().equals(password);
+        if (user != null)
+            return user.getEmail().equals(email) && user.getPassword().equals(password);
+        return false;
     }
 
     public Collection<User> getAll () {
