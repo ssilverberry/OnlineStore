@@ -46,7 +46,7 @@ public class LogInController {
         if (result.hasErrors()) {
             return "authorize";
         } else if (userService.getUser(user.getEmail(), user.getPassword()) != null) {
-            switch (userService.validateUserType(userService.getUser(user.getEmail(), user.getPassword()))) {
+            switch (userService.checkUserType(userService.getUser(user.getEmail(), user.getPassword()))) {
                 case ADMIN:
                     model.put("user", userService.getUser(user.getEmail(), user.getPassword()));
                     return "admin";

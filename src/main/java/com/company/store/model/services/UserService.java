@@ -31,7 +31,7 @@ public class UserService {
         return userDAO.getAllUsers();
     }
 
-    public UserRoles validateUserType(User user){
+    public UserRoles checkUserType(User user){
         if (user.isAdmin())
             return UserRoles.ADMIN;
         else
