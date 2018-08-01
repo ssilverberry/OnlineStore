@@ -21,7 +21,10 @@ public class UserService {
     public User getUser(String email, String password){
         return userDAO.getByCredentials(email, password);
     }
-
+    /**
+     * Acceptable.
+     * The method is used for matching needed user from Spring form with existing one in DB.
+    */
     public boolean match(String email, String password) {
         User user = userDAO.getByCredentials(email, password);
         if (user != null)
