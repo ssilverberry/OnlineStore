@@ -49,6 +49,7 @@ public class UserDAOImpl implements UserDAO {
      */
     private User parseUser(ResultSet resultSet) {
         User user = new User("superAdmin@gmail.com", "superAdmin", UserRoles.ADMIN);
+        int adminFlag = 1;
         try {
             user.setId(resultSet.getInt(1));
             user.setName(resultSet.getString(2));
@@ -57,7 +58,7 @@ public class UserDAOImpl implements UserDAO {
             user.setPhone(resultSet.getString(5));
             user.setPassword(resultSet.getString(6));
             user.setAddress(resultSet.getString(7));
-            if ("1".equalsIgnoreCase(String.valueOf(resultSet.getInt(8))))
+            if (adminFlag == resultSet.getInt(8))
                 user.setIsAdmin(true);
             else user.setIsAdmin(false);
         } catch (SQLException e) {
