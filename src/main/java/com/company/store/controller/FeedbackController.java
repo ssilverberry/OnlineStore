@@ -44,7 +44,7 @@ public class FeedbackController {
     }
 
     @RequestMapping(value = "addFeedback", method = RequestMethod.GET)
-    public ModelAndView addFeedBack (@Valid @ModelAttribute("feedback") Feedback feedback,
+    public ModelAndView addFeedBack (@Valid  @ModelAttribute("feedback") Feedback feedback,
                                BindingResult result,
                                Model model,
                                @RequestParam("content") String fb,

@@ -80,11 +80,10 @@ public class UserController {
 
     @RequestMapping(value = "removeUser")
     public ModelAndView removeUser(@RequestParam(value = "id") int id) {
-       Boolean up = userDAO.removeUser(id);
-        if(up){
+        Boolean up = userDAO.removeUser(id);
+        if (up)
             return new ModelAndView("removeUser");
-        }
         else
-        return new ModelAndView("user");
+            return new ModelAndView("user");
     }
 }

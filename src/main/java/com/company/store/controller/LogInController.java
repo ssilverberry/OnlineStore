@@ -40,7 +40,7 @@ public class LogInController {
     }
 
     @RequestMapping(value = "/userin", method = RequestMethod.POST)
-    public String loginAction(@Valid @ModelAttribute("authForm") User user,
+    public String loginAction(@Valid  @ModelAttribute("authForm") User user,
                                     BindingResult result,
                                     Map<String, Object> model,
                                     @RequestParam("email") String email,
