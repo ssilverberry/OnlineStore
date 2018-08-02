@@ -11,6 +11,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.Map;
 
@@ -38,7 +39,7 @@ public class UserController {
     }
 
     @RequestMapping(value="addUser", method = RequestMethod.POST)
-    public String saveUser(@ModelAttribute("registrationForm")  User user,
+    public String saveUser(@Valid @ModelAttribute("registrationForm")  User user,
                            BindingResult result,
                            @RequestParam("email") String email,
                            @RequestParam("name") String name,

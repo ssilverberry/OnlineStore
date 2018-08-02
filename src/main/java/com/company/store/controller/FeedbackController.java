@@ -14,6 +14,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.Collection;
 
 @Controller
@@ -43,7 +44,7 @@ public class FeedbackController {
     }
 
     @RequestMapping(value = "addFeedback", method = RequestMethod.GET)
-    public ModelAndView addFeedBack (@ModelAttribute("feedback") Feedback feedback,
+    public ModelAndView addFeedBack (@Valid @ModelAttribute("feedback") Feedback feedback,
                                BindingResult result,
                                Model model,
                                @RequestParam("content") String fb,
