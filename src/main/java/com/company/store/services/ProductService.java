@@ -28,8 +28,8 @@ public class ProductService {
     private final ProductParameterDAO productParameterDAO;
 
     @Autowired
-    public ProductService(ProductDAOImpl productDAO, CategoryAttributeDAOImpl categoryAttributeDAO,
-                          FeedbackDAOImpl feedbackDAO, ProductParameterDAO productParameterDAO) {
+    public ProductService(ProductDAO productDAO, CategoryAttributeDAO categoryAttributeDAO,
+                          FeedbackDAO feedbackDAO, ProductParameterDAO productParameterDAO) {
         this.productDAO = productDAO;
         this.categoryAttributeDAO = categoryAttributeDAO;
         this.feedbackDAO = feedbackDAO;
@@ -39,24 +39,14 @@ public class ProductService {
     public Map<Product, Collection<Product>> getCategories() {
         Collection<Product> mainCategories = productDAO.getCategories();
         Map<Product, Collection<Product>> categories = new TreeMap<>();
-        mainCategories.forEach(new Consumer<Product>() {
-            @Override
-            public void accept(Product product) {
-                categories.put(product, productDAO.getProductsForCategory(product.getId()));
-            }
-        });
+        mainCategories.forEach(product -> categories.put(product, productDAO.getProductsForCategory(product.getId())));
         return categories;
     }
 
     public Map<Integer, String> getSubcategories(){
         Collection<Product> subcategories = productDAO.getSubcategories();
         Map<Integer, String> subcategMap = new TreeMap<>();
-        subcategories.forEach(new Consumer<Product>() {
-            @Override
-            public void accept(Product product) {
-                subcategMap.put(product.getId(), product.getName());
-            }
-        });
+        subcategories.forEach(product -> subcategMap.put(product.getId(), product.getName()));
         return subcategMap;
     }
 
@@ -105,14 +95,9 @@ public class ProductService {
     public Map<ProductAttribute, ProductParameter> getParamsForProduct(int product_id){
         return productDAO.getParamsForProduct(product_id);
     }
-    public List<ProductParameter> getProductParams(int product_id){
-        return productParameterDAO.getProductParams(product_id);
-    }
 
     private boolean saveProductParams(List<ProductParameter> productParams, int prod_id){
-        productParams.forEach(productParameter -> {
-            productParameter.setProductId(prod_id);
-        });
+        productParams.forEach(productParameter -> productParameter.setProductId(prod_id));
         return productParameterDAO.saveParameters(productParams);
     }
 
@@ -253,12 +238,7 @@ public class ProductService {
     }
 
     private boolean saveCategoryAttributes(Product subcategory, List<ProductAttribute> attributes){
-        attributes.forEach(new Consumer<ProductAttribute>() {
-            @Override
-            public void accept(ProductAttribute attribute) {
-                attribute.setProductId(subcategory.getId());
-            }
-        });
+        attributes.forEach(attribute -> attribute.setProductId(subcategory.getId()));
         return categoryAttributeDAO.saveAttributes(attributes, false);
     }
 }
