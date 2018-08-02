@@ -1,8 +1,8 @@
 package com.company.store.controller;
 
-import com.company.store.model.entities.User;
-import com.company.store.model.services.UserService;
-import com.company.store.model.validators.SignInValidator;
+import com.company.store.entities.User;
+import com.company.store.services.UserService;
+import com.company.store.validators.SignInValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;

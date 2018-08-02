@@ -1,7 +1,7 @@
 package com.company.store.controller;
 
-import com.company.store.model.entities.ProductParameter;
-import com.company.store.model.repository.impl.ProductParameterDAOImpl;
+import com.company.store.entities.ProductParameter;
+import com.company.store.repository.impl.ProductParameterDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

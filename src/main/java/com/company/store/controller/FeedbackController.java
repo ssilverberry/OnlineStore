@@ -1,11 +1,11 @@
 package com.company.store.controller;
 
-import com.company.store.model.entities.Feedback;
-import com.company.store.model.repository.impl.FeedbackDAOImpl;
-import com.company.store.model.repository.impl.UserDAOImpl;
-import com.company.store.model.services.ProductService;
+import com.company.store.entities.Feedback;
+import com.company.store.repository.impl.FeedbackDAOImpl;
+import com.company.store.repository.impl.UserDAOImpl;
+import com.company.store.services.ProductService;
 
-import com.company.store.model.validators.FeedBackValidator;
+import com.company.store.validators.FeedBackValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

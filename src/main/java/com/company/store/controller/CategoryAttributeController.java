@@ -1,8 +1,8 @@
 package com.company.store.controller;
 
 
-import com.company.store.model.entities.ProductAttribute;
-import com.company.store.model.repository.impl.CategoryAttributeDAOImpl;
+import com.company.store.entities.ProductAttribute;
+import com.company.store.repository.impl.CategoryAttributeDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

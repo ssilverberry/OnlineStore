@@ -1,7 +1,7 @@
 package com.company.store.controller;
 
-import com.company.store.model.entities.Delivery;
-import com.company.store.model.repository.impl.DeliveryDAOImpl;
+import com.company.store.entities.Delivery;
+import com.company.store.repository.impl.DeliveryDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
