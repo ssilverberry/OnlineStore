@@ -1,4 +1,4 @@
-package com.company.store.controller;
+package com.company.store.model.validators;
 
 
 import com.company.store.model.entities.User;

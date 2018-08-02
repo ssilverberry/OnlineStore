@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Email;
 import javax.validation.constraints.Size;
 
 public class User {
+
     private int user_id;
     private String name;
     private String surname;
@@ -16,9 +17,9 @@ public class User {
     private boolean isAdmin;
     private UserRoles role;
 
-    public User () {}
+    private User () {}
 
-    public User(int user_id, String name, String surname, String email, String phone, String password, String address,
+    /*public User(int user_id, String name, String surname, String email, String phone, String password, String address,
                 boolean isAdmin) {
         this.user_id = user_id;
         this.name = name;
@@ -28,9 +29,9 @@ public class User {
         this.password = password;
         this.address = address;
         this.isAdmin = isAdmin;
-    }
+    }*/
 
-    public User(String email, String password) {
+    /*public User(String email, String password) {
         this.email = email;
         this.password = password;
     }
@@ -38,7 +39,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.role = role;
-    }
+    }*/
 
     public UserRoles getRole() {
         return role;
@@ -122,5 +123,54 @@ public class User {
                 "\n phone: " + phone +
                 "\n address: " + address +
                 "\n is admin: " + isAdmin;
+    }
+
+    public static UserBuilder newBuilder() {
+        return new User().new UserBuilder();
+    }
+
+    public class UserBuilder {
+
+        private UserBuilder () {}
+
+        public UserBuilder setRole(UserRoles role) {
+            User.this.setRole(role);
+            return this;
+        }
+        public UserBuilder setId(int id) {
+            User.this.setId(id);
+            return this;
+        }
+        public UserBuilder setName(String name) {
+            User.this.setName(name);
+            return this;
+        }
+        public UserBuilder setSurname(String surname) {
+            User.this.setSurname(surname);
+            return this;
+        }
+        public UserBuilder setEmail(String email) {
+            User.this.setEmail(email);
+            return this;
+        }
+        public UserBuilder setPhone(String phone) {
+            User.this.setPhone(phone);
+            return this;
+        }
+        public UserBuilder setPassword(String password) {
+            User.this.setPassword(password);
+            return this;
+        }
+        public UserBuilder setAddress(String address) {
+            User.this.setAddress(address);
+            return this;
+        }
+        public UserBuilder setAdmin(boolean isAdmin) {
+            User.this.setAdmin(isAdmin);
+            return this;
+        }
+        public User build () {
+            return User.this;
+        }
     }
 }

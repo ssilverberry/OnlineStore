@@ -2,6 +2,7 @@ package com.company.store.controller;
 
 import com.company.store.model.entities.User;
 import com.company.store.model.services.UserService;
+import com.company.store.model.validators.SignInValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -33,12 +34,12 @@ public class LogInController {
 
     @RequestMapping("/login")
     public String showLoginForm (Map<String, Object> model) {
-        model.put("authForm", new User());
+        model.put("authForm", User.newBuilder().build());
         return "authorize";
     }
 
     @RequestMapping(value = "/userin", method = RequestMethod.POST)
-    public String loginAction(@Valid @ModelAttribute("authForm") User user,
+    public String loginAction(@ModelAttribute("authForm") User user,
                                     BindingResult result,
                                     Map<String, Object> model,
                                     @RequestParam("email") String email,

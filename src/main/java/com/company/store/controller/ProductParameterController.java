@@ -26,7 +26,7 @@ public class ProductParameterController {
     @RequestMapping(value = "removeparameterbyproductid")
     public ModelAndView removeParameterByProductId(@RequestParam("id") int id) {
         Boolean rem = productParameterDAO.removeParameterByProductId(id);
-        if(rem == true){
+        if(rem){
         return new ModelAndView("removeparameterbyproductid");
     }else
         return new ModelAndView("notRemoveProduct");

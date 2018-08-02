@@ -156,7 +156,7 @@ public class FeedbackDAOImpl implements FeedbackDAO {
      */
     private Feedback parseFeedback(ResultSet resultSet) {
         Feedback feedback = new Feedback();
-        User user = new User("superAdmin@gmail.com", "superAdmin", UserRoles.ADMIN);
+        User user = User.newBuilder().build();
         try {
             feedback.setId(resultSet.getInt(1));
             user.setId(resultSet.getInt(2));

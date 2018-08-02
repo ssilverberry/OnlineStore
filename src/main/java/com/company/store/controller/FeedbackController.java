@@ -5,6 +5,7 @@ import com.company.store.model.repository.impl.FeedbackDAOImpl;
 import com.company.store.model.repository.impl.UserDAOImpl;
 import com.company.store.model.services.ProductService;
 
+import com.company.store.model.validators.FeedBackValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
 import java.util.Collection;
 
 @Controller
@@ -39,7 +39,7 @@ public class FeedbackController {
     }
 
     @RequestMapping(value = "addFeedback", method = RequestMethod.GET)
-    public ModelAndView addFeedBack (@Valid @ModelAttribute("feedback") Feedback feedback,
+    public ModelAndView addFeedBack (@ModelAttribute("feedback") Feedback feedback,
                                BindingResult result,
                                Model model,
                                @RequestParam("content") String fb,

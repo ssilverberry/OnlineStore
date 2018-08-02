@@ -1,4 +1,4 @@
-package com.company.store.controller;
+package com.company.store.model.validators;
 
 import com.company.store.model.entities.Feedback;
 import org.springframework.stereotype.Controller;
@@ -12,7 +12,6 @@ public class FeedBackValidator implements Validator {
     public boolean supports(Class<?> aClass) {
         return Feedback.class.equals(aClass);
     }
-
     @Override
     public void validate(Object o, Errors errors) {
         ValidationUtils.rejectIfEmpty(errors, "content", "content.empty");

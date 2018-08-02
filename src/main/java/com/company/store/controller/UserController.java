@@ -4,6 +4,7 @@ import com.company.store.model.entities.User;
 import com.company.store.model.repository.impl.UserDAOImpl;
 import com.company.store.model.services.UserService;
 
+import com.company.store.model.validators.SignUpValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -42,12 +43,12 @@ public class UserController {
 
     @RequestMapping(value = "/signup")
     public String showRegistrationForm(Map<String, Object> model) {
-        model.put("registrationForm", new User());
+        model.put("registrationForm", User.newBuilder());
         return "registration";
     }
 
     @RequestMapping(value="addUser", method = RequestMethod.POST)
-    public String saveUser(@Valid @ModelAttribute("registrationForm")  User user,
+    public String saveUser(@ModelAttribute("registrationForm")  User user,
                            BindingResult result,
                            @RequestParam("email") String email,
                            @RequestParam("name") String name,
@@ -55,24 +56,21 @@ public class UserController {
                            @RequestParam("phone") String phone,
                            @RequestParam("password") String password,
                            @RequestParam("address") String address) {
-        if (result.hasErrors()) {
-            //System.out.println(result.getFieldErrors().toString());
+        if (result.hasErrors())
             return "registration";
-        } else {
-            user.setName(name);
-            user.setSurname(surname);
-            user.setEmail(email);
-            user.setPhone(phone);
-            user.setPassword(password);
-            user.setAddress(address);
-
-            if (userDAO.saveUser(user)) {
-                //return new ModelAndView("index", "user", user);
+        else {
+            user = User.newBuilder()
+                    .setName(name)
+                    .setSurname(surname)
+                    .setEmail(email)
+                    .setPhone(phone)
+                    .setPassword(password)
+                    .setAddress(address)
+                    .build();
+            if (userDAO.saveUser(user))
                 return "redirect:/";
-            } else {
-                //return new ModelAndView("index", "user", user);
+            else
                 return "registration";
-            }
         }
     }
 

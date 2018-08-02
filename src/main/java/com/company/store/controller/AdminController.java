@@ -189,7 +189,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/createSubcategory", method = RequestMethod.POST)
-    public String createCategory(@ Valid @ModelAttribute("category") CategoryFormObject object,
+    public String createCategory(@ModelAttribute("category") CategoryFormObject object,
                                  BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("mainCategory", productService.getProductByName(object.getCategoryName()));
@@ -223,7 +223,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/updateSubcategory", method = RequestMethod.POST)
-    public String updateSubcategory(@Valid @ModelAttribute("category") CategoryFormObject category,
+    public String updateSubcategory(@ModelAttribute("category") CategoryFormObject category,
                                  BindingResult result) {
 
         if (result.hasErrors()) {
