@@ -24,40 +24,40 @@
 
     <mvc:resources mapping="/resources/**" location="/resources/" />
 
-    <bean id="userDAO" class="com.company.store.model.impls.UserDAOImpl" lazy-init="true">
+    <bean id="userDAO" class="com.company.store.repository.impl.UserDAOImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="productDAO" class="com.company.store.model.impls.ProductDAOImpl" lazy-init="true">
+    <bean id="productDAO" class="com.company.store.repository.impl.ProductDAOImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="prodParamDAO" class="com.company.store.model.impls.ProductParameterDAOImpl" lazy-init="true">
+    <bean id="prodParamDAO" class="com.company.store.repository.impl.ProductParameterDAOImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="paymentDAO" class="com.company.store.model.impls.PaymentDAOImpl" lazy-init="true">
+    <bean id="paymentDAO" class="com.company.store.repository.impl.PaymentDAOImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="orderProdDAO" class="com.company.store.model.impls.OrderProductsDAOImpl" lazy-init="true">
+    <bean id="orderProdDAO" class="com.company.store.repository.impl.OrderProductsDAOImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="orderDAO" class="com.company.store.model.impls.OrderDAOImpl" lazy-init="true">
+    <bean id="orderDAO" class="com.company.store.repository.impl.OrderDAOImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="feedbackDAO" class="com.company.store.model.impls.FeedbackDAOImpl" lazy-init="true">
+    <bean id="feedbackDAO" class="com.company.store.repository.impl.FeedbackDAOImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="deliveryDAO" class="com.company.store.model.impls.DeliveryDAOImpl" lazy-init="true">
+    <bean id="deliveryDAO" class="com.company.store.repository.impl.DeliveryDAOImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <bean id="categoryAttrDAO" class="com.company.store.model.impls.CategoryAttributeDAOImpl" lazy-init="true">
+    <bean id="categoryAttrDAO" class="com.company.store.repository.impl.CategoryAttributeDAOImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
 
-    <bean id="productService" class="com.company.store.model.services.ProductService" lazy-init="true"/>
-    <bean id="userService" class="com.company.store.model.services.UserService" lazy-init="true"/>
-    <bean id="signUpValidator2" class="com.company.store.controller.SignUpValidator" lazy-init="true"/>
-    <bean id="signInValidator" class="com.company.store.controller.SignInValidator" lazy-init="true"/>
-    <bean id="feedBackValidator" class="com.company.store.controller.FeedBackValidator" lazy-init="true"/>
+    <bean id="productService" class="com.company.store.services.ProductService" lazy-init="true"/>
+    <bean id="userService" class="com.company.store.services.UserService" lazy-init="true"/>
+    <bean id="signUpValidator2" class="com.company.store.validators.SignUpValidator" lazy-init="true"/>
+    <bean id="signInValidator" class="com.company.store.validators.SignInValidator" lazy-init="true"/>
+    <bean id="feedBackValidator" class="com.company.store.validators.FeedBackValidator" lazy-init="true"/>
 
     <bean id="messageSource"
           class="org.springframework.context.support.ResourceBundleMessageSource">
