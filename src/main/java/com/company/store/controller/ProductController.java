@@ -4,8 +4,8 @@ import com.company.store.model.entities.Feedback;
 import com.company.store.model.entities.Product;
 import com.company.store.model.entities.ProductAttribute;
 import com.company.store.model.entities.ProductParameter;
-import com.company.store.model.impls.FeedbackDAOImpl;
-import com.company.store.model.impls.ProductDAOImpl;
+import com.company.store.model.repository.impl.FeedbackDAOImpl;
+import com.company.store.model.repository.impl.ProductDAOImpl;
 import com.company.store.model.services.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;

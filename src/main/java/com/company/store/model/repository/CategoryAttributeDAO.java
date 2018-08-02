@@ -1,9 +1,8 @@
-package com.company.store.model.dao;
+package com.company.store.model.repository;
 
 
 import com.company.store.model.entities.ProductAttribute;
 
-import java.util.Collection;
 import java.util.List;
 
 public interface CategoryAttributeDAO {

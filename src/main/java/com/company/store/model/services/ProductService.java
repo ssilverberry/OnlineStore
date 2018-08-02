@@ -1,16 +1,16 @@
 package com.company.store.model.services;
 
-import com.company.store.model.dao.CategoryAttributeDAO;
-import com.company.store.model.dao.FeedbackDAO;
-import com.company.store.model.dao.ProductDAO;
-import com.company.store.model.dao.ProductParameterDAO;
+import com.company.store.model.repository.CategoryAttributeDAO;
+import com.company.store.model.repository.FeedbackDAO;
+import com.company.store.model.repository.ProductDAO;
+import com.company.store.model.repository.ProductParameterDAO;
 import com.company.store.model.entities.Product;
 import com.company.store.model.entities.ProductAttribute;
 import com.company.store.model.entities.ProductParameter;
 import com.company.store.model.formObjects.CategoryFormObject;
-import com.company.store.model.impls.CategoryAttributeDAOImpl;
-import com.company.store.model.impls.FeedbackDAOImpl;
-import com.company.store.model.impls.ProductDAOImpl;
+import com.company.store.model.repository.impl.CategoryAttributeDAOImpl;
+import com.company.store.model.repository.impl.FeedbackDAOImpl;
+import com.company.store.model.repository.impl.ProductDAOImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

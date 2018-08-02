@@ -1,8 +1,7 @@
 package com.company.store.controller;
 
 import com.company.store.model.entities.User;
-import com.company.store.model.entities.UserRoles;
-import com.company.store.model.impls.UserDAOImpl;
+import com.company.store.model.repository.impl.UserDAOImpl;
 import com.company.store.model.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;

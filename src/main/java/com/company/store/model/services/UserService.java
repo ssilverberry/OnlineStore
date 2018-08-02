@@ -1,6 +1,6 @@
 package com.company.store.model.services;
 
-import com.company.store.model.dao.UserDAO;
+import com.company.store.model.repository.UserDAO;
 import com.company.store.model.entities.User;
 import com.company.store.model.entities.UserRoles;
 import org.springframework.beans.factory.annotation.Autowired;

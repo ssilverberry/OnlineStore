@@ -1,7 +1,7 @@
-package com.company.store.model.impls;
+package com.company.store.model.repository.impl;
 
 
-import com.company.store.model.dao.UserDAO;
+import com.company.store.model.repository.UserDAO;
 import com.company.store.model.entities.User;
 
 import org.apache.logging.log4j.LogManager;

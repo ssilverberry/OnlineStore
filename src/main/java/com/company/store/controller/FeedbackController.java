@@ -1,8 +1,8 @@
 package com.company.store.controller;
 
 import com.company.store.model.entities.Feedback;
-import com.company.store.model.impls.FeedbackDAOImpl;
-import com.company.store.model.impls.UserDAOImpl;
+import com.company.store.model.repository.impl.FeedbackDAOImpl;
+import com.company.store.model.repository.impl.UserDAOImpl;
 import com.company.store.model.services.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;

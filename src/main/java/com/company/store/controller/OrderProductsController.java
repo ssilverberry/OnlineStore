@@ -2,7 +2,7 @@ package com.company.store.controller;
 
 import com.company.store.model.entities.Order;
 import com.company.store.model.entities.OrderProduct;
-import com.company.store.model.impls.OrderProductsDAOImpl;
+import com.company.store.model.repository.impl.OrderProductsDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

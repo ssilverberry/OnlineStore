@@ -1,6 +1,6 @@
 package com.company.store.model.validators;
 
-import com.company.store.model.dao.ProductDAO;
+import com.company.store.model.repository.ProductDAO;
 import com.company.store.model.entities.Product;
 import com.company.store.model.entities.ProductParameter;
 
