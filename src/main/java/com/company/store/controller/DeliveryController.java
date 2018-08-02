@@ -1,7 +1,8 @@
 package com.company.store.controller;
 
 import com.company.store.entities.Delivery;
-import com.company.store.repository.impl.DeliveryDAOImpl;
+import com.company.store.repository.DeliveryDAO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +14,9 @@ import java.util.Collection;
 @Controller
 public class DeliveryController {
 
-    private DeliveryDAOImpl deliveryDAO;
+    private DeliveryDAO deliveryDAO;
     @Autowired
-    public void setDeliveryDAO(DeliveryDAOImpl deliveryDAO) {
+    public void setDeliveryDAO(DeliveryDAO deliveryDAO) {
         this.deliveryDAO = deliveryDAO;
     }
 

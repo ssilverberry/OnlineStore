@@ -1,7 +1,8 @@
 package com.company.store.controller;
 
 import com.company.store.entities.Payment;
-import com.company.store.repository.impl.PaymentDAOImpl;
+import com.company.store.repository.PaymentDAO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,10 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class PaymentController {
-    // test
-    private PaymentDAOImpl paymentDAO;
+
+    private PaymentDAO paymentDAO;
     @Autowired
-    public void setPaymentDAO(PaymentDAOImpl paymentDAO) {
+    public void setPaymentDAO(PaymentDAO paymentDAO) {
         this.paymentDAO = paymentDAO;
     }
 

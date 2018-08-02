@@ -1,10 +1,9 @@
 package com.company.store.controller;
 
 import com.company.store.entities.User;
-import com.company.store.repository.impl.UserDAOImpl;
-import com.company.store.services.UserService;
-
+import com.company.store.repository.UserDAO;
 import com.company.store.validators.SignUpValidator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -12,34 +11,25 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
 import java.util.Collection;
 import java.util.Map;
 
 @Controller
 public class UserController {
 
-    private UserDAOImpl userDAO;
-    private UserService userService;
+    private UserDAO userDAO;
+    private final SignUpValidator signUpValidator;
 
     @Autowired
-    private SignUpValidator signUpValidator;
+    public UserController(UserDAO userDAO, SignUpValidator signUpValidator) {
+        this.userDAO = userDAO;
+        this.signUpValidator = signUpValidator;
+    }
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.setValidator(signUpValidator);
     }
-
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
-    @Autowired
-    public void setUserDAO(UserDAOImpl userDAO) {
-        this.userDAO = userDAO;
-    }
-
 
     @RequestMapping(value = "/signup")
     public String showRegistrationForm(Map<String, Object> model) {

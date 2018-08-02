@@ -1,21 +1,22 @@
 package com.company.store.controller;
 
-
 import com.company.store.entities.ProductAttribute;
-import com.company.store.repository.impl.CategoryAttributeDAOImpl;
+import com.company.store.repository.CategoryAttributeDAO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import java.util.Collection;
 
 
 @Controller
 public class CategoryAttributeController {
-    private CategoryAttributeDAOImpl categoryAttributeDAO;
+    private CategoryAttributeDAO categoryAttributeDAO;
     @Autowired
-    public void setCategoryAttributeDAO(CategoryAttributeDAOImpl categoryAttributeDAO) {
+    public void setCategoryAttributeDAO(CategoryAttributeDAO categoryAttributeDAO) {
         this.categoryAttributeDAO = categoryAttributeDAO;
     }
 

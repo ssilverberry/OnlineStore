@@ -3,6 +3,7 @@ package com.company.store.controller;
 import com.company.store.entities.User;
 import com.company.store.services.UserService;
 import com.company.store.validators.SignInValidator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,17 +20,17 @@ public class LogInController {
 
     private final UserService userService;
 
+    private final SignInValidator signInValidator;
+
     @Autowired
-    private SignInValidator signInValidator;
+    public LogInController(UserService userService, SignInValidator signInValidator) {
+        this.userService = userService;
+        this.signInValidator = signInValidator;
+    }
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.setValidator(signInValidator);
-    }
-
-    @Autowired
-    public LogInController(UserService userService) {
-        this.userService = userService;
     }
 
     @RequestMapping("/login")
