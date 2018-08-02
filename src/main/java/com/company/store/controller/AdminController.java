@@ -78,8 +78,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "createProduct", method = RequestMethod.POST)
-    public String createProduct(@ModelAttribute("product") Product product, BindingResult result, Model model){
-        productFormValidator.validate(product, result);
+    public String createProduct(@Valid @ModelAttribute("product") Product product, BindingResult result, Model model){
         if (result.hasErrors()){
             model.addAttribute("categories", productService.getSubcategories());
             model.addAttribute("attrsList", productService.getCategoryAttrs(product.getParentId()));
@@ -106,7 +105,6 @@ public class AdminController {
         List<ProductParameter> parameters = new ArrayList<>(attrParamMap.values());
         product.setParams(parameters);
         List<ProductAttribute> attributes = new ArrayList<>(attrParamMap.keySet());
-        //attributes.sort(Comparator.comparing(o -> String.valueOf(o.getAttrId())));
         model.addAttribute("product", product);
         model.addAttribute("attrs", attributes);
         model.addAttribute("categs", productService.getSubcategories());
@@ -115,8 +113,7 @@ public class AdminController {
 
     // WORKS
     @RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
-    public String updateProduct(@ModelAttribute("product") Product product, BindingResult result, Model model) {
-        productFormValidator.validate(product, result);
+    public String updateProduct(@Valid @ModelAttribute("product") Product product, BindingResult result, Model model) {
         if (result.hasErrors()){
             model.addAttribute("attrs", productService.getCategoryAttrs(product.getParentId()));
             model.addAttribute("categs", productService.getSubcategories());
@@ -139,7 +136,6 @@ public class AdminController {
     @RequestMapping(value = "/productsOperations", method = RequestMethod.GET)
     public String showProdOperations(Model model) {
         model.addAttribute("categories", productService.getSubcategories());
-        /*model.addAttribute("categ", new Product());*/
         return "admin/products/updatePages/productOperations";
     }
 
@@ -189,7 +185,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/createSubcategory", method = RequestMethod.POST)
-    public String createCategory(@ModelAttribute("category") CategoryObject object,
+    public String createCategory(@Valid @ModelAttribute("category") CategoryObject object,
                                  BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("mainCategory", productService.getProductByName(object.getCategoryName()));
@@ -223,7 +219,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/updateSubcategory", method = RequestMethod.POST)
-    public String updateSubcategory(@ModelAttribute("category") CategoryObject category,
+    public String updateSubcategory(@Valid @ModelAttribute("category") CategoryObject category,
                                  BindingResult result) {
 
         if (result.hasErrors()) {
@@ -235,7 +231,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/createCategory", method = RequestMethod.POST)
-    public String createCategory(@ Valid @ModelAttribute("category") CategoryObject category,
+    public String createCategory(@Valid @ModelAttribute("category") CategoryObject category,
                                  BindingResult result) {
         if (result.hasErrors()) {
             return "admin/categories/createCategoryForm";
