@@ -53,11 +53,11 @@
     </bean>
 
 
-    <bean id="productService" class="com.company.store.services.ProductService" lazy-init="true"/>
-    <bean id="userService" class="com.company.store.services.UserService" lazy-init="true"/>
-    <bean id="signUpValidator2" class="com.company.store.validators.SignUpValidator" lazy-init="true"/>
-    <bean id="signInValidator" class="com.company.store.validators.SignInValidator" lazy-init="true"/>
-    <bean id="feedBackValidator" class="com.company.store.validators.FeedBackValidator" lazy-init="true"/>
+    <bean id="productService" class="com.company.store.services.ProductService" />
+    <bean id="userService" class="com.company.store.services.UserService" />
+    <bean id="signUpValidator" class="com.company.store.validators.SignUpValidator" />
+    <bean id="signInValidator" class="com.company.store.validators.SignInValidator" />
+    <bean id="feedBackValidator" class="com.company.store.validators.FeedBackValidator" />
 
     <bean id="messageSource"
           class="org.springframework.context.support.ResourceBundleMessageSource">
