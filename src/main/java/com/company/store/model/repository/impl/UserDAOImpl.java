@@ -47,16 +47,18 @@ public class UserDAOImpl implements UserDAO {
      * parse cortege with user credentials to object User.
      */
     private User parseUser(ResultSet resultSet) {
-        User user = new User();
+        User user = null;
         int adminFlag = 1;
         try {
-            user.setId(resultSet.getInt(1));
-            user.setName(resultSet.getString(2));
-            user.setSurname(resultSet.getString(3));
-            user.setEmail(resultSet.getString(4));
-            user.setPhone(resultSet.getString(5));
-            user.setPassword(resultSet.getString(6));
-            user.setAddress(resultSet.getString(7));
+             user = User.newBuilder()
+                    .setId(resultSet.getInt(1))
+                    .setName(resultSet.getString(2))
+                    .setSurname(resultSet.getString(3))
+                    .setEmail(resultSet.getString(4))
+                    .setPhone(resultSet.getString(5))
+                    .setPassword(resultSet.getString(6))
+                    .setAddress(resultSet.getString(7))
+                    .build();
             if (adminFlag == resultSet.getInt(8))
                 user.setAdmin(true);
             else user.setAdmin(false);
