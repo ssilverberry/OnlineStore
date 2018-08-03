@@ -4,12 +4,15 @@ import com.company.store.entities.Product;
 import com.company.store.entities.ProductAttribute;
 import com.company.store.entities.ProductParameter;
 import com.company.store.forms.CategoryObject;
+
+import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public interface ProductService {
 
     Map<Product, Collection<Product>> getCategories();
