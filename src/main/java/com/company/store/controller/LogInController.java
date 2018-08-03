@@ -2,6 +2,7 @@ package com.company.store.controller;
 
 import com.company.store.entities.User;
 import com.company.store.services.UserService;
+import com.company.store.services.impl.UserServiceImpl;
 import com.company.store.validators.SignInValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;

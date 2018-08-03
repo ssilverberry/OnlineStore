@@ -46,7 +46,6 @@ public class AdminController {
         binder.setValidator(productFormValidator);
     }
 
-    //WORKS
     @RequestMapping(value = "/mainPage")
     public String getMainPage() {
         return "redirect:/admin/categoriesOperations";

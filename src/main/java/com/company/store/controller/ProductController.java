@@ -28,9 +28,9 @@ public class ProductController {
     private final FeedbackDAO feedbackDAO;
 
     @Autowired
-    public ProductController(ProductDAO productDAO, ProductService productService, FeedbackDAO feedback) {
+    public ProductController(ProductDAO productDAO, ProductService productServiceImpl, FeedbackDAO feedback) {
         this.productDAO = productDAO;
-        this.productService = productService;
+        this.productService = productServiceImpl;
         this.feedbackDAO = feedback;
     }
 
@@ -50,7 +50,7 @@ public class ProductController {
     public ModelAndView productBy(@RequestParam("prod_id") int  product_id, Model model) {
         model.addAttribute("feedback", new Feedback());
         model.addAttribute("feedbackList", feedbackDAO.getAllFeedbackForProduct(product_id));
-        model.addAttribute("product", productService.getProductById(product_id));
+        model.addAttribute("product", productService.getProductAndRating(product_id));
         return new ModelAndView("product");
     }
 
