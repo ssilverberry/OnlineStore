@@ -1,45 +1,17 @@
 package com.company.store.services;
 
-import com.company.store.repository.UserDAO;
 import com.company.store.entities.User;
 import com.company.store.entities.UserRoles;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 
-@Component
-public class UserService {
+public interface UserService {
 
-    private final UserDAO userDAO;
+    User getUser(String email, String password);
 
-    @Autowired
-    public UserService(UserDAO userDAO) {
-        this.userDAO = userDAO;
-    }
+    boolean match(String email, String password);
 
-    public User getUser(String email, String password){
-        return userDAO.getByCredentials(email, password);
-    }
-    /**
-     * Acceptable.
-     * The method is used for matching needed user from Spring form with existing one in DB.
-    */
-    public boolean match(String email, String password) {
-        User user = userDAO.getByCredentials(email, password);
-        if (user != null)
-            return user.getEmail().equals(email) && user.getPassword().equals(password);
-        return false;
-    }
+    Collection<User> getAll ();
 
-    public Collection<User> getAll () {
-        return userDAO.getAllUsers();
-    }
-
-    public UserRoles checkUserType(User user){
-        if (user.isAdmin())
-            return UserRoles.ADMIN;
-        else
-            return UserRoles.USER;
-    }
+    UserRoles checkUserType(User user);
 }
