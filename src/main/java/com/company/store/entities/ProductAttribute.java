@@ -1,9 +1,6 @@
 package com.company.store.entities;
 
-
-import java.util.Comparator;
-
-public class ProductAttribute implements Comparable<ProductAttribute>{
+public class ProductAttribute implements Comparable<ProductAttribute> {
 
     private int attr_id;
     private int product_id;
