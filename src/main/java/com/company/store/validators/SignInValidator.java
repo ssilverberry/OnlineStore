@@ -2,7 +2,8 @@ package com.company.store.validators;
 
 
 import com.company.store.entities.User;
-import com.company.store.repository.impl.UserDAOImpl;
+import com.company.store.repository.UserDAO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -14,7 +15,7 @@ import java.util.Collection;
 @Controller
 public class SignInValidator implements Validator {
 
-    private UserDAOImpl dataBase;
+    private UserDAO dataBase;
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -22,7 +23,7 @@ public class SignInValidator implements Validator {
     }
 
     @Autowired
-    public SignInValidator(UserDAOImpl dataBase) {
+    public SignInValidator(UserDAO dataBase) {
         this.dataBase = dataBase;
     }
     

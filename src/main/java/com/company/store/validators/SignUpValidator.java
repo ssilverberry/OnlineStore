@@ -1,7 +1,8 @@
 package com.company.store.validators;
 
 import com.company.store.entities.User;
-import com.company.store.services.UserService;
+import com.company.store.repository.UserDAO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -15,11 +16,12 @@ import java.util.regex.Pattern;
 
 @Component
 public class SignUpValidator implements Validator {
-    private UserService dataBase;
+
+    private UserDAO dataBase;
 
     @Autowired
-    public SignUpValidator (UserService service) {
-        dataBase = service;
+    public SignUpValidator (UserDAO dataBase) {
+        this.dataBase = dataBase;
     }
 
     @Override
@@ -49,7 +51,7 @@ public class SignUpValidator implements Validator {
         if (!EmailValidator.getInstance().isValid(user.getEmail())) {
             errors.rejectValue("email", "email.notValid");
         }
-        Collection<User> users = dataBase.getAll();
+        Collection<User> users = dataBase.getAllUsers();
         for (User usr : users) {
             if (usr.getPhone() != null)
                 if (usr.getPhone().equals(user.getPhone()))
