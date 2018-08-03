@@ -53,8 +53,9 @@
     </bean>
 
 
-    <bean id="productService" class="com.company.store.services.ProductService" />
-    <bean id="userService" class="com.company.store.services.UserService" />
+    <bean id="productService" class="com.company.store.services.impl.ProductServiceImpl" />
+    <bean id="userService" class="com.company.store.services.impl.UserServiceImpl" />
+
     <bean id="signUpValidator" class="com.company.store.validators.SignUpValidator" />
     <bean id="signInValidator" class="com.company.store.validators.SignInValidator" />
     <bean id="feedBackValidator" class="com.company.store.validators.FeedBackValidator" />
