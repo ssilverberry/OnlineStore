@@ -1,9 +1,8 @@
 package com.company.store.controller;
 
-import com.company.store.model.entities.User;
-import com.company.store.model.entities.UserRoles;
-import com.company.store.model.impls.UserDAOImpl;
-import com.company.store.model.services.UserService;
+import com.company.store.entities.User;
+import com.company.store.repository.UserDAO;
+import com.company.store.validators.SignUpValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,31 +18,23 @@ import java.util.Map;
 @Controller
 public class UserController {
 
-    private UserDAOImpl userDAO;
-    private UserService userService;
+    private UserDAO userDAO;
+    private final SignUpValidator signUpValidator;
 
     @Autowired
-    private SignUpValidator signUpValidator;
+    public UserController(UserDAO userDAO, SignUpValidator signUpValidator) {
+        this.userDAO = userDAO;
+        this.signUpValidator = signUpValidator;
+    }
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.setValidator(signUpValidator);
     }
 
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
-    @Autowired
-    public void setUserDAO(UserDAOImpl userDAO) {
-        this.userDAO = userDAO;
-    }
-
-
     @RequestMapping(value = "/signup")
     public String showRegistrationForm(Map<String, Object> model) {
-        model.put("registrationForm", new User());
+        model.put("registrationForm", User.newBuilder());
         return "registration";
     }
 
@@ -56,24 +47,21 @@ public class UserController {
                            @RequestParam("phone") String phone,
                            @RequestParam("password") String password,
                            @RequestParam("address") String address) {
-        if (result.hasErrors()) {
-            //System.out.println(result.getFieldErrors().toString());
+        if (result.hasErrors())
             return "registration";
-        } else {
-            user.setName(name);
-            user.setSurname(surname);
-            user.setEmail(email);
-            user.setPhone(phone);
-            user.setPassword(password);
-            user.setAddress(address);
-
-            if (userDAO.saveUser(user)) {
-                //return new ModelAndView("index", "user", user);
+        else {
+            user = User.newBuilder()
+                    .setName(name)
+                    .setSurname(surname)
+                    .setEmail(email)
+                    .setPhone(phone)
+                    .setPassword(password)
+                    .setAddress(address)
+                    .build();
+            if (userDAO.saveUser(user))
                 return "redirect:/";
-            } else {
-                //return new ModelAndView("index", "user", user);
+            else
                 return "registration";
-            }
         }
     }
 
@@ -92,11 +80,10 @@ public class UserController {
 
     @RequestMapping(value = "removeUser")
     public ModelAndView removeUser(@RequestParam(value = "id") int id) {
-       Boolean up = userDAO.removeUser(id);
-        if(up){
+        Boolean up = userDAO.removeUser(id);
+        if (up)
             return new ModelAndView("removeUser");
-        }
         else
-        return new ModelAndView("user");
+            return new ModelAndView("user");
     }
 }

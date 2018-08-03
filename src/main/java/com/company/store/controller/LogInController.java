@@ -1,7 +1,10 @@
 package com.company.store.controller;
 
-import com.company.store.model.entities.User;
-import com.company.store.model.services.UserService;
+import com.company.store.entities.User;
+import com.company.store.services.UserService;
+import com.company.store.services.impl.UserServiceImpl;
+import com.company.store.validators.SignInValidator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -11,28 +14,29 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Map;
 
+
 @Controller
 @SessionAttributes("user")
 public class LogInController {
 
     private final UserService userService;
 
+    private final SignInValidator signInValidator;
+
     @Autowired
-    private SignInValidator signInValidator;
+    public LogInController(UserService userService, SignInValidator signInValidator) {
+        this.userService = userService;
+        this.signInValidator = signInValidator;
+    }
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.setValidator(signInValidator);
     }
 
-    @Autowired
-    public LogInController(UserService userService) {
-        this.userService = userService;
-    }
-
     @RequestMapping("/login")
     public String showLoginForm (Map<String, Object> model) {
-        model.put("authForm", new User());
+        model.put("authForm", User.newBuilder().build());
         return "authorize";
     }
 
@@ -45,11 +49,11 @@ public class LogInController {
         if (result.hasErrors()) {
             return "authorize";
         } else if (userService.getUser(user.getEmail(), user.getPassword()) != null) {
-            switch (userService.validateUserType(userService.getUser(user.getEmail(), user.getPassword()))) {
-                case "admin":
+            switch (userService.checkUserType(userService.getUser(user.getEmail(), user.getPassword()))) {
+                case ADMIN:
                     model.put("user", userService.getUser(user.getEmail(), user.getPassword()));
                     return "admin";
-                case "user":
+                case USER:
                     model.put("user", userService.getUser(user.getEmail(), user.getPassword()));
                     return "index";
             }

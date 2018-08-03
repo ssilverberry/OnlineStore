@@ -1,9 +1,10 @@
 package com.company.store.controller;
 
-import com.company.store.model.entities.Feedback;
-import com.company.store.model.impls.FeedbackDAOImpl;
-import com.company.store.model.impls.UserDAOImpl;
-import com.company.store.model.services.ProductService;
+import com.company.store.entities.Feedback;
+import com.company.store.repository.FeedbackDAO;
+import com.company.store.repository.UserDAO;
+import com.company.store.services.ProductService;
+import com.company.store.validators.FeedBackValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,12 +20,16 @@ import java.util.Collection;
 @Controller
 public class FeedbackController {
 
-    private FeedbackDAOImpl feedbackDAO;
-    private UserDAOImpl userDAO;
+    private FeedbackDAO feedbackDAO;
+    private UserDAO userDAO;
     private ProductService productService;
 
+    private final FeedBackValidator feedBackValidator;
+
     @Autowired
-    private FeedBackValidator feedBackValidator;
+    public FeedbackController(FeedBackValidator feedBackValidator) {
+        this.feedBackValidator = feedBackValidator;
+    }
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
@@ -32,7 +37,7 @@ public class FeedbackController {
     }
 
     @Autowired
-    public void setFeedbackDAO(FeedbackDAOImpl feedbackDAO, ProductService productService, UserDAOImpl userDAO) {
+    public void setFeedbackDAO(FeedbackDAO feedbackDAO, ProductService productService, UserDAO userDAO) {
         this.feedbackDAO = feedbackDAO;
         this.productService = productService;
         this.userDAO = userDAO;
@@ -45,14 +50,13 @@ public class FeedbackController {
                                @RequestParam("content") String fb,
                                @RequestParam("productId") int  product_id) {
         if (result.hasErrors()) {
-            //model.addAttribute("content", feedback.getContent());
-            model.addAttribute("product", productService.getProductById(product_id));
+            model.addAttribute("product", productService.getProductAndRating(product_id));
             model.addAttribute("feedbackList", feedbackDAO.getAllFeedbackForProduct(product_id));
             return new ModelAndView("product");
         }
         else {
             model.addAttribute("content", feedback.getContent());
-            model.addAttribute("product", productService.getProductById(product_id));
+            model.addAttribute("product", productService.getProductAndRating(product_id));
             model.addAttribute("feedbackList", feedbackDAO.getAllFeedbackForProduct(product_id));
             feedbackDAO.saveFeedback(new Feedback(userDAO.getById(1000001), product_id,
                 4, feedback.getContent()));

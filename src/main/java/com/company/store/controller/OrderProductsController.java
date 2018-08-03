@@ -1,8 +1,9 @@
 package com.company.store.controller;
 
-import com.company.store.model.entities.Order;
-import com.company.store.model.entities.OrderProduct;
-import com.company.store.model.impls.OrderProductsDAOImpl;
+import com.company.store.entities.Order;
+import com.company.store.entities.OrderProduct;
+import com.company.store.repository.OrderProductsDAO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +15,9 @@ import java.util.Collection;
 @Controller
 public class OrderProductsController {
 
-    private OrderProductsDAOImpl orderProductsDAO;
+    private OrderProductsDAO orderProductsDAO;
     @Autowired
-    public void setOrderProductsDAO(OrderProductsDAOImpl orderProductsDAO) {
+    public void setOrderProductsDAO(OrderProductsDAO orderProductsDAO) {
         this.orderProductsDAO = orderProductsDAO;
     }
 

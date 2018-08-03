@@ -1,8 +1,9 @@
 package com.company.store.controller;
 
-import com.company.store.model.entities.Order;
-import com.company.store.model.impls.OrderDAOImpl;
-import com.company.store.model.services.ProductService;
+import com.company.store.entities.Order;
+import com.company.store.repository.OrderDAO;
+import com.company.store.services.ProductService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -15,11 +16,11 @@ import java.util.Map;
 @Controller
 public class OrderController {
 
-    private OrderDAOImpl orderDAO;
+    private OrderDAO orderDAO;
     private ProductService productService;
 
     @Autowired
-    public void setOrderDAO(OrderDAOImpl orderDAO, ProductService productService) {
+    public void setOrderDAO(OrderDAO orderDAO, ProductService productService) {
         this.orderDAO = orderDAO;
         this.productService = productService;
     }

@@ -1,12 +1,12 @@
 package com.company.store.controller;
 
-import com.company.store.model.entities.Feedback;
-import com.company.store.model.entities.Product;
-import com.company.store.model.entities.ProductAttribute;
-import com.company.store.model.entities.ProductParameter;
-import com.company.store.model.impls.FeedbackDAOImpl;
-import com.company.store.model.impls.ProductDAOImpl;
-import com.company.store.model.services.ProductService;
+import com.company.store.entities.Feedback;
+import com.company.store.entities.Product;
+import com.company.store.entities.ProductAttribute;
+import com.company.store.entities.ProductParameter;
+import com.company.store.repository.FeedbackDAO;
+import com.company.store.repository.ProductDAO;
+import com.company.store.services.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,37 +23,34 @@ import java.util.Map;
 @Controller
 public class ProductController {
 
-    private final ProductDAOImpl productDAO;
+    private final ProductDAO productDAO;
     private final ProductService productService;
-    private final FeedbackDAOImpl feedbackDAO;
+    private final FeedbackDAO feedbackDAO;
 
     @Autowired
-    public ProductController(ProductDAOImpl productDAO, ProductService productService, FeedbackDAOImpl feedback) {
+    public ProductController(ProductDAO productDAO, ProductService productServiceImpl, FeedbackDAO feedback) {
         this.productDAO = productDAO;
-        this.productService = productService;
+        this.productService = productServiceImpl;
         this.feedbackDAO = feedback;
     }
 
-    // it works
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView showCategories() {
         Map<Product, Collection<Product>> categories = productService.getCategories();
         return new ModelAndView("index", "categoryList", categories);
     }
 
-    // it works
     @RequestMapping(value = "subCategsFor", method = RequestMethod.GET)
     public ModelAndView getSubCategories(@RequestParam("categ_id") int categ_id){
         Collection subCategories = productService.getCategoryProducts(categ_id);
         return new ModelAndView("subCategList", "subCategs", subCategories);
     }
 
-
     @RequestMapping("product")
     public ModelAndView productBy(@RequestParam("prod_id") int  product_id, Model model) {
         model.addAttribute("feedback", new Feedback());
         model.addAttribute("feedbackList", feedbackDAO.getAllFeedbackForProduct(product_id));
-        model.addAttribute("product", productService.getProductById(product_id));
+        model.addAttribute("product", productService.getProductAndRating(product_id));
         return new ModelAndView("product");
     }
 

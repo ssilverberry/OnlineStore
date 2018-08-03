@@ -1,13 +1,13 @@
 package com.company.store.controller;
 
-import com.company.store.model.entities.Product;
-import com.company.store.model.entities.ProductAttribute;
-import com.company.store.model.entities.ProductParameter;
-import com.company.store.model.formObjects.CategoryFormObject;
-import com.company.store.model.services.ProductService;
-import com.company.store.model.validators.CategoryFormValidator;
+import com.company.store.entities.Product;
+import com.company.store.entities.ProductAttribute;
+import com.company.store.entities.ProductParameter;
+import com.company.store.forms.CategoryObject;
+import com.company.store.services.ProductService;
+import com.company.store.validators.CategoryFormValidator;
 
-import com.company.store.model.validators.ProductFormValidator;
+import com.company.store.validators.ProductFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,7 +46,6 @@ public class AdminController {
         binder.setValidator(productFormValidator);
     }
 
-    //WORKS
     @RequestMapping(value = "/mainPage")
     public String getMainPage() {
         return "redirect:/admin/categoriesOperations";
@@ -78,8 +77,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "createProduct", method = RequestMethod.POST)
-    public String createProduct(@ModelAttribute("product") Product product, BindingResult result, Model model){
-        productFormValidator.validate(product, result);
+    public String createProduct(@Valid @ModelAttribute("product") Product product, BindingResult result, Model model){
         if (result.hasErrors()){
             model.addAttribute("categories", productService.getSubcategories());
             model.addAttribute("attrsList", productService.getCategoryAttrs(product.getParentId()));
@@ -106,7 +104,6 @@ public class AdminController {
         List<ProductParameter> parameters = new ArrayList<>(attrParamMap.values());
         product.setParams(parameters);
         List<ProductAttribute> attributes = new ArrayList<>(attrParamMap.keySet());
-        //attributes.sort(Comparator.comparing(o -> String.valueOf(o.getAttrId())));
         model.addAttribute("product", product);
         model.addAttribute("attrs", attributes);
         model.addAttribute("categs", productService.getSubcategories());
@@ -115,8 +112,7 @@ public class AdminController {
 
     // WORKS
     @RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
-    public String updateProduct(@ModelAttribute("product") Product product, BindingResult result, Model model) {
-        productFormValidator.validate(product, result);
+    public String updateProduct(@Valid @ModelAttribute("product") Product product, BindingResult result, Model model) {
         if (result.hasErrors()){
             model.addAttribute("attrs", productService.getCategoryAttrs(product.getParentId()));
             model.addAttribute("categs", productService.getSubcategories());
@@ -139,7 +135,6 @@ public class AdminController {
     @RequestMapping(value = "/productsOperations", method = RequestMethod.GET)
     public String showProdOperations(Model model) {
         model.addAttribute("categories", productService.getSubcategories());
-        /*model.addAttribute("categ", new Product());*/
         return "admin/products/updatePages/productOperations";
     }
 
@@ -168,7 +163,7 @@ public class AdminController {
     //WORKS
     @RequestMapping(value = "/createCategoryForm", method = RequestMethod.GET)
     public String showCreateCategForm(Model model) {
-        CategoryFormObject object = new CategoryFormObject();
+        CategoryObject object = new CategoryObject();
         List<ProductAttribute> attributes = new ArrayList<>();
         attributes.add(new ProductAttribute());
         object.setAttributes(attributes);
@@ -179,7 +174,7 @@ public class AdminController {
     //WORKS
     @RequestMapping(value = "/createSubcategoryForm", method = RequestMethod.GET)
     public String showCreateSubcategForm(@RequestParam String categoryName, Model model) {
-        CategoryFormObject object = new CategoryFormObject();
+        CategoryObject object = new CategoryObject();
         List<ProductAttribute> attributes = new ArrayList<>();
         attributes.add(new ProductAttribute());
         object.setAttributes(attributes);
@@ -189,7 +184,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/createSubcategory", method = RequestMethod.POST)
-    public String createCategory(@ Valid @ModelAttribute("category") CategoryFormObject object,
+    public String createCategory(@Valid @ModelAttribute("category") CategoryObject object,
                                  BindingResult result, Model model) {
         if (result.hasErrors()) {
             model.addAttribute("mainCategory", productService.getProductByName(object.getCategoryName()));
@@ -213,7 +208,7 @@ public class AdminController {
     public String showUpdateSubcategForm(@RequestParam("subcategory_id") int subcategory_id, Model model) {
         Product subcategory = productService.getProduct(subcategory_id);
         Product category = productService.getProduct(subcategory.getParentId());
-        CategoryFormObject object = new CategoryFormObject(category.getId(), category.getName(), subcategory.getName());
+        CategoryObject object = new CategoryObject(category.getId(), category.getName(), subcategory.getName());
         object.setSubcategoryId(subcategory_id);
         object.setAttributes(productService.getCategoryAttrs(subcategory_id));
         object.getAttributes().sort(Comparator.comparing(o -> String.valueOf(o.getAttrId())));
@@ -223,7 +218,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/updateSubcategory", method = RequestMethod.POST)
-    public String updateSubcategory(@Valid @ModelAttribute("category") CategoryFormObject category,
+    public String updateSubcategory(@Valid @ModelAttribute("category") CategoryObject category,
                                  BindingResult result) {
 
         if (result.hasErrors()) {
@@ -235,7 +230,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/createCategory", method = RequestMethod.POST)
-    public String createCategory(@ Valid @ModelAttribute("category") CategoryFormObject category,
+    public String createCategory(@Valid @ModelAttribute("category") CategoryObject category,
                                  BindingResult result) {
         if (result.hasErrors()) {
             return "admin/categories/createCategoryForm";
