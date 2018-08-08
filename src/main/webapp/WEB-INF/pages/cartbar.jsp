@@ -86,27 +86,4 @@
         transition: all 1s;
         z-index: 5;
     }
-
 </style>
-<%--<script>
-    var cartElem = document.querySelector('.cartbar');
-
-    cartElem.addEventListener('click', showCartList());
-
-    function showCartList () {
-        var cartListElem = document.querySelector('.cartlist');
-        var cartbar = document.querySelector('.cartbar');
-
-        cartbar.addEventListener('click', function() {
-            cartListElem.classList.add('moveleft');
-            console.log('click');
-            cartListElem.addEventListener('mouseleave', function() {
-                setTimeout(function() {
-                    cartListElem.classList.remove('moveleft');
-                    console.log('move right');
-                }, 3000);
-            });
-
-        });
-    }
-</script>--%>

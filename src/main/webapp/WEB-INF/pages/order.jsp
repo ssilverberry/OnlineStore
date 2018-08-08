@@ -39,7 +39,6 @@
                 <img src="<c:url value="/resources/images/products/${product.id}.jpg"/>"/>
             </div>
         </div>
-        <!---->
         <div class="col-4 justify-content-center ml-4 my-2">
             <div class="shadow p-3">
                 <form:form class="needs-validation" method="get" action="${actionUrl}" modelAttribute="saveOrderForm">
@@ -74,14 +73,6 @@
                 <span class="badge badge-secondary badge-pill">1</span>
             </h4>
             <ul class="list-group mb-3">
-            <%--<c:forEach var="item" items="${product.parameters}">
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">${item.key.name}</h6>
-                        <small class="text-muted">${item.value.value}</small>
-                    </div>
-                </li>
-            </c:forEach>--%>
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Total (USD)</span>
                     <strong>$${price}</strong>
@@ -132,4 +123,3 @@
 
 </body>
 </html>
-<!--privet vsem-->

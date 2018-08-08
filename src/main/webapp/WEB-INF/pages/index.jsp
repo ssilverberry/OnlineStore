@@ -25,11 +25,6 @@
 </jsp:include>
 
 <div class="container-fluid" style="padding-top: 25px; position: relative; min-height: 100vh;">
-    <%--<div class="row justify-content-center myUsername">
-        <div class="col-3">
-            <div class="bg-info shadow rounded p-2 text-white text-center" style="cursor: pointer;">${username}</div>
-        </div>
-    </div>--%>
     <div class="row">
         <div class="col-2 pt-3">
             <div class="row">
