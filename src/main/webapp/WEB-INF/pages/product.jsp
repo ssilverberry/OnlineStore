@@ -43,7 +43,6 @@
 <spring:url value="/addFeedback" var="actionUrl"/>
 <jsp:include page="header.jsp" flush="true"/>
 
-<%--<jsp:include page="cartbar.jsp"/>--%>
 <div class="container-fluid justify-content-center" style="min-height: 100vh; position: relative; padding-top: 25px;">
 <div class="row">
     <div class="col-2 pt-3">
