@@ -3,8 +3,8 @@ package com.company.store.services.impl;
 import com.company.store.repository.UserDAO;
 import com.company.store.entities.User;
 import com.company.store.entities.UserRoles;
-
 import com.company.store.services.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService {
     public User getUser(String email, String password){
         return userDAO.getByCredentials(email, password);
     }
+
     /**
      * Acceptable.
      * The method is used for matching needed user from Spring form with existing one in DB.

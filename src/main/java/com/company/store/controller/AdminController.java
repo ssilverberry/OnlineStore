@@ -96,7 +96,6 @@ public class AdminController {
         return "admin/products/productInfo";
     }
 
-    // WORKS
     @RequestMapping(value = "showUpdateForm")
     public String getUpdateProduct(@RequestParam("prod_id") int prod_id, Model model) {
         Product product = productService.getProduct(prod_id);
@@ -110,7 +109,6 @@ public class AdminController {
         return "admin/products/updatePages/productUpdateForm";
     }
 
-    // WORKS
     @RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
     public String updateProduct(@Valid @ModelAttribute("product") Product product, BindingResult result, Model model) {
         if (result.hasErrors()){
@@ -123,7 +121,6 @@ public class AdminController {
         } else return null;
     }
 
-    //WORKS
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     public String getUser(@RequestParam("prod_id") int id, Model model) {
         Product product = productService.getProduct(id);
@@ -131,21 +128,18 @@ public class AdminController {
         return "admin/products/productInfo";
     }
 
-    //WORKS
     @RequestMapping(value = "/productsOperations", method = RequestMethod.GET)
     public String showProdOperations(Model model) {
         model.addAttribute("categories", productService.getSubcategories());
         return "admin/products/updatePages/productOperations";
     }
 
-    //WORKS
     @RequestMapping(value = "/updateProduct/productList", method = RequestMethod.POST)
     public @ResponseBody ModelAndView getListByCategory(@RequestParam("categ_id") int id, Model model) {
         model.addAttribute("productList", productService.getCategoryProducts(id));
         return new ModelAndView("admin/products/updatePages/innerProductList");
     }
 
-    //works
     @RequestMapping(value = "/deleteProduct", method = RequestMethod.GET)
     public String deleteProduct(@RequestParam("prod_id") int id) {
         if (productService.deleteProduct(id)){
@@ -153,14 +147,12 @@ public class AdminController {
         } else return null;
     }
 
-    //WORKS
     @RequestMapping(value = "/categoriesOperations", method = RequestMethod.GET)
     public String showCategsOperations(Model model) {
         model.addAttribute("categories", productService.getCategories());
         return "admin/categories/categoriesOperations";
     }
 
-    //WORKS
     @RequestMapping(value = "/createCategoryForm", method = RequestMethod.GET)
     public String showCreateCategForm(Model model) {
         CategoryObject object = new CategoryObject();
@@ -171,7 +163,6 @@ public class AdminController {
         return "admin/categories/createCategoryForm";
     }
 
-    //WORKS
     @RequestMapping(value = "/createSubcategoryForm", method = RequestMethod.GET)
     public String showCreateSubcategForm(@RequestParam String categoryName, Model model) {
         CategoryObject object = new CategoryObject();
@@ -203,7 +194,6 @@ public class AdminController {
         else return null;
     }
 
-    //WORKS
     @RequestMapping(value = "/updateSubcategoryForm", method = RequestMethod.GET)
     public String showUpdateSubcategForm(@RequestParam("subcategory_id") int subcategory_id, Model model) {
         Product subcategory = productService.getProduct(subcategory_id);

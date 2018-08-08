@@ -4,12 +4,13 @@ import com.company.store.repository.FeedbackDAO;
 import com.company.store.entities.Feedback;
 
 import com.company.store.entities.User;
-import com.company.store.entities.UserRoles;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
