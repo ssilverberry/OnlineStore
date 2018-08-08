@@ -4,13 +4,14 @@ import com.company.store.repository.UserDAO;
 import com.company.store.entities.User;
 import com.company.store.entities.UserRoles;
 
+import com.company.store.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
 @Service
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
 
     private final UserDAO userDAO;
 
@@ -19,6 +20,7 @@ public class UserServiceImpl {
         this.userDAO = userDAO;
     }
 
+    @Override
     public User getUser(String email, String password){
         return userDAO.getByCredentials(email, password);
     }
@@ -26,6 +28,7 @@ public class UserServiceImpl {
      * Acceptable.
      * The method is used for matching needed user from Spring form with existing one in DB.
     */
+    @Override
     public boolean match(String email, String password) {
         User user = userDAO.getByCredentials(email, password);
         if (user != null)
@@ -33,10 +36,12 @@ public class UserServiceImpl {
         return false;
     }
 
+    @Override
     public Collection<User> getAll () {
         return userDAO.getAllUsers();
     }
 
+    @Override
     public UserRoles checkUserType(User user){
         if (user.isAdmin())
             return UserRoles.ADMIN;
