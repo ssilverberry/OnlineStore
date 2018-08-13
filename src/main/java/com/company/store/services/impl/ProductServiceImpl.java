@@ -1,5 +1,6 @@
 package com.company.store.services.impl;
 
+import com.company.store.forms.ProductObject;
 import com.company.store.repository.CategoryAttributeDAO;
 import com.company.store.repository.FeedbackDAO;
 import com.company.store.repository.ProductDAO;
@@ -13,7 +14,12 @@ import com.company.store.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.*;
 
 @Service
@@ -23,6 +29,8 @@ public class ProductServiceImpl implements ProductService {
     private final CategoryAttributeDAO categoryAttributeDAO;
     private final FeedbackDAO feedbackDAO;
     private final ProductParameterDAO productParameterDAO;
+
+    private static final String imgFilePath = "/resources/images/products/";
 
     @Autowired
     public ProductServiceImpl(ProductDAO productDAO, CategoryAttributeDAO categoryAttributeDAO,
@@ -87,11 +95,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public boolean addProduct(Product product){
-        product.setId(0);
-        if (productDAO.saveProduct(product)){
+    public boolean addProduct(ProductObject product){
+        Product prodToSave = new Product(0, product.getParentId(), product.getName(), false);
+        if (productDAO.saveProduct(prodToSave)){
             product.setId(productDAO.getProductByName(product.getName()).getId());
-            return saveProductParams(product.getParams(), product.getId());
+            saveProductParams(product.getParams(), product.getId());
+            return saveProductImages(product.getFiles(), product.getAppPath(), product.getId());
         } else return false;
     }
 
@@ -249,5 +258,51 @@ public class ProductServiceImpl implements ProductService {
     private boolean saveCategoryAttributes(Product subcategory, List<ProductAttribute> attributes){
         attributes.forEach(attribute -> attribute.setProductId(subcategory.getId()));
         return categoryAttributeDAO.saveAttributes(attributes, false);
+    }
+
+    private boolean saveProductImages(MultipartFile[] imgs, String rootPath, int productId){
+        if (saveProductImgsOnServer(imgs, rootPath)){
+            return saveProductImgsToDB(productId, imgs);
+        }
+        return false;
+    }
+
+    private boolean saveProductImgsOnServer(MultipartFile[] imgs, String rootPath){
+        for (MultipartFile file : imgs) {
+            try {
+                byte[] bytes = file.getBytes();
+
+                // Creating the directory to store file
+                String dirName = file.getOriginalFilename().substring(0, file.getOriginalFilename().indexOf("."));
+                File dir = new File(rootPath + imgFilePath + dirName);
+
+                if (!dir.exists())
+                    dir.mkdirs();
+
+                // Create the file on server
+                File img = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
+
+                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(img));
+                stream.write(bytes);
+                stream.close();
+
+            } catch (Exception e) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean saveProductImgsToDB(int productId, MultipartFile[] imgs){
+        List<ProductParameter> productParameters = new ArrayList<>();
+        int attr_id = categoryAttributeDAO.getAttributeByName("Main image").getAttrId();
+        for (MultipartFile file: imgs) {
+            ProductParameter parameter = new ProductParameter();
+            parameter.setAttrId(attr_id);
+            parameter.setProductId(productId);
+            parameter.setValue(file.getOriginalFilename());
+            productParameters.add(parameter);
+        }
+        return saveProductParams(productParameters, productId);
     }
 }

@@ -4,20 +4,27 @@ import com.company.store.entities.Product;
 import com.company.store.entities.ProductAttribute;
 import com.company.store.entities.ProductParameter;
 import com.company.store.forms.CategoryObject;
+import com.company.store.forms.ProductObject;
 import com.company.store.services.ProductService;
 import com.company.store.validators.CategoryFormValidator;
 
 import com.company.store.validators.ProductFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
 import java.util.*;
 
 @Controller
@@ -54,7 +61,7 @@ public class AdminController {
     @RequestMapping(value = "showCreateForm", method = RequestMethod.GET)
     public String showCreateForm(Model model) {
         model.addAttribute("categories", productService.getSubcategories());
-        model.addAttribute("product", new Product());
+        model.addAttribute("product", new ProductObject());
         return "admin/products/createPages/createProduct";
     }
 
@@ -68,7 +75,7 @@ public class AdminController {
             productParameter.setAttrId(attribute.getAttrId());
             parameters.add(productParameter);
         }
-        Product product = new Product();
+        ProductObject product = new ProductObject();
         product.setParams(parameters);
         model.addAttribute("attrsList", attributes);
         model.addAttribute("paramList", parameters);
@@ -77,12 +84,17 @@ public class AdminController {
     }
 
     @RequestMapping(value = "createProduct", method = RequestMethod.POST)
-    public String createProduct(@Valid @ModelAttribute("product") Product product, BindingResult result, Model model){
+    public String createProduct(@Valid @ModelAttribute("product") ProductObject product, BindingResult result,
+                                Model model, HttpServletRequest request){
         if (result.hasErrors()){
             model.addAttribute("categories", productService.getSubcategories());
             model.addAttribute("attrsList", productService.getCategoryAttrs(product.getParentId()));
             return "admin/products/createPages/createProduct";
-        } else {
+        }
+        else {
+            // get absolute path of the application
+            ServletContext context = request.getServletContext();
+            product.setAppPath(context.getRealPath(""));
             if (productService.addProduct(product)){
                 return "redirect:/admin/products/?prod_id=" + product.getId();
             }

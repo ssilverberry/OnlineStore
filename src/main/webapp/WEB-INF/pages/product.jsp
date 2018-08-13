@@ -60,7 +60,11 @@
             </div>
             <div class="content__mainpart__product__photos__img">
                 <div class="img__placeholder product-image-same-size">
-                    <img src="<c:url value="/resources/images/products/${prod.id}.jpg"/>"/>
+                    <c:forEach var="item" items="${prod.parameters}">
+                        <c:if test="${'Main image'.equals(item.key.name)}">
+                            <img src="<c:url value="/resources/images/products/${item.value.value.substring(0, item.value.value.indexOf('.'))}/${item.value.value}"/>"/>
+                        </c:if>
+                    </c:forEach>
                 </div>
             </div>
         </div>
@@ -79,7 +83,7 @@
                 <div class="tab-pane fade show active " id="home" role="tabpanel" aria-labelledby="home-tab">
                     <b>Rating: </b> <i style="margin-left: 20px">${rating}</i> <br><br>
                     <c:forEach var="item" items="${prod.parameters}">
-                        <c:if test="${!'Price'.equals(item.key.name)}">
+                        <c:if test="${!'Price'.equals(item.key.name) && !'Main image'.equals(item.key.name)}">
                             <span class="pb-2 pt-2">${item.key.name} : ${item.value.value}</span><br><br>
                         </c:if>
                         <c:if test="${'Price'.equals(item.key.name)}">

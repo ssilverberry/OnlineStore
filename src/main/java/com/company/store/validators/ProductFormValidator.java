@@ -1,5 +1,6 @@
 package com.company.store.validators;
 
+import com.company.store.forms.ProductObject;
 import com.company.store.repository.ProductDAO;
 import com.company.store.entities.Product;
 import com.company.store.entities.ProductParameter;
@@ -8,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -24,20 +27,22 @@ public class ProductFormValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return Product.class.equals(clazz);
+        return ProductObject.class.equals(clazz);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
 
-        Product product = (Product) target;
+        ProductObject product = (ProductObject) target;
 
         checkProductName(product, errors);
 
         checkParameters(product, errors);
+
+        checkProductImgs(product, errors);
     }
 
-    private void checkProductName(Product product, Errors errors){
+    private void checkProductName(ProductObject product, Errors errors){
         String productName = product.getName().trim();
         if (productName.equals("")){
             errors.rejectValue("name", "NotEmpty.product.name");
@@ -50,7 +55,7 @@ public class ProductFormValidator implements Validator {
         }
     }
 
-    private void checkParameters(Product product, Errors errors){
+    private void checkParameters(ProductObject product, Errors errors){
         List<Integer> commonIndexes = new ArrayList<>();
         for (int i = 0; i < product.getParams().size(); i++) {
             ProductParameter parameter = product.getParams().get(i);
@@ -72,6 +77,14 @@ public class ProductFormValidator implements Validator {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    private void checkProductImgs(ProductObject product, Errors errors){
+        for (MultipartFile file: product.getFiles()) {
+            if (file.getOriginalFilename().equals("")){
+                errors.rejectValue("files", "NotEmpty.product.files");
             }
         }
     }

@@ -27,7 +27,7 @@
             <spring:url value="/admin/createProduct" var="actionUrl"/>
 
             <div class="col-lg-9 ml-auto">
-                <form:form action="${actionUrl}" method="post" modelAttribute="product">
+                <form:form action="${actionUrl}" method="post" modelAttribute="product" enctype="multipart/form-data">
 
                     <div class="row mb-4">
                         <h4> Creating product</h4> <br>
@@ -64,12 +64,22 @@
                         </div>
                     </spring:bind>
 
-                    <div class="row-fluid mt-3 ml-auto">
+                    <div class="row pt-4 pb-2 pr-0 mr-0">
+                        <div class="col-3">
+                            <label>Upload main photo: </label>
+                        </div>
+                        <div class="col">
+                            <input name="files" type="file"/><br />
+                        </div>
+                        <div class="col pt-2 pr-0">
+                            <form:errors path="files" cssClass="error"/>
+                        </div>
+                    </div>
 
+                    <div class="row-fluid mt-3 ml-auto">
                         <div class="row" id="attrs">
                             <jsp:include page="innerAttrsList.jsp"/>
                         </div>
-
                     </div>
                     <div class="row mt-5">
                         <div class="col-11">

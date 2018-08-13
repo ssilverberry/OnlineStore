@@ -21,7 +21,9 @@ public class CategoryAttributeDAOImpl implements CategoryAttributeDAO {
 
     private static final String GET_ATTRIBUTE_BY_ID = "SELECT * FROM PRODUCTS_ATTRIBUTES WHERE ATTRIBUTE_ID = ?";
     private static final String GET_ATTRIBUTE_BY_NAME = "SELECT * FROM PRODUCTS_ATTRIBUTES WHERE ATTRIBUTE_NAME = ?";
-    private static final String GET_ATTRIBUTES_FOR_CATEGORY = "SELECT * FROM PRODUCTS_ATTRIBUTES WHERE PRODUCT_ID = ?";
+    private static final String GET_ATTRIBUTE_BY_TYPE = "SELECT * FROM PRODUCTS_ATTRIBUTES WHERE attr_type = ?";
+    private static final String GET_ATTRIBUTES_FOR_CATEGORY = "SELECT * FROM PRODUCTS_ATTRIBUTES WHERE PRODUCT_ID = ? " +
+            "AND attr_type is null";
 
     /**
      * Parameters in this order: PRODUCT_ID, ATTRIBUTE_NAME
