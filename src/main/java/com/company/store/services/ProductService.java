@@ -5,8 +5,10 @@ import com.company.store.entities.ProductAttribute;
 import com.company.store.entities.ProductParameter;
 import com.company.store.forms.CategoryObject;
 
+import com.company.store.forms.ProductObject;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collection;
 import java.util.List;
@@ -33,7 +35,7 @@ public interface ProductService {
 
     boolean updateProduct(Product product);
 
-    boolean addProduct(Product product);
+    boolean addProduct(ProductObject product);
 
     boolean deleteProduct(int prod_id);
 
